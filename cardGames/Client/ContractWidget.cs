@@ -48,6 +48,7 @@ namespace Client
             contractChoice.Items.Add("Coeur");
             contractChoice.Items.Add("Tout atout");
             contractChoice.SelectedIndex = 0;
+            contractChoice.VerticalContentAlignment = VerticalAlignment.Center;
 
             contractConfirm.Width = 100;
             contractConfirm.Height = 30;
