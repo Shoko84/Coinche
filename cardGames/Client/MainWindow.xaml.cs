@@ -20,9 +20,25 @@ namespace Client
     /// </summary>
     public partial class MainWindow : Window
     {
+        private ContractWidget contractWidget = new ContractWidget();
+
         public MainWindow()
         {
             InitializeComponent();
+            System.Windows.Shapes.Rectangle rect;
+            rect = new System.Windows.Shapes.Rectangle
+            {
+                Fill = new SolidColorBrush(Colors.ForestGreen),
+                Width = this.TestCanvas.Width - this.TestCanvas.Margin.Right - this.TestCanvas.Margin.Left,
+                Height = 300
+            };
+            Canvas.SetLeft(rect, 0);
+            Canvas.SetTop(rect, this.TestCanvas.Height / 2 - rect.Height / 2);
+            this.TestCanvas.Children.Add(rect);
+
+            if (contractWidget.ContractGrid != null)
+                Console.Write("rip");
+            BottomActions.Child = contractWidget.ContractGrid;
         }
     }
 }
