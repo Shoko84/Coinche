@@ -1,0 +1,15 @@
+C:\Users\Maxime\Documents\GitHub\Coinche\cardGames\Client\bin\Debug\Client.exe.config
+C:\Users\Maxime\Documents\GitHub\Coinche\cardGames\Client\bin\Debug\Client.exe
+C:\Users\Maxime\Documents\GitHub\Coinche\cardGames\Client\bin\Debug\Client.pdb
+C:\Users\Maxime\Documents\GitHub\Coinche\cardGames\Client\obj\Debug\Client.csprojResolveAssemblyReference.cache
+C:\Users\Maxime\Documents\GitHub\Coinche\cardGames\Client\obj\Debug\MainWindow.g.cs
+C:\Users\Maxime\Documents\GitHub\Coinche\cardGames\Client\obj\Debug\App.g.cs
+C:\Users\Maxime\Documents\GitHub\Coinche\cardGames\Client\obj\Debug\Client_MarkupCompile.cache
+C:\Users\Maxime\Documents\GitHub\Coinche\cardGames\Client\obj\Debug\Client_MarkupCompile.lref
+C:\Users\Maxime\Documents\GitHub\Coinche\cardGames\Client\obj\Debug\MainWindow.baml
+C:\Users\Maxime\Documents\GitHub\Coinche\cardGames\Client\obj\Debug\Client.g.resources
+C:\Users\Maxime\Documents\GitHub\Coinche\cardGames\Client\obj\Debug\Client.Properties.Resources.resources
+C:\Users\Maxime\Documents\GitHub\Coinche\cardGames\Client\obj\Debug\Client.csproj.GenerateResource.Cache
+C:\Users\Maxime\Documents\GitHub\Coinche\cardGames\Client\obj\Debug\Client.csproj.CoreCompileInputs.cache
+C:\Users\Maxime\Documents\GitHub\Coinche\cardGames\Client\obj\Debug\Client.exe
+C:\Users\Maxime\Documents\GitHub\Coinche\cardGames\Client\obj\Debug\Client.pdb
