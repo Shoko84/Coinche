@@ -2,9 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\cardGames",
-    "\\cardGames\\Client",
-    "\\cardGames\\Server"
+    "\\cardGames\\Client"
   ],
-  "SelectedNode": "\\cardGames\\Client\\Client.cs",
+  "SelectedNode": "\\cardGames\\Client\\Client.csproj",
   "PreviewInSolutionExplorer": false
 }

@@ -18,22 +18,13 @@ namespace Client
     class IngameCallWidget
     {
         private Grid ingameCallGrid = new Grid();
-        public Grid IngameCallGrid
-        {
-            get { return ingameCallGrid; }
-        }
+        public Grid IngameCallGrid { get => ingameCallGrid; }
 
         private ComboBox cardChoice = new ComboBox();
-        public ComboBox CardChoice
-        {
-            get { return cardChoice; }
-        }
+        public ComboBox CardChoice { get => cardChoice; }
 
         private Button cardChoiceConfirm = new Button();
-        public Button CardChoiceConfirm
-        {
-            get { return cardChoiceConfirm; }
-        }
+        public Button CardChoiceConfirm { get => cardChoiceConfirm; }
 
         public void addInCardChoiceList(params string[] list)
         {
