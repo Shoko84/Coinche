@@ -18,16 +18,13 @@ namespace Client
     class CoincheCallWidget
     {
         private Grid coincheGrid = new Grid();
-        public Grid CoincheGrid {
-            get { return coincheGrid; }
-        }
+        public Grid CoincheGrid { get => coincheGrid; }
 
         private Button coincheConfirm = new Button();
-        public Button CoincheConfirm {
-            get { return coincheConfirm; }
-        }
+        public Button CoincheConfirm { get => coincheConfirm; }
 
-        public void setContentCoincheCall(string name) {
+        public void setContentCoincheCall(string name)
+        {
             coincheConfirm.Content = name;
         }
 

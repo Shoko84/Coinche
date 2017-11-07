@@ -61,6 +61,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Card.cs" />
+    <Compile Include="ClientUser.cs" />
+    <Compile Include="GameInfos.cs" />
     <Compile Include="IngameCallWidget.cs" />
     <Compile Include="CoincheCallWidget.cs" />
     <Compile Include="ContractWidget.cs" />

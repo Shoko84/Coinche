@@ -18,19 +18,13 @@ namespace Client
     class ContractWidget
     {
         private Grid contractGrid = new Grid();
-        public Grid ContractGrid {
-            get { return contractGrid; }
-        }
+        public Grid ContractGrid { get => contractGrid; }
 
         private ComboBox contractChoice = new ComboBox();
-        public ComboBox ContractChoice  {
-            get { return contractChoice; }
-        }
+        public ComboBox ContractChoice { get => contractChoice; }
 
         private Button contractConfirm = new Button();
-        public Button ContractConfirm {
-            get { return contractConfirm; }
-        }
+        public Button ContractConfirm { get => contractConfirm; }
 
         public ContractWidget()
         {
