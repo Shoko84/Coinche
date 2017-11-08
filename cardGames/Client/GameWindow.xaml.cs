@@ -23,7 +23,6 @@ namespace Client
         private ContractWidget contractWidget;
         private CoincheCallWidget coincheCallWidget;
         private IngameCallWidget ingameCallWidget;
-        private GameInfos gameInfos;
 
         private void DisplayRectOnCanvas(double x, double y, double width, double height, Color color)
         {
@@ -166,35 +165,33 @@ namespace Client
             BottomActions.Child = contractWidget.ContractGrid;
             BottomActions.Child = coincheCallWidget.CoincheGrid;
             BottomActions.Child = ingameCallWidget.IngameCallGrid;
-
-            gameInfos.AddPlayer(2, "Shoko", true);
-            gameInfos.AddCardToPlayerId(2, new Card(Card.CardColour.Spades, Card.CardValue.Ace, Card.CardPosition.Bottom));
-            gameInfos.AddCardToPlayerId(2, new Card(Card.CardColour.Hearts, Card.CardValue.Queen, Card.CardPosition.Bottom));
-            gameInfos.AddCardToPlayerId(2, new Card(Card.CardColour.Spades, Card.CardValue.Ten, Card.CardPosition.Bottom));
-            gameInfos.AddCardToPlayerId(2, new Card(Card.CardColour.Diamonds, Card.CardValue.King, Card.CardPosition.Bottom));
-            gameInfos.AddCardToPlayerId(2, new Card(Card.CardColour.Clubs, Card.CardValue.Four, Card.CardPosition.Bottom));
-            gameInfos.AddPlayer(0, "Marco", false);
-            gameInfos.AddCardToPlayerId(0, new Card(Card.CardColour.Unknown, Card.CardValue.Unknown, Card.CardPosition.Top));
-            gameInfos.AddPlayer(1, "Herbaux", false);
-            gameInfos.AddCardToPlayerId(1, new Card(Card.CardColour.Unknown, Card.CardValue.Unknown, Card.CardPosition.Right));
-            gameInfos.AddCardToPlayerId(1, new Card(Card.CardColour.Unknown, Card.CardValue.Unknown, Card.CardPosition.Right));
-            gameInfos.AddCardToPlayerId(1, new Card(Card.CardColour.Unknown, Card.CardValue.Unknown, Card.CardPosition.Right));
-            gameInfos.AddCardToPlayerId(1, new Card(Card.CardColour.Unknown, Card.CardValue.Unknown, Card.CardPosition.Right));
-            gameInfos.AddCardToPlayerId(1, new Card(Card.CardColour.Unknown, Card.CardValue.Unknown, Card.CardPosition.Right));
-            gameInfos.AddCardToPlayerId(1, new Card(Card.CardColour.Unknown, Card.CardValue.Unknown, Card.CardPosition.Right));
-            gameInfos.AddPlayer(3, "Albert", false);
-            gameInfos.AddCardToPlayerId(3, new Card(Card.CardColour.Unknown, Card.CardValue.Unknown, Card.CardPosition.Left));
-            gameInfos.AddCardToPlayerId(3, new Card(Card.CardColour.Unknown, Card.CardValue.Unknown, Card.CardPosition.Left));
-            gameInfos.AddCardToPlayerId(3, new Card(Card.CardColour.Unknown, Card.CardValue.Unknown, Card.CardPosition.Left));
-            gameInfos.AddCardsPlayed(new Card(Card.CardColour.Diamonds, Card.CardValue.Six, Card.CardPosition.Right));
-            gameInfos.AddCardsPlayed(new Card(Card.CardColour.Clubs, Card.CardValue.King, Card.CardPosition.Top));
-            gameInfos.AddCardsPlayed(new Card(Card.CardColour.Hearts, Card.CardValue.Jack, Card.CardPosition.Left));
-            gameInfos.AddCardsPlayed(new Card(Card.CardColour.Spades, Card.CardValue.Nine, Card.CardPosition.Bottom));
+            
+            GameInfos.Instance.AddCardToPlayerId(2, new Card(Card.CardColour.Spades, Card.CardValue.Ace, Card.CardPosition.Bottom));
+            GameInfos.Instance.AddCardToPlayerId(2, new Card(Card.CardColour.Hearts, Card.CardValue.Queen, Card.CardPosition.Bottom));
+            GameInfos.Instance.AddCardToPlayerId(2, new Card(Card.CardColour.Spades, Card.CardValue.Ten, Card.CardPosition.Bottom));
+            GameInfos.Instance.AddCardToPlayerId(2, new Card(Card.CardColour.Diamonds, Card.CardValue.King, Card.CardPosition.Bottom));
+            GameInfos.Instance.AddCardToPlayerId(2, new Card(Card.CardColour.Clubs, Card.CardValue.Four, Card.CardPosition.Bottom));
+            GameInfos.Instance.AddPlayer(0, "Marco", false);
+            GameInfos.Instance.AddCardToPlayerId(0, new Card(Card.CardColour.Unknown, Card.CardValue.Unknown, Card.CardPosition.Top));
+            GameInfos.Instance.AddPlayer(1, "Herbaux", false);
+            GameInfos.Instance.AddCardToPlayerId(1, new Card(Card.CardColour.Unknown, Card.CardValue.Unknown, Card.CardPosition.Right));
+            GameInfos.Instance.AddCardToPlayerId(1, new Card(Card.CardColour.Unknown, Card.CardValue.Unknown, Card.CardPosition.Right));
+            GameInfos.Instance.AddCardToPlayerId(1, new Card(Card.CardColour.Unknown, Card.CardValue.Unknown, Card.CardPosition.Right));
+            GameInfos.Instance.AddCardToPlayerId(1, new Card(Card.CardColour.Unknown, Card.CardValue.Unknown, Card.CardPosition.Right));
+            GameInfos.Instance.AddCardToPlayerId(1, new Card(Card.CardColour.Unknown, Card.CardValue.Unknown, Card.CardPosition.Right));
+            GameInfos.Instance.AddCardToPlayerId(1, new Card(Card.CardColour.Unknown, Card.CardValue.Unknown, Card.CardPosition.Right));
+            GameInfos.Instance.AddPlayer(3, "Albert", false);
+            GameInfos.Instance.AddCardToPlayerId(3, new Card(Card.CardColour.Unknown, Card.CardValue.Unknown, Card.CardPosition.Left));
+            GameInfos.Instance.AddCardToPlayerId(3, new Card(Card.CardColour.Unknown, Card.CardValue.Unknown, Card.CardPosition.Left));
+            GameInfos.Instance.AddCardToPlayerId(3, new Card(Card.CardColour.Unknown, Card.CardValue.Unknown, Card.CardPosition.Left));
+            GameInfos.Instance.AddCardsPlayed(new Card(Card.CardColour.Diamonds, Card.CardValue.Six, Card.CardPosition.Right));
+            GameInfos.Instance.AddCardsPlayed(new Card(Card.CardColour.Clubs, Card.CardValue.King, Card.CardPosition.Top));
+            GameInfos.Instance.AddCardsPlayed(new Card(Card.CardColour.Hearts, Card.CardValue.Jack, Card.CardPosition.Left));
+            GameInfos.Instance.AddCardsPlayed(new Card(Card.CardColour.Spades, Card.CardValue.Nine, Card.CardPosition.Bottom));
         }
 
         public GameWindow()
         {
-            gameInfos = new GameInfos();
             contractWidget = new ContractWidget();
             coincheCallWidget = new CoincheCallWidget();
             ingameCallWidget = new IngameCallWidget();

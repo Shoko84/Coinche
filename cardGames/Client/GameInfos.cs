@@ -9,6 +9,20 @@ namespace Client
 {
     public class GameInfos
     {
+        private static GameInfos instance;
+        private static readonly object padlock = new object();
+        public static GameInfos Instance
+        {
+            get {
+                lock (padlock)
+                {
+                    if (instance == null)
+                        instance = new GameInfos();
+                    return (instance);
+                }
+            }
+        }
+
         private List<ClientUser> usersList;
         private List<Card> cardsPlayed;
         private int myId;

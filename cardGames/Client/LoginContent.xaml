@@ -40,6 +40,7 @@
                    VerticalAlignment="Center"
                    VerticalContentAlignment="Center"/>
             <TextBox Grid.Column="1"
+                     x:Name="UsernameField"
                      Margin="0,21,18,18"
                      Height="22"
                      VerticalAlignment="Center"
@@ -67,9 +68,11 @@
                        Foreground="White"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
-                       VerticalContentAlignment="Center"/>
+                       VerticalContentAlignment="Center"
+                       Margin="9,0,0,0"/>
                 <TextBox Grid.Column="1"
-                         Margin="0,21,18,18"
+                         x:Name="AddressField"
+                         Margin="23,21,18,18"
                          VerticalAlignment="Center"
                          VerticalContentAlignment="Center"
                          Height="22"/>
@@ -90,6 +93,7 @@
                        VerticalAlignment="Center"
                        VerticalContentAlignment="Center"/>
                 <TextBox Grid.Column="1"
+                         x:Name="PortField"
                          Margin="0,21,18,18"
                          VerticalAlignment="Center"
                          VerticalContentAlignment="Center"
@@ -97,6 +101,7 @@
             </Grid>
         </Grid>
         <Button Grid.Row="3"
+                x:Name="ConnectButton"
                 Width="100" Height="30"
                 Content="Connect"
                 Background="#FF5B5B5B"
