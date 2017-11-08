@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Client
 {
-    public class Card
+    public class Card : Object
     {
         public enum CardColour : int
         {
@@ -64,6 +64,14 @@ namespace Client
 
         private CardPosition position;
         public CardPosition Position { get => position; }
+
+        public override bool Equals(object obj)
+        {
+            Card other = obj as Card;
+            return (this.colour == other.Colour &&
+                    this.value == other.Value &&
+                    this.position == other.Position);
+        }
 
         public Card(CardColour _colour, CardValue _value, CardPosition _position)
         {
