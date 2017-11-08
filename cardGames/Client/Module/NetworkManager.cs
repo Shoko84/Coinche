@@ -14,23 +14,30 @@ namespace Client
     /**
      *  This Class contains the network part of the client.
      */
-    class NetworkManager
+    public class NetworkManager
     {
         private string  _serverIP;      /**< This var correspond to the server'ip*/
         private int     _serverPort;    /**< This var correspond to the server's port*/
         private bool    _connect;       /**< This boolean permit to know if the client is connected or not to a server*/
-
+        
+        private void Init()
+        {
+            SetCallBackFunction<string>("msg", GameInfos.Instance.EventManager.PrintIncomingMessage);
+            SetCallBackFunction<string>("011", GameInfos.Instance.EventManager.WaitingForPlayer);
+            SetCallBackFunction<string>("010", GameInfos.Instance.EventManager.Playing);
+            SetCallBackFunction<string>("030", GameInfos.Instance.EventManager.PlayersConnect);
+            SetCallBackFunction<string>("031", GameInfos.Instance.EventManager.PlayerRename);
+            SetCallBackFunction<string>("052", GameInfos.Instance.EventManager.PlayersQuit);
+            SetCallBackFunction<string>("200", GameInfos.Instance.EventManager.Ok);
+            SetCallBackFunction<string>("230", GameInfos.Instance.EventManager.ConnectionOk);
+            SetCallBackFunction<string>("330", GameInfos.Instance.EventManager.ConnectionKo);
+        }
+       
         /**
          *  Getter of the connection.
          *  @return Return the state of the connection to the server.
          */
-        public bool IsConnected
-        {
-            get
-            {
-                return (this._connect);
-            }
-        }
+        public bool IsConnected { get => _connect; set => _connect = value; }
 
         /**
          *  Constructor.
@@ -44,11 +51,13 @@ namespace Client
          *  @param  ip      The ip of the server.
          *  @param  port    The port of the server.
          */
-        public void Connect(string ip, int port)
+        public void Connect(string username, string ip, int port)
         {
             this._serverIP = ip;
             this._serverPort = port;
-            this._connect = true;
+            this._connect = false;
+            this.Init();
+            GameInfos.Instance.NetManager.WriteMessage("130", username);
         }
 
         /**
@@ -91,21 +100,16 @@ namespace Client
          */
         public void WriteMessage(string type, string msg)
         {
-            if (this._connect)
+            try
             {
-                try
-                {
-                    NetworkComms.SendObject(type, this._serverIP, this._serverPort, msg);
-                    Console.WriteLine("send[" + type + "]: " + msg);
-                }
-                catch (Exception)
-                {
-                    this.Error("Error", "The server is disconnected");
-                    this._connect = false;
-                }
+                NetworkComms.SendObject(type, this._serverIP, this._serverPort, msg);
+                Console.WriteLine("send[" + type + "]: " + msg);
             }
-            else
-                this.Error("Warning", "The client is not connected to any servers");
+            catch (Exception)
+            {
+                this.Error("Error", "The server is disconnected");
+                this._connect = false;
+            }
         }
 
         /**
