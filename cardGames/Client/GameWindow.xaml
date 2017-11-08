@@ -1,0 +1,74 @@
+﻿<Window x:Class="Client.GameWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Client"
+        mc:Ignorable="d"
+        Title="CardGames" Height="620" Width="1050"
+        ResizeMode="NoResize">
+
+    <Grid Background="#FF323232">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border BorderBrush="#FF5B5B5B" BorderThickness="1">
+            <Grid Grid.Column="0" Grid.Row="0" Background="#FF272727">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <TextBlock HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           TextWrapping="Wrap"
+                           Grid.Row="0"
+                           Foreground="White" Padding="4,4,0,0">
+                    Coinche
+                </TextBlock>
+                <Separator HorizontalAlignment="Center"
+                           Width="130"
+                           Margin="0,0,0,0"
+                           Grid.Row="1"
+                           VerticalAlignment="Center"
+                           Foreground="#FF5B5B5B">
+                </Separator>
+                <TextBlock HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           TextWrapping="Wrap"
+                           Grid.Row="2"
+                           Foreground="White" Padding="4,4,0,0">
+                    Des choses
+                </TextBlock>
+            </Grid>
+        </Border>
+        <Grid Grid.Column="1" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <Border Grid.Column="1" Grid.Row="0" Margin="10" BorderBrush="#FF5B5B5B" BorderThickness="1">
+                <Canvas HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Width="863" Height="510"
+                        Name="TestCanvas"/>
+            </Border>
+            <Border Grid.Column="1" Grid.Row="1"
+                    Margin="10,0,10,10"
+                    BorderBrush="#FF5B5B5B"
+                    BorderThickness="1"
+                    Name="BottomActions">
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

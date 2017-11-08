@@ -1,0 +1,95 @@
+﻿<UserControl x:Class="Client.WaitingScreenContent"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Client"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="450">
+
+        <Grid Background="#FF323232">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <Label  Grid.Row="0"
+                Content="Waiting for players.."
+                FontSize="24"
+                Foreground="White"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                VerticalContentAlignment="Center"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Button Grid.Column="0"
+                    Width="80"
+                    Padding="4"
+                    VerticalAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Content="Ready"
+                    Background="#FF404040"
+                    Foreground="White"
+                    IsHitTestVisible="False"
+                    BorderBrush="#FF1AD411"
+                    BorderThickness="2"
+                    x:Name="Player1Button" />
+            <Button Grid.Column="1"
+                    Width="80"
+                    Padding="4"
+                    VerticalAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Content="Not ready"
+                    Background="#FF404040"
+                    Foreground="White"
+                    IsHitTestVisible="False"
+                    BorderBrush="#FFEF4836"
+                    BorderThickness="2"
+                    x:Name="Player2Button" />
+            <Button Grid.Column="2"
+                    Width="80"
+                    Padding="4"
+                    VerticalAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Content="Not ready"
+                    Background="#FF404040"
+                    Foreground="White"
+                    IsHitTestVisible="False"
+                    BorderBrush="#FFEF4836"
+                    BorderThickness="2"
+                    x:Name="Player3Button" />
+            <Button Grid.Column="3"
+                    Width="80"
+                    Padding="4"
+                    VerticalAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Content="Not ready"
+                    Background="#FF404040"
+                    Foreground="White"
+                    IsHitTestVisible="False"
+                    BorderBrush="#FFEF4836"
+                    BorderThickness="2"
+                    x:Name="Player4Button" />
+        </Grid>
+        <Button Grid.Row="2"
+                Width="80"
+                Content="Skip"
+                Padding="7"
+                VerticalAlignment="Center"
+                VerticalContentAlignment="Center"
+                Background="#FF404040"
+                Foreground="White"
+                Click="Button_Click" />
+    </Grid>
+</UserControl>
