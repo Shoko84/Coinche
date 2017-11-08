@@ -19,8 +19,12 @@ namespace Client
     /// </summary>
     public partial class MainWindow : Window
     {
+        private static MainWindow instance;
+        public static MainWindow Instance { get => instance; }
+
         public MainWindow()
         {
+            instance = this;
             InitializeComponent();
             ContentArea.Content = new Client.LoginContent();
         }

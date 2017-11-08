@@ -23,9 +23,17 @@ namespace Client
             }
         }
 
+        private NetworkManager netManager;
+        public NetworkManager NetManager { get => netManager; }
+        private EventManager eventManager;
+        public EventManager EventManager { get => eventManager; }
+
         private List<ClientUser> usersList;
+        public List<ClientUser> UsersList { get => usersList; }
+
         private List<Card> cardsPlayed;
         private int myId;
+        public int MyId { get => myId; set => myId = value; }
 
         public ClientUser.ClientPosition GetPosFromId(int myId, int id)
         {
@@ -119,6 +127,8 @@ namespace Client
 
         public GameInfos()
         {
+            netManager = new NetworkManager();
+            eventManager = new EventManager();
             usersList = new List<ClientUser>();
             cardsPlayed = new List<Card>();
             myId = -1;

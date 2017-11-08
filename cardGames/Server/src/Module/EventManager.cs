@@ -76,7 +76,7 @@ namespace Server
             if (connect == true)
             {
                 Server.Instance.PrintOnDebug("A new player just connect " + ip + " " + port + " " + id);
-                Server.Instance.WriteTo("230", ip, port, id.ToString());
+                Server.Instance.WriteTo("230", ip, port, id.ToString() + ":" + message);
                 if (Server.Instance.players.list.Count() == 4)
                 {
                     if (Server.Instance.game.status == GAME_STATUS.WAIT)
