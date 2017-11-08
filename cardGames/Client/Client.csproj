@@ -61,7 +61,8 @@
     </ApplicationDefinition>
     <Compile Include="Module\EventManager.cs" />
     <Compile Include="Module\NetworkManager.cs" />
-    <Compile Include="Utils\Util.cs" />
+    <Compile Include="Utils\Data.cs" />
+    <Compile Include="Utils\Serializer.cs" />
     <Compile Include="WaitingScreenContent.xaml.cs">
       <DependentUpon>WaitingScreenContent.xaml</DependentUpon>
     </Compile>

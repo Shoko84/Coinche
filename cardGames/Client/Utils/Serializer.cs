@@ -2,7 +2,7 @@
  * @file    Utils.cs
  * @author  Marc-Antoine Leconte
  * 
- * This file contains different util Class.
+ * This file contains the Serializer Class.
  */
 
 using Newtonsoft.Json;
@@ -10,28 +10,8 @@ using Newtonsoft.Json;
 namespace Common
 {
     /**
-    *  This class is a class used in test.
-    *  TO_DESTROY
+    * This class is a class permit to serialize and unserialized an object.
     */
-    public class Data
-    {
-        public string _name;
-        public string _msg;
-        public Data()
-        {
-            _msg = "";
-            _name = "";
-        }
-        public Data(string msg, string name)
-        {
-            _msg = msg;
-            _name = name;
-        }
-    }
-
-    /**
-     * This class is a class permit to serialize and unserialized an object.
-     */
     public class Serializer
     {
         /**

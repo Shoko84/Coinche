@@ -54,7 +54,8 @@
     <Compile Include="src\Module\PlayerManager.cs" />
     <Compile Include="src\Server.cs" />
     <Compile Include="src\ServerLobby.cs" />
-    <Compile Include="src\Utils\Util.cs" />
+    <Compile Include="src\Utils\Data.cs" />
+    <Compile Include="src\Utils\Serializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
