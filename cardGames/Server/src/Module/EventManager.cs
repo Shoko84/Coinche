@@ -43,7 +43,7 @@ namespace Server
             if (Server.Instance.players.list.Count() < 4)
             {
                 id = Server.Instance.players.list.Count();
-                Profile newDeck = new Profile(id, ip, port);
+                Profile newDeck = new Profile(message, id, ip, port);
                 Server.Instance.players.list.Add(newDeck);
                 connect = true;
             }
@@ -89,7 +89,7 @@ namespace Server
                 foreach (var it in Server.Instance.players.list)
                 {
                     if (it.id != id || it.id != port)
-                        Server.Instance.WriteTo("030", it.ip, it.port, it.id + ":" + it.owner);
+                        Server.Instance.WriteTo("030", ip, port, it.id + ":" + it.owner);
                 }
                 Server.Instance.WriteToOther("030", ip, port, id + ":" + message);
             }
