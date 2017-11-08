@@ -88,11 +88,10 @@ namespace Server
                     Server.Instance.WriteTo("011", ip, port, "Waiting for players");
                 foreach (var it in Server.Instance.players.list)
                 {
-                    if (it.id == id)
-                        break;
-                    Server.Instance.WriteTo("030", it.ip, it.port, it.id + ":" + it.owner);
+                    if (it.id != id || it.id != port)
+                        Server.Instance.WriteTo("030", it.ip, it.port, it.id + ":" + it.owner);
                 }
-                Server.Instance.WriteToAll("030", id + ":" + message);
+                Server.Instance.WriteToOther("030", ip, port, id + ":" + message);
             }
             else
                 Server.Instance.WriteTo("330", ip, port, "Sorry, there are too many client which are already connected");
