@@ -30,22 +30,22 @@ namespace Client
         public void AddCardsPlayed(Card card)
         {
             cardsPlayed.Add(card);
-            if (App.Current.MainWindow is MainWindow)
+            if (App.Current.MainWindow is GameWindow)
             {
-                ((MainWindow)App.Current.MainWindow).DrawGameField();
-                ((MainWindow)App.Current.MainWindow).DrawHandCards(usersList);
-                ((MainWindow)App.Current.MainWindow).DrawCardsPlayed(cardsPlayed);
+                ((GameWindow)App.Current.MainWindow).DrawGameField();
+                ((GameWindow)App.Current.MainWindow).DrawHandCards(usersList);
+                ((GameWindow)App.Current.MainWindow).DrawCardsPlayed(cardsPlayed);
             }
         }
 
         public void ClearCardsPlayed()
         {
             cardsPlayed.Clear();
-            if (App.Current.MainWindow is MainWindow)
+            if (App.Current.MainWindow is GameWindow)
             {
-                ((MainWindow)App.Current.MainWindow).DrawGameField();
-                ((MainWindow)App.Current.MainWindow).DrawHandCards(usersList);
-                ((MainWindow)App.Current.MainWindow).DrawCardsPlayed(cardsPlayed);
+                ((GameWindow)App.Current.MainWindow).DrawGameField();
+                ((GameWindow)App.Current.MainWindow).DrawHandCards(usersList);
+                ((GameWindow)App.Current.MainWindow).DrawCardsPlayed(cardsPlayed);
             }
         }
 
@@ -56,11 +56,12 @@ namespace Client
                 if (usersList[i].Id == id)
                 {
                     usersList[i].AddCard(card);
-                    if (App.Current.MainWindow is MainWindow)
+
+                    if (App.Current.MainWindow is GameWindow)
                     {
-                        ((MainWindow)App.Current.MainWindow).DrawGameField();
-                        ((MainWindow)App.Current.MainWindow).DrawHandCards(usersList);
-                        ((MainWindow)App.Current.MainWindow).DrawCardsPlayed(cardsPlayed);
+                        ((GameWindow)App.Current.MainWindow).DrawGameField();
+                        ((GameWindow)App.Current.MainWindow).DrawHandCards(usersList);
+                        ((GameWindow)App.Current.MainWindow).DrawCardsPlayed(cardsPlayed);
                     }
                     break;
                 }
@@ -71,11 +72,11 @@ namespace Client
         {
             // TODO
 
-            //if (App.Current.MainWindow is MainWindow)
+            //if (App.Current.MainWindow is GameWindow)
             //{
-            //    ((MainWindow)App.Current.MainWindow).DrawGameField();
-            //    ((MainWindow)App.Current.MainWindow).DrawHandCards(usersList);
-            //    ((MainWindow)App.Current.MainWindow).DrawCardsPlayed(cardsPlayed);
+            //    ((GameWindow)App.Current.MainWindow).DrawGameField();
+            //    ((GameWindow)App.Current.MainWindow).DrawHandCards(usersList);
+            //    ((GameWindow)App.Current.MainWindow).DrawCardsPlayed(cardsPlayed);
             //}
         }
 
@@ -94,11 +95,11 @@ namespace Client
         {
             // TODO
 
-            //if (App.Current.MainWindow is MainWindow)
+            //if (App.Current.MainWindow is GameWindow)
             //{
-            //    ((MainWindow)App.Current.MainWindow).DrawGameField();
-            //    ((MainWindow)App.Current.MainWindow).DrawHandCards(usersList);
-            //    ((MainWindow)App.Current.MainWindow).DrawCardsPlayed(cardsPlayed);
+            //    ((GameWindow)App.Current.MainWindow).DrawGameField();
+            //    ((GameWindow)App.Current.MainWindow).DrawHandCards(usersList);
+            //    ((GameWindow)App.Current.MainWindow).DrawCardsPlayed(cardsPlayed);
             //}
         }
 

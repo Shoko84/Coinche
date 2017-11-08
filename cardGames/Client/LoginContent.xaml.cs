@@ -10,19 +10,24 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Client
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for LoginContent.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class LoginContent : UserControl
     {
-        public MainWindow()
+        public LoginContent()
         {
             InitializeComponent();
-            ContentArea.Content = new Client.LoginContent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ((MainWindow)App.Current.MainWindow).ContentArea.Content = new WaitingScreenContent();
         }
     }
 }
