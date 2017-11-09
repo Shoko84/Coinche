@@ -20,15 +20,40 @@ namespace Client
     public partial class MainWindow : Window
     {
         private static MainWindow instance;
-        private static object padlock = new object();
-        public static object Padlock { get => padlock; }
+        private static readonly object padlock = new object(); 
+
         public static MainWindow Instance { get => instance; }
+        public static object Padlock { get => padlock; }
 
         public MainWindow()
         {
             instance = this;
             InitializeComponent();
             ContentArea.Content = new Client.LoginContent();
+        }
+
+        public object ContentAreaContent
+        {
+            get
+            {
+                return this.ContentArea.Content;
+            }
+            set
+            {
+                lock (padlock)
+                {
+                    this.ContentArea.Content = value;
+                }
+            }
+        }
+
+        public void ChangeButton(string message)
+        {
+            WaitingScreenContent content = MainWindow.Instance.ContentAreaContent as WaitingScreenContent;
+
+            Button b = content.FindName("Player" + message.Split(':')[0] + "Button") as Button;
+            b.BorderBrush = new BrushConverter().ConvertFrom("#FF1AD411") as Brush;
+            b.Content = message.Split(':')[1];
         }
     }
 }

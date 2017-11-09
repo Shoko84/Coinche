@@ -99,18 +99,12 @@ namespace Client
          */
         public void PlayersConnect(PacketHeader header, Connection connection, string message)
         {
-            MessageBox.Show(message, "Id: " + GameInfos.Instance.MyId);
+            //MessageBox.Show(message, "Id: " + GameInfos.Instance.MyId);
             GameInfos.Instance.AddPlayer(int.Parse(message.Split(':')[0]), message.Split(':')[1], false);
 
             App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
             {
-                WaitingScreenContent content = MainWindow.Instance.ContentArea.Content as WaitingScreenContent;
-
-                Button b = content.FindName("Player" + message.Split(':')[0] + "Button") as Button;
-
-                b.BorderBrush = new BrushConverter().ConvertFrom("#FF1AD411") as Brush;
-                b.Content = message.Split(':')[1];
-
+                MainWindow.Instance.ChangeButton(message);
                 if (GameInfos.Instance.UsersList.Count == 4)
                 {
                     GameWindow win = new GameWindow();
