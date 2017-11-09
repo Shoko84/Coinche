@@ -13,7 +13,8 @@ namespace Client
         private static readonly object padlock = new object();
         public static GameInfos Instance
         {
-            get {
+            get
+            {
                 lock (padlock)
                 {
                     if (instance == null)
@@ -109,7 +110,7 @@ namespace Client
                 usersList.Add(new ClientUser(id, playerName, GetPosFromId(id, id)));
                 myId = id;
             }
-            else if (!isMyself && myId != -1)
+            else if (!isMyself && myId != -1 && !usersList.Exists(e => e.Id == id))
                 usersList.Add(new ClientUser(id, playerName, GetPosFromId(myId, id)));
         }
 

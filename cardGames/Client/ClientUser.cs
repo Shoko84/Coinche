@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Client
 {
-    public class ClientUser
+    public class ClientUser : object
     {
         public enum ClientPosition : int
         {
@@ -27,6 +27,14 @@ namespace Client
 
         private List<Card> cardsList;
         public List<Card> CardsList { get => cardsList; }
+
+        public override bool Equals(object obj)
+        {
+            ClientUser other = obj as ClientUser;
+            return (this.username == other.Username &&
+                    this.position == other.Position &&
+                    this.cardsList == other.CardsList);
+        }
 
         public void AddCard(Card card)
         {

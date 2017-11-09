@@ -11,6 +11,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Threading;
 
 namespace Client
 {
@@ -102,30 +103,18 @@ namespace Client
 
             App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
             {
-                WaitingScreenContent content = MainWindow.Instance.ContentArea.Content as WaitingScreenContent;
+                WaitingScreenContent content = MainWindow.Instance.ContentAreaContent as WaitingScreenContent;
 
-                switch (GameInfos.Instance.UsersList.Count)
+                Button b = content.FindName("Player" + message.Split(':')[0] + "Button") as Button;
+                b.BorderBrush = new BrushConverter().ConvertFrom("#FF1AD411") as Brush;
+                b.Content = message.Split(':')[1];
+                if (GameInfos.Instance.UsersList.Count == 4)
                 {
-                    case 2:
-                        Button b = content.FindName("Player2Button") as Button;
-                        b.BorderBrush = new BrushConverter().ConvertFrom("#FF1AD411") as Brush;
-                        b.Content = "Ready";
-                        break;
-                    case 3:
-                        Button c = content.FindName("Player3Button") as Button;
-                        c.BorderBrush = new BrushConverter().ConvertFrom("#FF1AD411") as Brush;
-                        c.Content = "Ready";
-                        break;
-                    case 4:
-                        Button d = content.FindName("Player4Button") as Button;
-                        d.BorderBrush = new BrushConverter().ConvertFrom("#FF1AD411") as Brush;
-                        d.Content = "Ready";
-                        GameWindow win = new GameWindow();
-                        App.Current.MainWindow.Close();
-                        App.Current.MainWindow = win;
-                        win.Initialize();
-                        win.Show();
-                        break;
+                    GameWindow win = new GameWindow();
+                    App.Current.MainWindow.Close();
+                    App.Current.MainWindow = win;
+                    win.Initialize();
+                    win.Show();
                 }
             }));
             Console.WriteLine("A player connect : " + message);
