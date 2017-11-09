@@ -15,33 +15,23 @@ public enum PLAYER_STATUS
 
 namespace Server
 {
-    public  class Contract
-    {
-    }
-
-    public class Card
-    {
-        public string value;
-        public string color;
-    }
-
     public class Profile
     {
         public string           owner;
         public int              id;
         public string           ip;
         public int              port;
-        public List<Card>       deck;
+        public Deck             deck;
         public PLAYER_STATUS    status;
         public Contract         contract;
 
-        public Profile(int _id, string _ip, int _port)
+        public Profile(int _id, string _ip, int _port, string name)
         {
-            owner = "lambda";
+            owner = name;
             id = _id;
             ip = _ip;
             port = _port;
-            deck = new List<Card>();
+            deck = new Deck();
             status = PLAYER_STATUS.ONLINE;
         }
     }

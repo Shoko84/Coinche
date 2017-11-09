@@ -6,6 +6,7 @@
  */
 
 using System.Linq;
+using static Server.Card;
 
 namespace Server
 {
@@ -28,6 +29,7 @@ namespace Server
     public class GameManager
     {
         private GAME_STATUS _status;  /**< This var determine the state of the game.*/
+        private Deck _deck;           /**< The deck containing all the cards.*/
 
         /**
          *  Getter and Setter for the _status var.
@@ -35,15 +37,8 @@ namespace Server
          */
         public GAME_STATUS  status
         {
-            get
-            {
-                return (this._status);
-            }
-            set
-            {
-                this._status = value;
-            }
-
+            get => (this._status);
+            set => this._status = value;
         }
 
         /**
@@ -52,6 +47,7 @@ namespace Server
         public GameManager()
         {
             status = GAME_STATUS.WAIT;
+            _deck = new Deck();
         }
 
         /**
@@ -64,10 +60,57 @@ namespace Server
         }
 
         /**
+         *  Init the initial deck;
+         */
+
+        private void    InitDeck()
+        {
+            CardColour color = CardColour.Hearts;
+            CardValue   value = CardValue.King;
+            CardPosition position = CardPosition.NotSpecified;
+
+            while (color != CardColour.Unknown)
+            {
+                value = CardValue.King;
+                while (value != CardValue.Unknown)
+                {
+                    if (value >= CardValue.Seven || value == CardValue.Ace)
+                        _deck.AddCard(color, value, position);
+                    value -= 1;
+                }
+                color -= 1;
+            }
+        }
+
+        /**
          *  This function is triggered when the game is in DISTRIB mode.
          */
         public void Distrib()
         {
+            Card tmp;
+            int turn = 0;
+            _deck.Clear();
+            InitDeck();
+
+            while (_deck.Count != 0)
+            {
+                tmp = _deck.GetRandomCard();
+                Server.Instance.players.list[turn].deck.AddCard(tmp);
+                _deck.RemoveCard(tmp);
+                turn += 1;
+                if (turn == 4)
+                    turn = 0;
+            }
+
+            if (Server.Instance.debug)
+            {
+                foreach (var it in Server.Instance.players.list)
+                {
+                    Server.Instance.PrintOnDebug("Player " + it.owner + ": ");
+                    it.deck.Dump();
+                }
+            }
+            status = GAME_STATUS.ANNONCE;
         }
 
         /**

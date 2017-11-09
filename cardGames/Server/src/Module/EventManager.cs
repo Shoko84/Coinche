@@ -43,7 +43,7 @@ namespace Server
             if (Server.Instance.players.list.Count() < 4)
             {
                 id = Server.Instance.players.list.Count();
-                Profile newDeck = new Profile(id, ip, port);
+                Profile newDeck = new Profile(id, ip, port, message);
                 Server.Instance.players.list.Add(newDeck);
                 connect = true;
             }
@@ -165,6 +165,33 @@ namespace Server
             Serializer serializer = new Serializer();
             Data data = serializer.StringToObject<Data>(obj);
             Console.WriteLine("[" + data._name + "]: " + data._msg);
+        }
+
+        public void SendDeck(PacketHeader header, Connection connection, string message)
+        {
+            var ip = connection.ConnectionInfo.RemoteEndPoint.ToString().Split(':')[0];
+            var port = int.Parse(connection.ConnectionInfo.RemoteEndPoint.ToString().Split(':')[1]);
+
+            Serializer serializer = new Serializer();
+            foreach (var it in Server.Instance.players.list)
+            {
+                if (it.ip == ip && it.port == port)
+                {
+                    string msg = serializer.ObjectToString(it.deck);
+                    Server.Instance.WriteTo("211", ip, port, msg);
+                    break;
+                }
+            }
+        }
+
+        public void SendPile(PacketHeader header, Connection connection, string message)
+        {
+
+        }
+
+        public void SendPlayedCards(PacketHeader header, Connection connection, string message)
+        {
+
         }
     }
 }
