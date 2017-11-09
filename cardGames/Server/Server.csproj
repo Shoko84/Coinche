@@ -48,6 +48,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\Game\Card.cs" />
+    <Compile Include="src\Game\Contract.cs" />
+    <Compile Include="src\Game\Deck.cs" />
     <Compile Include="src\Module\EventManager.cs" />
     <Compile Include="src\Module\GameManager.cs" />
     <Compile Include="src\Module\NetworkManager.cs" />

@@ -32,6 +32,7 @@ namespace Server
             NetworkComms.AppendGlobalIncomingPacketHandler<string>("050", Server.Instance.events.Deconnection);
             NetworkComms.AppendGlobalIncomingPacketHandler<string>("130", Server.Instance.events.Connection);
             NetworkComms.AppendGlobalIncomingPacketHandler<string>("131", Server.Instance.events.Rename);
+            NetworkComms.AppendGlobalIncomingPacketHandler<string>("111", Server.Instance.events.SendDeck);
         }
 
         /**
