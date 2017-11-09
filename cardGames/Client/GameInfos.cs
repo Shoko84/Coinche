@@ -13,7 +13,8 @@ namespace Client
         private static readonly object padlock = new object();
         public static GameInfos Instance
         {
-            get {
+            get
+            {
                 lock (padlock)
                 {
                     if (instance == null)

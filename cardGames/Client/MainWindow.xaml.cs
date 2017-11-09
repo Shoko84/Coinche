@@ -20,6 +20,8 @@ namespace Client
     public partial class MainWindow : Window
     {
         private static MainWindow instance;
+        private static object padlock = new object();
+        public static object Padlock { get => padlock; }
         public static MainWindow Instance { get => instance; }
 
         public MainWindow()
