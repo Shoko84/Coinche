@@ -10,6 +10,7 @@ using NetworkCommsDotNet;
 using System.Linq;
 using Common;
 using System;
+using System.Threading;
 
 namespace Server
 {
@@ -89,7 +90,10 @@ namespace Server
                 foreach (var it in Server.Instance.players.list)
                 {
                     if (it.id != id || it.id != port)
+                    {
                         Server.Instance.WriteTo("030", ip, port, it.id + ":" + it.owner);
+                        Thread.Sleep(25);
+                    }
                 }
                 Server.Instance.WriteToOther("030", ip, port, id + ":" + message);
             }

@@ -46,14 +46,5 @@ namespace Client
                 }
             }
         }
-
-        public void ChangeButton(string message)
-        {
-            WaitingScreenContent content = MainWindow.Instance.ContentAreaContent as WaitingScreenContent;
-
-            Button b = content.FindName("Player" + message.Split(':')[0] + "Button") as Button;
-            b.BorderBrush = new BrushConverter().ConvertFrom("#FF1AD411") as Brush;
-            b.Content = message.Split(':')[1];
-        }
     }
 }

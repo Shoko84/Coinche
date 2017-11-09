@@ -99,12 +99,15 @@ namespace Client
          */
         public void PlayersConnect(PacketHeader header, Connection connection, string message)
         {
-            //MessageBox.Show(message, "Id: " + GameInfos.Instance.MyId);
             GameInfos.Instance.AddPlayer(int.Parse(message.Split(':')[0]), message.Split(':')[1], false);
 
             App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
             {
-                MainWindow.Instance.ChangeButton(message);
+                WaitingScreenContent content = MainWindow.Instance.ContentAreaContent as WaitingScreenContent;
+
+                Button b = content.FindName("Player" + message.Split(':')[0] + "Button") as Button;
+                b.BorderBrush = new BrushConverter().ConvertFrom("#FF1AD411") as Brush;
+                b.Content = message.Split(':')[1];
                 if (GameInfos.Instance.UsersList.Count == 4)
                 {
                     GameWindow win = new GameWindow();
@@ -113,34 +116,6 @@ namespace Client
                     win.Initialize();
                     win.Show();
                 }
-
-                //Button b1 = content.FindName("Player0Button") as Button;
-                //Button b2 = content.FindName("Player1Button") as Button;
-                //Button b3 = content.FindName("Player2Button") as Button;
-                //Button b4 = content.FindName("Player3Button") as Button;
-
-                //switch (GameInfos.Instance.UsersList.Count)
-                //{
-                //    case 2:
-                //        b2.BorderBrush = new BrushConverter().ConvertFrom("#FF1AD411") as Brush;
-                //        b2.Content = "Ready";
-                //        Thread.Sleep(1000);
-                //        break;
-                //    case 3:
-                //        b2.BorderBrush = new BrushConverter().ConvertFrom("#FF1AD411") as Brush;
-                //        b2.Content = "Ready";
-                //        b3.BorderBrush = new BrushConverter().ConvertFrom("#FF1AD411") as Brush;
-                //        b3.Content = "Ready";
-                //        Thread.Sleep(1000);
-                //        break;
-                //    case 4:
-                //        GameWindow win = new GameWindow();
-                //        App.Current.MainWindow.Close();
-                //        App.Current.MainWindow = win;
-                //        win.Initialize();
-                //        win.Show();
-                //        break;
-                //}
             }));
             Console.WriteLine("A player connect : " + message);
         }
