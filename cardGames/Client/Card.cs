@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Client
 {
-    public class Card : Object
+    public class Card : object
     {
         public enum CardColour : int
         {
