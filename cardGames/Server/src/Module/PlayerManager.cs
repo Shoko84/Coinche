@@ -35,9 +35,9 @@ namespace Server
         public PLAYER_STATUS    status;
         public Contract         contract;
 
-        public Profile(int _id, string _ip, int _port)
+        public Profile(string name, int _id, string _ip, int _port)
         {
-            owner = "lambda";
+            owner = name;
             id = _id;
             ip = _ip;
             port = _port;

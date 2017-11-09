@@ -38,13 +38,13 @@
                     Padding="4"
                     VerticalAlignment="Center"
                     VerticalContentAlignment="Center"
-                    Content="Ready"
+                    Content="Not ready"
                     Background="#FF404040"
                     Foreground="White"
                     IsHitTestVisible="False"
-                    BorderBrush="#FF1AD411"
+                    BorderBrush="#FFEF4836"
                     BorderThickness="2"
-                    x:Name="Player1Button" />
+                    x:Name="Player0Button" />
             <Button Grid.Column="1"
                     Width="80"
                     Padding="4"
@@ -56,7 +56,7 @@
                     IsHitTestVisible="False"
                     BorderBrush="#FFEF4836"
                     BorderThickness="2"
-                    x:Name="Player2Button" />
+                    x:Name="Player1Button" />
             <Button Grid.Column="2"
                     Width="80"
                     Padding="4"
@@ -68,7 +68,7 @@
                     IsHitTestVisible="False"
                     BorderBrush="#FFEF4836"
                     BorderThickness="2"
-                    x:Name="Player3Button" />
+                    x:Name="Player2Button" />
             <Button Grid.Column="3"
                     Width="80"
                     Padding="4"
@@ -80,7 +80,7 @@
                     IsHitTestVisible="False"
                     BorderBrush="#FFEF4836"
                     BorderThickness="2"
-                    x:Name="Player4Button" />
+                    x:Name="Player3Button" />
         </Grid>
         <Button Grid.Row="2"
                 Width="80"
