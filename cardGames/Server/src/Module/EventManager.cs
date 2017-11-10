@@ -199,7 +199,7 @@ namespace Server
             var port = int.Parse(connection.ConnectionInfo.RemoteEndPoint.ToString().Split(':')[1]);
             int _id = int.Parse(id);
 
-            Server.Instance.WriteTo("213", ip, port, Server.Instance.players.list[_id].deck.Count.ToString());
+            Server.Instance.WriteTo("213", ip, port, id + ":" + Server.Instance.players.list[_id].deck.Count.ToString());
         }
 
         public void PlayerAnnonce(PacketHeader header, Connection connection, string message)
@@ -275,12 +275,12 @@ namespace Server
             }
         }
 
-        public void getScore(PacketHeader header, Connection connection, string message)
+        public void GetScore(PacketHeader header, Connection connection, string id)
         {
             var ip = connection.ConnectionInfo.RemoteEndPoint.ToString().Split(':')[0];
             var port = int.Parse(connection.ConnectionInfo.RemoteEndPoint.ToString().Split(':')[1]);
 
-            Server.Instance.WriteTo("214", ip, port, Server.Instance.players.list[int.Parse(message)].win.CalculPoint(Server.Instance.game.contract).ToString());
+            Server.Instance.WriteTo("214", ip, port, id + ":" + Server.Instance.players.list[int.Parse(id)].win.CalculPoint(Server.Instance.game.contract).ToString());
         }
 
     }

@@ -35,6 +35,7 @@ namespace Server
             NetworkComms.AppendGlobalIncomingPacketHandler<string>("111", Server.Instance.events.SendDeck);
             NetworkComms.AppendGlobalIncomingPacketHandler<string>("112", Server.Instance.events.SendPile);
             NetworkComms.AppendGlobalIncomingPacketHandler<string>("113", Server.Instance.events.HowManyCards);
+            NetworkComms.AppendGlobalIncomingPacketHandler<string>("114", Server.Instance.events.GetScore);
             NetworkComms.AppendGlobalIncomingPacketHandler<string>("120", Server.Instance.events.PlayerAnnonce);
             NetworkComms.AppendGlobalIncomingPacketHandler<string>("121", Server.Instance.events.PlayerPlay);
         }
