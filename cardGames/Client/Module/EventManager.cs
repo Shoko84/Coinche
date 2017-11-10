@@ -150,6 +150,17 @@ namespace Client
         }
 
         /**
+        *  Triggered when a client receive the cards number from someone.
+        *  @param   header      Infos about the header.
+        *  @param   connection  Infos about the server's connection.
+        *  @param   message     The number of cards.
+        */
+        public void GetPlayerCardsNumber(PacketHeader header, Connection connection, string message)
+        {
+
+        }
+
+        /**
         *  Triggered when a client receive his deck.
         *  @param   header      Infos about the header.
         *  @param   connection  Infos about the server's connection.

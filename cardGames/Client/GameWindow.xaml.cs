@@ -173,6 +173,11 @@ namespace Client
             DrawCardsPlayed(GameInfos.Instance.CardsPlayed);
 
             GameInfos.Instance.NetManager.WriteMessage("111", "");
+            for (int i = 0; i < GameInfos.Instance.UsersList.Count; i++)
+            {
+                if (GameInfos.Instance.UsersList[i].Id != GameInfos.Instance.MyId)
+                    GameInfos.Instance.NetManager.WriteMessage("113", GameInfos.Instance.UsersList[i].Id.ToString());
+            }
         }
 
         public GameWindow()
