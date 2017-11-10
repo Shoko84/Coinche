@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Game;
 
 namespace Client
 {
@@ -32,9 +33,21 @@ namespace Client
         private List<ClientUser> usersList;
         public List<ClientUser> UsersList { get => usersList; }
 
-        private List<Card> cardsPlayed;
+        private List<Game.Card> cardsPlayed;
+        public List<Game.Card> CardsPlayed { get => cardsPlayed; }
+
         private int myId;
         public int MyId { get => myId; set => myId = value; }
+
+        public ClientUser GetClientUserById(int id)
+        {
+            for (int i = 0; i < usersList.Count; i++)
+            {
+                if (usersList[i].Id == id)
+                    return (usersList[i]);
+            }
+            return (null);
+        }
 
         public ClientUser.ClientPosition GetPosFromId(int myId, int id)
         {
@@ -103,7 +116,7 @@ namespace Client
             //}
         }
 
-        public void AddPlayer(int id, string playerName, bool isMyself)
+        public bool AddPlayer(int id, string playerName, bool isMyself)
         {
             if (isMyself && myId == -1)
             {
@@ -112,6 +125,9 @@ namespace Client
             }
             else if (!isMyself && myId != -1 && !usersList.Exists(e => e.Id == id))
                 usersList.Add(new ClientUser(id, playerName, GetPosFromId(myId, id)));
+            else
+                return (false);
+            return (true);
         }
 
         public void RemovePlayer(string playerName)

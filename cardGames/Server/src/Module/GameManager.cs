@@ -5,8 +5,9 @@
  * This file contains the GameManager Class.
  */
 
+using Game;
 using System.Linq;
-using static Server.Card;
+using static Game.Card;
 
 namespace Server
 {
@@ -67,7 +68,7 @@ namespace Server
         {
             CardColour color = CardColour.Hearts;
             CardValue   value = CardValue.King;
-            CardPosition position = CardPosition.NotSpecified;
+            CardPosition position = CardPosition.Bottom;
 
             while (color != CardColour.Unknown)
             {
@@ -106,8 +107,11 @@ namespace Server
             {
                 foreach (var it in Server.Instance.players.list)
                 {
-                    Server.Instance.PrintOnDebug("Player " + it.owner + ": ");
-                    it.deck.Dump();
+                    lock (it)
+                    {
+                        Server.Instance.PrintOnDebug("Player " + it.owner + ": ");
+                        it.deck.Dump();
+                    }
                 }
             }
             status = GAME_STATUS.ANNONCE;

@@ -82,14 +82,5 @@
                     BorderThickness="2"
                     x:Name="Player3Button" />
         </Grid>
-        <Button Grid.Row="2"
-                Width="80"
-                Content="Skip"
-                Padding="7"
-                VerticalAlignment="Center"
-                VerticalContentAlignment="Center"
-                Background="#FF404040"
-                Foreground="White"
-                Click="Button_Click" />
     </Grid>
 </UserControl>

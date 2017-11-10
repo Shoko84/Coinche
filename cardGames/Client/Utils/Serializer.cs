@@ -19,7 +19,7 @@ namespace Common
          *  @param  obj An instance of a object.
          *  @return Return a string containing the serialisation of the object obj.
          */
-        public string ObjectToString(object obj)
+        static public string ObjectToString(object obj)
         {
             return (JsonConvert.SerializeObject(obj));
         }
@@ -29,7 +29,7 @@ namespace Common
          *  @param  str A string containing the serialisation of an object.
          *  @return Return an object corresponding to the serialized object contain in the string str.
          */
-        public T StringToObject<T>(string str)
+        static public T StringToObject<T>(string str)
         {
             T obj = JsonConvert.DeserializeObject<T>(str);
             return (obj);

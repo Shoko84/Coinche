@@ -20,31 +20,22 @@ namespace Client
     public partial class MainWindow : Window
     {
         private static MainWindow instance;
-        private static readonly object padlock = new object(); 
-
         public static MainWindow Instance { get => instance; }
-        public static object Padlock { get => padlock; }
+
+        private WaitingScreenContent waitingScreen;
+        public WaitingScreenContent WaitingScreen { get => waitingScreen; }
+
+        private LoginContent loginScreen;
+        public LoginContent LoginScreen { get => loginScreen; }
 
         public MainWindow()
         {
             instance = this;
-            InitializeComponent();
-            ContentArea.Content = new Client.LoginContent();
-        }
+            waitingScreen = new WaitingScreenContent();
+            loginScreen = new LoginContent();
 
-        public object ContentAreaContent
-        {
-            get
-            {
-                return this.ContentArea.Content;
-            }
-            set
-            {
-                lock (padlock)
-                {
-                    this.ContentArea.Content = value;
-                }
-            }
+            InitializeComponent();
+            ContentArea.Content = loginScreen;
         }
     }
 }

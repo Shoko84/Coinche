@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Game;
 
 namespace Client
 {
@@ -23,6 +24,9 @@ namespace Client
         private ContractWidget contractWidget;
         private CoincheCallWidget coincheCallWidget;
         private IngameCallWidget ingameCallWidget;
+
+        private static GameWindow instance;
+        public static GameWindow Instance { get => instance; }
 
         private void DisplayRectOnCanvas(double x, double y, double width, double height, Color color)
         {
@@ -83,7 +87,7 @@ namespace Client
 
                 for (int j = 0; j < cardsList[i].CardsList.Count; j++)
                 {
-                    int posCard = (int)cardsList[i].CardsList[j].Position;
+                    int posCard = (int)cardsList[i].CardsList.cards[j].position;
 
                     Point spaceTaken;
                     if (posCard % 2 == 0)
@@ -93,7 +97,7 @@ namespace Client
 
                     Image img = new Image();
 
-                    string path = System.IO.Path.Combine(Environment.CurrentDirectory, "..", "..", "ressources", "assets", "cards", cardsList[i].CardsList[j].StringColour, cardsList[i].CardsList[j].StringValue + ".png");
+                    string path = System.IO.Path.Combine(Environment.CurrentDirectory, "..", "..", "ressources", "assets", "cards", cardsList[i].CardsList.cards[j].StringColour, cardsList[i].CardsList.cards[j].StringValue + ".png");
                     Uri uri = new Uri(path);
                     BitmapImage bmp = new BitmapImage();
 
@@ -152,8 +156,8 @@ namespace Client
                 img.Source = bmp;
                 img.Width = bmp.Width * 0.70;
                 img.Height = bmp.Height * 0.70;
-                Canvas.SetLeft(img, cardsPos[(int)cardsPlayed[i].Position].X - img.Width / 2);
-                Canvas.SetTop(img, cardsPos[(int)cardsPlayed[i].Position].Y - img.Height / 2);
+                Canvas.SetLeft(img, cardsPos[(int)cardsPlayed[i].position].X - img.Width / 2);
+                Canvas.SetTop(img, cardsPos[(int)cardsPlayed[i].position].Y - img.Height / 2);
                 this.TestCanvas.Children.Add(img);
             }
         }
@@ -161,10 +165,14 @@ namespace Client
         public void Initialize()
         {
             DrawGameField();
+            DrawHandCards(GameInfos.Instance.UsersList);
+            DrawCardsPlayed(GameInfos.Instance.CardsPlayed);
 
             BottomActions.Child = contractWidget.ContractGrid;
             BottomActions.Child = coincheCallWidget.CoincheGrid;
             BottomActions.Child = ingameCallWidget.IngameCallGrid;
+
+            GameInfos.Instance.NetManager.WriteMessage("111", "");
         }
 
         public GameWindow()
@@ -174,6 +182,7 @@ namespace Client
             ingameCallWidget = new IngameCallWidget();
 
             InitializeComponent();
+            instance = this;
         }
     }
 }

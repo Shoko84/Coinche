@@ -92,10 +92,11 @@ namespace Server
                     if (it.id != id || it.id != port)
                     {
                         Server.Instance.WriteTo("030", ip, port, it.id + ":" + it.owner);
-                        Thread.Sleep(25);
+                        Console.WriteLine("030" + " " + ip + " " + port + " " + it.id + ":" + it.owner);
                     }
                 }
                 Server.Instance.WriteToOther("030", ip, port, id + ":" + message);
+                Console.WriteLine("030" + " " + ip + " " + port + " " + id + ":" + message);
             }
             else
                 Server.Instance.WriteTo("330", ip, port, "Sorry, there are too many client which are already connected");
@@ -187,7 +188,10 @@ namespace Server
                 if (it.ip == ip && it.port == port)
                 {
                     string msg = serializer.ObjectToString(it.deck);
+                    Console.WriteLine("dumping client deck for id " + it.id + ":");
+                    it.deck.Dump();
                     Server.Instance.WriteTo("211", ip, port, msg);
+                    Console.WriteLine("211" + " " + ip + " " + port + " " + msg);
                     break;
                 }
             }

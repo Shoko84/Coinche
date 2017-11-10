@@ -6,6 +6,7 @@
  */
 
 using System.Collections.Generic;
+using Game;
 
 public enum PLAYER_STATUS
 {

@@ -29,6 +29,7 @@ namespace Client
             SetCallBackFunction<string>("031", GameInfos.Instance.EventManager.PlayerRename);
             SetCallBackFunction<string>("052", GameInfos.Instance.EventManager.PlayersQuit);
             SetCallBackFunction<string>("200", GameInfos.Instance.EventManager.Ok);
+            SetCallBackFunction<string>("211", GameInfos.Instance.EventManager.PlayerReceiveDeck);
             SetCallBackFunction<string>("230", GameInfos.Instance.EventManager.ConnectionOk);
             SetCallBackFunction<string>("330", GameInfos.Instance.EventManager.ConnectionKo);
         }
@@ -121,8 +122,7 @@ namespace Client
         {
             if (this._connect)
             {
-                Serializer serializer = new Serializer();
-                string serialize = serializer.ObjectToString(obj);
+                string serialize = Serializer.ObjectToString(obj);
                 WriteMessage(type, serialize);
             }
             else

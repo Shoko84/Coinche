@@ -4,10 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server
+namespace Game
 {
     public class Contract
     {
+        Contract()
+        {
 
+        }
     }
 }

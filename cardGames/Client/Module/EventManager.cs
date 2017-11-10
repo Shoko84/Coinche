@@ -12,6 +12,11 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Threading;
+using Common;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+using Game;
+using System.Linq;
 
 namespace Client
 {
@@ -65,7 +70,7 @@ namespace Client
             App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
             {
                 MainWindow win = MainWindow.Instance;
-                win.ContentArea.Content = new WaitingScreenContent();
+                win.ContentArea.Content = MainWindow.Instance.WaitingScreen;
             }));
         }
 
@@ -99,25 +104,34 @@ namespace Client
          */
         public void PlayersConnect(PacketHeader header, Connection connection, string message)
         {
-            GameInfos.Instance.AddPlayer(int.Parse(message.Split(':')[0]), message.Split(':')[1], false);
-
-            App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
+            if (GameInfos.Instance.AddPlayer(int.Parse(message.Split(':')[0]), message.Split(':')[1], false))
             {
-                WaitingScreenContent content = MainWindow.Instance.ContentAreaContent as WaitingScreenContent;
-
-                Button b = content.FindName("Player" + message.Split(':')[0] + "Button") as Button;
-                b.BorderBrush = new BrushConverter().ConvertFrom("#FF1AD411") as Brush;
-                b.Content = message.Split(':')[1];
-                if (GameInfos.Instance.UsersList.Count == 4)
+                //MessageBox.Show(message, GameInfos.Instance.MyId.ToString());
+                App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
                 {
-                    GameWindow win = new GameWindow();
-                    App.Current.MainWindow.Close();
-                    App.Current.MainWindow = win;
-                    win.Initialize();
-                    win.Show();
-                }
-            }));
-            Console.WriteLine("A player connect : " + message);
+                    try
+                    {
+                        WaitingScreenContent content = MainWindow.Instance.WaitingScreen;
+
+                        Button b = content.FindName("Player" + message.Split(':')[0] + "Button") as Button;
+                        b.BorderBrush = new BrushConverter().ConvertFrom("#FF1AD411") as Brush;
+                        b.Content = message.Split(':')[1];
+                        if (GameInfos.Instance.UsersList.Count == 4)
+                        {
+                            GameWindow win = new GameWindow();
+                            App.Current.MainWindow.Close();
+                            App.Current.MainWindow = win;
+                            win.Initialize();
+                            win.Show();
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show(e.ToString());
+                    }
+                }));
+                Console.WriteLine("A player connect : " + message);
+            }
         }
 
         /**
@@ -140,6 +154,26 @@ namespace Client
         public void PlayerRename(PacketHeader header, Connection connection, string message)
         {
             Console.WriteLine("Player " + message.Split('|')[0] + " renamed " + message.Split('|')[1] + " to " + message.Split('|')[2]);
+        }
+
+        /**
+        *  Triggered when a client receive his deck.
+        *  @param   header      Infos about the header.
+        *  @param   connection  Infos about the server's connection.
+        *  @param   message     The id, the old name and the new name of the client in format id|old|new.
+        */
+        public void PlayerReceiveDeck(PacketHeader header, Connection connection, string message)
+        {
+            Deck deck = JsonConvert.DeserializeObject<Deck>(message);
+
+            GameInfos.Instance.GetClientUserById(GameInfos.Instance.MyId).CardsList = deck;
+
+            App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
+            {
+                GameWindow.Instance.DrawGameField();
+                GameWindow.Instance.DrawHandCards(GameInfos.Instance.UsersList);
+                GameWindow.Instance.DrawCardsPlayed(GameInfos.Instance.CardsPlayed);
+            }));
         }
 
         /**

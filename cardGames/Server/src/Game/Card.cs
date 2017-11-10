@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server
+namespace Game
 {
     public class Card
     {
@@ -54,16 +54,14 @@ namespace Server
             "Back", "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"
         };
 
-        private CardColour colour;
-        public CardColour Colour { get => colour; }
+        public CardColour colour;
         public string StringColour { get => listColours[(int)colour]; }
 
-        private CardValue value;
-        public CardValue Value { get => value; }
+        public CardValue value;
         public string StringValue { get => listValues[(int)value]; }
 
-        private CardPosition position;
-        public CardPosition Position { get => position; }
+        public CardPosition position;
+
 
         public Card(CardColour _colour, CardValue _value, CardPosition _position)
         {
@@ -73,4 +71,3 @@ namespace Server
         }
     }
 }
-
