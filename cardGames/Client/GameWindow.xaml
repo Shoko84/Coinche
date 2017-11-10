@@ -68,6 +68,7 @@
                     BorderBrush="#FF5B5B5B"
                     BorderThickness="1"
                     Name="BottomActions">
+                <ContentControl x:Name="ContentArea"/>
             </Border>
         </Grid>
     </Grid>

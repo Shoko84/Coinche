@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Maxime\Documents\GitHub\Coinche\cardGames\Client\App.xaml
-41357367816
+7747171712
 
-211125883459
-16-1222196870
-GameWindow.xaml;LoginContent.xaml;MainWindow.xaml;WaitingScreenContent.xaml;
+211522089899
+231447443037
+CoincheCallContent.xaml;ContractCallContent.xaml;GameWindow.xaml;IngameCallContent.xaml;LoginContent.xaml;MainWindow.xaml;WaitingScreenContent.xaml;
 
 True
 

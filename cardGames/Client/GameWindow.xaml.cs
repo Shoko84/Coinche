@@ -21,9 +21,13 @@ namespace Client
     /// </summary>
     public partial class GameWindow : Window
     {
-        private ContractWidget contractWidget;
-        private CoincheCallWidget coincheCallWidget;
-        private IngameCallWidget ingameCallWidget;
+        private ContractCallContent contractCallCont;
+        private CoincheCallContent coincheCallWidget;
+        private IngameCallContent ingameCallCont;
+
+        public ContractCallContent ContractCallCont { get => contractCallCont; }
+        public CoincheCallContent CoincheCallWidget { get => coincheCallWidget; }
+        public IngameCallContent IngameCallCont { get => ingameCallCont; }
 
         private static GameWindow instance;
         public static GameWindow Instance { get => instance; }
@@ -168,21 +172,18 @@ namespace Client
             DrawHandCards(GameInfos.Instance.UsersList);
             DrawCardsPlayed(GameInfos.Instance.CardsPlayed);
 
-            BottomActions.Child = contractWidget.ContractGrid;
-            BottomActions.Child = coincheCallWidget.CoincheGrid;
-            BottomActions.Child = ingameCallWidget.IngameCallGrid;
-
             GameInfos.Instance.NetManager.WriteMessage("111", "");
         }
 
         public GameWindow()
         {
-            contractWidget = new ContractWidget();
-            coincheCallWidget = new CoincheCallWidget();
-            ingameCallWidget = new IngameCallWidget();
+            instance = this;
+            contractCallCont = new ContractCallContent();
+            coincheCallWidget = new CoincheCallContent();
+            ingameCallCont = new IngameCallContent();
 
             InitializeComponent();
-            instance = this;
+            ContentArea.Content = contractCallCont;
         }
     }
 }
