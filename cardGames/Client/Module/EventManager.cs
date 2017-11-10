@@ -109,25 +109,18 @@ namespace Client
                 //MessageBox.Show(message, GameInfos.Instance.MyId.ToString());
                 App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
                 {
-                    try
-                    {
-                        WaitingScreenContent content = MainWindow.Instance.WaitingScreen;
+                    WaitingScreenContent content = MainWindow.Instance.WaitingScreen;
 
-                        Button b = content.FindName("Player" + message.Split(':')[0] + "Button") as Button;
-                        b.BorderBrush = new BrushConverter().ConvertFrom("#FF1AD411") as Brush;
-                        b.Content = message.Split(':')[1];
-                        if (GameInfos.Instance.UsersList.Count == 4)
-                        {
-                            GameWindow win = new GameWindow();
-                            App.Current.MainWindow.Close();
-                            App.Current.MainWindow = win;
-                            win.Initialize();
-                            win.Show();
-                        }
-                    }
-                    catch (Exception e)
+                    Button b = content.FindName("Player" + message.Split(':')[0] + "Button") as Button;
+                    b.BorderBrush = new BrushConverter().ConvertFrom("#FF1AD411") as Brush;
+                    b.Content = message.Split(':')[1];
+                    if (GameInfos.Instance.UsersList.Count == 4)
                     {
-                        MessageBox.Show(e.ToString());
+                        GameWindow win = new GameWindow();
+                        App.Current.MainWindow.Close();
+                        App.Current.MainWindow = win;
+                        win.Initialize();
+                        win.Show();
                     }
                 }));
                 Console.WriteLine("A player connect : " + message);
