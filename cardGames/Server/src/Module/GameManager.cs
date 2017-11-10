@@ -315,12 +315,37 @@ namespace Server
             status = GAME_STATUS.REFEREE;
         }
 
+        public  int CalculScore(int id1, int id2)
+        {
+            return (Server.Instance.players.list[id1].win.CalculPoint(contract) + Server.Instance.players.list[id2].win.CalculPoint(contract));
+        }
+
         /**
          *  This function is triggered when the game is in REFEREE mode.
          */
         public void Referee()
         {
-            Server.Instance.PrintOnDebug("THE GAME IS FINISH ! ... oh ! i was suppose to set the scores ?");
+            int teamOne = CalculScore(0, 2);
+            int teamTwo = CalculScore(1, 3);
+
+            foreach (var it in Server.Instance.players.list)
+            {
+                Server.Instance.WriteTo("040", it.ip, it.port, "Game is finish");
+                if (it.id == 0 || it.id == 2)
+                {
+                    if (teamOne > teamTwo)
+                        Server.Instance.WriteTo("042", it.ip, it.port, "Congratulation");
+                    else
+                        Server.Instance.WriteTo("041", it.ip, it.port, "You're so bad omg");
+                }
+                else
+                {
+                    if (teamOne < teamTwo)
+                        Server.Instance.WriteTo("042", it.ip, it.port, "Congratulation");
+                    else
+                        Server.Instance.WriteTo("041", it.ip, it.port, "You're so bad omg");
+                }
+            }
         }
 
         /**

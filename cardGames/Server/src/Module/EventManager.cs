@@ -274,5 +274,14 @@ namespace Server
                 }
             }
         }
+
+        public void getScore(PacketHeader header, Connection connection, string message)
+        {
+            var ip = connection.ConnectionInfo.RemoteEndPoint.ToString().Split(':')[0];
+            var port = int.Parse(connection.ConnectionInfo.RemoteEndPoint.ToString().Split(':')[1]);
+
+            Server.Instance.WriteTo("214", ip, port, Server.Instance.players.list[int.Parse(message)].win.CalculPoint(Server.Instance.game.contract).ToString());
+        }
+
     }
 }

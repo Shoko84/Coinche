@@ -115,5 +115,24 @@ namespace Game
             }
             return (false);
         }
+
+        public int CalculPoint(Contract contract)
+        {
+            int score = 0;
+
+            foreach (var it in cards)
+            {
+                if ((int)it.colour == (int)contract.type || contract.type == CONTRACT_TYPE.ALL_TRUMP)
+                    score += trumpPoint[(int)it.value];
+                else
+                    score += cardPoint[(int)it.value];
+                if ((int)it.value == 1 && contract.type == CONTRACT_TYPE.WITHOUT_TRUMP)
+                    score += 8;
+            }
+            if (contract.type == CONTRACT_TYPE.ALL_TRUMP)
+                score = score * 162 / 258;
+            return (score);
+        }
+
     }
 }
