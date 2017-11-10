@@ -5,6 +5,7 @@
  *  This file contain the server class.
  */
 
+using Common;
 using NetworkCommsDotNet;
 using System;
 
@@ -22,6 +23,7 @@ namespace Server
         public PlayerManager            players;    /**< List all the player's ips by id.*/
         public EventManager             events;     /**< List of all the events.*/
         public GameManager              game;       /**< Contains the state of the game.*/
+        public Serializer               serializer;
 
         private bool                    _debug;     /**< Allow or not debug prints.*/
 
@@ -51,14 +53,8 @@ namespace Server
         */
         public bool debug
         {
-            get
-            {
-                return (this._debug);
-            }
-            set
-            {
-                this._debug = value;
-            }
+            get => (this._debug);
+            set => this._debug = value;
         }
 
         /**
@@ -72,6 +68,7 @@ namespace Server
             this.players = new PlayerManager();
             this.events = new EventManager();
             this.game = new GameManager();
+            this.serializer = new Serializer();
         }
 
         /**

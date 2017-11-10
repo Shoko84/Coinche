@@ -62,7 +62,6 @@ namespace Game
 
         public CardPosition position;
 
-
         public Card(CardColour _colour, CardValue _value, CardPosition _position)
         {
             colour = _colour;
