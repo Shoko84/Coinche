@@ -10,7 +10,7 @@ using NetworkCommsDotNet;
 using System.Linq;
 using Common;
 using System;
-using System.Threading;
+using Game;
 
 namespace Server
 {
@@ -164,19 +164,6 @@ namespace Server
             Server.Instance.WriteTo("Response", ip, port, "OK");
         }
 
-        /**
-        *   Triggered when the client send a Data object.
-        *   @param   header      Infos about the header.
-        *   @param   connection  Infos about the client connection.
-        *   @param   obj         An instance of a Data object in string.
-        */
-        public void ReceiveData(PacketHeader header, Connection connection, string obj)
-        {
-            Serializer serializer = new Serializer();
-            Data data = serializer.StringToObject<Data>(obj);
-            Console.WriteLine("[" + data._name + "]: " + data._msg);
-        }
-
         public void SendDeck(PacketHeader header, Connection connection, string message)
         {
             var ip = connection.ConnectionInfo.RemoteEndPoint.ToString().Split(':')[0];
@@ -199,12 +186,93 @@ namespace Server
 
         public void SendPile(PacketHeader header, Connection connection, string message)
         {
+            var ip = connection.ConnectionInfo.RemoteEndPoint.ToString().Split(':')[0];
+            var port = int.Parse(connection.ConnectionInfo.RemoteEndPoint.ToString().Split(':')[1]);
+            string serial = Server.Instance.serializer.ObjectToString(Server.Instance.game.pile);
 
+            Server.Instance.WriteTo("212", ip, port, serial);
         }
 
-        public void SendPlayedCards(PacketHeader header, Connection connection, string message)
+        public void HowManyCards(PacketHeader header, Connection connection, string id)
         {
+            var ip = connection.ConnectionInfo.RemoteEndPoint.ToString().Split(':')[0];
+            var port = int.Parse(connection.ConnectionInfo.RemoteEndPoint.ToString().Split(':')[1]);
+            int _id = int.Parse(id);
 
+            Server.Instance.WriteTo("213", ip, port, Server.Instance.players.list[_id].deck.Count.ToString());
+        }
+
+        public void PlayerAnnonce(PacketHeader header, Connection connection, string message)
+        {
+            var ip = connection.ConnectionInfo.RemoteEndPoint.ToString().Split(':')[0];
+            var port = int.Parse(connection.ConnectionInfo.RemoteEndPoint.ToString().Split(':')[1]);
+            Contract annonce = Server.Instance.serializer.StringToObject<Contract>(message);
+            string type = "";
+            string msg = "";
+
+            foreach (var it in Server.Instance.players.list)
+            {
+                if (it.ip == ip && it.port == port)
+                {
+                    if (Server.Instance.game.status != GAME_STATUS.ANNONCE && type == "")
+                    {
+                        type = "324";
+                        msg = Server.Instance.game.status.ToString();
+                    }
+                    if (Server.Instance.game.gameTurn != it.id && type == "")
+                    {
+                        type = "320";
+                        msg = Server.Instance.game.gameTurn.ToString();
+                    }
+                    if (!Server.Instance.game.CheckAnnonce(annonce) && type == "")
+                        type = "322";
+                    if (type == "")
+                    {
+                        type = "200";
+                        Server.Instance.game.NextAnnonce();
+                        Server.Instance.WriteToAll("020", message);
+                    }
+                    Server.Instance.WriteTo(type, ip, port, msg);
+                    break;
+                }
+            }
+        }
+
+        public void PlayerPlay(PacketHeader header, Connection connection, string message)
+        {
+            var ip = connection.ConnectionInfo.RemoteEndPoint.ToString().Split(':')[0];
+            var port = int.Parse(connection.ConnectionInfo.RemoteEndPoint.ToString().Split(':')[1]);
+            Card card = Server.Instance.serializer.StringToObject<Card>(message);
+            string type = "";
+            string msg = "";
+
+            foreach (var it in Server.Instance.players.list)
+            {
+                if (it.ip == ip && it.port == port)
+                {
+                    if (Server.Instance.game.status != GAME_STATUS.TURN && type == "")
+                    {
+                        type = "325";
+                        msg = Server.Instance.game.status.ToString();
+                    }
+                    if (Server.Instance.game.gameTurn != it.id && type == "")
+                    {
+                        type = "320";
+                        msg = Server.Instance.game.gameTurn.ToString();
+                    }
+                    if (it.deck.Find(card) == null && type == "")
+                        type = "321";
+                    if (!Server.Instance.game.CheckCard(card) && type == "")
+                        type = "323";
+                    if (type == "")
+                    {
+                        type = "200";
+                        Server.Instance.WriteToAll("021", message);
+                    }
+                    Server.Instance.WriteTo(type, ip, port, msg);
+                    break;
+                }
+            }
         }
     }
 }
