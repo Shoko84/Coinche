@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Game;
 
 namespace Client
 {
@@ -25,8 +26,8 @@ namespace Client
         private ClientPosition position;
         public ClientPosition Position { get => position; }
 
-        private List<Card> cardsList;
-        public List<Card> CardsList { get => cardsList; }
+        private Deck cardsList;
+        public Deck CardsList { get => cardsList; set => cardsList = value; }
 
         public override bool Equals(object obj)
         {
@@ -38,12 +39,12 @@ namespace Client
 
         public void AddCard(Card card)
         {
-            cardsList.Add(card);
+            cardsList.AddCard(card);
         }
 
         public void RemoveCard(Card card)
         {
-            // TODO
+            cardsList.RemoveCard(card);
         }
 
         public ClientUser(int _id, string _username, ClientPosition _position)
@@ -51,7 +52,7 @@ namespace Client
             id = _id;
             username = _username;
             position = _position;
-            cardsList = new List<Card>();
+            cardsList = new Deck();
         }
     }
 }
