@@ -25,6 +25,9 @@
                 </Style>
             </ComboBox.ItemContainerStyle>
             <ComboBoxItem>
+                Pass
+            </ComboBoxItem>
+            <ComboBoxItem>
                 No trump
             </ComboBoxItem>
             <ComboBoxItem>
