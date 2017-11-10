@@ -33,8 +33,8 @@ namespace Client
         private List<ClientUser> usersList;
         public List<ClientUser> UsersList { get => usersList; }
 
-        private List<Game.Card> cardsPlayed;
-        public List<Game.Card> CardsPlayed { get => cardsPlayed; }
+        private List<Card> cardsPlayed;
+        public List<Card> CardsPlayed { get => cardsPlayed; }
 
         private int myId;
         public int MyId { get => myId; set => myId = value; }
