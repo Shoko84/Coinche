@@ -239,6 +239,8 @@ namespace Server
             string type = "";
             string msg = "";
 
+            Server.Instance.PrintOnDebug("THE PLAYER WANT TO PLAY");
+
             foreach (var it in Server.Instance.players.list)
             {
                 if (it.ip == ip && it.port == port)
@@ -259,6 +261,7 @@ namespace Server
                         type = "323";
                     if (type == "")
                     {
+                        Server.Instance.PrintOnDebug("THE PLAYER PLAY RIGHT");
                         Server.Instance.WriteToAll("021", message);
                         type = "211";
                         msg = Server.Instance.serializer.ObjectToString(Server.Instance.players.list[it.id].deck);

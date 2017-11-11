@@ -274,16 +274,18 @@ namespace Server
 
         public bool NextTurn(Card card)
         {
+            Server.Instance.PrintOnDebug("NEXT TURN");
+           
+            pile.AddCard(card);
+            if (pile.Count >= 4)
+            {
+                int winner = FindWinner();
+                foreach (var i in pile.cards)
+                    Server.Instance.players.list[winner].win.AddCard(i);
+                pile.Clear();
+            }
             lock (_padlock)
             {
-                pile.AddCard(card);
-                if (pile.Count >= 4)
-                {
-                    int winner = FindWinner();
-                    foreach (var i in pile.cards)
-                        Server.Instance.players.list[winner].win.AddCard(i);
-                    pile.Clear();
-                }
                 _gameTurn.Next();
             }
             var it = Server.Instance.players.list[_gameTurn.It];
@@ -295,6 +297,8 @@ namespace Server
 
         public bool CheckCard(Card card)
         {
+            Server.Instance.PrintOnDebug("CHECK CARD");
+
             if (contract == null)
             {
                 status = GAME_STATUS.ANNONCE;
