@@ -193,13 +193,14 @@ namespace Server
             }
             foreach (var it in Server.Instance.players.list)
             {
-                if (it.contract != null)
+                if (it.contract != null && contract != null)
                 {
                     if (it.contract.score >= contract.score)
                         return (false);
                 }
             }
             Server.Instance.players.list[_annonceTurn.It].contract = contract;
+            this.contract = contract;
             nbPass = 0;
             Server.Instance.WriteToAll("020", Server.Instance.serializer.ObjectToString(contract));
             NextAnnonce();
@@ -213,22 +214,17 @@ namespace Server
         {
             if (nbPass >= 3)
             {
-                Contract _contract = null;
-
-                foreach (var it in Server.Instance.players.list)
+                lock (_padlock)
                 {
-                    if (it.contract != null)
-                        _contract = it.contract;
-                }
-                if (_contract == null)
-                    status = GAME_STATUS.DISTRIB;
-                else
-                {
-                    status = GAME_STATUS.TURN;
-                    this.contract = _contract;
-                    var it = Server.Instance.players.list[_gameTurn.It];
-                    Server.Instance.WriteToAll("013", _gameTurn.It.ToString());
-                    Server.Instance.PrintOnDebug("Waiting turn from player " + _gameTurn.It.ToString());
+                    if (contract == null)
+                        status = GAME_STATUS.DISTRIB;
+                    else
+                    {
+                        status = GAME_STATUS.TURN;
+                        var it = Server.Instance.players.list[_gameTurn.It];
+                        Server.Instance.WriteToAll("013", _gameTurn.It.ToString());
+                        Server.Instance.PrintOnDebug("Waiting turn from player " + _gameTurn.It.ToString());
+                    }
                 }
             }
         }
