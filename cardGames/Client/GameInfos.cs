@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using Game;
+using Server;
 
 namespace Client
 {
@@ -33,11 +34,14 @@ namespace Client
         private List<ClientUser> usersList;
         public List<ClientUser> UsersList { get => usersList; }
 
-        private List<Card> cardsPlayed;
-        public List<Card> CardsPlayed { get => cardsPlayed; }
+        private Deck cardsPlayed;
+        public Deck CardsPlayed { get => cardsPlayed; set => cardsPlayed = value; }
 
         private int myId = -1;
         public int MyId { get => myId; set => myId = value; }
+
+        private GAME_STATUS gameStatus;
+        public GAME_STATUS GameStatus { get => gameStatus; set => gameStatus = value; }
 
         public ClientUser GetClientUserById(int id)
         {
@@ -56,7 +60,7 @@ namespace Client
 
         public void AddCardsPlayed(Card card)
         {
-            cardsPlayed.Add(card);
+            cardsPlayed.AddCard(card);
             if (App.Current.MainWindow is GameWindow)
             {
                 ((GameWindow)App.Current.MainWindow).DrawGameField();
@@ -138,8 +142,9 @@ namespace Client
             netManager = new NetworkManager();
             eventManager = new EventManager();
             usersList = new List<ClientUser>();
-            cardsPlayed = new List<Card>();
+            cardsPlayed = new Deck();
             myId = -1;
+            gameStatus = GAME_STATUS.WAIT;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,15 @@ namespace Client
         public IngameCallContent()
         {
             InitializeComponent();
+        }
+
+        private void PickCardButton_Click(object sender, RoutedEventArgs e)
+        {
+            ClientUser user = GameInfos.Instance.GetClientUserById(GameInfos.Instance.MyId);
+            if (CardsListBox.SelectedIndex == -1)
+                MessageBox.Show("Impossibulu");
+            if (CardsListBox.SelectedIndex != -1)
+                GameInfos.Instance.NetManager.WriteMessage("121", JsonConvert.SerializeObject(user.CardsList.cards[CardsListBox.SelectedIndex]));
         }
     }
 }

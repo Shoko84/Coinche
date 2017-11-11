@@ -1,4 +1,11 @@
-﻿using System;
+﻿/**
+ * @file    WaitingScreenContent.xaml.cs
+ * @author  Maxime Cauvin
+ * 
+ * This file contains the WaitingScreenContent Class.
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +27,9 @@ namespace Client
     /// </summary>
     public partial class WaitingScreenContent : UserControl
     {
+        /**
+         *  WaitingScreenContent's constructor - Create an WaitingScreenContent instance
+         */
         public WaitingScreenContent()
         {
             InitializeComponent();
