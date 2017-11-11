@@ -148,6 +148,11 @@ namespace Server
                 {
                     Server.Instance.PrintOnDebug("Player " + it.owner + ": ");
                     it.deck.Dump();
+                    string msg = Server.Instance.serializer.ObjectToString(it.deck);
+                    Console.WriteLine("dumping client deck for id " + it.id + ":");
+                    Server.Instance.WriteTo("211", it.ip, it.port, msg);
+                    Console.WriteLine("211" + " " + it.ip + " " + it.port + " " + msg);
+                    break;
                 }
             }
             NextAnnonce(true);

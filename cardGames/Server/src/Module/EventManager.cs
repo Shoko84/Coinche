@@ -183,7 +183,6 @@ namespace Server
                 {
                     string msg = serializer.ObjectToString(it.deck);
                     Console.WriteLine("dumping client deck for id " + it.id + ":");
-                    it.deck.Dump();
                     Server.Instance.WriteTo("211", ip, port, msg);
                     Console.WriteLine("211" + " " + ip + " " + port + " " + msg);
                     break;
