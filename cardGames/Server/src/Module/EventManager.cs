@@ -11,6 +11,7 @@ using System.Linq;
 using Common;
 using System;
 using Game;
+using System.Collections.Generic;
 
 namespace Server
 {
@@ -87,16 +88,22 @@ namespace Server
                 }
                 else
                     Server.Instance.WriteTo("011", ip, port, "Waiting for players");
+
+                List<string> list = new List<string>();
+
                 foreach (var it in Server.Instance.players.list)
                 {
                     if (it.id != id || it.id != port)
-                    {
-                        Server.Instance.WriteTo("030", ip, port, it.id + ":" + it.owner);
-                        Console.WriteLine("030" + " " + ip + " " + port + " " + it.id + ":" + it.owner);
-                    }
+                        list.Add(it.id + ":" + it.owner);
                 }
-                Server.Instance.WriteToOther("030", ip, port, id + ":" + message);
-                Console.WriteLine("030" + " " + ip + " " + port + " " + id + ":" + message);
+                Server.Instance.WriteTo("030", ip, port, Server.Instance.serializer.ObjectToString(list));
+                Console.WriteLine("030" + " " + ip + " " + port + " " + Server.Instance.serializer.ObjectToString(list));
+
+                list.Clear();
+                list.Add(id + ":" + message);
+
+                Server.Instance.WriteToOther("030", ip, port, Server.Instance.serializer.ObjectToString(list));
+                Console.WriteLine("030" + " " + ip + " " + port + " " + Server.Instance.serializer.ObjectToString(list));
             }
             else
                 Server.Instance.WriteTo("330", ip, port, "Sorry, there are too many client which are already connected");
