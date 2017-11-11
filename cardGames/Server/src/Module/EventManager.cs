@@ -245,29 +245,33 @@ namespace Server
             {
                 if (it.ip == ip && it.port == port)
                 {
-                    if (Server.Instance.game.status != GAME_STATUS.TURN && type == "")
-                    {
-                        type = "325";
-                        msg = Server.Instance.game.status.ToString();
-                    }
-                    if (Server.Instance.game.gameTurn != it.id && type == "")
-                    {
-                        type = "320";
-                        msg = Server.Instance.game.gameTurn.ToString();
-                    }
-                    if (it.deck.Find(card) == null && type == "")
-                        type = "321";
-                    if (!Server.Instance.game.CheckCard(card) && type == "")
-                        type = "323";
-                    if (type == "")
+                    if (Server.Instance.game.status != GAME_STATUS.TURN)
+                        Server.Instance.WriteTo("325", ip, port, Server.Instance.game.status.ToString());
+                    if (Server.Instance.game.gameTurn != it.id)
+                        Server.Instance.WriteTo("320", ip, port, Server.Instance.game.gameTurn.ToString());
+                    if (it.deck.Find(card) == null)
+                        Server.Instance.WriteTo("321", ip, port, "");
+                    if (!Server.Instance.game.CheckCard(card))
+                        Server.Instance.WriteTo("323", ip, port, "");
+                    else
                     {
                         Server.Instance.PrintOnDebug("THE PLAYER PLAY RIGHT");
                         Server.Instance.WriteToAll("021", message);
-                        Server.Instance.players.list[it.id].deck.RemoveCard(card);
-                        type = "211";
-                        msg = Server.Instance.serializer.ObjectToString(Server.Instance.players.list[it.id].deck);
                     }
-                    Server.Instance.WriteTo(type, ip, port, msg);
+
+                    Server.Instance.WriteTo("211", ip, port,Server.Instance.serializer.ObjectToString(Server.Instance.players.list[it.id].deck));
+                    Server.Instance.WriteToAll("212", Server.Instance.serializer.ObjectToString(Server.Instance.game.pile));
+                    foreach (var itA in Server.Instance.players.list)
+                    {
+                        if (itA.id != it.id)
+                        {
+                            foreach (var itB in Server.Instance.players.list)
+                            {
+                                if (itB.id != itA.id)
+                                    Server.Instance.WriteToAll("213", msg);
+                            }
+                        }
+                    }
                     break;
                 }
             }
