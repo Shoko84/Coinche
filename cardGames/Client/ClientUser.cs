@@ -63,6 +63,18 @@ namespace Client
          *  This function overrides the object 'Equals' method
          *  @param  obj      The object to test the operation with.
          */
+
+        private int score; /**< This integer corresponds to the user's score*/
+        /**
+         *  Getter of the user's score.
+         *  @return Return the user's score.
+         */
+        public int Score { get => score; set => score = value; }
+
+        /**
+         *  This function overrides the object 'Equals' method
+         *  @param  obj      The object to test the operation with.
+         */
         public override bool Equals(object obj)
         {
             ClientUser other = obj as ClientUser;
@@ -101,6 +113,7 @@ namespace Client
             username = _username;
             position = _position;
             cardsList = new Deck();
+            score = 0;
         }
     }
 }

@@ -273,12 +273,28 @@ namespace Client
                         GameInfos.Instance.UsersList[i].CardsList.Clear();
                         for (int j = 0; j < nbCard; j++)
                             GameInfos.Instance.UsersList[i].CardsList.AddCard(Card.CardColour.Unknown, Card.CardValue.Unknown, (Card.CardPosition)GameInfos.Instance.GetPosFromId(GameInfos.Instance.MyId, GameInfos.Instance.UsersList[i].Id));
-                        GameWindow.Instance.DrawGameField();
-                        GameWindow.Instance.DrawHandCards(GameInfos.Instance.UsersList);
-                        GameWindow.Instance.DrawCardsPlayed(GameInfos.Instance.CardsPlayed);
+                        GameWindow.Instance.DrawCanvas();
                         break;
                     }
                 }
+            }));
+        }
+
+        /**
+         *  Triggered when a client receive the player's score.
+         *  @param   header      Infos about the header.
+         *  @param   connection  Infos about the server's connection.
+         *  @param   message     The id of the player and the score as id:score.
+         */
+        public void GetPlayerScore(PacketHeader header, Connection connection, string message)
+        {
+            App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
+            {
+                string[] args = message.Split(':');
+
+                ClientUser user = GameInfos.Instance.GetClientUserById(int.Parse(args[0]));
+                user.Score += int.Parse(args[1]);
+                GameWindow.Instance.DrawCanvas();
             }));
         }
 
@@ -299,9 +315,7 @@ namespace Client
 
             App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
             {
-                GameWindow.Instance.DrawGameField();
-                GameWindow.Instance.DrawHandCards(GameInfos.Instance.UsersList);
-                GameWindow.Instance.DrawCardsPlayed(GameInfos.Instance.CardsPlayed);
+                GameWindow.Instance.DrawCanvas();
                 GameWindow.Instance.IngameCallCont.CardsListBox.ItemsSource = cardsNames;
                 GameWindow.Instance.IngameCallCont.CardsListBox.SelectedIndex = 0;
             }));
@@ -318,9 +332,7 @@ namespace Client
 
             App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
             {
-                GameWindow.Instance.DrawGameField();
-                GameWindow.Instance.DrawHandCards(GameInfos.Instance.UsersList);
-                GameWindow.Instance.DrawCardsPlayed(GameInfos.Instance.CardsPlayed);
+                GameWindow.Instance.DrawCanvas();
             }));
         }
 
