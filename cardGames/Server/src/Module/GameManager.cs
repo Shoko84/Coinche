@@ -97,6 +97,7 @@ namespace Server
                     if (it.ready == false)
                         return;
                 }
+                Server.Instance.WriteToAll("010", "The game can start");
                 status = GAME_STATUS.DISTRIB;
             }
         }
@@ -144,19 +145,20 @@ namespace Server
 
             foreach (var it in Server.Instance.players.list)
             {
-                if (Server.Instance.debug)
+                lock (_padlock)
                 {
-                    Server.Instance.PrintOnDebug("Player " + it.owner + ": ");
-                    it.deck.Dump();
-                }
-                string msg = Server.Instance.serializer.ObjectToString(it.deck);
-                Console.WriteLine("dumping client deck for id " + it.id + ":");
-                Server.Instance.WriteTo("211", it.ip, it.port, msg);
-                Console.WriteLine("211" + " " + it.ip + " " + it.port + " " + msg);
-                foreach (var iter in Server.Instance.players.list)
-                {
-                    if (iter.ip != it.ip || iter.port != it.port)
-                    Server.Instance.WriteTo("213", it.ip, it.port, iter.id + ":" + Server.Instance.players.list[iter.id].deck.Count.ToString());
+                    if (Server.Instance.debug)
+                    {
+                        Console.WriteLine("dumping client deck for id " + it.id + "/" + it.owner + ":");
+                        it.deck.Dump();
+                    }
+                    string msg = Server.Instance.serializer.ObjectToString(it.deck);
+                    Server.Instance.WriteTo("211", it.ip, it.port, msg);
+                    foreach (var iter in Server.Instance.players.list)
+                    {
+                        if (iter.ip != it.ip || iter.port != it.port)
+                            Server.Instance.WriteTo("213", it.ip, it.port, iter.id + ":" + Server.Instance.players.list[iter.id].deck.Count.ToString());
+                    }
                 }
                 break;
             }

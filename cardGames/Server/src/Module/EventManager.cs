@@ -15,9 +15,9 @@ using System.Collections.Generic;
 
 namespace Server
 {
-/**
- *  This class contain all the functions which will be triggered by the client's requests.
- */
+    /**
+     *  This class contain all the functions which will be triggered by the client's requests.
+     */
     public class EventManager
     {
         /**
@@ -79,15 +79,7 @@ namespace Server
             {
                 Server.Instance.PrintOnDebug("A new player just connect " + ip + " " + port + " " + id);
                 Server.Instance.WriteTo("230", ip, port, id.ToString() + ":" + message);
-                if (Server.Instance.players.list.Count() == 4)
-                {
-                    if (Server.Instance.game.status == GAME_STATUS.WAIT)
-                        Server.Instance.WriteToAll("010", "The game can start");
-                    else
-                        Server.Instance.WriteTo("010", ip, port, "The game can start");
-                }
-                else
-                    Server.Instance.WriteTo("011", ip, port, "Waiting for players");
+                Server.Instance.WriteTo("011", ip, port, "Waiting for players");
 
                 List<string> list = new List<string>();
 
@@ -97,13 +89,11 @@ namespace Server
                         list.Add(it.id + ":" + it.owner);
                 }
                 Server.Instance.WriteTo("030", ip, port, Server.Instance.serializer.ObjectToString(list));
-                Console.WriteLine("030" + " " + ip + " " + port + " " + Server.Instance.serializer.ObjectToString(list));
 
                 list.Clear();
                 list.Add(id + ":" + message);
 
                 Server.Instance.WriteToOther("030", ip, port, Server.Instance.serializer.ObjectToString(list));
-                Console.WriteLine("030" + " " + ip + " " + port + " " + Server.Instance.serializer.ObjectToString(list));
             }
             else
                 Server.Instance.WriteTo("330", ip, port, "Sorry, there are too many client which are already connected");
@@ -168,7 +158,7 @@ namespace Server
             var port = int.Parse(connection.ConnectionInfo.RemoteEndPoint.ToString().Split(':')[1]);
 
             Server.Instance.PrintOnDebug(message);
-            Server.Instance.WriteTo("Response", ip, port, "OK");
+            Server.Instance.WriteTo("message", ip, port, "OK");
         }
 
         public void SendDeck(PacketHeader header, Connection connection, string message)
@@ -182,9 +172,8 @@ namespace Server
                 if (it.ip == ip && it.port == port)
                 {
                     string msg = serializer.ObjectToString(it.deck);
-                    Console.WriteLine("dumping client deck for id " + it.id + ":");
+                    Server.Instance.PrintOnDebug("-->[" + it.id + "]: Send Deck");
                     Server.Instance.WriteTo("211", ip, port, msg);
-                    Console.WriteLine("211" + " " + ip + " " + port + " " + msg);
                     break;
                 }
             }
@@ -196,6 +185,7 @@ namespace Server
             var port = int.Parse(connection.ConnectionInfo.RemoteEndPoint.ToString().Split(':')[1]);
             string serial = Server.Instance.serializer.ObjectToString(Server.Instance.game.pile);
 
+            Server.Instance.PrintOnDebug("-->[]: How many cards");
             Server.Instance.WriteTo("212", ip, port, serial);
         }
 
@@ -205,6 +195,7 @@ namespace Server
             var port = int.Parse(connection.ConnectionInfo.RemoteEndPoint.ToString().Split(':')[1]);
             int _id = int.Parse(id);
 
+            Server.Instance.PrintOnDebug("-->[]: How many cards player " + id);
             Server.Instance.WriteTo("213", ip, port, id + ":" + Server.Instance.players.list[_id].deck.Count.ToString());
         }
 
@@ -299,6 +290,8 @@ namespace Server
             {
                 if (it.ip == ip && it.port == port)
                 {
+                    if (Server.Instance.game.status != GAME_STATUS.WAIT)
+                        Server.Instance.WriteTo("014", ip, port, "");
                     it.ready = true;
                     return;
                 }

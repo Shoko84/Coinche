@@ -118,25 +118,28 @@ namespace Server
          */
         public void WriteTo(string type, string ip, int port, string msg)
         {
-            try
+            lock (_padlock)
             {
-                NetworkComms.SendObject(type, ip, port, msg);
-                PrintOnDebug(type + ": " + msg);
-            }
-            catch (Exception)
-            {
-                this.Error("Error", "the client is not connected");
-                foreach (var entry in players.list)
+                try
                 {
-                    if (entry.ip == ip && entry.port == port)
+                    NetworkComms.SendObject(type, ip, port, msg);
+                    PrintOnDebug("[" + type + "]: " + msg);
+                }
+                catch (Exception)
+                {
+                    this.Error("Error", "the client is not connected");
+                    foreach (var entry in players.list)
                     {
-                        if (players.list[entry.id].status != PLAYER_STATUS.OFFLINE)
+                        if (entry.ip == ip && entry.port == port)
                         {
-                            Server.Instance.PrintOnDebug("A player is offline " + entry.ip + " " + entry.port + " " + entry.id);
-                            players.list[entry.id].status = PLAYER_STATUS.OFFLINE;
-                            Server.Instance.WriteToOther("052", entry.ip, entry.port, entry.id.ToString());
+                            if (players.list[entry.id].status != PLAYER_STATUS.OFFLINE)
+                            {
+                                Server.Instance.PrintOnDebug("A player is offline " + entry.ip + " " + entry.port + " " + entry.id);
+                                players.list[entry.id].status = PLAYER_STATUS.OFFLINE;
+                                Server.Instance.WriteToOther("052", entry.ip, entry.port, entry.id.ToString());
+                            }
+                            break;
                         }
-                        break;
                     }
                 }
             }
@@ -149,6 +152,7 @@ namespace Server
          */
         public void WriteToAll(string type, string msg)
         {
+            PrintOnDebug("<ALL>");
             foreach (var entry in players.list)
                 WriteTo(type, entry.ip, entry.port, msg);
         }
@@ -162,6 +166,7 @@ namespace Server
         */
         public void WriteToOther(string type, string ip, int port, string msg)
         {
+            PrintOnDebug("<OTHER>");
             foreach (var entry in players.list)
             {
                 if (entry.ip != ip || entry.port != port)
