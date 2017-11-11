@@ -36,7 +36,7 @@ namespace Client
         private List<Card> cardsPlayed;
         public List<Card> CardsPlayed { get => cardsPlayed; }
 
-        private int myId;
+        private int myId = -1;
         public int MyId { get => myId; set => myId = value; }
 
         public ClientUser GetClientUserById(int id)

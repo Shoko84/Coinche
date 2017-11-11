@@ -63,12 +63,16 @@ namespace Client
          */
         public void ConnectionOk(PacketHeader header, Connection connection, string data)
         {
-            Console.WriteLine("Connected:", data);
-            GameInfos.Instance.NetManager.IsConnected = true;
-            GameInfos.Instance.MyId = int.Parse(data.Split(':')[0]);
-            GameInfos.Instance.AddPlayer(GameInfos.Instance.MyId, data.Split(':')[1], true);
             App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
             {
+                string[] dataSplit = data.Split(':');
+
+                GameInfos.Instance.AddPlayer(int.Parse(dataSplit[0]), dataSplit[1], true);
+                Button b = MainWindow.Instance.WaitingScreen.FindName("Player" + dataSplit[0] + "Button") as Button;
+                b.BorderBrush = new BrushConverter().ConvertFrom("#FF1AD411") as Brush;
+                b.Content = dataSplit[1];
+                GameInfos.Instance.MyId = int.Parse(data.Split(':')[0]);
+                GameInfos.Instance.NetManager.IsConnected = true;
                 MainWindow win = MainWindow.Instance;
                 win.ContentArea.Content = MainWindow.Instance.WaitingScreen;
             }));
@@ -93,7 +97,12 @@ namespace Client
          */
         public void Playing(PacketHeader header, Connection connection, string message)
         {
-            Console.WriteLine("Let's play !!!");
+            GameInfos.Instance.NetManager.WriteMessage("111", "");
+            for (int i = 0; i < GameInfos.Instance.UsersList.Count; i++)
+            {
+                if (GameInfos.Instance.UsersList[i].Id != GameInfos.Instance.MyId)
+                    GameInfos.Instance.NetManager.WriteMessage("113", GameInfos.Instance.UsersList[i].Id.ToString());
+            }
         }
 
         /**
@@ -163,7 +172,6 @@ namespace Client
         public void SomeoneHasAnnounced(PacketHeader header, Connection connection, string message)
         {
             Contract contract = JsonConvert.DeserializeObject<Contract>(message);
-            MessageBox.Show((contract.score + 10).ToString(), GameInfos.Instance.MyId.ToString());
             if (contract.type != CONTRACT_TYPE.PASS)
             {
                 App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
@@ -198,7 +206,7 @@ namespace Client
                         Button b = content.FindName("Player" + item.Split(':')[0] + "Button") as Button;
                         b.BorderBrush = new BrushConverter().ConvertFrom("#FF1AD411") as Brush;
                         b.Content = item.Split(':')[1];
-                        if (GameInfos.Instance.UsersList.Count == 4)
+                        if (GameInfos.Instance.UsersList.Count == 4 && !(App.Current.MainWindow is GameWindow))
                         {
                             GameWindow win = new GameWindow();
                             App.Current.MainWindow.Close();

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Client"
         mc:Ignorable="d"
         Title="CardGames" Height="620" Width="1050"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize" Closing="Window_Closing">
 
     <Grid Background="#FF323232">
         <Grid.ColumnDefinitions>
