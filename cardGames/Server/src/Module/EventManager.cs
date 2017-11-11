@@ -85,7 +85,7 @@ namespace Server
 
                 foreach (var it in Server.Instance.players.list)
                 {
-                    if (it.id != id || it.id != port)
+                    if (it.ip != ip || it.port != port)
                         list.Add(it.id + ":" + it.owner);
                 }
                 Server.Instance.WriteTo("030", ip, port, Server.Instance.serializer.ObjectToString(list));
