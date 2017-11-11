@@ -108,6 +108,8 @@ namespace Server
 
         private void    InitDeck()
         {
+            Server.Instance.PrintOnDebug("\nInitDeck");
+
             CardColour color = CardColour.Hearts;
             CardValue   value = CardValue.King;
             CardPosition position = CardPosition.Bottom;
@@ -163,8 +165,8 @@ namespace Server
                 }
                 break;
             }
-            NextAnnonce(true);
             status = GAME_STATUS.ANNONCE;
+            NextAnnonce(true);
         }
 
         public void NextAnnonce(bool first = false)
