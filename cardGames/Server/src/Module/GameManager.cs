@@ -178,11 +178,9 @@ namespace Server
                 }
             }
             var it = Server.Instance.players.list[_annonceTurn.It];
-            if (status == GAME_STATUS.ANNONCE)
-            {
-                Server.Instance.WriteToAll("012", _annonceTurn.It.ToString());
-                Server.Instance.PrintOnDebug("Waiting annonce from player " + _annonceTurn.It.ToString());
-            }
+            Server.Instance.WriteToAll("012", _annonceTurn.It.ToString());
+            Server.Instance.PrintOnDebug("Waiting annonce from player " + _annonceTurn.It.ToString());
+            Server.Instance.PrintOnDebug("status = " + status.ToString());
         }
 
         public bool CheckAnnonce(Contract contract)
