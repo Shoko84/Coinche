@@ -256,6 +256,7 @@ namespace Server
                     else
                     {
                         Server.Instance.PrintOnDebug("THE PLAYER PLAY RIGHT");
+                        Server.Instance.players.list[it.id].deck.RemoveCard(card);
                         Server.Instance.WriteToAll("021", message);
                     }
 
