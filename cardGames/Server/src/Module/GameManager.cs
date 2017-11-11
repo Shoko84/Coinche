@@ -289,6 +289,8 @@ namespace Server
                     Server.Instance.players.list[winner].win.AddCard(i);
                 pile.cards.Clear();
                 pile.owners.Clear();
+                foreach(var dest in Server.Instance.players.list)
+                    Server.Instance.WriteToAll("214", dest.id + ":" + dest.deck.CalculPoint(contract).ToString());
             }
             lock (_padlock)
             {
