@@ -51,13 +51,13 @@
     <Compile Include="src\Game\Card.cs" />
     <Compile Include="src\Game\Contract.cs" />
     <Compile Include="src\Game\Deck.cs" />
+    <Compile Include="src\Game\Pile.cs" />
     <Compile Include="src\Module\EventManager.cs" />
     <Compile Include="src\Module\GameManager.cs" />
     <Compile Include="src\Module\NetworkManager.cs" />
     <Compile Include="src\Module\PlayerManager.cs" />
     <Compile Include="src\Server.cs" />
     <Compile Include="src\ServerLobby.cs" />
-    <Compile Include="src\Utils\Data.cs" />
     <Compile Include="src\Utils\Loop.cs" />
     <Compile Include="src\Utils\Serializer.cs" />
   </ItemGroup>

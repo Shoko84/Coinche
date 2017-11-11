@@ -45,7 +45,7 @@ namespace Server
 
         public Contract contract;
 
-        public Deck pile;
+        public Pile pile;
 
         /**
          *  Getter and Setter for the _status var.
@@ -80,7 +80,7 @@ namespace Server
             _deck = new Deck();
             _annonceTurn = new Loop(0, 3, rand.Next(0, 3));
             _gameTurn = new Loop(0, 3, _annonceTurn.It);
-            pile = new Deck();
+            pile = new Pile();
             nbPass = 0;
             contract = null;
         }
@@ -237,28 +237,28 @@ namespace Server
         private int FindWinner()
         {
             int tmp = 0;
-            Card origin = pile.cards[0];
+            Card origin = pile.cards.cards[0];
             int winnerCard = 0;
             int winnerTrump = -1;
             int winner;
 
-            foreach (var it in pile.cards)
+            foreach (var it in pile.cards.cards)
             {
                 if (origin != it)
                 {
                     if (origin.colour == it.colour)
                     {
-                        if (!pile.ExistHigher(it, contract.type))
+                        if (!pile.cards.ExistHigher(it, contract.type))
                             winnerCard = tmp;
                     }
                     else if ((int)origin.colour == (int)contract.type)
                     {
-                        if (!pile.ExistHigher(it, contract.type))
+                        if (!pile.cards.ExistHigher(it, contract.type))
                             winnerTrump = tmp;
                     }
                     else if (contract.type == CONTRACT_TYPE.ALL_TRUMP)
                     {
-                        if (!pile.ExistHigher(it, (CONTRACT_TYPE)it.colour))
+                        if (!pile.cards.ExistHigher(it, (CONTRACT_TYPE)it.colour))
                             winnerTrump = tmp;
                     }
                 }
@@ -276,19 +276,26 @@ namespace Server
 
         public bool NextTurn(Card card)
         {
+            int winner = -1;
+
             Server.Instance.PrintOnDebug("NEXT TURN");
            
-            pile.AddCard(card);
-            if (pile.Count >= 4)
+            pile.cards.AddCard(card);
+            pile.owners.Add(_gameTurn.It);
+            if (pile.cards.Count >= 4)
             {
-                int winner = FindWinner();
-                foreach (var i in pile.cards)
+                winner = FindWinner();
+                foreach (var i in pile.cards.cards)
                     Server.Instance.players.list[winner].win.AddCard(i);
-                pile.Clear();
+                pile.cards.Clear();
+                pile.owners.Clear();
             }
             lock (_padlock)
             {
-                _gameTurn.Next();
+                if (winner < 0)
+                    _gameTurn.Next();
+                else
+                    _gameTurn.It = winner;
             }
             var it = Server.Instance.players.list[_gameTurn.It];
             Server.Instance.WriteToAll("212", Server.Instance.serializer.ObjectToString(pile));
@@ -309,11 +316,11 @@ namespace Server
             }
             CardColour color = card.colour;
 
-            if (pile.Count != 0)
-                color = pile.cards[0].colour;
+            if (pile.cards.Count != 0)
+                color = pile.cards.cards[0].colour;
             if (card.colour == color)
             {
-                if (pile.ExistHigher(card, contract.type))
+                if (pile.cards.ExistHigher(card, contract.type))
                 {
                     if (Server.Instance.players.list[_gameTurn.It].deck.ExistHigher(card, contract.type))
                         return (false);
@@ -324,7 +331,7 @@ namespace Server
             {
                 if ((int)card.colour == (int)contract.type)
                 {
-                    if (pile.ExistHigher(card, contract.type))
+                    if (pile.cards.ExistHigher(card, contract.type))
                     {
                         if (Server.Instance.players.list[_gameTurn.It].deck.ExistHigher(card, contract.type))
                             return (false);
