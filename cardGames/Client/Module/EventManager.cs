@@ -106,18 +106,18 @@ namespace Client
         {
             List<string> connectedUsers = JsonConvert.DeserializeObject<List<string>>(message);
 
-            for (int i = 0; i < connectedUsers.Count; i++)
+            foreach (var item in connectedUsers)
             {
-                if (GameInfos.Instance.AddPlayer(int.Parse(connectedUsers[i].Split(':')[0]), connectedUsers[i].Split(':')[1], false))
+                if (GameInfos.Instance.AddPlayer(int.Parse(item.Split(':')[0]), item.Split(':')[1], false))
                 {
                     //MessageBox.Show(message, GameInfos.Instance.MyId.ToString());
                     App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
                     {
                         WaitingScreenContent content = MainWindow.Instance.WaitingScreen;
 
-                        Button b = content.FindName("Player" + connectedUsers[i].Split(':')[0] + "Button") as Button;
+                        Button b = content.FindName("Player" + item.Split(':')[0] + "Button") as Button;
                         b.BorderBrush = new BrushConverter().ConvertFrom("#FF1AD411") as Brush;
-                        b.Content = connectedUsers[i].Split(':')[1];
+                        b.Content = item.Split(':')[1];
                         if (GameInfos.Instance.UsersList.Count == 4)
                         {
                             GameWindow win = new GameWindow();
@@ -127,7 +127,7 @@ namespace Client
                             win.Show();
                         }
                     }));
-                    Console.WriteLine("A player connect : " + connectedUsers[i]);
+                    Console.WriteLine("A player connect : " + item);
                 }
             }
         }
