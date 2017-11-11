@@ -135,6 +135,7 @@ namespace Server
             _deck.Clear();
             InitDeck();
 
+            Server.Instance.PrintOnDebug("\nDistribution");
             while (_deck.Count != 0)
             {
                 tmp = _deck.GetRandomCard();
@@ -177,8 +178,11 @@ namespace Server
                 }
             }
             var it = Server.Instance.players.list[_annonceTurn.It];
-            Server.Instance.WriteToAll("012", _annonceTurn.It.ToString());
-            Server.Instance.PrintOnDebug("Waiting annonce from player " + _annonceTurn.It.ToString());
+            if (status == GAME_STATUS.ANNONCE)
+            {
+                Server.Instance.WriteToAll("012", _annonceTurn.It.ToString());
+                Server.Instance.PrintOnDebug("Waiting annonce from player " + _annonceTurn.It.ToString());
+            }
         }
 
         public bool CheckAnnonce(Contract contract)
@@ -214,6 +218,7 @@ namespace Server
         {
             if (nbPass >= 3)
             {
+                Server.Instance.PrintOnDebug("\nThere are 3 pass");
                 lock (_padlock)
                 {
                     if (contract == null)
@@ -352,6 +357,7 @@ namespace Server
             int teamOne = CalculScore(0, 2);
             int teamTwo = CalculScore(1, 3);
 
+            Server.Instance.PrintOnDebug("\nCount of the points");
             foreach (var it in Server.Instance.players.list)
             {
                 Server.Instance.WriteTo("040", it.ip, it.port, "Game is finish");
