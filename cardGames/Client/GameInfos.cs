@@ -58,59 +58,6 @@ namespace Client
             return (ClientUser.ClientPosition)(((id - myId) + 4) % 4);
         }
 
-        public void AddCardsPlayed(Card card)
-        {
-            cardsPlayed.AddCard(card);
-            if (App.Current.MainWindow is GameWindow)
-            {
-                ((GameWindow)App.Current.MainWindow).DrawGameField();
-                ((GameWindow)App.Current.MainWindow).DrawHandCards(usersList);
-                ((GameWindow)App.Current.MainWindow).DrawCardsPlayed(cardsPlayed);
-            }
-        }
-
-        public void ClearCardsPlayed()
-        {
-            cardsPlayed.Clear();
-            if (App.Current.MainWindow is GameWindow)
-            {
-                ((GameWindow)App.Current.MainWindow).DrawGameField();
-                ((GameWindow)App.Current.MainWindow).DrawHandCards(usersList);
-                ((GameWindow)App.Current.MainWindow).DrawCardsPlayed(cardsPlayed);
-            }
-        }
-
-        public void AddCardToPlayerId(int id, Card card)
-        {
-            for (int i = 0; i < usersList.Count; i++)
-            {
-                if (usersList[i].Id == id)
-                {
-                    usersList[i].AddCard(card);
-
-                    if (App.Current.MainWindow is GameWindow)
-                    {
-                        ((GameWindow)App.Current.MainWindow).DrawGameField();
-                        ((GameWindow)App.Current.MainWindow).DrawHandCards(usersList);
-                        ((GameWindow)App.Current.MainWindow).DrawCardsPlayed(cardsPlayed);
-                    }
-                    break;
-                }
-            }
-        }
-
-        public void RemoveCardFromPlayerId(int id, Card card)
-        {
-            // TODO
-
-            //if (App.Current.MainWindow is GameWindow)
-            //{
-            //    ((GameWindow)App.Current.MainWindow).DrawGameField();
-            //    ((GameWindow)App.Current.MainWindow).DrawHandCards(usersList);
-            //    ((GameWindow)App.Current.MainWindow).DrawCardsPlayed(cardsPlayed);
-            //}
-        }
-
         public bool AddPlayer(int id, string playerName, bool isMyself)
         {
             if (isMyself && myId == -1)
@@ -123,18 +70,6 @@ namespace Client
             else
                 return (false);
             return (true);
-        }
-
-        public void RemovePlayer(string playerName)
-        {
-            // TODO
-
-            //if (App.Current.MainWindow is GameWindow)
-            //{
-            //    ((GameWindow)App.Current.MainWindow).DrawGameField();
-            //    ((GameWindow)App.Current.MainWindow).DrawHandCards(usersList);
-            //    ((GameWindow)App.Current.MainWindow).DrawCardsPlayed(cardsPlayed);
-            //}
         }
 
         public GameInfos()

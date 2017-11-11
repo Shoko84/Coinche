@@ -236,8 +236,6 @@ namespace Server
             var ip = connection.ConnectionInfo.RemoteEndPoint.ToString().Split(':')[0];
             var port = int.Parse(connection.ConnectionInfo.RemoteEndPoint.ToString().Split(':')[1]);
             Card card = Server.Instance.serializer.StringToObject<Card>(message);
-            string type = "";
-            string msg = "";
 
             Server.Instance.PrintOnDebug("THE PLAYER WANT TO PLAY");
 

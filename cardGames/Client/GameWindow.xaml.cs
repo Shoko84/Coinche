@@ -166,12 +166,40 @@ namespace Client
             }
         }
 
-        public void Initialize()
+        public void DrawScore()
+        {
+            for (int i = 0; i < GameInfos.Instance.UsersList.Count; i++)
+            {
+                Label text = new Label
+                {
+                    Foreground = Brushes.White,
+                    Content = GameInfos.Instance.UsersList[i].Username + ": " + GameInfos.Instance.UsersList[i].Score.ToString()
+                };
+                text.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+                Point[] scoresPos = new Point[]
+                {
+                    new Point(this.TestCanvas.Width / 2 - text.DesiredSize.Width / 2, this.TestCanvas.Height - 130),
+                    new Point(100, this.TestCanvas.Height / 2 - text.DesiredSize.Height / 2),
+                    new Point(this.TestCanvas.Width / 2 - text.DesiredSize.Width / 2, 100),
+                    new Point(this.TestCanvas.Width - 100 - text.DesiredSize.Width, this.TestCanvas.Height / 2 - text.DesiredSize.Height / 2),
+                };
+                Canvas.SetLeft(text, scoresPos[(int)GameInfos.Instance.UsersList[i].Position].X);
+                Canvas.SetTop(text, scoresPos[(int)GameInfos.Instance.UsersList[i].Position].Y);
+                TestCanvas.Children.Add(text);
+            }
+        }
+
+        public void DrawCanvas()
         {
             DrawGameField();
             DrawHandCards(GameInfos.Instance.UsersList);
             DrawCardsPlayed(GameInfos.Instance.CardsPlayed);
+            DrawScore();
+        }
 
+        public void Initialize()
+        {
+            DrawCanvas();
             GameInfos.Instance.NetManager.WriteMessage("100", "");
         }
 
