@@ -166,7 +166,7 @@ namespace Client
             }
         }
 
-        public void DrawScore()
+        public void DrawNameAndScore()
         {
             for (int i = 0; i < GameInfos.Instance.UsersList.Count; i++)
             {
@@ -194,7 +194,7 @@ namespace Client
             DrawGameField();
             DrawHandCards(GameInfos.Instance.UsersList);
             DrawCardsPlayed(GameInfos.Instance.CardsPlayed);
-            DrawScore();
+            DrawNameAndScore();
         }
 
         public void Initialize()
