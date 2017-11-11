@@ -5,8 +5,8 @@
  *  This file contain the server class.
  */
 
-using Common;
 using NetworkCommsDotNet;
+using Common;
 using System;
 
 namespace Server
@@ -23,11 +23,11 @@ namespace Server
         public PlayerManager            players;    /**< List all the player's ips by id.*/
         public EventManager             events;     /**< List of all the events.*/
         public GameManager              game;       /**< Contains the state of the game.*/
-        public Serializer               serializer;
+        public Serializer               serializer; /**< Object wich serialize and deserialize objects.*/
 
         private bool                    _debug;     /**< Allow or not debug prints.*/
 
-        private static Server           _instance;  /**< The instance of th singleton.*/
+        private static Server           _instance;  /**< The instance of the singleton.*/
         private static readonly object  _padlock = new object();    /**< Thread protection.*/
 
         /**
