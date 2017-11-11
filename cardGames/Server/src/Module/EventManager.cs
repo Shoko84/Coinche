@@ -259,8 +259,9 @@ namespace Server
                         type = "323";
                     if (type == "")
                     {
-                        type = "200";
                         Server.Instance.WriteToAll("021", message);
+                        type = "211";
+                        msg = Server.Instance.serializer.ObjectToString(Server.Instance.players.list[it.id].deck);
                     }
                     Server.Instance.WriteTo(type, ip, port, msg);
                     break;

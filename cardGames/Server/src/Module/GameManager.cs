@@ -288,6 +288,7 @@ namespace Server
                 _gameTurn.Next();
             }
             var it = Server.Instance.players.list[_gameTurn.It];
+            Server.Instance.WriteToAll("212", Server.Instance.serializer.ObjectToString(pile));
             Server.Instance.WriteToAll("013", _gameTurn.It.ToString());
             Server.Instance.PrintOnDebug("Waiting turn from player " + _gameTurn.It.ToString());
             return (true);
