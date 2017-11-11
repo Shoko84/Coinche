@@ -17,6 +17,8 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Game;
 using System.Linq;
+using System.Collections.ObjectModel;
+using Server;
 
 namespace Client
 {
@@ -113,29 +115,28 @@ namespace Client
          */
         public void PlayerAnnounce(PacketHeader header, Connection connection, string message)
         {
-            App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
+            if (GameInfos.Instance.GameStatus < GAME_STATUS.ANNONCE)
+                GameInfos.Instance.GameStatus = GAME_STATUS.ANNONCE;
+            if (GameInfos.Instance.GameStatus == GAME_STATUS.ANNONCE)
             {
-                //GameWindow.Instance.ContentArea.Content = GameWindow.Instance.ContractCallCont;
-                ContractCallContent content = GameWindow.Instance.ContractCallCont;
-                if (int.Parse(message) == GameInfos.Instance.MyId)
-                {
-                    content.ContractBox.IsEnabled = true;
-                    content.ContractValue.IsEnabled = true;
-                    content.ContractCallButton.IsEnabled = true;
-                }
-                else
-                {
-                    content.ContractBox.IsEnabled = false;
-                    content.ContractValue.IsEnabled = false;
-                    content.ContractCallButton.IsEnabled = false;
-                }
-                //GameInfos.Instance.NetManager.WriteMessage("111", "");
-                //for (int i = 0; i < GameInfos.Instance.UsersList.Count; i++)
-                //{
-                //    if (GameInfos.Instance.UsersList[i].Id != GameInfos.Instance.MyId)
-                //        GameInfos.Instance.NetManager.WriteMessage("113", GameInfos.Instance.UsersList[i].Id.ToString());
-                //}
-            }));
+                App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
+                    {
+                    GameWindow.Instance.ContentArea.Content = GameWindow.Instance.ContractCallCont;
+                    ContractCallContent content = GameWindow.Instance.ContractCallCont;
+                    if (int.Parse(message) == GameInfos.Instance.MyId)
+                    {
+                        content.ContractBox.IsEnabled = true;
+                        content.ContractValue.IsEnabled = true;
+                        content.ContractCallButton.IsEnabled = true;
+                    }
+                    else
+                    {
+                        content.ContractBox.IsEnabled = false;
+                        content.ContractValue.IsEnabled = false;
+                        content.ContractCallButton.IsEnabled = false;
+                    }
+                }));
+            }
         }
 
         /**
@@ -146,21 +147,26 @@ namespace Client
          */
         public void PlayerPlay(PacketHeader header, Connection connection, string message)
         {
-            App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
+            if (GameInfos.Instance.GameStatus < GAME_STATUS.TURN)
+                GameInfos.Instance.GameStatus = GAME_STATUS.TURN;
+            if (GameInfos.Instance.GameStatus == GAME_STATUS.TURN)
             {
-                //GameWindow.Instance.ContentArea.Content = GameWindow.Instance.IngameCallCont;
-                IngameCallContent content = GameWindow.Instance.IngameCallCont;
-                if (int.Parse(message) == GameInfos.Instance.MyId)
+                App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
                 {
-                    content.CardsListBox.IsEnabled = true;
-                    content.PickCardButton.IsEnabled = true;
-                }
-                else
-                {
-                    content.CardsListBox.IsEnabled = false;
-                    content.PickCardButton.IsEnabled = false;
-                }
-            }));
+                    GameWindow.Instance.ContentArea.Content = GameWindow.Instance.IngameCallCont;
+                    IngameCallContent content = GameWindow.Instance.IngameCallCont;
+                    if (int.Parse(message) == GameInfos.Instance.MyId)
+                    {
+                        content.CardsListBox.IsEnabled = true;
+                        content.PickCardButton.IsEnabled = true;
+                    }
+                    else
+                    {
+                        content.CardsListBox.IsEnabled = false;
+                        content.PickCardButton.IsEnabled = false;
+                    }
+                }));
+            }
         }
 
         /**
@@ -206,7 +212,6 @@ namespace Client
             {
                 if (GameInfos.Instance.AddPlayer(int.Parse(item.Split(':')[0]), item.Split(':')[1], false))
                 {
-                    //MessageBox.Show(message, GameInfos.Instance.MyId.ToString());
                     App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
                     {
                         WaitingScreenContent content = MainWindow.Instance.WaitingScreen;
@@ -286,8 +291,29 @@ namespace Client
         public void PlayerReceiveDeck(PacketHeader header, Connection connection, string message)
         {
             Deck deck = JsonConvert.DeserializeObject<Deck>(message);
+            ObservableCollection<string> cardsNames = new ObservableCollection<string>();
 
             GameInfos.Instance.GetClientUserById(GameInfos.Instance.MyId).CardsList = deck;
+            foreach (var card in deck.cards)
+                cardsNames.Add(card.StringValue + " " + card.StringColour);
+
+            App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
+            {
+                GameWindow.Instance.DrawGameField();
+                GameWindow.Instance.DrawHandCards(GameInfos.Instance.UsersList);
+                GameWindow.Instance.DrawCardsPlayed(GameInfos.Instance.CardsPlayed);
+                GameWindow.Instance.IngameCallCont.CardsListBox.ItemsSource = cardsNames;
+            }));
+        }
+
+        public void PlayerReceivePile(PacketHeader header, Connection connection, string message)
+        {
+            Pile pile = JsonConvert.DeserializeObject<Pile>(message);
+            ObservableCollection<string> cardsNames = new ObservableCollection<string>();
+            
+            GameInfos.Instance.CardsPlayed.Clear();
+            for (int i = 0; i < pile.cards.Count; i++)
+                GameInfos.Instance.CardsPlayed.AddCard(pile.cards[i].Color, pile.cards[i].Value, GameInfos.Instance.GetPosFromId(GameInfos.Instance.MyId, pile.owners[i]));
 
             App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
             {
@@ -312,13 +338,30 @@ namespace Client
         {
             MessageBox.Show("It's not your turn, it's player " + message + "'s turn");
         }
+
+        public void NotOwningCard(PacketHeader header, Connection connection, string message)
+        {
+            MessageBox.Show("You don't own this card.");
+        }
+
         public void AnnounceIncorrect(PacketHeader header, Connection connection, string message)
         {
             MessageBox.Show("Incorrect announce");
         }
+
+        public void CardNotAllowed(PacketHeader header, Connection connection, string message)
+        {
+            MessageBox.Show("You can't play this card.");
+        }
+
         public void AnnounceNotAllowed(PacketHeader header, Connection connection, string message)
         {
             MessageBox.Show("It's not an announce turn");
+        }
+
+        public void IncorrectTurnType(PacketHeader header, Connection connection, string message)
+        {
+            MessageBox.Show("Incorrect turn type");
         }
     }
 }

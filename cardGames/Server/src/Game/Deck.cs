@@ -50,29 +50,31 @@ namespace Game
 
         public void RemoveCard(Card card)
         {
-            cards.Remove(card);
-        }
-
-        public void RemoveCard(CardColour color, CardValue value, CardPosition position)
-        {
-            int cpt = 0;
-
-            foreach (var it in cards)
+            foreach (var c in cards)
             {
-                if (it.colour == color
-                    && it.value == value
-                    && it.position == position)
+                if (c.colour == card.colour && c.value == card.value && c.position == card.position)
                 {
-                    cards.RemoveAt(cpt);
+                    cards.Remove(c);
                     break;
                 }
-                cpt += 1;
+            }
+        }
+
+        public void RemoveCard(CardColour colour, CardValue value, CardPosition position)
+        {
+            foreach (var c in cards)
+            {
+                if (c.colour == colour && c.value == value && c.position == position)
+                {
+                    cards.Remove(c);
+                    break;
+                }
             }
         }
 
         public Card Find(Card card)
         {
-            return (cards.Find(x => x == card));
+            return (cards.Find(x => x.colour == card.colour && x.position == card.position && x.value == card.value));
         }
 
         public bool ExistColour(CardColour color)

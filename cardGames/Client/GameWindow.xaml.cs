@@ -139,7 +139,7 @@ namespace Client
             }
         }
 
-        public void DrawCardsPlayed(List<Card> cardsPlayed)
+        public void DrawCardsPlayed(Deck cardsPlayed)
         {
             Point[] cardsPos = new Point[]
             {
@@ -153,15 +153,15 @@ namespace Client
             {
                 Image img = new Image();
 
-                string path = System.IO.Path.Combine(Environment.CurrentDirectory, "..", "..", "ressources", "assets", "cards", cardsPlayed[i].StringColour, cardsPlayed[i].StringValue + ".png");
+                string path = System.IO.Path.Combine(Environment.CurrentDirectory, "..", "..", "ressources", "assets", "cards", cardsPlayed.cards[i].StringColour, cardsPlayed.cards[i].StringValue + ".png");
                 Uri uri = new Uri(path);
                 BitmapImage bmp = new BitmapImage(uri);
 
                 img.Source = bmp;
                 img.Width = bmp.Width * 0.70;
                 img.Height = bmp.Height * 0.70;
-                Canvas.SetLeft(img, cardsPos[(int)cardsPlayed[i].position].X - img.Width / 2);
-                Canvas.SetTop(img, cardsPos[(int)cardsPlayed[i].position].Y - img.Height / 2);
+                Canvas.SetLeft(img, cardsPos[(int)cardsPlayed.cards[i].position].X - img.Width / 2);
+                Canvas.SetTop(img, cardsPos[(int)cardsPlayed.cards[i].position].Y - img.Height / 2);
                 this.TestCanvas.Children.Add(img);
             }
         }

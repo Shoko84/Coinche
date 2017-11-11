@@ -263,6 +263,7 @@ namespace Server
                     {
                         Server.Instance.PrintOnDebug("THE PLAYER PLAY RIGHT");
                         Server.Instance.WriteToAll("021", message);
+                        Server.Instance.players.list[it.id].deck.RemoveCard(card);
                         type = "211";
                         msg = Server.Instance.serializer.ObjectToString(Server.Instance.players.list[it.id].deck);
                     }
