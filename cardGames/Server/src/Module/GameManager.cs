@@ -91,7 +91,14 @@ namespace Server
         public void Wait()
         {
             if (Server.Instance.players.list.Count() == 4)
+            {
+                foreach(var it in Server.Instance.players.list)
+                {
+                    if (it.ready == false)
+                        return;
+                }
                 status = GAME_STATUS.DISTRIB;
+            }
         }
 
         /**

@@ -290,5 +290,21 @@ namespace Server
             Server.Instance.WriteTo("214", ip, port, id + ":" + Server.Instance.players.list[int.Parse(id)].win.CalculPoint(Server.Instance.game.contract).ToString());
         }
 
+        
+        public void PlayerReady(PacketHeader header, Connection connection, string id)
+        {
+            var ip = connection.ConnectionInfo.RemoteEndPoint.ToString().Split(':')[0];
+            var port = int.Parse(connection.ConnectionInfo.RemoteEndPoint.ToString().Split(':')[1]);
+
+            foreach (var it in Server.Instance.players.list)
+            {
+                if (it.ip == ip && it.port == port)
+                {
+                    it.ready = true;
+                    return;
+                }
+            }
+        }
+
     }
 }
