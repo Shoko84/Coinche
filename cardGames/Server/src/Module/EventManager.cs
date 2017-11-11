@@ -216,19 +216,15 @@ namespace Server
                         type = "324";
                         msg = Server.Instance.game.status.ToString();
                     }
-                    if (Server.Instance.game.gameTurn != it.id && type == "")
+                    if (Server.Instance.game.annonceTurn != it.id && type == "")
                     {
                         type = "320";
-                        msg = Server.Instance.game.gameTurn.ToString();
+                        msg = Server.Instance.game.annonceTurn.ToString();
                     }
                     if (!Server.Instance.game.CheckAnnonce(annonce) && type == "")
                         type = "322";
                     if (type == "")
-                    {
                         type = "200";
-                        Server.Instance.game.NextAnnonce();
-                        Server.Instance.WriteToAll("020", message);
-                    }
                     Server.Instance.WriteTo(type, ip, port, msg);
                     break;
                 }

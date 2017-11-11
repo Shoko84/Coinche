@@ -184,6 +184,7 @@ namespace Client
 
             InitializeComponent();
             ContentArea.Content = contractCallCont;
+            Title = GameInfos.Instance.GetClientUserById(GameInfos.Instance.MyId).Username + ":" + GameInfos.Instance.MyId;
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

@@ -171,7 +171,10 @@ namespace Server
             lock (_padlock)
             {
                 if (!first)
+                {
                     _annonceTurn.Next();
+                    Server.Instance.PrintOnDebug("THE PLAYER WHO ANNONCE IS " + _annonceTurn.It);
+                }
             }
             var it = Server.Instance.players.list[_annonceTurn.It];
             Server.Instance.WriteToAll("012", _annonceTurn.It.ToString());
@@ -184,6 +187,7 @@ namespace Server
             {
                 Server.Instance.players.list[_annonceTurn.It].contract = null;
                 nbPass += 1;
+                Server.Instance.WriteToAll("020", Server.Instance.serializer.ObjectToString(contract));
                 NextAnnonce();
                 return (true);
             }
@@ -197,6 +201,7 @@ namespace Server
             }
             Server.Instance.players.list[_annonceTurn.It].contract = contract;
             nbPass = 0;
+            Server.Instance.WriteToAll("020", Server.Instance.serializer.ObjectToString(contract));
             NextAnnonce();
             return (true);
         }
