@@ -152,6 +152,8 @@ namespace Server
                     Console.WriteLine("dumping client deck for id " + it.id + ":");
                     Server.Instance.WriteTo("211", it.ip, it.port, msg);
                     Console.WriteLine("211" + " " + it.ip + " " + it.port + " " + msg);
+                    foreach(var iter in Server.Instance.players.list)
+                        Server.Instance.WriteTo("213", it.ip, it.port, iter.id + ":" + Server.Instance.players.list[iter.id].deck.Count.ToString());
                     break;
                 }
             }
