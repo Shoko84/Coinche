@@ -291,7 +291,7 @@ namespace Server
                 if (it.ip == ip && it.port == port)
                 {
                     if (Server.Instance.game.status != GAME_STATUS.WAIT)
-                        Server.Instance.WriteTo("014", ip, port, "");
+                        Server.Instance.WriteTo("010", ip, port, "");
                     it.ready = true;
                     return;
                 }
