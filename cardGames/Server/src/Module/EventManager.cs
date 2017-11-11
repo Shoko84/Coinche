@@ -265,9 +265,7 @@ namespace Server
                     foreach (var itA in Server.Instance.players.list)
                     {
                         if (itA.id != it.id)
-                        {
-                            Server.Instance.WriteTo("213", itA.ip, itA.port, Server.Instance.players.list[it.id].deck.Count.ToString());
-                        }
+                            Server.Instance.WriteTo("213", itA.ip, itA.port, it.id + ":" + Server.Instance.players.list[it.id].deck.Count.ToString());
                     }
                     break;
                 }
