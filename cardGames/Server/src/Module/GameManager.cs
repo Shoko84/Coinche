@@ -264,8 +264,8 @@ namespace Server
                 _gameTurn.Next();
             }
             var it = Server.Instance.players.list[_gameTurn.It];
-            Server.Instance.WriteTo("013", it.ip, it.port, "your turn to play");
-            Server.Instance.PrintOnDebug("Waiting turn from player " + it.id);
+            Server.Instance.WriteToAll("013", _gameTurn.It.ToString());
+            Server.Instance.PrintOnDebug("Waiting turn from player " + _gameTurn.It.ToString());
             return (true);
         }
 

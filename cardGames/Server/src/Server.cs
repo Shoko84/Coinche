@@ -121,6 +121,7 @@ namespace Server
             try
             {
                 NetworkComms.SendObject(type, ip, port, msg);
+                PrintOnDebug(type + ": " + msg);
             }
             catch (Exception)
             {
