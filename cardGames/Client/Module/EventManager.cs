@@ -104,26 +104,31 @@ namespace Client
          */
         public void PlayersConnect(PacketHeader header, Connection connection, string message)
         {
-            if (GameInfos.Instance.AddPlayer(int.Parse(message.Split(':')[0]), message.Split(':')[1], false))
-            {
-                //MessageBox.Show(message, GameInfos.Instance.MyId.ToString());
-                App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
-                {
-                    WaitingScreenContent content = MainWindow.Instance.WaitingScreen;
+            List<string> connectedUsers = JsonConvert.DeserializeObject<List<string>>(message);
 
-                    Button b = content.FindName("Player" + message.Split(':')[0] + "Button") as Button;
-                    b.BorderBrush = new BrushConverter().ConvertFrom("#FF1AD411") as Brush;
-                    b.Content = message.Split(':')[1];
-                    if (GameInfos.Instance.UsersList.Count == 4)
+            for (int i = 0; i < connectedUsers.Count; i++)
+            {
+                if (GameInfos.Instance.AddPlayer(int.Parse(connectedUsers[i].Split(':')[0]), connectedUsers[i].Split(':')[1], false))
+                {
+                    //MessageBox.Show(message, GameInfos.Instance.MyId.ToString());
+                    App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
                     {
-                        GameWindow win = new GameWindow();
-                        App.Current.MainWindow.Close();
-                        App.Current.MainWindow = win;
-                        win.Initialize();
-                        win.Show();
-                    }
-                }));
-                Console.WriteLine("A player connect : " + message);
+                        WaitingScreenContent content = MainWindow.Instance.WaitingScreen;
+
+                        Button b = content.FindName("Player" + connectedUsers[i].Split(':')[0] + "Button") as Button;
+                        b.BorderBrush = new BrushConverter().ConvertFrom("#FF1AD411") as Brush;
+                        b.Content = connectedUsers[i].Split(':')[1];
+                        if (GameInfos.Instance.UsersList.Count == 4)
+                        {
+                            GameWindow win = new GameWindow();
+                            App.Current.MainWindow.Close();
+                            App.Current.MainWindow = win;
+                            win.Initialize();
+                            win.Show();
+                        }
+                    }));
+                    Console.WriteLine("A player connect : " + connectedUsers[i]);
+                }
             }
         }
 
