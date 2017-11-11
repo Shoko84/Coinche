@@ -155,8 +155,8 @@ namespace Server
                     _annonceTurn.Next();
             }
             var it = Server.Instance.players.list[_annonceTurn.It];
-            Server.Instance.WriteTo("012", it.ip, it.port, "your turn to annonce");
-            Server.Instance.PrintOnDebug("Wainting annonce from player " + it.id);
+            Server.Instance.WriteToAll("012", _annonceTurn.It.ToString());
+            Server.Instance.PrintOnDebug("Waiting annonce from player " + _annonceTurn.It.ToString());
         }
 
         public bool CheckAnnonce(Contract contract)
@@ -203,8 +203,8 @@ namespace Server
                     status = GAME_STATUS.TURN;
                     this.contract = _contract;
                     var it = Server.Instance.players.list[_gameTurn.It];
-                    Server.Instance.WriteTo("013", it.ip, it.port, "your turn to play");
-                    Server.Instance.PrintOnDebug("Waiting turn from player " + it.id);
+                    Server.Instance.WriteToAll("013", _gameTurn.It.ToString());
+                    Server.Instance.PrintOnDebug("Waiting turn from player " + _gameTurn.It.ToString());
                 }
             }
         }
