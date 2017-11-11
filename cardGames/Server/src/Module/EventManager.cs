@@ -237,6 +237,7 @@ namespace Server
                     {
                         type = "200";
                         Server.Instance.game.NextAnnonce();
+                        Server.Instance.WriteTo("014", ip, port, Server.Instance.game.annonceTurn.ToString());
                         Server.Instance.WriteToAll("020", message);
                     }
                     Server.Instance.WriteTo(type, ip, port, msg);
@@ -274,6 +275,7 @@ namespace Server
                     if (type == "")
                     {
                         type = "200";
+                        Server.Instance.WriteTo("015", ip, port, Server.Instance.game.gameTurn.ToString());
                         Server.Instance.WriteToAll("021", message);
                     }
                     Server.Instance.WriteTo(type, ip, port, msg);
