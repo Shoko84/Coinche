@@ -11,6 +11,7 @@ namespace Client
     {
         public enum ClientPosition : int
         {
+            NotSpecified = -1,
             Bottom = 0,
             Left = 1,
             Top,

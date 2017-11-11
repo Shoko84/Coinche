@@ -30,6 +30,7 @@ namespace Client
             SetCallBackFunction<string>("052", GameInfos.Instance.EventManager.PlayersQuit);
             SetCallBackFunction<string>("200", GameInfos.Instance.EventManager.Ok);
             SetCallBackFunction<string>("211", GameInfos.Instance.EventManager.PlayerReceiveDeck);
+            SetCallBackFunction<string>("213", GameInfos.Instance.EventManager.GetPlayerCardsNumber);
             SetCallBackFunction<string>("230", GameInfos.Instance.EventManager.ConnectionOk);
             SetCallBackFunction<string>("330", GameInfos.Instance.EventManager.ConnectionKo);
         }

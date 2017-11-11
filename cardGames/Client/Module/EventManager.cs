@@ -153,11 +153,27 @@ namespace Client
         *  Triggered when a client receive the cards number from someone.
         *  @param   header      Infos about the header.
         *  @param   connection  Infos about the server's connection.
-        *  @param   message     The number of cards.
+        *  @param   message     The id of the player and the number of cards as id:nbCard.
         */
         public void GetPlayerCardsNumber(PacketHeader header, Connection connection, string message)
         {
-
+            App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
+            {
+                for (int i = 0; i < GameInfos.Instance.UsersList.Count; i++)
+                {
+                    if (GameInfos.Instance.UsersList[i].Id == int.Parse(message.Split(':')[0]))
+                    {
+                        int nbCard = int.Parse(message.Split(':')[1]);
+                        GameInfos.Instance.UsersList[i].CardsList.Clear();
+                        for (int j = 0; j < nbCard; j++)
+                            GameInfos.Instance.UsersList[i].CardsList.AddCard(Card.CardColour.Unknown, Card.CardValue.Unknown, (Card.CardPosition)GameInfos.Instance.GetPosFromId(GameInfos.Instance.MyId, GameInfos.Instance.UsersList[i].Id));
+                        GameWindow.Instance.DrawGameField();
+                        GameWindow.Instance.DrawHandCards(GameInfos.Instance.UsersList);
+                        GameWindow.Instance.DrawCardsPlayed(GameInfos.Instance.CardsPlayed);
+                        break;
+                    }
+                }
+            }));
         }
 
         /**
