@@ -303,6 +303,7 @@ namespace Client
                 GameWindow.Instance.DrawHandCards(GameInfos.Instance.UsersList);
                 GameWindow.Instance.DrawCardsPlayed(GameInfos.Instance.CardsPlayed);
                 GameWindow.Instance.IngameCallCont.CardsListBox.ItemsSource = cardsNames;
+                GameWindow.Instance.IngameCallCont.CardsListBox.SelectedIndex = 0;
             }));
         }
 
@@ -313,7 +314,7 @@ namespace Client
             
             GameInfos.Instance.CardsPlayed.Clear();
             for (int i = 0; i < pile.cards.Count; i++)
-                GameInfos.Instance.CardsPlayed.AddCard(pile.cards[i].Color, pile.cards[i].Value, GameInfos.Instance.GetPosFromId(GameInfos.Instance.MyId, pile.owners[i]));
+                GameInfos.Instance.CardsPlayed.AddCard(pile.cards.cards[i].colour, pile.cards.cards[i].value, (Card.CardPosition)GameInfos.Instance.GetPosFromId(GameInfos.Instance.MyId, pile.owners[i]));
 
             App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
             {
