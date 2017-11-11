@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\marc-\OneDrive\Documents\GitHub\Coinche\cardGames\Client\obj\Debug\
+C:\Users\Maxime\Documents\GitHub\Coinche\cardGames\Client\obj\Debug\
 Client
 none
 false
 DEBUG;TRACE
-C:\Users\marc-\OneDrive\Documents\GitHub\Coinche\cardGames\Client\App.xaml
+C:\Users\Maxime\Documents\GitHub\Coinche\cardGames\Client\App.xaml
 7747171712
 
-21685925407
-23-195988125
+211522089899
+231447443037
 CoincheCallContent.xaml;ContractCallContent.xaml;GameWindow.xaml;IngameCallContent.xaml;LoginContent.xaml;MainWindow.xaml;WaitingScreenContent.xaml;
 
-False
+True
 

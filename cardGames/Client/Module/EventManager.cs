@@ -97,6 +97,86 @@ namespace Client
         }
 
         /**
+         *  Triggered when the it's the announce turn of the client [id]
+         *  @param   header      Infos about the header.
+         *  @param   connection  Infos about the server's connection.
+         *  @param   message     A client id.
+         */
+        public void PlayerAnnounce(PacketHeader header, Connection connection, string message)
+        {
+            App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
+            {
+                //GameWindow.Instance.ContentArea.Content = GameWindow.Instance.ContractCallCont;
+                ContractCallContent content = GameWindow.Instance.ContractCallCont;
+                if (int.Parse(message) == GameInfos.Instance.MyId)
+                {
+                    content.ContractBox.IsEnabled = true;
+                    content.ContractValue.IsEnabled = true;
+                    content.ContractCallButton.IsEnabled = true;
+                }
+                else
+                {
+                    content.ContractBox.IsEnabled = false;
+                    content.ContractValue.IsEnabled = false;
+                    content.ContractCallButton.IsEnabled = false;
+                }
+                //GameInfos.Instance.NetManager.WriteMessage("111", "");
+                //for (int i = 0; i < GameInfos.Instance.UsersList.Count; i++)
+                //{
+                //    if (GameInfos.Instance.UsersList[i].Id != GameInfos.Instance.MyId)
+                //        GameInfos.Instance.NetManager.WriteMessage("113", GameInfos.Instance.UsersList[i].Id.ToString());
+                //}
+            }));
+        }
+
+        /**
+         *  Triggered when the it's the play turn of the client [id]
+         *  @param   header      Infos about the header.
+         *  @param   connection  Infos about the server's connection.
+         *  @param   message     A client id.
+         */
+        public void PlayerPlay(PacketHeader header, Connection connection, string message)
+        {
+            App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
+            {
+                //GameWindow.Instance.ContentArea.Content = GameWindow.Instance.IngameCallCont;
+                IngameCallContent content = GameWindow.Instance.IngameCallCont;
+                if (int.Parse(message) == GameInfos.Instance.MyId)
+                {
+                    content.CardsListBox.IsEnabled = true;
+                    content.PickCardButton.IsEnabled = true;
+                }
+                else
+                {
+                    content.CardsListBox.IsEnabled = false;
+                    content.PickCardButton.IsEnabled = false;
+                }
+            }));
+        }
+
+        /**
+         *  Triggered when the someone announced
+         *  @param   header      Infos about the header.
+         *  @param   connection  Infos about the server's connection.
+         *  @param   message     A contract.
+         */
+        public void SomeoneHasAnnounced(PacketHeader header, Connection connection, string message)
+        {
+            Contract contract = JsonConvert.DeserializeObject<Contract>(message);
+            MessageBox.Show((contract.score + 10).ToString(), GameInfos.Instance.MyId.ToString());
+            if (contract.type != CONTRACT_TYPE.PASS)
+            {
+                App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
+                {
+                    ContractCallContent content = GameWindow.Instance.ContractCallCont;
+
+                    content.ContractValue.Minimum = contract.score + 10;
+                    content.ContractValue.Value = contract.score + 10;
+                }));
+            }
+        }
+
+        /**
          *  Triggered when a new client is connected to the server.
          *  @param   header      Infos about the header.
          *  @param   connection  Infos about the server's connection.
@@ -210,6 +290,19 @@ namespace Client
         public void Ok(PacketHeader header, Connection connection, string message)
         {
             Console.WriteLine("OK");
+        }
+
+        public void NotMyTurn(PacketHeader header, Connection connection, string message)
+        {
+            MessageBox.Show("It's not your turn, it's player " + message + "'s turn");
+        }
+        public void AnnounceIncorrect(PacketHeader header, Connection connection, string message)
+        {
+            MessageBox.Show("Incorrect announce");
+        }
+        public void AnnounceNotAllowed(PacketHeader header, Connection connection, string message)
+        {
+            MessageBox.Show("It's not an announce turn");
         }
     }
 }

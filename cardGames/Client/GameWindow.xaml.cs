@@ -172,6 +172,7 @@ namespace Client
             DrawHandCards(GameInfos.Instance.UsersList);
             DrawCardsPlayed(GameInfos.Instance.CardsPlayed);
 
+            GameInfos.Instance.NetManager.WriteMessage("100", "");
             GameInfos.Instance.NetManager.WriteMessage("111", "");
             for (int i = 0; i < GameInfos.Instance.UsersList.Count; i++)
             {
