@@ -331,6 +331,8 @@ namespace Server
             }
             else
             {
+                if (Server.Instance.players.list[_gameTurn.It].deck.ExistColour(card.colour))
+                    return (false);
                 if ((int)card.colour == (int)contract.type)
                 {
                     if (pile.cards.ExistHigher(card, contract.type))
