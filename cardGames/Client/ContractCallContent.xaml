@@ -16,6 +16,7 @@
                   Margin="40,0,40,0"
                   VerticalAlignment="Center"
                   SelectedIndex="0"
+                  IsEnabled="False"
                   x:Name="ContractBox">
             <ComboBox.ItemContainerStyle>
                 <Style TargetType="ComboBoxItem">
@@ -26,9 +27,6 @@
             </ComboBox.ItemContainerStyle>
             <ComboBoxItem>
                 Pass
-            </ComboBoxItem>
-            <ComboBoxItem>
-                No trump
             </ComboBoxItem>
             <ComboBoxItem>
                 Spades
@@ -45,11 +43,20 @@
             <ComboBoxItem>
                 All trumps
             </ComboBoxItem>
+            <ComboBoxItem>
+                No trumps
+            </ComboBoxItem>
         </ComboBox>
         <xctk:IntegerUpDown Grid.Column="1"
                             Width="120" Height="24"
                             Background="#FF5B5B5B"
                             Foreground="White"
+                            Value="80"
+                            AllowTextInput="False"
+                            Minimum="80"
+                            Maximum="160"
+                            Increment="10"
+                            IsEnabled="False"
                             x:Name="ContractValue"/>
         <Button Grid.Column="2"
                 VerticalAlignment="Center"
@@ -57,6 +64,7 @@
                 Content="Call"
                 Background="#FF5B5B5B"
                 Foreground="White"
-                x:Name="ContractCallButton"/>
+                IsEnabled="False"
+                x:Name="ContractCallButton" Click="ContractCallButton_Click"/>
     </Grid>
 </UserControl>

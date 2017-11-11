@@ -91,7 +91,15 @@ namespace Server
         public void Wait()
         {
             if (Server.Instance.players.list.Count() == 4)
+            {
+                foreach(var it in Server.Instance.players.list)
+                {
+                    if (it.ready == false)
+                        return;
+                }
+                Server.Instance.WriteToAll("010", "The game can start");
                 status = GAME_STATUS.DISTRIB;
+            }
         }
 
         /**
@@ -135,13 +143,24 @@ namespace Server
                 turn.Next();
             }
 
-            if (Server.Instance.debug)
+            foreach (var it in Server.Instance.players.list)
             {
-                foreach (var it in Server.Instance.players.list)
+                lock (_padlock)
                 {
-                    Server.Instance.PrintOnDebug("Player " + it.owner + ": ");
-                    it.deck.Dump();
+                    if (Server.Instance.debug)
+                    {
+                        Console.WriteLine("dumping client deck for id " + it.id + "/" + it.owner + ":");
+                        it.deck.Dump();
+                    }
+                    string msg = Server.Instance.serializer.ObjectToString(it.deck);
+                    Server.Instance.WriteTo("211", it.ip, it.port, msg);
+                    foreach (var iter in Server.Instance.players.list)
+                    {
+                        if (iter.ip != it.ip || iter.port != it.port)
+                            Server.Instance.WriteTo("213", it.ip, it.port, iter.id + ":" + Server.Instance.players.list[iter.id].deck.Count.ToString());
+                    }
                 }
+                break;
             }
             NextAnnonce(true);
             status = GAME_STATUS.ANNONCE;
@@ -152,11 +171,14 @@ namespace Server
             lock (_padlock)
             {
                 if (!first)
+                {
                     _annonceTurn.Next();
+                    Server.Instance.PrintOnDebug("THE PLAYER WHO ANNONCE IS " + _annonceTurn.It);
+                }
             }
             var it = Server.Instance.players.list[_annonceTurn.It];
-            Server.Instance.WriteTo("012", it.ip, it.port, "your turn to annonce");
-            Server.Instance.PrintOnDebug("Wainting annonce from player " + it.id);
+            Server.Instance.WriteToAll("012", _annonceTurn.It.ToString());
+            Server.Instance.PrintOnDebug("Waiting annonce from player " + _annonceTurn.It.ToString());
         }
 
         public bool CheckAnnonce(Contract contract)
@@ -165,6 +187,7 @@ namespace Server
             {
                 Server.Instance.players.list[_annonceTurn.It].contract = null;
                 nbPass += 1;
+                Server.Instance.WriteToAll("020", Server.Instance.serializer.ObjectToString(contract));
                 NextAnnonce();
                 return (true);
             }
@@ -172,12 +195,13 @@ namespace Server
             {
                 if (it.contract != null)
                 {
-                    if (it.contract.score > contract.score)
+                    if (it.contract.score >= contract.score)
                         return (false);
                 }
             }
             Server.Instance.players.list[_annonceTurn.It].contract = contract;
             nbPass = 0;
+            Server.Instance.WriteToAll("020", Server.Instance.serializer.ObjectToString(contract));
             NextAnnonce();
             return (true);
         }
@@ -202,6 +226,9 @@ namespace Server
                 {
                     status = GAME_STATUS.TURN;
                     this.contract = _contract;
+                    var it = Server.Instance.players.list[_gameTurn.It];
+                    Server.Instance.WriteToAll("013", _gameTurn.It.ToString());
+                    Server.Instance.PrintOnDebug("Waiting turn from player " + _gameTurn.It.ToString());
                 }
             }
         }
@@ -261,8 +288,8 @@ namespace Server
                 _gameTurn.Next();
             }
             var it = Server.Instance.players.list[_gameTurn.It];
-            Server.Instance.WriteTo("013", it.ip, it.port, "your turn to annonce");
-            Server.Instance.PrintOnDebug("Waiting turn from player " + it.id);
+            Server.Instance.WriteToAll("013", _gameTurn.It.ToString());
+            Server.Instance.PrintOnDebug("Waiting turn from player " + _gameTurn.It.ToString());
             return (true);
         }
 

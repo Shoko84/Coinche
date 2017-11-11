@@ -26,6 +26,7 @@ namespace Server
         public PLAYER_STATUS    status;
         public Contract         contract;
         public Deck             win;
+        public bool             ready;
 
         public Profile(string name, int _id, string _ip, int _port)
         {
@@ -37,6 +38,7 @@ namespace Server
             status = PLAYER_STATUS.ONLINE;
             contract = null;
             win = new Deck();
+            ready = false;
         }
     }
 

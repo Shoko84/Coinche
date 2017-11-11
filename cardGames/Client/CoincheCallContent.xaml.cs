@@ -1,4 +1,11 @@
-﻿using System;
+﻿/**
+ * @file    CoincheCallContent.xaml.cs
+ * @author  Maxime Cauvin
+ * 
+ * This file contains the CoincheCallContent Class.
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +27,9 @@ namespace Client
     /// </summary>
     public partial class CoincheCallContent : UserControl
     {
+        /**
+         *  CoincheCallContent's constructor - Create an CoincheCallContent instance
+         */
         public CoincheCallContent()
         {
             InitializeComponent();

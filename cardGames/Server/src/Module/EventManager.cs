@@ -11,12 +11,13 @@ using System.Linq;
 using Common;
 using System;
 using Game;
+using System.Collections.Generic;
 
 namespace Server
 {
-/**
- *  This class contain all the functions which will be triggered by the client's requests.
- */
+    /**
+     *  This class contain all the functions which will be triggered by the client's requests.
+     */
     public class EventManager
     {
         /**
@@ -78,25 +79,21 @@ namespace Server
             {
                 Server.Instance.PrintOnDebug("A new player just connect " + ip + " " + port + " " + id);
                 Server.Instance.WriteTo("230", ip, port, id.ToString() + ":" + message);
-                if (Server.Instance.players.list.Count() == 4)
-                {
-                    if (Server.Instance.game.status == GAME_STATUS.WAIT)
-                        Server.Instance.WriteToAll("010", "The game can start");
-                    else
-                        Server.Instance.WriteTo("010", ip, port, "The game can start");
-                }
-                else
-                    Server.Instance.WriteTo("011", ip, port, "Waiting for players");
+                Server.Instance.WriteTo("011", ip, port, "Waiting for players");
+
+                List<string> list = new List<string>();
+
                 foreach (var it in Server.Instance.players.list)
                 {
-                    if (it.id != id || it.id != port)
-                    {
-                        Server.Instance.WriteTo("030", ip, port, it.id + ":" + it.owner);
-                        Console.WriteLine("030" + " " + ip + " " + port + " " + it.id + ":" + it.owner);
-                    }
+                    if (it.id != id)
+                        list.Add(it.id + ":" + it.owner);
                 }
-                Server.Instance.WriteToOther("030", ip, port, id + ":" + message);
-                Console.WriteLine("030" + " " + ip + " " + port + " " + id + ":" + message);
+                Server.Instance.WriteTo("030", ip, port, Server.Instance.serializer.ObjectToString(list));
+
+                list.Clear();
+                list.Add(id + ":" + message);
+
+                Server.Instance.WriteToOther("030", ip, port, Server.Instance.serializer.ObjectToString(list));
             }
             else
                 Server.Instance.WriteTo("330", ip, port, "Sorry, there are too many client which are already connected");
@@ -161,7 +158,7 @@ namespace Server
             var port = int.Parse(connection.ConnectionInfo.RemoteEndPoint.ToString().Split(':')[1]);
 
             Server.Instance.PrintOnDebug(message);
-            Server.Instance.WriteTo("Response", ip, port, "OK");
+            Server.Instance.WriteTo("message", ip, port, "OK");
         }
 
         public void SendDeck(PacketHeader header, Connection connection, string message)
@@ -175,10 +172,8 @@ namespace Server
                 if (it.ip == ip && it.port == port)
                 {
                     string msg = serializer.ObjectToString(it.deck);
-                    Console.WriteLine("dumping client deck for id " + it.id + ":");
-                    it.deck.Dump();
+                    Server.Instance.PrintOnDebug("-->[" + it.id + "]: Send Deck");
                     Server.Instance.WriteTo("211", ip, port, msg);
-                    Console.WriteLine("211" + " " + ip + " " + port + " " + msg);
                     break;
                 }
             }
@@ -190,6 +185,7 @@ namespace Server
             var port = int.Parse(connection.ConnectionInfo.RemoteEndPoint.ToString().Split(':')[1]);
             string serial = Server.Instance.serializer.ObjectToString(Server.Instance.game.pile);
 
+            Server.Instance.PrintOnDebug("-->[]: How many cards");
             Server.Instance.WriteTo("212", ip, port, serial);
         }
 
@@ -199,7 +195,8 @@ namespace Server
             var port = int.Parse(connection.ConnectionInfo.RemoteEndPoint.ToString().Split(':')[1]);
             int _id = int.Parse(id);
 
-            Server.Instance.WriteTo("213", ip, port, Server.Instance.players.list[_id].deck.Count.ToString());
+            Server.Instance.PrintOnDebug("-->[]: How many cards player " + id);
+            Server.Instance.WriteTo("213", ip, port, id + ":" + Server.Instance.players.list[_id].deck.Count.ToString());
         }
 
         public void PlayerAnnonce(PacketHeader header, Connection connection, string message)
@@ -219,19 +216,15 @@ namespace Server
                         type = "324";
                         msg = Server.Instance.game.status.ToString();
                     }
-                    if (Server.Instance.game.gameTurn != it.id && type == "")
+                    if (Server.Instance.game.annonceTurn != it.id && type == "")
                     {
                         type = "320";
-                        msg = Server.Instance.game.gameTurn.ToString();
+                        msg = Server.Instance.game.annonceTurn.ToString();
                     }
                     if (!Server.Instance.game.CheckAnnonce(annonce) && type == "")
                         type = "322";
                     if (type == "")
-                    {
                         type = "200";
-                        Server.Instance.game.NextAnnonce();
-                        Server.Instance.WriteToAll("020", message);
-                    }
                     Server.Instance.WriteTo(type, ip, port, msg);
                     break;
                 }
@@ -275,12 +268,30 @@ namespace Server
             }
         }
 
-        public void getScore(PacketHeader header, Connection connection, string message)
+        public void GetScore(PacketHeader header, Connection connection, string id)
         {
             var ip = connection.ConnectionInfo.RemoteEndPoint.ToString().Split(':')[0];
             var port = int.Parse(connection.ConnectionInfo.RemoteEndPoint.ToString().Split(':')[1]);
 
-            Server.Instance.WriteTo("214", ip, port, Server.Instance.players.list[int.Parse(message)].win.CalculPoint(Server.Instance.game.contract).ToString());
+            Server.Instance.WriteTo("214", ip, port, id + ":" + Server.Instance.players.list[int.Parse(id)].win.CalculPoint(Server.Instance.game.contract).ToString());
+        }
+
+        
+        public void PlayerReady(PacketHeader header, Connection connection, string id)
+        {
+            var ip = connection.ConnectionInfo.RemoteEndPoint.ToString().Split(':')[0];
+            var port = int.Parse(connection.ConnectionInfo.RemoteEndPoint.ToString().Split(':')[1]);
+
+            foreach (var it in Server.Instance.players.list)
+            {
+                if (it.ip == ip && it.port == port)
+                {
+                    if (Server.Instance.game.status != GAME_STATUS.WAIT)
+                        Server.Instance.WriteTo("010", ip, port, "");
+                    it.ready = true;
+                    return;
+                }
+            }
         }
 
     }

@@ -5,8 +5,8 @@
  *  This file contain the server class.
  */
 
-using Common;
 using NetworkCommsDotNet;
+using Common;
 using System;
 
 namespace Server
@@ -23,11 +23,11 @@ namespace Server
         public PlayerManager            players;    /**< List all the player's ips by id.*/
         public EventManager             events;     /**< List of all the events.*/
         public GameManager              game;       /**< Contains the state of the game.*/
-        public Serializer               serializer;
+        public Serializer               serializer; /**< Object wich serialize and deserialize objects.*/
 
         private bool                    _debug;     /**< Allow or not debug prints.*/
 
-        private static Server           _instance;  /**< The instance of th singleton.*/
+        private static Server           _instance;  /**< The instance of the singleton.*/
         private static readonly object  _padlock = new object();    /**< Thread protection.*/
 
         /**
@@ -118,24 +118,28 @@ namespace Server
          */
         public void WriteTo(string type, string ip, int port, string msg)
         {
-            try
+            lock (_padlock)
             {
-                NetworkComms.SendObject(type, ip, port, msg);
-            }
-            catch (Exception)
-            {
-                this.Error("Error", "the client is not connected");
-                foreach (var entry in players.list)
+                try
                 {
-                    if (entry.ip == ip && entry.port == port)
+                    NetworkComms.SendObject(type, ip, port, msg);
+                    PrintOnDebug("[" + type + "]: " + msg);
+                }
+                catch (Exception)
+                {
+                    this.Error("Error", "the client is not connected");
+                    foreach (var entry in players.list)
                     {
-                        if (players.list[entry.id].status != PLAYER_STATUS.OFFLINE)
+                        if (entry.ip == ip && entry.port == port)
                         {
-                            Server.Instance.PrintOnDebug("A player is offline " + entry.ip + " " + entry.port + " " + entry.id);
-                            players.list[entry.id].status = PLAYER_STATUS.OFFLINE;
-                            Server.Instance.WriteToOther("052", entry.ip, entry.port, entry.id.ToString());
+                            if (players.list[entry.id].status != PLAYER_STATUS.OFFLINE)
+                            {
+                                Server.Instance.PrintOnDebug("A player is offline " + entry.ip + " " + entry.port + " " + entry.id);
+                                players.list[entry.id].status = PLAYER_STATUS.OFFLINE;
+                                Server.Instance.WriteToOther("052", entry.ip, entry.port, entry.id.ToString());
+                            }
+                            break;
                         }
-                        break;
                     }
                 }
             }
@@ -148,6 +152,7 @@ namespace Server
          */
         public void WriteToAll(string type, string msg)
         {
+            PrintOnDebug("<ALL>");
             foreach (var entry in players.list)
                 WriteTo(type, entry.ip, entry.port, msg);
         }
@@ -161,6 +166,7 @@ namespace Server
         */
         public void WriteToOther(string type, string ip, int port, string msg)
         {
+            PrintOnDebug("<OTHER>");
             foreach (var entry in players.list)
             {
                 if (entry.ip != ip || entry.port != port)

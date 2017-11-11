@@ -23,7 +23,7 @@ namespace Game
         public CONTRACT_TYPE    type;
         public int              id;
 
-        Contract(int _score, CONTRACT_TYPE _type, int _id)
+        public Contract(int _score, CONTRACT_TYPE _type, int _id)
         {
             score = _score;
             type = _type;

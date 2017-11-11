@@ -36,7 +36,7 @@ namespace Client
         private List<Card> cardsPlayed;
         public List<Card> CardsPlayed { get => cardsPlayed; }
 
-        private int myId;
+        private int myId = -1;
         public int MyId { get => myId; set => myId = value; }
 
         public ClientUser GetClientUserById(int id)
@@ -51,16 +51,7 @@ namespace Client
 
         public ClientUser.ClientPosition GetPosFromId(int myId, int id)
         {
-            int tmp = myId;
-            int it = 0;
-            while (tmp != id)
-            {
-                if (tmp == 4)
-                    tmp = -1;
-                it += 1;
-                tmp += 1;
-            }
-            return ((ClientUser.ClientPosition)it);
+            return (ClientUser.ClientPosition)(((id - myId) + 4) % 4);
         }
 
         public void AddCardsPlayed(Card card)

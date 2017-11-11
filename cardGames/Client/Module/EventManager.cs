@@ -63,12 +63,16 @@ namespace Client
          */
         public void ConnectionOk(PacketHeader header, Connection connection, string data)
         {
-            Console.WriteLine("Connected:", data);
-            GameInfos.Instance.NetManager.IsConnected = true;
-            GameInfos.Instance.MyId = int.Parse(data.Split(':')[0]);
-            GameInfos.Instance.AddPlayer(GameInfos.Instance.MyId, data.Split(':')[1], true);
             App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
             {
+                string[] dataSplit = data.Split(':');
+
+                GameInfos.Instance.AddPlayer(int.Parse(dataSplit[0]), dataSplit[1], true);
+                Button b = MainWindow.Instance.WaitingScreen.FindName("Player" + dataSplit[0] + "Button") as Button;
+                b.BorderBrush = new BrushConverter().ConvertFrom("#FF1AD411") as Brush;
+                b.Content = dataSplit[1];
+                GameInfos.Instance.MyId = int.Parse(data.Split(':')[0]);
+                GameInfos.Instance.NetManager.IsConnected = true;
                 MainWindow win = MainWindow.Instance;
                 win.ContentArea.Content = MainWindow.Instance.WaitingScreen;
             }));
@@ -93,7 +97,99 @@ namespace Client
          */
         public void Playing(PacketHeader header, Connection connection, string message)
         {
-            Console.WriteLine("Let's play !!!");
+            GameInfos.Instance.NetManager.WriteMessage("111", "");
+            for (int i = 0; i < GameInfos.Instance.UsersList.Count; i++)
+            {
+                if (GameInfos.Instance.UsersList[i].Id != GameInfos.Instance.MyId)
+                    GameInfos.Instance.NetManager.WriteMessage("113", GameInfos.Instance.UsersList[i].Id.ToString());
+            }
+        }
+
+        /**
+         *  Triggered when the it's the announce turn of the client [id]
+         *  @param   header      Infos about the header.
+         *  @param   connection  Infos about the server's connection.
+         *  @param   message     A client id.
+         */
+        public void PlayerAnnounce(PacketHeader header, Connection connection, string message)
+        {
+            App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
+            {
+                //GameWindow.Instance.ContentArea.Content = GameWindow.Instance.ContractCallCont;
+                ContractCallContent content = GameWindow.Instance.ContractCallCont;
+                if (int.Parse(message) == GameInfos.Instance.MyId)
+                {
+                    content.ContractBox.IsEnabled = true;
+                    content.ContractValue.IsEnabled = true;
+                    content.ContractCallButton.IsEnabled = true;
+                }
+                else
+                {
+                    content.ContractBox.IsEnabled = false;
+                    content.ContractValue.IsEnabled = false;
+                    content.ContractCallButton.IsEnabled = false;
+                }
+                //GameInfos.Instance.NetManager.WriteMessage("111", "");
+                //for (int i = 0; i < GameInfos.Instance.UsersList.Count; i++)
+                //{
+                //    if (GameInfos.Instance.UsersList[i].Id != GameInfos.Instance.MyId)
+                //        GameInfos.Instance.NetManager.WriteMessage("113", GameInfos.Instance.UsersList[i].Id.ToString());
+                //}
+            }));
+        }
+
+        /**
+         *  Triggered when the it's the play turn of the client [id]
+         *  @param   header      Infos about the header.
+         *  @param   connection  Infos about the server's connection.
+         *  @param   message     A client id.
+         */
+        public void PlayerPlay(PacketHeader header, Connection connection, string message)
+        {
+            App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
+            {
+                //GameWindow.Instance.ContentArea.Content = GameWindow.Instance.IngameCallCont;
+                IngameCallContent content = GameWindow.Instance.IngameCallCont;
+                if (int.Parse(message) == GameInfos.Instance.MyId)
+                {
+                    content.CardsListBox.IsEnabled = true;
+                    content.PickCardButton.IsEnabled = true;
+                }
+                else
+                {
+                    content.CardsListBox.IsEnabled = false;
+                    content.PickCardButton.IsEnabled = false;
+                }
+            }));
+        }
+
+        /**
+         *  Triggered when the someone announced
+         *  @param   header      Infos about the header.
+         *  @param   connection  Infos about the server's connection.
+         *  @param   message     A contract.
+         */
+        public void SomeoneHasAnnounced(PacketHeader header, Connection connection, string message)
+        {
+            Contract contract = JsonConvert.DeserializeObject<Contract>(message);
+            if (contract.type != CONTRACT_TYPE.PASS)
+            {
+                App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
+                {
+                    ContractCallContent content = GameWindow.Instance.ContractCallCont;
+
+                    if (contract.score < 160)
+                    {
+                        content.ContractValue.Minimum = contract.score + 10;
+                        content.ContractValue.Value = contract.score + 10;
+                    }
+                    else
+                    {
+                        content.ContractValue.Minimum = 160;
+                        content.ContractValue.Value = 160;
+                    }
+                }));
+            }
         }
 
         /**
@@ -104,26 +200,31 @@ namespace Client
          */
         public void PlayersConnect(PacketHeader header, Connection connection, string message)
         {
-            if (GameInfos.Instance.AddPlayer(int.Parse(message.Split(':')[0]), message.Split(':')[1], false))
-            {
-                //MessageBox.Show(message, GameInfos.Instance.MyId.ToString());
-                App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
-                {
-                    WaitingScreenContent content = MainWindow.Instance.WaitingScreen;
+            List<string> connectedUsers = JsonConvert.DeserializeObject<List<string>>(message);
 
-                    Button b = content.FindName("Player" + message.Split(':')[0] + "Button") as Button;
-                    b.BorderBrush = new BrushConverter().ConvertFrom("#FF1AD411") as Brush;
-                    b.Content = message.Split(':')[1];
-                    if (GameInfos.Instance.UsersList.Count == 4)
+            foreach (var item in connectedUsers)
+            {
+                if (GameInfos.Instance.AddPlayer(int.Parse(item.Split(':')[0]), item.Split(':')[1], false))
+                {
+                    //MessageBox.Show(message, GameInfos.Instance.MyId.ToString());
+                    App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
                     {
-                        GameWindow win = new GameWindow();
-                        App.Current.MainWindow.Close();
-                        App.Current.MainWindow = win;
-                        win.Initialize();
-                        win.Show();
-                    }
-                }));
-                Console.WriteLine("A player connect : " + message);
+                        WaitingScreenContent content = MainWindow.Instance.WaitingScreen;
+
+                        Button b = content.FindName("Player" + item.Split(':')[0] + "Button") as Button;
+                        b.BorderBrush = new BrushConverter().ConvertFrom("#FF1AD411") as Brush;
+                        b.Content = item.Split(':')[1];
+                        if (GameInfos.Instance.UsersList.Count == 4 && !(App.Current.MainWindow is GameWindow))
+                        {
+                            GameWindow win = new GameWindow();
+                            App.Current.MainWindow.Close();
+                            App.Current.MainWindow = win;
+                            win.Initialize();
+                            win.Show();
+                        }
+                    }));
+                    Console.WriteLine("A player connect : " + item);
+                }
             }
         }
 
@@ -147,6 +248,33 @@ namespace Client
         public void PlayerRename(PacketHeader header, Connection connection, string message)
         {
             Console.WriteLine("Player " + message.Split('|')[0] + " renamed " + message.Split('|')[1] + " to " + message.Split('|')[2]);
+        }
+
+        /**
+        *  Triggered when a client receive the cards number from someone.
+        *  @param   header      Infos about the header.
+        *  @param   connection  Infos about the server's connection.
+        *  @param   message     The id of the player and the number of cards as id:nbCard.
+        */
+        public void GetPlayerCardsNumber(PacketHeader header, Connection connection, string message)
+        {
+            App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
+            {
+                for (int i = 0; i < GameInfos.Instance.UsersList.Count; i++)
+                {
+                    if (GameInfos.Instance.UsersList[i].Id == int.Parse(message.Split(':')[0]))
+                    {
+                        int nbCard = int.Parse(message.Split(':')[1]);
+                        GameInfos.Instance.UsersList[i].CardsList.Clear();
+                        for (int j = 0; j < nbCard; j++)
+                            GameInfos.Instance.UsersList[i].CardsList.AddCard(Card.CardColour.Unknown, Card.CardValue.Unknown, (Card.CardPosition)GameInfos.Instance.GetPosFromId(GameInfos.Instance.MyId, GameInfos.Instance.UsersList[i].Id));
+                        GameWindow.Instance.DrawGameField();
+                        GameWindow.Instance.DrawHandCards(GameInfos.Instance.UsersList);
+                        GameWindow.Instance.DrawCardsPlayed(GameInfos.Instance.CardsPlayed);
+                        break;
+                    }
+                }
+            }));
         }
 
         /**
@@ -178,6 +306,19 @@ namespace Client
         public void Ok(PacketHeader header, Connection connection, string message)
         {
             Console.WriteLine("OK");
+        }
+
+        public void NotMyTurn(PacketHeader header, Connection connection, string message)
+        {
+            MessageBox.Show("It's not your turn, it's player " + message + "'s turn");
+        }
+        public void AnnounceIncorrect(PacketHeader header, Connection connection, string message)
+        {
+            MessageBox.Show("Incorrect announce");
+        }
+        public void AnnounceNotAllowed(PacketHeader header, Connection connection, string message)
+        {
+            MessageBox.Show("It's not an announce turn");
         }
     }
 }

@@ -172,7 +172,7 @@ namespace Client
             DrawHandCards(GameInfos.Instance.UsersList);
             DrawCardsPlayed(GameInfos.Instance.CardsPlayed);
 
-            GameInfos.Instance.NetManager.WriteMessage("111", "");
+            GameInfos.Instance.NetManager.WriteMessage("100", "");
         }
 
         public GameWindow()
@@ -184,6 +184,12 @@ namespace Client
 
             InitializeComponent();
             ContentArea.Content = contractCallCont;
+            Title = GameInfos.Instance.GetClientUserById(GameInfos.Instance.MyId).Username + ":" + GameInfos.Instance.MyId;
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            //GameInfos.Instance.NetManager.WriteMessage("050", "");
         }
     }
 }

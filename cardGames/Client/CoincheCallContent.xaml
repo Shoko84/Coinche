@@ -19,6 +19,7 @@
                 Background="#FF5B5B5B"
                 Foreground="White"
                 Margin="0,0,10,0"
+                IsEnabled="False"
                 x:Name="CoincheButton"/>
         <Button Grid.Column="1"
                 HorizontalAlignment="Left"
@@ -28,6 +29,7 @@
                 Background="#FF5B5B5B"
                 Foreground="White"
                 Margin="10,0,0,0"
+                IsEnabled="False"
                 x:Name="NoCallButton"/>
     </Grid>
 </UserControl>
