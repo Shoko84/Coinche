@@ -202,6 +202,9 @@ namespace Server
                 {
                     status = GAME_STATUS.TURN;
                     this.contract = _contract;
+                    var it = Server.Instance.players.list[_gameTurn.It];
+                    Server.Instance.WriteTo("013", it.ip, it.port, "your turn to play");
+                    Server.Instance.PrintOnDebug("Waiting turn from player " + it.id);
                 }
             }
         }
@@ -261,7 +264,7 @@ namespace Server
                 _gameTurn.Next();
             }
             var it = Server.Instance.players.list[_gameTurn.It];
-            Server.Instance.WriteTo("013", it.ip, it.port, "your turn to annonce");
+            Server.Instance.WriteTo("013", it.ip, it.port, "your turn to play");
             Server.Instance.PrintOnDebug("Waiting turn from player " + it.id);
             return (true);
         }
