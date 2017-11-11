@@ -191,13 +191,11 @@ namespace Server
                 NextAnnonce();
                 return (true);
             }
-            if (contract.score > 160)
-                return (false);
             foreach (var it in Server.Instance.players.list)
             {
                 if (it.contract != null)
                 {
-                    if (it.contract.score > contract.score)
+                    if (it.contract.score >= contract.score)
                         return (false);
                 }
             }

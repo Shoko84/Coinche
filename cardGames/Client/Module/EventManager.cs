@@ -178,8 +178,16 @@ namespace Client
                 {
                     ContractCallContent content = GameWindow.Instance.ContractCallCont;
 
-                    content.ContractValue.Minimum = contract.score + 10;
-                    content.ContractValue.Value = contract.score + 10;
+                    if (contract.score < 160)
+                    {
+                        content.ContractValue.Minimum = contract.score + 10;
+                        content.ContractValue.Value = contract.score + 10;
+                    }
+                    else
+                    {
+                        content.ContractValue.Minimum = 160;
+                        content.ContractValue.Value = 160;
+                    }
                 }));
             }
         }

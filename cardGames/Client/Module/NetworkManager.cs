@@ -16,9 +16,9 @@ namespace Client
      */
     public class NetworkManager
     {
-        private string  _serverIP;      /**< This var correspond to the server'ip*/
-        private int     _serverPort;    /**< This var correspond to the server's port*/
-        private bool    _connect;       /**< This boolean permit to know if the client is connected or not to a server*/
+        private string  _serverIP;      /**< This string corresponds to the server's ip*/
+        private int     _serverPort;    /**< This int corresponds to the server's port*/
+        private bool    _connect;       /**< This boolean allows to know if the client is connected or not to a server*/
         
         private void Init()
         {
