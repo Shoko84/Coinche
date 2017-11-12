@@ -103,7 +103,10 @@ namespace Server
                 foreach (var it in Server.Instance.players.list.ToList<Profile>())
                 {
                     if (it.ready == false)
+                    {
+                        Console.WriteLine("Missing player " + it.id.ToString());
                         return;
+                    }
                 }
                 Server.Instance.WriteToAll("010", "The game can start");
                 status = GAME_STATUS.DISTRIB;
@@ -493,6 +496,7 @@ namespace Server
             {
                 Reset();
                 status = GAME_STATUS.WAIT;
+                Console.WriteLine("Relance");
             }
         }
     }

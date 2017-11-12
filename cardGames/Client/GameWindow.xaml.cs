@@ -35,7 +35,6 @@ namespace Client
          */
         private void DrawGameField()
         {
-            TestCanvas.Children.Clear();
             Image img = new Image();
             string path = System.IO.Path.Combine(Environment.CurrentDirectory, "..", "..", "ressources", "assets", "background", "background.jpg");
             Uri uri = new Uri(path);
@@ -285,6 +284,16 @@ namespace Client
         public void Initialize()
         {
             GameInfos.Instance.NetManager.WriteMessage("100", "");
+            Label text = new Label
+            {
+                Foreground = Brushes.White,
+                Content = "Waiting for players...",
+                FontSize = 28
+            };
+            text.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+            Canvas.SetLeft(text, TestCanvas.Width / 2 - text.DesiredSize.Width / 2);
+            Canvas.SetTop(text, TestCanvas.Height / 2 - text.DesiredSize.Height / 2);
+            TestCanvas.Children.Add(text);
         }
 
         /**
@@ -324,6 +333,11 @@ namespace Client
             }
         }
 
+        /**
+         *  Window On KeyDown Event trigger
+         *  @param  sender     The component that triggered the event
+         *  @param  e          Object that contains the state information and data about the event triggered.
+         */
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.F5)

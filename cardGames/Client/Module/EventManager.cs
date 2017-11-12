@@ -347,6 +347,64 @@ namespace Client
         }
 
         /**
+        *  Triggered when a client has lost
+        *  @param   header      Infos about the header.
+        *  @param   connection  Infos about the server's connection.
+        *  @param   message     Unused
+        */
+        public void PlayerHasLost(PacketHeader header, Connection connection, string message)
+        {
+            App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
+            {
+                MessageBoxResult result;
+                if ((result = MessageBox.Show("You lost..\nDo you want to restart a game ?", "Game over", MessageBoxButton.YesNo, MessageBoxImage.Question)) == MessageBoxResult.Yes)
+                {
+                    GameInfos.Instance.NetManager.WriteMessage("022", "");
+                    GameInfos.Instance.RestartGameInfos();
+                    GameWindow win = new GameWindow();
+                    App.Current.MainWindow.Close();
+                    App.Current.MainWindow = win;
+                    win.Initialize();
+                    win.Show();
+                }
+                else if (result == MessageBoxResult.No)
+                {
+                    GameInfos.Instance.NetManager.WriteMessage("050", "");
+                    Application.Current.Shutdown();
+                }
+            }));
+        }
+
+        /**
+        *  Triggered when a client has won
+        *  @param   header      Infos about the header.
+        *  @param   connection  Infos about the server's connection.
+        *  @param   message     Unused
+        */
+        public void PlayerHasWon(PacketHeader header, Connection connection, string message)
+        {
+            App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
+            {
+                MessageBoxResult result;
+                if ((result = MessageBox.Show("You won!!\nDo you want to restart a game ?", "Win", MessageBoxButton.YesNo, MessageBoxImage.Question)) == MessageBoxResult.Yes)
+                {
+                    GameInfos.Instance.NetManager.WriteMessage("022", "");
+                    GameInfos.Instance.RestartGameInfos();
+                    GameWindow win = new GameWindow();
+                    App.Current.MainWindow.Close();
+                    App.Current.MainWindow = win;
+                    win.Initialize();
+                    win.Show();
+                }
+                else if (result == MessageBoxResult.No)
+                {
+                    GameInfos.Instance.NetManager.WriteMessage("050", "");
+                    Application.Current.Shutdown();
+                }
+            }));
+        }
+
+        /**
         *  Triggered when a client receive the cards number from someone.
         *  @param   header      Infos about the header.
         *  @param   connection  Infos about the server's connection.
@@ -384,7 +442,7 @@ namespace Client
             App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
             {
                 ClientUser user = GameInfos.Instance.GetClientUserById(int.Parse(args[0]));
-                user.Score += int.Parse(args[1]);
+                user.Score = int.Parse(args[1]);
                 if (GameWindow.Instance.GameLogger.Text != "")
                     GameWindow.Instance.GameLogger.Text += "\n\n";
                 GameWindow.Instance.GameLogger.Text += "[" + DateTime.Now.ToShortTimeString().ToString() + "] " +
