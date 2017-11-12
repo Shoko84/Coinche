@@ -19,9 +19,15 @@ namespace Game
 
     public class Contract
     {
+        private string[] typeStr = new string[]
+        {
+            "Pass", "Spades", "Clubs", "Diamonds", "Hearts", "All trumps", "Without trumps"
+        };
+
         public int              score;
         public CONTRACT_TYPE    type;
         public int              id;
+        public string           StringType { get => typeStr[(int)type]; }
 
         public Contract(int _score, CONTRACT_TYPE _type, int _id)
         {
