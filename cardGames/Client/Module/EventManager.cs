@@ -214,8 +214,8 @@ namespace Client
                         content.ContractValue.Minimum = 160;
                         content.ContractValue.Value = 160;
                     }
-                    if (GameInfos.Instance.contractPicked == null || GameInfos.Instance.contractPicked.score < contract.score)
-                        GameInfos.Instance.contractPicked = new Contract(contract.score, contract.type, contract.id);
+                    if (GameInfos.Instance.ContractPicked == null || GameInfos.Instance.ContractPicked.score < contract.score)
+                        GameInfos.Instance.ContractPicked = new Contract(contract.score, contract.type, contract.id);
                     GameWindow.Instance.DrawCanvas();
                 }));
             }
@@ -348,10 +348,12 @@ namespace Client
         {
             Pile pile = JsonConvert.DeserializeObject<Pile>(message);
             ObservableCollection<string> cardsNames = new ObservableCollection<string>();
-            
+
             GameInfos.Instance.CardsPlayed.Clear();
             for (int i = 0; i < pile.cards.Count; i++)
                 GameInfos.Instance.CardsPlayed.AddCard(pile.cards.cards[i].colour, pile.cards.cards[i].value, (Card.CardPosition)GameInfos.Instance.GetPosFromId(GameInfos.Instance.MyId, pile.owners[i]));
+            if (pile.cards.Count == 4)
+                MessageBox.Show("tkt c bon");
 
             App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
             {

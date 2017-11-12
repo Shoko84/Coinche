@@ -38,7 +38,8 @@ namespace Client
         public Deck CardsPlayed;
         public int MyId;
         public GAME_STATUS GameStatus;
-        public Contract contractPicked;
+        public Contract ContractPicked;
+        public Pile LastPile;
 
         public ClientUser GetClientUserById(int id)
         {
@@ -77,7 +78,8 @@ namespace Client
             CardsPlayed = new Deck();
             MyId = -1;
             GameStatus = GAME_STATUS.WAIT;
-            contractPicked = null;
+            ContractPicked = null;
+            LastPile = null;
         }
     }
 }
