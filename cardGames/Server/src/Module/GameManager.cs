@@ -274,39 +274,48 @@ namespace Server
         {
             int tmp = 0;
             Card origin = pile.cards.cards[0];
-            int winnerCard = 0;
-            int winnerTrump = -1;
-            int winner;
+            Card higher = null;
+            int winner = 0;
 
             foreach (var it in pile.cards.cards)
             {
-                if (origin != it)
+                if (higher == null)
+                    higher = it;
+                else
                 {
-                    if (origin.colour == it.colour)
+                    if (it.colour == origin.colour)
                     {
-                        if (!pile.cards.ExistHigher(it, contract.type))
-                            winnerCard = tmp;
+                        if ((int)higher.colour != (int)contract.type)
+                        {
+                            if (pile.cards.cardValue[(int)it.value] > pile.cards.cardValue[(int)higher.value])
+                            {
+                                higher = it;
+                                winner = pile.owners[tmp];
+                            }
+                        }
                     }
-                    else if ((int)origin.colour == (int)contract.type)
+                    else
                     {
-                        if (!pile.cards.ExistHigher(it, contract.type))
-                            winnerTrump = tmp;
-                    }
-                    else if (contract.type == CONTRACT_TYPE.ALL_TRUMP)
-                    {
-                        if (!pile.cards.ExistHigher(it, (CONTRACT_TYPE)it.colour))
-                            winnerTrump = tmp;
+                        if ((int)it.colour == (int)contract.type)
+                        {
+                            if ((int)higher.colour == (int)contract.type)
+                            {
+                                if (pile.cards.trumpValue[(int)it.value] > pile.cards.trumpValue[(int)higher.value])
+                                {
+                                    higher = it;
+                                    winner = pile.owners[tmp];
+                                }
+                            }
+                            else
+                            {
+                                higher = it;
+                                winner = pile.owners[tmp];
+                            }
+                        }
                     }
                 }
-                tmp += 1;    
+                tmp += 1;
             }
-            winner = winnerCard;
-            if (winnerTrump != -1)
-                winner = winnerTrump;
-
-            winner = winner + _gameTurn.It + 1;
-            if (winner >= 4)
-                winner -= 4;
             return (winner);
         }
 
@@ -325,6 +334,8 @@ namespace Server
             if (pile.cards.Count >= 4)
             {
                 winner = FindWinner();
+                if (winner < 0)
+                    return (false);
                 foreach (var i in pile.cards.cards)
                     Server.Instance.players.list[winner].win.AddCard(i);
                 Server.Instance.WriteToAll("212", Server.Instance.serializer.ObjectToString(pile));
