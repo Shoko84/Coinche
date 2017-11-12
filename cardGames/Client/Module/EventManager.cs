@@ -42,7 +42,15 @@ namespace Client
          */
         public void PrintIncomingMessage(PacketHeader header, Connection connection, string message)
         {
-            Console.WriteLine("\nA message was received from " + connection.ToString() + " which said '" + message + "'.");
+            App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
+            {
+                string[] args = message.Split(':');
+
+                if (GameWindow.Instance.ChatData.Text != "")
+                    GameWindow.Instance.ChatData.Text += "\n";
+                GameWindow.Instance.ChatData.Text += "[" + message.Split(':')[0] + "]: " + message.Split(':')[1];
+                GameWindow.Instance.ChatScroller.ScrollToBottom();
+            }));
         }
 
         /**
@@ -149,6 +157,7 @@ namespace Client
                     GameWindow.Instance.GameLogger.Text += "[" + DateTime.Now.ToShortTimeString().ToString() + "] " +
                                                            GameInfos.Instance.GetClientUserById(userId).Username +
                                                            " is now announcing";
+                    GameWindow.Instance.GameLoggerScroller.ScrollToBottom();
                     GameWindow.Instance.DrawCanvas();
                 }));
             }
@@ -194,6 +203,7 @@ namespace Client
                     GameWindow.Instance.GameLogger.Text += "[" + DateTime.Now.ToShortTimeString().ToString() + "] " +
                                                            GameInfos.Instance.GetClientUserById(userId).Username +
                                                            " is now playing";
+                    GameWindow.Instance.GameLoggerScroller.ScrollToBottom();
                     GameWindow.Instance.DrawCanvas();
                 }));
             }
@@ -242,6 +252,7 @@ namespace Client
                                                            GameInfos.Instance.GetClientUserById(contract.id).Username +
                                                            " passed";
                 }
+                GameWindow.Instance.GameLoggerScroller.ScrollToBottom();
             }));
         }
 
@@ -260,6 +271,7 @@ namespace Client
                     GameWindow.Instance.GameLogger.Text += "\n\n";
                 GameWindow.Instance.GameLogger.Text += "[" + DateTime.Now.ToShortTimeString().ToString() + "] " +
                                                        card.StringValue + " " + card.StringColour + " was played";
+                GameWindow.Instance.GameLoggerScroller.ScrollToBottom();
             }));
         }
 
@@ -315,6 +327,7 @@ namespace Client
                 GameWindow.Instance.GameLogger.Text += "[" + DateTime.Now.ToShortTimeString().ToString() + "] " +
                                                        GameInfos.Instance.GetClientUserById(userId).Username +
                                                        " disconnected";
+                GameWindow.Instance.GameLoggerScroller.ScrollToBottom();
             }));
         }
 
@@ -331,6 +344,7 @@ namespace Client
                 if (GameWindow.Instance.GameLogger.Text != "")
                     GameWindow.Instance.GameLogger.Text += "\n\n";
                 GameWindow.Instance.GameLogger.Text += "[" + DateTime.Now.ToShortTimeString().ToString() + "] " + "Player " + message.Split('|')[0] + " renamed " + message.Split('|')[1] + " to " + message.Split('|')[2];
+                GameWindow.Instance.GameLoggerScroller.ScrollToBottom();
             }));
         }
 
@@ -378,6 +392,7 @@ namespace Client
                 GameWindow.Instance.GameLogger.Text += "[" + DateTime.Now.ToShortTimeString().ToString() + "] " +
                                                        GameInfos.Instance.GetClientUserById(int.Parse(args[0])).Username +
                                                        " has a score of " + args[1];
+                GameWindow.Instance.GameLoggerScroller.ScrollToBottom();
                 GameWindow.Instance.DrawCanvas();
             }));
         }
