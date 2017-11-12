@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Client"
         mc:Ignorable="d"
         Title="Coinche" Height="620" Width="1258"
-        ResizeMode="NoResize" Closing="Window_Closing">
+        ResizeMode="NoResize" Closing="Window_Closing" KeyDown="Window_KeyDown">
 
     <Grid Background="#FF323232">
         <Grid.ColumnDefinitions>

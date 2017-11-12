@@ -1,10 +1,12 @@
-﻿/**
- *  @file ServerLobby
- *  @author Marc-Anroine Leconte
- *
- * This file contain the EntryPoint of the server.
- */
+﻿
 
+using System;
+/**
+*  @file ServerLobby
+*  @author Marc-Anroine Leconte
+*
+* This file contain the EntryPoint of the server.
+*/
 namespace Server
 {
     /**
@@ -19,11 +21,9 @@ namespace Server
         {
             Server.Instance.debug = true;
             Server.Instance.Open();
-
+            Console.WriteLine("Press any key to stop the server..");
             while (true)
-            {
                 Server.Instance.Run();
-            }
             Server.Instance.Close();
         }
     }
