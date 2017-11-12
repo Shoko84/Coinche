@@ -54,7 +54,7 @@ namespace Client
             BitmapImage bmp = new BitmapImage(uri);
 
             img.Source = bmp;
-            img.Width = bmp.Width * 3.27f + 1;
+            img.Width = bmp.Width * 3.26f + 1;
             img.Height = bmp.Height * 3.27f;
             img.Stretch = Stretch.Fill;
             Canvas.SetLeft(img, 0);
