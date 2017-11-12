@@ -1,0 +1,125 @@
+\hypertarget{class_server_1_1_profile}{}\section{Server.\+Profile Class Reference}
+\label{class_server_1_1_profile}\index{Server.\+Profile@{Server.\+Profile}}
+
+
+Collaboration diagram for Server.\+Profile\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_server_1_1_profile_a1c8c2f5f1d1acf3e6303ff330cf7058d}{Profile} (string name, int \+\_\+id, string \+\_\+ip, int \+\_\+port)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string \hyperlink{class_server_1_1_profile_a5164872783fd0c6966cb4adfd4bd8aa8}{owner}
+\item 
+int \hyperlink{class_server_1_1_profile_a7c33482aae15048d64f918ea55be1594}{id}
+\item 
+string \hyperlink{class_server_1_1_profile_a29c991a350d7230881419bf71a374ee3}{ip}
+\item 
+int \hyperlink{class_server_1_1_profile_a874fcf418204b40c14a66169e7651ef3}{port}
+\item 
+\hyperlink{class_game_1_1_deck}{Deck} \hyperlink{class_server_1_1_profile_a21c96a3449f0b52e4a3f06741f369788}{deck}
+\item 
+\hyperlink{_player_manager_8cs_ad4fb168881776778ff2e0f659212a0da}{P\+L\+A\+Y\+E\+R\+\_\+\+S\+T\+A\+T\+US} \hyperlink{class_server_1_1_profile_ab4e81f19ca7f09df48bbf54bf3cd37ed}{status}
+\item 
+\hyperlink{class_game_1_1_contract}{Contract} \hyperlink{class_server_1_1_profile_a10830f7350f39c402412482075b32bca}{contract}
+\item 
+\hyperlink{class_game_1_1_deck}{Deck} \hyperlink{class_server_1_1_profile_a6ea89928248a56c2d602e736aa00af00}{win}
+\item 
+bool \hyperlink{class_server_1_1_profile_a4c774c7861a97447f29e51cc58d79df2}{ready}
+\item 
+int \hyperlink{class_server_1_1_profile_a5cec9a20a8b2479e5a74cf802d53d21e}{points}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class define a player. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_server_1_1_profile_a1c8c2f5f1d1acf3e6303ff330cf7058d}\label{class_server_1_1_profile_a1c8c2f5f1d1acf3e6303ff330cf7058d}} 
+\index{Server\+::\+Profile@{Server\+::\+Profile}!Profile@{Profile}}
+\index{Profile@{Profile}!Server\+::\+Profile@{Server\+::\+Profile}}
+\subsubsection{\texorpdfstring{Profile()}{Profile()}}
+{\footnotesize\ttfamily Server.\+Profile.\+Profile (\begin{DoxyParamCaption}\item[{string}]{name,  }\item[{int}]{\+\_\+id,  }\item[{string}]{\+\_\+ip,  }\item[{int}]{\+\_\+port }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor. 
+\begin{DoxyParams}{Parameters}
+{\em name} & The name of the player. \\
+\hline
+{\em \+\_\+id} & The id of the player. \\
+\hline
+{\em \+\_\+ip} & The ip of the player. \\
+\hline
+{\em \+\_\+port} & The port of the player. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_server_1_1_profile_a10830f7350f39c402412482075b32bca}\label{class_server_1_1_profile_a10830f7350f39c402412482075b32bca}} 
+\index{Server\+::\+Profile@{Server\+::\+Profile}!contract@{contract}}
+\index{contract@{contract}!Server\+::\+Profile@{Server\+::\+Profile}}
+\subsubsection{\texorpdfstring{contract}{contract}}
+{\footnotesize\ttfamily \hyperlink{class_game_1_1_contract}{Contract} Server.\+Profile.\+contract}
+
+The contract of the player. \mbox{\Hypertarget{class_server_1_1_profile_a21c96a3449f0b52e4a3f06741f369788}\label{class_server_1_1_profile_a21c96a3449f0b52e4a3f06741f369788}} 
+\index{Server\+::\+Profile@{Server\+::\+Profile}!deck@{deck}}
+\index{deck@{deck}!Server\+::\+Profile@{Server\+::\+Profile}}
+\subsubsection{\texorpdfstring{deck}{deck}}
+{\footnotesize\ttfamily \hyperlink{class_game_1_1_deck}{Deck} Server.\+Profile.\+deck}
+
+The deck of the player. \mbox{\Hypertarget{class_server_1_1_profile_a7c33482aae15048d64f918ea55be1594}\label{class_server_1_1_profile_a7c33482aae15048d64f918ea55be1594}} 
+\index{Server\+::\+Profile@{Server\+::\+Profile}!id@{id}}
+\index{id@{id}!Server\+::\+Profile@{Server\+::\+Profile}}
+\subsubsection{\texorpdfstring{id}{id}}
+{\footnotesize\ttfamily int Server.\+Profile.\+id}
+
+The id of the player (define the turn order). \mbox{\Hypertarget{class_server_1_1_profile_a29c991a350d7230881419bf71a374ee3}\label{class_server_1_1_profile_a29c991a350d7230881419bf71a374ee3}} 
+\index{Server\+::\+Profile@{Server\+::\+Profile}!ip@{ip}}
+\index{ip@{ip}!Server\+::\+Profile@{Server\+::\+Profile}}
+\subsubsection{\texorpdfstring{ip}{ip}}
+{\footnotesize\ttfamily string Server.\+Profile.\+ip}
+
+The ip of the player. \mbox{\Hypertarget{class_server_1_1_profile_a5164872783fd0c6966cb4adfd4bd8aa8}\label{class_server_1_1_profile_a5164872783fd0c6966cb4adfd4bd8aa8}} 
+\index{Server\+::\+Profile@{Server\+::\+Profile}!owner@{owner}}
+\index{owner@{owner}!Server\+::\+Profile@{Server\+::\+Profile}}
+\subsubsection{\texorpdfstring{owner}{owner}}
+{\footnotesize\ttfamily string Server.\+Profile.\+owner}
+
+The user name. \mbox{\Hypertarget{class_server_1_1_profile_a5cec9a20a8b2479e5a74cf802d53d21e}\label{class_server_1_1_profile_a5cec9a20a8b2479e5a74cf802d53d21e}} 
+\index{Server\+::\+Profile@{Server\+::\+Profile}!points@{points}}
+\index{points@{points}!Server\+::\+Profile@{Server\+::\+Profile}}
+\subsubsection{\texorpdfstring{points}{points}}
+{\footnotesize\ttfamily int Server.\+Profile.\+points}
+
+All the added points gain in the game. \mbox{\Hypertarget{class_server_1_1_profile_a874fcf418204b40c14a66169e7651ef3}\label{class_server_1_1_profile_a874fcf418204b40c14a66169e7651ef3}} 
+\index{Server\+::\+Profile@{Server\+::\+Profile}!port@{port}}
+\index{port@{port}!Server\+::\+Profile@{Server\+::\+Profile}}
+\subsubsection{\texorpdfstring{port}{port}}
+{\footnotesize\ttfamily int Server.\+Profile.\+port}
+
+The port of the player. \mbox{\Hypertarget{class_server_1_1_profile_a4c774c7861a97447f29e51cc58d79df2}\label{class_server_1_1_profile_a4c774c7861a97447f29e51cc58d79df2}} 
+\index{Server\+::\+Profile@{Server\+::\+Profile}!ready@{ready}}
+\index{ready@{ready}!Server\+::\+Profile@{Server\+::\+Profile}}
+\subsubsection{\texorpdfstring{ready}{ready}}
+{\footnotesize\ttfamily bool Server.\+Profile.\+ready}
+
+A boolean describing if the client is ready to get info from the serv. \mbox{\Hypertarget{class_server_1_1_profile_ab4e81f19ca7f09df48bbf54bf3cd37ed}\label{class_server_1_1_profile_ab4e81f19ca7f09df48bbf54bf3cd37ed}} 
+\index{Server\+::\+Profile@{Server\+::\+Profile}!status@{status}}
+\index{status@{status}!Server\+::\+Profile@{Server\+::\+Profile}}
+\subsubsection{\texorpdfstring{status}{status}}
+{\footnotesize\ttfamily \hyperlink{_player_manager_8cs_ad4fb168881776778ff2e0f659212a0da}{P\+L\+A\+Y\+E\+R\+\_\+\+S\+T\+A\+T\+US} Server.\+Profile.\+status}
+
+The status of the player. \mbox{\Hypertarget{class_server_1_1_profile_a6ea89928248a56c2d602e736aa00af00}\label{class_server_1_1_profile_a6ea89928248a56c2d602e736aa00af00}} 
+\index{Server\+::\+Profile@{Server\+::\+Profile}!win@{win}}
+\index{win@{win}!Server\+::\+Profile@{Server\+::\+Profile}}
+\subsubsection{\texorpdfstring{win}{win}}
+{\footnotesize\ttfamily \hyperlink{class_game_1_1_deck}{Deck} Server.\+Profile.\+win}
+
+The deck containing all the cards the player won. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Server/src/\+Module/\hyperlink{_player_manager_8cs}{Player\+Manager.\+cs}\end{DoxyCompactItemize}

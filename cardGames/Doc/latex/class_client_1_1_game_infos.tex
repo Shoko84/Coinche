@@ -1,0 +1,182 @@
+\hypertarget{class_client_1_1_game_infos}{}\section{Client.\+Game\+Infos Class Reference}
+\label{class_client_1_1_game_infos}\index{Client.\+Game\+Infos@{Client.\+Game\+Infos}}
+
+
+Collaboration diagram for Client.\+Game\+Infos\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_client_1_1_client_user}{Client\+User} \hyperlink{class_client_1_1_game_infos_a2dbb92b8c2238fd07e326ffd31b3fd1e}{Get\+Client\+User\+By\+Id} (int id)
+\item 
+\hyperlink{class_client_1_1_client_user_a346cb93cba9cd67a4de7410a02828cc7}{Client\+User.\+Client\+Position} \hyperlink{class_client_1_1_game_infos_aaa76a248bde67bb6bd73e36b9b57615f}{Get\+Pos\+From\+Id} (int my\+Id, int id)
+\item 
+bool \hyperlink{class_client_1_1_game_infos_adea137b31b6477e2c64a083e8eab6fac}{Add\+Player} (int id, string player\+Name, bool is\+Myself)
+\item 
+void \hyperlink{class_client_1_1_game_infos_a2b9f1fda5fe14c3f6509a0fcd640577a}{Restart\+Game\+Infos} ()
+\item 
+\hyperlink{class_client_1_1_game_infos_afc867ab95ff782307639ead71b2b109a}{Game\+Infos} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_game_1_1_deck}{Deck} \hyperlink{class_client_1_1_game_infos_a00af5f50e9e390863429f7d92f6773f6}{Cards\+Played}
+\item 
+int \hyperlink{class_client_1_1_game_infos_a2c299a5f0e89e0e7488aa5e29734563b}{My\+Id}
+\item 
+\hyperlink{namespace_server_a2b496a25969b5c46d373f7079fac645f}{G\+A\+M\+E\+\_\+\+S\+T\+A\+T\+US} \hyperlink{class_client_1_1_game_infos_a0575b18e5cac61c7f5c23d1aec491f7f}{Game\+Status}
+\item 
+\hyperlink{class_game_1_1_contract}{Contract} \hyperlink{class_client_1_1_game_infos_a2a529958f54314f5cda3688858bf3f26}{Contract\+Picked}
+\item 
+\hyperlink{class_game_1_1_pile}{Pile} \hyperlink{class_client_1_1_game_infos_a59c87f768e5324e97379e687c2570bf5}{Last\+Pile}
+\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_client_1_1_game_infos}{Game\+Infos} \hyperlink{class_client_1_1_game_infos_a09359e8cbd7142ba3b493250a06132a6}{Instance}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\item 
+\hyperlink{class_client_1_1_network_manager}{Network\+Manager} \hyperlink{class_client_1_1_game_infos_a43ff6022f351a13ccdf8bf7c4abdf922}{Net\+Manager}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\item 
+\hyperlink{class_client_1_1_event_manager}{Event\+Manager} \hyperlink{class_client_1_1_game_infos_ac6fb690cf0d16adee7f7354e2f0248bb}{Event\+Manager}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\item 
+List$<$ \hyperlink{class_client_1_1_client_user}{Client\+User} $>$ \hyperlink{class_client_1_1_game_infos_a0fa9e2a98ced445c3c1ba6068cdcb995}{Users\+List}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_client_1_1_game_infos_afc867ab95ff782307639ead71b2b109a}\label{class_client_1_1_game_infos_afc867ab95ff782307639ead71b2b109a}} 
+\index{Client\+::\+Game\+Infos@{Client\+::\+Game\+Infos}!Game\+Infos@{Game\+Infos}}
+\index{Game\+Infos@{Game\+Infos}!Client\+::\+Game\+Infos@{Client\+::\+Game\+Infos}}
+\subsubsection{\texorpdfstring{Game\+Infos()}{GameInfos()}}
+{\footnotesize\ttfamily Client.\+Game\+Infos.\+Game\+Infos (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\hyperlink{class_client_1_1_game_infos}{Game\+Infos}\textquotesingle{}s constructor -\/ Create an \hyperlink{class_client_1_1_game_infos}{Game\+Infos} instance 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_client_1_1_game_infos_adea137b31b6477e2c64a083e8eab6fac}\label{class_client_1_1_game_infos_adea137b31b6477e2c64a083e8eab6fac}} 
+\index{Client\+::\+Game\+Infos@{Client\+::\+Game\+Infos}!Add\+Player@{Add\+Player}}
+\index{Add\+Player@{Add\+Player}!Client\+::\+Game\+Infos@{Client\+::\+Game\+Infos}}
+\subsubsection{\texorpdfstring{Add\+Player()}{AddPlayer()}}
+{\footnotesize\ttfamily bool Client.\+Game\+Infos.\+Add\+Player (\begin{DoxyParamCaption}\item[{int}]{id,  }\item[{string}]{player\+Name,  }\item[{bool}]{is\+Myself }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+This function add a player into the game userlist 
+\begin{DoxyParams}{Parameters}
+{\em id} & The user\textquotesingle{}s id to be added \\
+\hline
+{\em player\+Name} & The user\textquotesingle{}s name to be added \\
+\hline
+{\em is\+Myself} & Is the current player or not \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A boolean if the player as been added or not 
+\end{DoxyReturn}
+Here is the caller graph for this function\+:
+% FIG 1
+\mbox{\Hypertarget{class_client_1_1_game_infos_a2dbb92b8c2238fd07e326ffd31b3fd1e}\label{class_client_1_1_game_infos_a2dbb92b8c2238fd07e326ffd31b3fd1e}} 
+\index{Client\+::\+Game\+Infos@{Client\+::\+Game\+Infos}!Get\+Client\+User\+By\+Id@{Get\+Client\+User\+By\+Id}}
+\index{Get\+Client\+User\+By\+Id@{Get\+Client\+User\+By\+Id}!Client\+::\+Game\+Infos@{Client\+::\+Game\+Infos}}
+\subsubsection{\texorpdfstring{Get\+Client\+User\+By\+Id()}{GetClientUserById()}}
+{\footnotesize\ttfamily \hyperlink{class_client_1_1_client_user}{Client\+User} Client.\+Game\+Infos.\+Get\+Client\+User\+By\+Id (\begin{DoxyParamCaption}\item[{int}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+This function returns the Client\+Data by its id 
+\begin{DoxyParams}{Parameters}
+{\em id} & The user\textquotesingle{}s id data to be found. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The Client\+Data that contains the user\textquotesingle{}s id \mbox{[}id\mbox{]} 
+\end{DoxyReturn}
+Here is the caller graph for this function\+:
+% FIG 2
+\mbox{\Hypertarget{class_client_1_1_game_infos_aaa76a248bde67bb6bd73e36b9b57615f}\label{class_client_1_1_game_infos_aaa76a248bde67bb6bd73e36b9b57615f}} 
+\index{Client\+::\+Game\+Infos@{Client\+::\+Game\+Infos}!Get\+Pos\+From\+Id@{Get\+Pos\+From\+Id}}
+\index{Get\+Pos\+From\+Id@{Get\+Pos\+From\+Id}!Client\+::\+Game\+Infos@{Client\+::\+Game\+Infos}}
+\subsubsection{\texorpdfstring{Get\+Pos\+From\+Id()}{GetPosFromId()}}
+{\footnotesize\ttfamily \hyperlink{class_client_1_1_client_user_a346cb93cba9cd67a4de7410a02828cc7}{Client\+User.\+Client\+Position} Client.\+Game\+Infos.\+Get\+Pos\+From\+Id (\begin{DoxyParamCaption}\item[{int}]{my\+Id,  }\item[{int}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+This function returns the Client\+Position of an id compared to another one 
+\begin{DoxyParams}{Parameters}
+{\em my\+Id} & Mostly the current user id. \\
+\hline
+{\em id} & The user\textquotesingle{}s id data to be found. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The Client\+Data that contains the user\textquotesingle{}s id \mbox{[}id\mbox{]} 
+\end{DoxyReturn}
+Here is the caller graph for this function\+:
+% FIG 3
+\mbox{\Hypertarget{class_client_1_1_game_infos_a2b9f1fda5fe14c3f6509a0fcd640577a}\label{class_client_1_1_game_infos_a2b9f1fda5fe14c3f6509a0fcd640577a}} 
+\index{Client\+::\+Game\+Infos@{Client\+::\+Game\+Infos}!Restart\+Game\+Infos@{Restart\+Game\+Infos}}
+\index{Restart\+Game\+Infos@{Restart\+Game\+Infos}!Client\+::\+Game\+Infos@{Client\+::\+Game\+Infos}}
+\subsubsection{\texorpdfstring{Restart\+Game\+Infos()}{RestartGameInfos()}}
+{\footnotesize\ttfamily void Client.\+Game\+Infos.\+Restart\+Game\+Infos (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+This function clear all game infos Here is the caller graph for this function\+:
+% FIG 4
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_client_1_1_game_infos_a00af5f50e9e390863429f7d92f6773f6}\label{class_client_1_1_game_infos_a00af5f50e9e390863429f7d92f6773f6}} 
+\index{Client\+::\+Game\+Infos@{Client\+::\+Game\+Infos}!Cards\+Played@{Cards\+Played}}
+\index{Cards\+Played@{Cards\+Played}!Client\+::\+Game\+Infos@{Client\+::\+Game\+Infos}}
+\subsubsection{\texorpdfstring{Cards\+Played}{CardsPlayed}}
+{\footnotesize\ttfamily \hyperlink{class_game_1_1_deck}{Deck} Client.\+Game\+Infos.\+Cards\+Played}
+
+This Deck class contains the current pile (in the center of the board) \mbox{\Hypertarget{class_client_1_1_game_infos_a2a529958f54314f5cda3688858bf3f26}\label{class_client_1_1_game_infos_a2a529958f54314f5cda3688858bf3f26}} 
+\index{Client\+::\+Game\+Infos@{Client\+::\+Game\+Infos}!Contract\+Picked@{Contract\+Picked}}
+\index{Contract\+Picked@{Contract\+Picked}!Client\+::\+Game\+Infos@{Client\+::\+Game\+Infos}}
+\subsubsection{\texorpdfstring{Contract\+Picked}{ContractPicked}}
+{\footnotesize\ttfamily \hyperlink{class_game_1_1_contract}{Contract} Client.\+Game\+Infos.\+Contract\+Picked}
+
+$<$ This List contains all users displayed ingame \mbox{\Hypertarget{class_client_1_1_game_infos_a0575b18e5cac61c7f5c23d1aec491f7f}\label{class_client_1_1_game_infos_a0575b18e5cac61c7f5c23d1aec491f7f}} 
+\index{Client\+::\+Game\+Infos@{Client\+::\+Game\+Infos}!Game\+Status@{Game\+Status}}
+\index{Game\+Status@{Game\+Status}!Client\+::\+Game\+Infos@{Client\+::\+Game\+Infos}}
+\subsubsection{\texorpdfstring{Game\+Status}{GameStatus}}
+{\footnotesize\ttfamily \hyperlink{namespace_server_a2b496a25969b5c46d373f7079fac645f}{G\+A\+M\+E\+\_\+\+S\+T\+A\+T\+US} Client.\+Game\+Infos.\+Game\+Status}
+
+$<$ This enum corresponds to the current game status \mbox{\Hypertarget{class_client_1_1_game_infos_a59c87f768e5324e97379e687c2570bf5}\label{class_client_1_1_game_infos_a59c87f768e5324e97379e687c2570bf5}} 
+\index{Client\+::\+Game\+Infos@{Client\+::\+Game\+Infos}!Last\+Pile@{Last\+Pile}}
+\index{Last\+Pile@{Last\+Pile}!Client\+::\+Game\+Infos@{Client\+::\+Game\+Infos}}
+\subsubsection{\texorpdfstring{Last\+Pile}{LastPile}}
+{\footnotesize\ttfamily \hyperlink{class_game_1_1_pile}{Pile} Client.\+Game\+Infos.\+Last\+Pile}
+
+This Pile class contains the last Pile \mbox{\Hypertarget{class_client_1_1_game_infos_a2c299a5f0e89e0e7488aa5e29734563b}\label{class_client_1_1_game_infos_a2c299a5f0e89e0e7488aa5e29734563b}} 
+\index{Client\+::\+Game\+Infos@{Client\+::\+Game\+Infos}!My\+Id@{My\+Id}}
+\index{My\+Id@{My\+Id}!Client\+::\+Game\+Infos@{Client\+::\+Game\+Infos}}
+\subsubsection{\texorpdfstring{My\+Id}{MyId}}
+{\footnotesize\ttfamily int Client.\+Game\+Infos.\+My\+Id}
+
+$<$ This int corresponds to the current player id 
+
+\subsection{Property Documentation}
+\mbox{\Hypertarget{class_client_1_1_game_infos_ac6fb690cf0d16adee7f7354e2f0248bb}\label{class_client_1_1_game_infos_ac6fb690cf0d16adee7f7354e2f0248bb}} 
+\index{Client\+::\+Game\+Infos@{Client\+::\+Game\+Infos}!Event\+Manager@{Event\+Manager}}
+\index{Event\+Manager@{Event\+Manager}!Client\+::\+Game\+Infos@{Client\+::\+Game\+Infos}}
+\subsubsection{\texorpdfstring{Event\+Manager}{EventManager}}
+{\footnotesize\ttfamily \hyperlink{class_client_1_1_event_manager}{Event\+Manager} Client.\+Game\+Infos.\+Event\+Manager\hspace{0.3cm}{\ttfamily [get]}}
+
+Getter of the \hyperlink{class_client_1_1_event_manager}{Event\+Manager} instance \mbox{\Hypertarget{class_client_1_1_game_infos_a09359e8cbd7142ba3b493250a06132a6}\label{class_client_1_1_game_infos_a09359e8cbd7142ba3b493250a06132a6}} 
+\index{Client\+::\+Game\+Infos@{Client\+::\+Game\+Infos}!Instance@{Instance}}
+\index{Instance@{Instance}!Client\+::\+Game\+Infos@{Client\+::\+Game\+Infos}}
+\subsubsection{\texorpdfstring{Instance}{Instance}}
+{\footnotesize\ttfamily \hyperlink{class_client_1_1_game_infos}{Game\+Infos} Client.\+Game\+Infos.\+Instance\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [get]}}
+
+Getter of the \hyperlink{class_client_1_1_game_infos}{Game\+Infos} instance \mbox{\Hypertarget{class_client_1_1_game_infos_a43ff6022f351a13ccdf8bf7c4abdf922}\label{class_client_1_1_game_infos_a43ff6022f351a13ccdf8bf7c4abdf922}} 
+\index{Client\+::\+Game\+Infos@{Client\+::\+Game\+Infos}!Net\+Manager@{Net\+Manager}}
+\index{Net\+Manager@{Net\+Manager}!Client\+::\+Game\+Infos@{Client\+::\+Game\+Infos}}
+\subsubsection{\texorpdfstring{Net\+Manager}{NetManager}}
+{\footnotesize\ttfamily \hyperlink{class_client_1_1_network_manager}{Network\+Manager} Client.\+Game\+Infos.\+Net\+Manager\hspace{0.3cm}{\ttfamily [get]}}
+
+Getter of the \hyperlink{class_client_1_1_network_manager}{Network\+Manager} instance \mbox{\Hypertarget{class_client_1_1_game_infos_a0fa9e2a98ced445c3c1ba6068cdcb995}\label{class_client_1_1_game_infos_a0fa9e2a98ced445c3c1ba6068cdcb995}} 
+\index{Client\+::\+Game\+Infos@{Client\+::\+Game\+Infos}!Users\+List@{Users\+List}}
+\index{Users\+List@{Users\+List}!Client\+::\+Game\+Infos@{Client\+::\+Game\+Infos}}
+\subsubsection{\texorpdfstring{Users\+List}{UsersList}}
+{\footnotesize\ttfamily List$<$\hyperlink{class_client_1_1_client_user}{Client\+User}$>$ Client.\+Game\+Infos.\+Users\+List\hspace{0.3cm}{\ttfamily [get]}}
+
+Getter of the \hyperlink{namespace_game}{Game} users list 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Client/\hyperlink{_game_infos_8cs}{Game\+Infos.\+cs}\end{DoxyCompactItemize}

@@ -1,0 +1,298 @@
+\hypertarget{class_game_1_1_deck}{}\section{Game.\+Deck Class Reference}
+\label{class_game_1_1_deck}\index{Game.\+Deck@{Game.\+Deck}}
+
+
+Collaboration diagram for Game.\+Deck\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_game_1_1_deck_a977147d53a1be6b09363e38488937c14}{Deck} ()
+\item 
+void \hyperlink{class_game_1_1_deck_a905f11ad54ca87390a643a9b78e90e3b}{Add\+Card} (\hyperlink{class_game_1_1_card}{Card} new\+Card)
+\item 
+void \hyperlink{class_game_1_1_deck_a0e9186cc809c646aa1ef5ad38f684b91}{Add\+Card} (Card\+Colour color, Card\+Value value, Card\+Position position)
+\item 
+void \hyperlink{class_game_1_1_deck_ad860d1e5b25771143334ac5abf6a82ab}{Remove\+Card} (\hyperlink{class_game_1_1_card}{Card} card)
+\item 
+void \hyperlink{class_game_1_1_deck_a025b050df3a0ed5018739552b0a84c24}{Remove\+Card} (Card\+Colour colour, Card\+Value value, Card\+Position position)
+\item 
+\hyperlink{class_game_1_1_card}{Card} \hyperlink{class_game_1_1_deck_ae871b4e89aa2cb118bf33afd885a3e4c}{Find} (\hyperlink{class_game_1_1_card}{Card} card)
+\item 
+bool \hyperlink{class_game_1_1_deck_afa33057f343a0c812d061c7b30895727}{Exist\+Colour} (Card\+Colour color)
+\item 
+\hyperlink{class_game_1_1_card}{Card} \hyperlink{class_game_1_1_deck_a7178873941924addbde9c150bb253c5b}{Get\+Random\+Card} ()
+\item 
+void \hyperlink{class_game_1_1_deck_a62bbbd7a4de1775ff7fe3c30e9a70ea7}{Clear} ()
+\item 
+void \hyperlink{class_game_1_1_deck_a613f5cafa2c403afc6b91247ded472f4}{Dump} ()
+\item 
+bool \hyperlink{class_game_1_1_deck_ac66b46d86ce2f0db905bd2c195fc36f5}{Exist\+Higher} (\hyperlink{class_game_1_1_card}{Card} card, \hyperlink{namespace_game_ae93b4df2175d9820e5d19dc1ab708e7e}{C\+O\+N\+T\+R\+A\+C\+T\+\_\+\+T\+Y\+PE} trump)
+\item 
+Card\+Value \hyperlink{class_game_1_1_deck_a7c461ece0d32eccaaa1c3047a24a214e}{Get\+Higher} (\hyperlink{class_game_1_1_card}{Card} card, \hyperlink{namespace_game_ae93b4df2175d9820e5d19dc1ab708e7e}{C\+O\+N\+T\+R\+A\+C\+T\+\_\+\+T\+Y\+PE} trump)
+\item 
+int \hyperlink{class_game_1_1_deck_a2a63e65747fc5d221b841be0243cc8e0}{Calcul\+Point} (\hyperlink{class_game_1_1_contract}{Contract} contract)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{[}$\,$\mbox{]} \hyperlink{class_game_1_1_deck_a65e61cbf0d765d09c6d0742792ec0d82}{card\+Value}
+\item 
+int \mbox{[}$\,$\mbox{]} \hyperlink{class_game_1_1_deck_a1250678654804b3aa2b272336467d739}{card\+Point}
+\item 
+int \mbox{[}$\,$\mbox{]} \hyperlink{class_game_1_1_deck_a1f9866a01494d663c631d26f5bb8aa59}{trump\+Value}
+\item 
+int \mbox{[}$\,$\mbox{]} \hyperlink{class_game_1_1_deck_a88e31656c1599ddbe6bfb62b2ca34442}{trump\+Point}
+\item 
+List$<$ \hyperlink{class_game_1_1_card}{Card} $>$ \hyperlink{class_game_1_1_deck_ab0baedb618b1ef893fa4ae9ce063748e}{cards}
+\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{class_game_1_1_deck_a9b8b9e6382eba67dfd83e41134c5a601}{Count}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class is a list a cards. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_game_1_1_deck_a977147d53a1be6b09363e38488937c14}\label{class_game_1_1_deck_a977147d53a1be6b09363e38488937c14}} 
+\index{Game\+::\+Deck@{Game\+::\+Deck}!Deck@{Deck}}
+\index{Deck@{Deck}!Game\+::\+Deck@{Game\+::\+Deck}}
+\subsubsection{\texorpdfstring{Deck()}{Deck()}}
+{\footnotesize\ttfamily Game.\+Deck.\+Deck (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_game_1_1_deck_a905f11ad54ca87390a643a9b78e90e3b}\label{class_game_1_1_deck_a905f11ad54ca87390a643a9b78e90e3b}} 
+\index{Game\+::\+Deck@{Game\+::\+Deck}!Add\+Card@{Add\+Card}}
+\index{Add\+Card@{Add\+Card}!Game\+::\+Deck@{Game\+::\+Deck}}
+\subsubsection{\texorpdfstring{Add\+Card()}{AddCard()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Game.\+Deck.\+Add\+Card (\begin{DoxyParamCaption}\item[{\hyperlink{class_game_1_1_card}{Card}}]{new\+Card }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Add a card in the deck from a copy of an other card. 
+\begin{DoxyParams}{Parameters}
+{\em new\+Card} & The card to add in the deck. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function\+:
+% FIG 1
+\mbox{\Hypertarget{class_game_1_1_deck_a0e9186cc809c646aa1ef5ad38f684b91}\label{class_game_1_1_deck_a0e9186cc809c646aa1ef5ad38f684b91}} 
+\index{Game\+::\+Deck@{Game\+::\+Deck}!Add\+Card@{Add\+Card}}
+\index{Add\+Card@{Add\+Card}!Game\+::\+Deck@{Game\+::\+Deck}}
+\subsubsection{\texorpdfstring{Add\+Card()}{AddCard()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Game.\+Deck.\+Add\+Card (\begin{DoxyParamCaption}\item[{Card\+Colour}]{color,  }\item[{Card\+Value}]{value,  }\item[{Card\+Position}]{position }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Add a card in the deck. 
+\begin{DoxyParams}{Parameters}
+{\em color} & The color of the new card. \\
+\hline
+{\em value} & The value of the new card. \\
+\hline
+{\em position} & The position of the new card. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_game_1_1_deck_a2a63e65747fc5d221b841be0243cc8e0}\label{class_game_1_1_deck_a2a63e65747fc5d221b841be0243cc8e0}} 
+\index{Game\+::\+Deck@{Game\+::\+Deck}!Calcul\+Point@{Calcul\+Point}}
+\index{Calcul\+Point@{Calcul\+Point}!Game\+::\+Deck@{Game\+::\+Deck}}
+\subsubsection{\texorpdfstring{Calcul\+Point()}{CalculPoint()}}
+{\footnotesize\ttfamily int Game.\+Deck.\+Calcul\+Point (\begin{DoxyParamCaption}\item[{\hyperlink{class_game_1_1_contract}{Contract}}]{contract }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Get the total score of the game. 
+\begin{DoxyParams}{Parameters}
+{\em contract} & The current contract. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Return the score of the deck. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_game_1_1_deck_a62bbbd7a4de1775ff7fe3c30e9a70ea7}\label{class_game_1_1_deck_a62bbbd7a4de1775ff7fe3c30e9a70ea7}} 
+\index{Game\+::\+Deck@{Game\+::\+Deck}!Clear@{Clear}}
+\index{Clear@{Clear}!Game\+::\+Deck@{Game\+::\+Deck}}
+\subsubsection{\texorpdfstring{Clear()}{Clear()}}
+{\footnotesize\ttfamily void Game.\+Deck.\+Clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Clear all the cards in the deck. Here is the caller graph for this function\+:
+% FIG 2
+\mbox{\Hypertarget{class_game_1_1_deck_a613f5cafa2c403afc6b91247ded472f4}\label{class_game_1_1_deck_a613f5cafa2c403afc6b91247ded472f4}} 
+\index{Game\+::\+Deck@{Game\+::\+Deck}!Dump@{Dump}}
+\index{Dump@{Dump}!Game\+::\+Deck@{Game\+::\+Deck}}
+\subsubsection{\texorpdfstring{Dump()}{Dump()}}
+{\footnotesize\ttfamily void Game.\+Deck.\+Dump (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Print all the cards in the deck. \mbox{\Hypertarget{class_game_1_1_deck_afa33057f343a0c812d061c7b30895727}\label{class_game_1_1_deck_afa33057f343a0c812d061c7b30895727}} 
+\index{Game\+::\+Deck@{Game\+::\+Deck}!Exist\+Colour@{Exist\+Colour}}
+\index{Exist\+Colour@{Exist\+Colour}!Game\+::\+Deck@{Game\+::\+Deck}}
+\subsubsection{\texorpdfstring{Exist\+Colour()}{ExistColour()}}
+{\footnotesize\ttfamily bool Game.\+Deck.\+Exist\+Colour (\begin{DoxyParamCaption}\item[{Card\+Colour}]{color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Check if a card with the color exist in the deck. 
+\begin{DoxyParams}{Parameters}
+{\em color} & The color to find. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Return true if the color exist and false in the contrary 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_game_1_1_deck_ac66b46d86ce2f0db905bd2c195fc36f5}\label{class_game_1_1_deck_ac66b46d86ce2f0db905bd2c195fc36f5}} 
+\index{Game\+::\+Deck@{Game\+::\+Deck}!Exist\+Higher@{Exist\+Higher}}
+\index{Exist\+Higher@{Exist\+Higher}!Game\+::\+Deck@{Game\+::\+Deck}}
+\subsubsection{\texorpdfstring{Exist\+Higher()}{ExistHigher()}}
+{\footnotesize\ttfamily bool Game.\+Deck.\+Exist\+Higher (\begin{DoxyParamCaption}\item[{\hyperlink{class_game_1_1_card}{Card}}]{card,  }\item[{\hyperlink{namespace_game_ae93b4df2175d9820e5d19dc1ab708e7e}{C\+O\+N\+T\+R\+A\+C\+T\+\_\+\+T\+Y\+PE}}]{trump }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Check if a higher card exist. 
+\begin{DoxyParams}{Parameters}
+{\em card} & The card to compare. \\
+\hline
+{\em trump} & The current trump. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Return true if a greatest card in found and false in the contrary. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_game_1_1_deck_ae871b4e89aa2cb118bf33afd885a3e4c}\label{class_game_1_1_deck_ae871b4e89aa2cb118bf33afd885a3e4c}} 
+\index{Game\+::\+Deck@{Game\+::\+Deck}!Find@{Find}}
+\index{Find@{Find}!Game\+::\+Deck@{Game\+::\+Deck}}
+\subsubsection{\texorpdfstring{Find()}{Find()}}
+{\footnotesize\ttfamily \hyperlink{class_game_1_1_card}{Card} Game.\+Deck.\+Find (\begin{DoxyParamCaption}\item[{\hyperlink{class_game_1_1_card}{Card}}]{card }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Find a card in the deck and return it. 
+\begin{DoxyParams}{Parameters}
+{\em card} & The card. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The card found. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_game_1_1_deck_a7c461ece0d32eccaaa1c3047a24a214e}\label{class_game_1_1_deck_a7c461ece0d32eccaaa1c3047a24a214e}} 
+\index{Game\+::\+Deck@{Game\+::\+Deck}!Get\+Higher@{Get\+Higher}}
+\index{Get\+Higher@{Get\+Higher}!Game\+::\+Deck@{Game\+::\+Deck}}
+\subsubsection{\texorpdfstring{Get\+Higher()}{GetHigher()}}
+{\footnotesize\ttfamily Card\+Value Game.\+Deck.\+Get\+Higher (\begin{DoxyParamCaption}\item[{\hyperlink{class_game_1_1_card}{Card}}]{card,  }\item[{\hyperlink{namespace_game_ae93b4df2175d9820e5d19dc1ab708e7e}{C\+O\+N\+T\+R\+A\+C\+T\+\_\+\+T\+Y\+PE}}]{trump }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Return the higher card in the deck with the same color. 
+\begin{DoxyParams}{Parameters}
+{\em card} & The card permitting to compare the color \\
+\hline
+{\em trump} & The current trump. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Return the value of the higher card with the same color. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_game_1_1_deck_a7178873941924addbde9c150bb253c5b}\label{class_game_1_1_deck_a7178873941924addbde9c150bb253c5b}} 
+\index{Game\+::\+Deck@{Game\+::\+Deck}!Get\+Random\+Card@{Get\+Random\+Card}}
+\index{Get\+Random\+Card@{Get\+Random\+Card}!Game\+::\+Deck@{Game\+::\+Deck}}
+\subsubsection{\texorpdfstring{Get\+Random\+Card()}{GetRandomCard()}}
+{\footnotesize\ttfamily \hyperlink{class_game_1_1_card}{Card} Game.\+Deck.\+Get\+Random\+Card (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Pick a random card in the deck. \begin{DoxyReturn}{Returns}
+Return the card get randomly. 
+\end{DoxyReturn}
+Here is the caller graph for this function\+:
+% FIG 3
+\mbox{\Hypertarget{class_game_1_1_deck_ad860d1e5b25771143334ac5abf6a82ab}\label{class_game_1_1_deck_ad860d1e5b25771143334ac5abf6a82ab}} 
+\index{Game\+::\+Deck@{Game\+::\+Deck}!Remove\+Card@{Remove\+Card}}
+\index{Remove\+Card@{Remove\+Card}!Game\+::\+Deck@{Game\+::\+Deck}}
+\subsubsection{\texorpdfstring{Remove\+Card()}{RemoveCard()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Game.\+Deck.\+Remove\+Card (\begin{DoxyParamCaption}\item[{\hyperlink{class_game_1_1_card}{Card}}]{card }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Remove a card in the deck. 
+\begin{DoxyParams}{Parameters}
+{\em card} & The card to remove. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function\+:
+% FIG 4
+\mbox{\Hypertarget{class_game_1_1_deck_a025b050df3a0ed5018739552b0a84c24}\label{class_game_1_1_deck_a025b050df3a0ed5018739552b0a84c24}} 
+\index{Game\+::\+Deck@{Game\+::\+Deck}!Remove\+Card@{Remove\+Card}}
+\index{Remove\+Card@{Remove\+Card}!Game\+::\+Deck@{Game\+::\+Deck}}
+\subsubsection{\texorpdfstring{Remove\+Card()}{RemoveCard()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Game.\+Deck.\+Remove\+Card (\begin{DoxyParamCaption}\item[{Card\+Colour}]{colour,  }\item[{Card\+Value}]{value,  }\item[{Card\+Position}]{position }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Remove a card in the deck. 
+\begin{DoxyParams}{Parameters}
+{\em colour} & The color of the card to remove. \\
+\hline
+{\em value} & The value of the card to remove. \\
+\hline
+{\em position} & The position of the card to remove. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_game_1_1_deck_a1250678654804b3aa2b272336467d739}\label{class_game_1_1_deck_a1250678654804b3aa2b272336467d739}} 
+\index{Game\+::\+Deck@{Game\+::\+Deck}!card\+Point@{card\+Point}}
+\index{card\+Point@{card\+Point}!Game\+::\+Deck@{Game\+::\+Deck}}
+\subsubsection{\texorpdfstring{card\+Point}{cardPoint}}
+{\footnotesize\ttfamily int \mbox{[}$\,$\mbox{]} Game.\+Deck.\+card\+Point}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \textcolor{keyword}{new} \textcolor{keywordtype}{int}[]
+        \{
+            0, 11, 0, 0, 0, 0, 0, 0, 0, 0, 10, 2, 3, 4
+        \}
+\end{DoxyCode}
+A list representing the value in point of all the cards not trump. \mbox{\Hypertarget{class_game_1_1_deck_ab0baedb618b1ef893fa4ae9ce063748e}\label{class_game_1_1_deck_ab0baedb618b1ef893fa4ae9ce063748e}} 
+\index{Game\+::\+Deck@{Game\+::\+Deck}!cards@{cards}}
+\index{cards@{cards}!Game\+::\+Deck@{Game\+::\+Deck}}
+\subsubsection{\texorpdfstring{cards}{cards}}
+{\footnotesize\ttfamily List$<$\hyperlink{class_game_1_1_card}{Card}$>$ Game.\+Deck.\+cards}
+
+The list of all the cards. \mbox{\Hypertarget{class_game_1_1_deck_a65e61cbf0d765d09c6d0742792ec0d82}\label{class_game_1_1_deck_a65e61cbf0d765d09c6d0742792ec0d82}} 
+\index{Game\+::\+Deck@{Game\+::\+Deck}!card\+Value@{card\+Value}}
+\index{card\+Value@{card\+Value}!Game\+::\+Deck@{Game\+::\+Deck}}
+\subsubsection{\texorpdfstring{card\+Value}{cardValue}}
+{\footnotesize\ttfamily int \mbox{[}$\,$\mbox{]} Game.\+Deck.\+card\+Value}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \textcolor{keyword}{new} \textcolor{keywordtype}{int}[]
+        \{
+            0, 8, 0, 0, 0, 0, 0, 1, 2, 3, 7, 4, 5, 6
+        \}
+\end{DoxyCode}
+A list representing the value of all the cards not trump. \mbox{\Hypertarget{class_game_1_1_deck_a88e31656c1599ddbe6bfb62b2ca34442}\label{class_game_1_1_deck_a88e31656c1599ddbe6bfb62b2ca34442}} 
+\index{Game\+::\+Deck@{Game\+::\+Deck}!trump\+Point@{trump\+Point}}
+\index{trump\+Point@{trump\+Point}!Game\+::\+Deck@{Game\+::\+Deck}}
+\subsubsection{\texorpdfstring{trump\+Point}{trumpPoint}}
+{\footnotesize\ttfamily int \mbox{[}$\,$\mbox{]} Game.\+Deck.\+trump\+Point}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \textcolor{keyword}{new} \textcolor{keywordtype}{int}[]
+        \{
+            0, 11, 0, 0, 0, 0, 0, 0, 0, 14, 10, 20, 3, 4
+        \}
+\end{DoxyCode}
+A list representing the value in point of all the trumps. \mbox{\Hypertarget{class_game_1_1_deck_a1f9866a01494d663c631d26f5bb8aa59}\label{class_game_1_1_deck_a1f9866a01494d663c631d26f5bb8aa59}} 
+\index{Game\+::\+Deck@{Game\+::\+Deck}!trump\+Value@{trump\+Value}}
+\index{trump\+Value@{trump\+Value}!Game\+::\+Deck@{Game\+::\+Deck}}
+\subsubsection{\texorpdfstring{trump\+Value}{trumpValue}}
+{\footnotesize\ttfamily int \mbox{[}$\,$\mbox{]} Game.\+Deck.\+trump\+Value}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \textcolor{keyword}{new} \textcolor{keywordtype}{int}[]
+       \{
+            0, 6, 0, 0, 0, 0, 0, 1, 2, 7, 5, 8, 3, 4
+       \}
+\end{DoxyCode}
+A list representing the value of all the trumps. 
+
+\subsection{Property Documentation}
+\mbox{\Hypertarget{class_game_1_1_deck_a9b8b9e6382eba67dfd83e41134c5a601}\label{class_game_1_1_deck_a9b8b9e6382eba67dfd83e41134c5a601}} 
+\index{Game\+::\+Deck@{Game\+::\+Deck}!Count@{Count}}
+\index{Count@{Count}!Game\+::\+Deck@{Game\+::\+Deck}}
+\subsubsection{\texorpdfstring{Count}{Count}}
+{\footnotesize\ttfamily int Game.\+Deck.\+Count\hspace{0.3cm}{\ttfamily [get]}}
+
+Getter and setter of the count of the cards in the deck 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Server/src/\+Game/\hyperlink{_deck_8cs}{Deck.\+cs}\end{DoxyCompactItemize}

@@ -1,0 +1,21 @@
+var searchData=
+[
+  ['game',['Game',['../namespace_game.html',1,'Game'],['../class_server_1_1_server.html#a51d909a4a359caec248274776756af39',1,'Server.Server.game()']]],
+  ['game_5fstatus',['GAME_STATUS',['../namespace_server.html#a2b496a25969b5c46d373f7079fac645f',1,'Server']]],
+  ['gameinfos',['GameInfos',['../class_client_1_1_game_infos.html',1,'Client.GameInfos'],['../class_client_1_1_game_infos.html#afc867ab95ff782307639ead71b2b109a',1,'Client.GameInfos.GameInfos()']]],
+  ['gameinfos_2ecs',['GameInfos.cs',['../_game_infos_8cs.html',1,'']]],
+  ['gamemanager',['GameManager',['../class_server_1_1_game_manager.html',1,'Server.GameManager'],['../class_server_1_1_game_manager.html#af92b9cb93c22d1751486c11c7f49a26f',1,'Server.GameManager.GameManager()']]],
+  ['gamemanager_2ecs',['GameManager.cs',['../_game_manager_8cs.html',1,'']]],
+  ['gamestatus',['GameStatus',['../class_client_1_1_game_infos.html#a0575b18e5cac61c7f5c23d1aec491f7f',1,'Client::GameInfos']]],
+  ['gameturn',['gameTurn',['../class_server_1_1_game_manager.html#a8e96395c8c7e183856fff1cb92ae948f',1,'Server::GameManager']]],
+  ['gamewindow',['GameWindow',['../class_client_1_1_game_window.html',1,'Client.GameWindow'],['../class_client_1_1_game_window.html#afc1d45d2b704a4daf6a669e3e0e28f5f',1,'Client.GameWindow.GameWindow()']]],
+  ['gamewindow_2examl_2ecs',['GameWindow.xaml.cs',['../_game_window_8xaml_8cs.html',1,'']]],
+  ['getclientuserbyid',['GetClientUserById',['../class_client_1_1_game_infos.html#a2dbb92b8c2238fd07e326ffd31b3fd1e',1,'Client::GameInfos']]],
+  ['gethashcode',['GetHashCode',['../class_client_1_1_client_user.html#a1984c77d9a3444fdda847c6f8e4b1c93',1,'Client::ClientUser']]],
+  ['gethigher',['GetHigher',['../class_game_1_1_deck.html#a7c461ece0d32eccaaa1c3047a24a214e',1,'Game::Deck']]],
+  ['getplayercardsnumber',['GetPlayerCardsNumber',['../class_client_1_1_event_manager.html#ab2bcf174789c716591233351bb28d1e7',1,'Client::EventManager']]],
+  ['getplayerscore',['GetPlayerScore',['../class_client_1_1_event_manager.html#a0780cdbdad5e278920c1b01e81441e1a',1,'Client::EventManager']]],
+  ['getposfromid',['GetPosFromId',['../class_client_1_1_game_infos.html#aaa76a248bde67bb6bd73e36b9b57615f',1,'Client::GameInfos']]],
+  ['getrandomcard',['GetRandomCard',['../class_game_1_1_deck.html#a7178873941924addbde9c150bb253c5b',1,'Game::Deck']]],
+  ['getscore',['GetScore',['../class_server_1_1_event_manager.html#a8c0e262490d85c41247c2ba333351141',1,'Server::EventManager']]]
+];

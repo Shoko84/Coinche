@@ -1,0 +1,176 @@
+\hypertarget{class_client_1_1_client_user}{}\section{Client.\+Client\+User Class Reference}
+\label{class_client_1_1_client_user}\index{Client.\+Client\+User@{Client.\+Client\+User}}
+
+
+Inheritance diagram for Client.\+Client\+User\+:
+% FIG 0
+
+
+Collaboration diagram for Client.\+Client\+User\+:
+% FIG 1
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{class_client_1_1_client_user_a346cb93cba9cd67a4de7410a02828cc7}{Client\+Position} \+: int \{ \newline
+{\bfseries Not\+Specified} = -\/1, 
+{\bfseries Bottom} = 0, 
+{\bfseries Left} = 1, 
+{\bfseries Top}, 
+\newline
+{\bfseries Right}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+override bool \hyperlink{class_client_1_1_client_user_a515f5e58fe9f58abb63cfff6b9d399f1}{Equals} (object obj)
+\item 
+override int \hyperlink{class_client_1_1_client_user_a1984c77d9a3444fdda847c6f8e4b1c93}{Get\+Hash\+Code} ()
+\item 
+void \hyperlink{class_client_1_1_client_user_adc5cda4be6a9fa1dcdf7adb0e18e57b0}{Add\+Card} (\hyperlink{class_game_1_1_card}{Card} card)
+\item 
+void \hyperlink{class_client_1_1_client_user_a10a7d16ab41f5fcc15e45a0313bfb53e}{Remove\+Card} (\hyperlink{class_game_1_1_card}{Card} card)
+\item 
+\hyperlink{class_client_1_1_client_user_ac6d81d5908f6afec828a95ca227ba280}{Client\+User} (int \+\_\+id, string \+\_\+username, \hyperlink{class_client_1_1_client_user_a346cb93cba9cd67a4de7410a02828cc7}{Client\+Position} \+\_\+position)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{class_client_1_1_client_user_ad2b381bf17a07b968f424b871c8cd282}{Id}
+\item 
+string \hyperlink{class_client_1_1_client_user_a6d7e902f2d43717e5a1bf49ff584f1ba}{Username}
+\item 
+\hyperlink{class_client_1_1_client_user_a346cb93cba9cd67a4de7410a02828cc7}{Client\+Position} \hyperlink{class_client_1_1_client_user_aed7f2c9aec11669fd21ea87e3968d8f0}{Position}
+\item 
+\hyperlink{class_game_1_1_deck}{Deck} \hyperlink{class_client_1_1_client_user_ab274adea6fea7e9b7f637c2d1e0592e7}{Cards\+List}
+\item 
+int \hyperlink{class_client_1_1_client_user_a116f16f187c387955d724291aa44c5eb}{Score}
+\item 
+bool \hyperlink{class_client_1_1_client_user_a77ae6af8f7fb3c66ddd5b3013b55c2aa}{Is\+Playing}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This Class contains all the data used for an User. 
+
+\subsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{class_client_1_1_client_user_a346cb93cba9cd67a4de7410a02828cc7}\label{class_client_1_1_client_user_a346cb93cba9cd67a4de7410a02828cc7}} 
+\index{Client\+::\+Client\+User@{Client\+::\+Client\+User}!Client\+Position@{Client\+Position}}
+\index{Client\+Position@{Client\+Position}!Client\+::\+Client\+User@{Client\+::\+Client\+User}}
+\subsubsection{\texorpdfstring{Client\+Position}{ClientPosition}}
+{\footnotesize\ttfamily enum \hyperlink{class_client_1_1_client_user_a346cb93cba9cd67a4de7410a02828cc7}{Client.\+Client\+User.\+Client\+Position} \+: int\hspace{0.3cm}{\ttfamily [strong]}}
+
+This Enumeration defines an User position on screen. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_client_1_1_client_user_ac6d81d5908f6afec828a95ca227ba280}\label{class_client_1_1_client_user_ac6d81d5908f6afec828a95ca227ba280}} 
+\index{Client\+::\+Client\+User@{Client\+::\+Client\+User}!Client\+User@{Client\+User}}
+\index{Client\+User@{Client\+User}!Client\+::\+Client\+User@{Client\+::\+Client\+User}}
+\subsubsection{\texorpdfstring{Client\+User()}{ClientUser()}}
+{\footnotesize\ttfamily Client.\+Client\+User.\+Client\+User (\begin{DoxyParamCaption}\item[{int}]{\+\_\+id,  }\item[{string}]{\+\_\+username,  }\item[{\hyperlink{class_client_1_1_client_user_a346cb93cba9cd67a4de7410a02828cc7}{Client\+Position}}]{\+\_\+position }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\hyperlink{class_client_1_1_client_user}{Client\+User}\textquotesingle{}s constructor -\/ Create an \hyperlink{class_client_1_1_client_user}{Client\+User} instance 
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+id} & The user\textquotesingle{}s id. \\
+\hline
+{\em \+\_\+username} & The user\textquotesingle{}s name. \\
+\hline
+{\em \+\_\+position} & The user\textquotesingle{}s position. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_client_1_1_client_user_adc5cda4be6a9fa1dcdf7adb0e18e57b0}\label{class_client_1_1_client_user_adc5cda4be6a9fa1dcdf7adb0e18e57b0}} 
+\index{Client\+::\+Client\+User@{Client\+::\+Client\+User}!Add\+Card@{Add\+Card}}
+\index{Add\+Card@{Add\+Card}!Client\+::\+Client\+User@{Client\+::\+Client\+User}}
+\subsubsection{\texorpdfstring{Add\+Card()}{AddCard()}}
+{\footnotesize\ttfamily void Client.\+Client\+User.\+Add\+Card (\begin{DoxyParamCaption}\item[{\hyperlink{class_game_1_1_card}{Card}}]{card }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+This function add a Card to the deck card 
+\begin{DoxyParams}{Parameters}
+{\em card} & The card being added. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_client_1_1_client_user_a515f5e58fe9f58abb63cfff6b9d399f1}\label{class_client_1_1_client_user_a515f5e58fe9f58abb63cfff6b9d399f1}} 
+\index{Client\+::\+Client\+User@{Client\+::\+Client\+User}!Equals@{Equals}}
+\index{Equals@{Equals}!Client\+::\+Client\+User@{Client\+::\+Client\+User}}
+\subsubsection{\texorpdfstring{Equals()}{Equals()}}
+{\footnotesize\ttfamily override bool Client.\+Client\+User.\+Equals (\begin{DoxyParamCaption}\item[{object}]{obj }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+This function overrides the object \textquotesingle{}Equals\textquotesingle{} method 
+\begin{DoxyParams}{Parameters}
+{\em obj} & The object to test the operation with. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_client_1_1_client_user_a1984c77d9a3444fdda847c6f8e4b1c93}\label{class_client_1_1_client_user_a1984c77d9a3444fdda847c6f8e4b1c93}} 
+\index{Client\+::\+Client\+User@{Client\+::\+Client\+User}!Get\+Hash\+Code@{Get\+Hash\+Code}}
+\index{Get\+Hash\+Code@{Get\+Hash\+Code}!Client\+::\+Client\+User@{Client\+::\+Client\+User}}
+\subsubsection{\texorpdfstring{Get\+Hash\+Code()}{GetHashCode()}}
+{\footnotesize\ttfamily override int Client.\+Client\+User.\+Get\+Hash\+Code (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+This function overrides the object \textquotesingle{}Equals\textquotesingle{} method 
+\begin{DoxyParams}{Parameters}
+{\em obj} & The object to test the operation with. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returning default Hash\+Code 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_client_1_1_client_user_a10a7d16ab41f5fcc15e45a0313bfb53e}\label{class_client_1_1_client_user_a10a7d16ab41f5fcc15e45a0313bfb53e}} 
+\index{Client\+::\+Client\+User@{Client\+::\+Client\+User}!Remove\+Card@{Remove\+Card}}
+\index{Remove\+Card@{Remove\+Card}!Client\+::\+Client\+User@{Client\+::\+Client\+User}}
+\subsubsection{\texorpdfstring{Remove\+Card()}{RemoveCard()}}
+{\footnotesize\ttfamily void Client.\+Client\+User.\+Remove\+Card (\begin{DoxyParamCaption}\item[{\hyperlink{class_game_1_1_card}{Card}}]{card }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+This function remove a Card from the deck card 
+\begin{DoxyParams}{Parameters}
+{\em card} & The card being removed. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_client_1_1_client_user_ab274adea6fea7e9b7f637c2d1e0592e7}\label{class_client_1_1_client_user_ab274adea6fea7e9b7f637c2d1e0592e7}} 
+\index{Client\+::\+Client\+User@{Client\+::\+Client\+User}!Cards\+List@{Cards\+List}}
+\index{Cards\+List@{Cards\+List}!Client\+::\+Client\+User@{Client\+::\+Client\+User}}
+\subsubsection{\texorpdfstring{Cards\+List}{CardsList}}
+{\footnotesize\ttfamily \hyperlink{class_game_1_1_deck}{Deck} Client.\+Client\+User.\+Cards\+List}
+
+This Deck class corresponds to the user\textquotesingle{}s deck card \mbox{\Hypertarget{class_client_1_1_client_user_ad2b381bf17a07b968f424b871c8cd282}\label{class_client_1_1_client_user_ad2b381bf17a07b968f424b871c8cd282}} 
+\index{Client\+::\+Client\+User@{Client\+::\+Client\+User}!Id@{Id}}
+\index{Id@{Id}!Client\+::\+Client\+User@{Client\+::\+Client\+User}}
+\subsubsection{\texorpdfstring{Id}{Id}}
+{\footnotesize\ttfamily int Client.\+Client\+User.\+Id}
+
+This int corresponds to the user\textquotesingle{}s id \mbox{\Hypertarget{class_client_1_1_client_user_a77ae6af8f7fb3c66ddd5b3013b55c2aa}\label{class_client_1_1_client_user_a77ae6af8f7fb3c66ddd5b3013b55c2aa}} 
+\index{Client\+::\+Client\+User@{Client\+::\+Client\+User}!Is\+Playing@{Is\+Playing}}
+\index{Is\+Playing@{Is\+Playing}!Client\+::\+Client\+User@{Client\+::\+Client\+User}}
+\subsubsection{\texorpdfstring{Is\+Playing}{IsPlaying}}
+{\footnotesize\ttfamily bool Client.\+Client\+User.\+Is\+Playing}
+
+This boolean corresponds if the user is playing \mbox{\Hypertarget{class_client_1_1_client_user_aed7f2c9aec11669fd21ea87e3968d8f0}\label{class_client_1_1_client_user_aed7f2c9aec11669fd21ea87e3968d8f0}} 
+\index{Client\+::\+Client\+User@{Client\+::\+Client\+User}!Position@{Position}}
+\index{Position@{Position}!Client\+::\+Client\+User@{Client\+::\+Client\+User}}
+\subsubsection{\texorpdfstring{Position}{Position}}
+{\footnotesize\ttfamily \hyperlink{class_client_1_1_client_user_a346cb93cba9cd67a4de7410a02828cc7}{Client\+Position} Client.\+Client\+User.\+Position}
+
+This enum corresponds to the user\textquotesingle{}s position \mbox{\Hypertarget{class_client_1_1_client_user_a116f16f187c387955d724291aa44c5eb}\label{class_client_1_1_client_user_a116f16f187c387955d724291aa44c5eb}} 
+\index{Client\+::\+Client\+User@{Client\+::\+Client\+User}!Score@{Score}}
+\index{Score@{Score}!Client\+::\+Client\+User@{Client\+::\+Client\+User}}
+\subsubsection{\texorpdfstring{Score}{Score}}
+{\footnotesize\ttfamily int Client.\+Client\+User.\+Score}
+
+This integer corresponds to the user\textquotesingle{}s score \mbox{\Hypertarget{class_client_1_1_client_user_a6d7e902f2d43717e5a1bf49ff584f1ba}\label{class_client_1_1_client_user_a6d7e902f2d43717e5a1bf49ff584f1ba}} 
+\index{Client\+::\+Client\+User@{Client\+::\+Client\+User}!Username@{Username}}
+\index{Username@{Username}!Client\+::\+Client\+User@{Client\+::\+Client\+User}}
+\subsubsection{\texorpdfstring{Username}{Username}}
+{\footnotesize\ttfamily string Client.\+Client\+User.\+Username}
+
+This string corresponds to the user\textquotesingle{}s name 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Client/\hyperlink{_client_user_8cs}{Client\+User.\+cs}\end{DoxyCompactItemize}

@@ -1,0 +1,222 @@
+\hypertarget{class_server_1_1_server}{}\section{Server.\+Server Class Reference}
+\label{class_server_1_1_server}\index{Server.\+Server@{Server.\+Server}}
+
+
+Collaboration diagram for Server.\+Server\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_server_1_1_server_a8e9b2b8663928808ab906762126879fa}{Server} (bool \hyperlink{class_server_1_1_server_a944c5350249b3be31a0d9b6762e49512}{debug}=false)
+\item 
+void \hyperlink{class_server_1_1_server_a16a01fa77c0292a83902c19e2619eb58}{Open} ()
+\item 
+void \hyperlink{class_server_1_1_server_af043e9887ea794762dd17f3ed2cb2580}{Close} ()
+\item 
+void \hyperlink{class_server_1_1_server_a9e311d0f23134ccc2212c9fe28f15f91}{Error} (string type, string msg)
+\item 
+void \hyperlink{class_server_1_1_server_ab7c9f699d19ea455b66a53b0ca78b8d2}{Print\+On\+Debug} (string msg)
+\item 
+void \hyperlink{class_server_1_1_server_af7a81d039c792b8a0f8b001952082bb2}{Write\+To} (string type, string ip, int port, string msg)
+\item 
+void \hyperlink{class_server_1_1_server_ab0d8ff0323adc8a74b9dd1161140b3f8}{Write\+To\+All} (string type, string msg)
+\item 
+void \hyperlink{class_server_1_1_server_a0ac824900c30ddb89dc79be8e8a2340b}{Write\+To\+Other} (string type, string ip, int port, string msg)
+\item 
+bool \hyperlink{class_server_1_1_server_a9944a0c7ee91e196b9eefdf723b08ae4}{Check\+Close} ()
+\item 
+void \hyperlink{class_server_1_1_server_a40d5db9d850120c06889f827e8ce259a}{Run} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_server_1_1_network_manager}{Network\+Manager} \hyperlink{class_server_1_1_server_a1bf9e09369666a2aac8968f74e45f6ad}{network}
+\item 
+\hyperlink{class_server_1_1_player_manager}{Player\+Manager} \hyperlink{class_server_1_1_server_a928d460f653e48aaa9c97ca77fc12a63}{players}
+\item 
+\hyperlink{class_server_1_1_event_manager}{Event\+Manager} \hyperlink{class_server_1_1_server_aa40e6489cb599b3a2e651794468adb55}{events}
+\item 
+\hyperlink{class_server_1_1_game_manager}{Game\+Manager} \hyperlink{class_server_1_1_server_a51d909a4a359caec248274776756af39}{game}
+\item 
+\hyperlink{class_common_1_1_serializer}{Serializer} \hyperlink{class_server_1_1_server_aca27435969e9497574ce1a886bd8aa82}{serializer}
+\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_server_1_1_server}{Server} \hyperlink{class_server_1_1_server_a6660837e8cc96449219c2c0f0c4afbf9}{Instance}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\item 
+bool \hyperlink{class_server_1_1_server_a944c5350249b3be31a0d9b6762e49512}{debug}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class contain all the module composing the server. It contains the I/O module too.
+
+This class is a singleton. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_server_1_1_server_a8e9b2b8663928808ab906762126879fa}\label{class_server_1_1_server_a8e9b2b8663928808ab906762126879fa}} 
+\index{Server\+::\+Server@{Server\+::\+Server}!Server@{Server}}
+\index{Server@{Server}!Server\+::\+Server@{Server\+::\+Server}}
+\subsubsection{\texorpdfstring{Server()}{Server()}}
+{\footnotesize\ttfamily Server.\+Server.\+Server (\begin{DoxyParamCaption}\item[{bool}]{debug = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor 
+\begin{DoxyParams}{Parameters}
+{\em debug} & Allow or not the debug prints. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_server_1_1_server_a9944a0c7ee91e196b9eefdf723b08ae4}\label{class_server_1_1_server_a9944a0c7ee91e196b9eefdf723b08ae4}} 
+\index{Server\+::\+Server@{Server\+::\+Server}!Check\+Close@{Check\+Close}}
+\index{Check\+Close@{Check\+Close}!Server\+::\+Server@{Server\+::\+Server}}
+\subsubsection{\texorpdfstring{Check\+Close()}{CheckClose()}}
+{\footnotesize\ttfamily bool Server.\+Server.\+Check\+Close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Check if all the players are O\+N\+L\+I\+NE \begin{DoxyReturn}{Returns}
+Return False if all the players are offline 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_server_1_1_server_af043e9887ea794762dd17f3ed2cb2580}\label{class_server_1_1_server_af043e9887ea794762dd17f3ed2cb2580}} 
+\index{Server\+::\+Server@{Server\+::\+Server}!Close@{Close}}
+\index{Close@{Close}!Server\+::\+Server@{Server\+::\+Server}}
+\subsubsection{\texorpdfstring{Close()}{Close()}}
+{\footnotesize\ttfamily void Server.\+Server.\+Close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Close the server. \mbox{\Hypertarget{class_server_1_1_server_a9e311d0f23134ccc2212c9fe28f15f91}\label{class_server_1_1_server_a9e311d0f23134ccc2212c9fe28f15f91}} 
+\index{Server\+::\+Server@{Server\+::\+Server}!Error@{Error}}
+\index{Error@{Error}!Server\+::\+Server@{Server\+::\+Server}}
+\subsubsection{\texorpdfstring{Error()}{Error()}}
+{\footnotesize\ttfamily void Server.\+Server.\+Error (\begin{DoxyParamCaption}\item[{string}]{type,  }\item[{string}]{msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Print an Error. 
+\begin{DoxyParams}{Parameters}
+{\em type} & The type of the error. \\
+\hline
+{\em msg} & The error message. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_server_1_1_server_a16a01fa77c0292a83902c19e2619eb58}\label{class_server_1_1_server_a16a01fa77c0292a83902c19e2619eb58}} 
+\index{Server\+::\+Server@{Server\+::\+Server}!Open@{Open}}
+\index{Open@{Open}!Server\+::\+Server@{Server\+::\+Server}}
+\subsubsection{\texorpdfstring{Open()}{Open()}}
+{\footnotesize\ttfamily void Server.\+Server.\+Open (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Open the server. \mbox{\Hypertarget{class_server_1_1_server_ab7c9f699d19ea455b66a53b0ca78b8d2}\label{class_server_1_1_server_ab7c9f699d19ea455b66a53b0ca78b8d2}} 
+\index{Server\+::\+Server@{Server\+::\+Server}!Print\+On\+Debug@{Print\+On\+Debug}}
+\index{Print\+On\+Debug@{Print\+On\+Debug}!Server\+::\+Server@{Server\+::\+Server}}
+\subsubsection{\texorpdfstring{Print\+On\+Debug()}{PrintOnDebug()}}
+{\footnotesize\ttfamily void Server.\+Server.\+Print\+On\+Debug (\begin{DoxyParamCaption}\item[{string}]{msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Print something wich can only be display in debug mode. 
+\begin{DoxyParams}{Parameters}
+{\em msg} & The message to print. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_server_1_1_server_a40d5db9d850120c06889f827e8ce259a}\label{class_server_1_1_server_a40d5db9d850120c06889f827e8ce259a}} 
+\index{Server\+::\+Server@{Server\+::\+Server}!Run@{Run}}
+\index{Run@{Run}!Server\+::\+Server@{Server\+::\+Server}}
+\subsubsection{\texorpdfstring{Run()}{Run()}}
+{\footnotesize\ttfamily void Server.\+Server.\+Run (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Play one turn of the game according to the game state. \mbox{\Hypertarget{class_server_1_1_server_af7a81d039c792b8a0f8b001952082bb2}\label{class_server_1_1_server_af7a81d039c792b8a0f8b001952082bb2}} 
+\index{Server\+::\+Server@{Server\+::\+Server}!Write\+To@{Write\+To}}
+\index{Write\+To@{Write\+To}!Server\+::\+Server@{Server\+::\+Server}}
+\subsubsection{\texorpdfstring{Write\+To()}{WriteTo()}}
+{\footnotesize\ttfamily void Server.\+Server.\+Write\+To (\begin{DoxyParamCaption}\item[{string}]{type,  }\item[{string}]{ip,  }\item[{int}]{port,  }\item[{string}]{msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Send a string to a client. 
+\begin{DoxyParams}{Parameters}
+{\em type} & The type of the event. \\
+\hline
+{\em ip} & The ip of the client. \\
+\hline
+{\em port} & The port of the client. \\
+\hline
+{\em msg} & The message to send to the client. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_server_1_1_server_ab0d8ff0323adc8a74b9dd1161140b3f8}\label{class_server_1_1_server_ab0d8ff0323adc8a74b9dd1161140b3f8}} 
+\index{Server\+::\+Server@{Server\+::\+Server}!Write\+To\+All@{Write\+To\+All}}
+\index{Write\+To\+All@{Write\+To\+All}!Server\+::\+Server@{Server\+::\+Server}}
+\subsubsection{\texorpdfstring{Write\+To\+All()}{WriteToAll()}}
+{\footnotesize\ttfamily void Server.\+Server.\+Write\+To\+All (\begin{DoxyParamCaption}\item[{string}]{type,  }\item[{string}]{msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Send a string to a all of the client. 
+\begin{DoxyParams}{Parameters}
+{\em type} & The type of the event. \\
+\hline
+{\em msg} & The message to send to the clients. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_server_1_1_server_a0ac824900c30ddb89dc79be8e8a2340b}\label{class_server_1_1_server_a0ac824900c30ddb89dc79be8e8a2340b}} 
+\index{Server\+::\+Server@{Server\+::\+Server}!Write\+To\+Other@{Write\+To\+Other}}
+\index{Write\+To\+Other@{Write\+To\+Other}!Server\+::\+Server@{Server\+::\+Server}}
+\subsubsection{\texorpdfstring{Write\+To\+Other()}{WriteToOther()}}
+{\footnotesize\ttfamily void Server.\+Server.\+Write\+To\+Other (\begin{DoxyParamCaption}\item[{string}]{type,  }\item[{string}]{ip,  }\item[{int}]{port,  }\item[{string}]{msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Send a string to a all of the clients except one. 
+\begin{DoxyParams}{Parameters}
+{\em type} & The type of the event. \\
+\hline
+{\em ip} & The ip of the client to ignore. \\
+\hline
+{\em port} & The port of the client to ignore. \\
+\hline
+{\em msg} & The message to send to the clients. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_server_1_1_server_aa40e6489cb599b3a2e651794468adb55}\label{class_server_1_1_server_aa40e6489cb599b3a2e651794468adb55}} 
+\index{Server\+::\+Server@{Server\+::\+Server}!events@{events}}
+\index{events@{events}!Server\+::\+Server@{Server\+::\+Server}}
+\subsubsection{\texorpdfstring{events}{events}}
+{\footnotesize\ttfamily \hyperlink{class_server_1_1_event_manager}{Event\+Manager} Server.\+Server.\+events}
+
+List of all the events. \mbox{\Hypertarget{class_server_1_1_server_a51d909a4a359caec248274776756af39}\label{class_server_1_1_server_a51d909a4a359caec248274776756af39}} 
+\index{Server\+::\+Server@{Server\+::\+Server}!game@{game}}
+\index{game@{game}!Server\+::\+Server@{Server\+::\+Server}}
+\subsubsection{\texorpdfstring{game}{game}}
+{\footnotesize\ttfamily \hyperlink{class_server_1_1_game_manager}{Game\+Manager} Server.\+Server.\+game}
+
+Contains the state of the game. \mbox{\Hypertarget{class_server_1_1_server_a1bf9e09369666a2aac8968f74e45f6ad}\label{class_server_1_1_server_a1bf9e09369666a2aac8968f74e45f6ad}} 
+\index{Server\+::\+Server@{Server\+::\+Server}!network@{network}}
+\index{network@{network}!Server\+::\+Server@{Server\+::\+Server}}
+\subsubsection{\texorpdfstring{network}{network}}
+{\footnotesize\ttfamily \hyperlink{class_server_1_1_network_manager}{Network\+Manager} Server.\+Server.\+network}
+
+Contains the network gestion. \mbox{\Hypertarget{class_server_1_1_server_a928d460f653e48aaa9c97ca77fc12a63}\label{class_server_1_1_server_a928d460f653e48aaa9c97ca77fc12a63}} 
+\index{Server\+::\+Server@{Server\+::\+Server}!players@{players}}
+\index{players@{players}!Server\+::\+Server@{Server\+::\+Server}}
+\subsubsection{\texorpdfstring{players}{players}}
+{\footnotesize\ttfamily \hyperlink{class_server_1_1_player_manager}{Player\+Manager} Server.\+Server.\+players}
+
+List all the player\textquotesingle{}s ips by id. \mbox{\Hypertarget{class_server_1_1_server_aca27435969e9497574ce1a886bd8aa82}\label{class_server_1_1_server_aca27435969e9497574ce1a886bd8aa82}} 
+\index{Server\+::\+Server@{Server\+::\+Server}!serializer@{serializer}}
+\index{serializer@{serializer}!Server\+::\+Server@{Server\+::\+Server}}
+\subsubsection{\texorpdfstring{serializer}{serializer}}
+{\footnotesize\ttfamily \hyperlink{class_common_1_1_serializer}{Serializer} Server.\+Server.\+serializer}
+
+Object wich serialize and deserialize objects. 
+
+\subsection{Property Documentation}
+\mbox{\Hypertarget{class_server_1_1_server_a944c5350249b3be31a0d9b6762e49512}\label{class_server_1_1_server_a944c5350249b3be31a0d9b6762e49512}} 
+\index{Server\+::\+Server@{Server\+::\+Server}!debug@{debug}}
+\index{debug@{debug}!Server\+::\+Server@{Server\+::\+Server}}
+\subsubsection{\texorpdfstring{debug}{debug}}
+{\footnotesize\ttfamily bool Server.\+Server.\+debug\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+Getter / Setter of the status of debug. \mbox{\Hypertarget{class_server_1_1_server_a6660837e8cc96449219c2c0f0c4afbf9}\label{class_server_1_1_server_a6660837e8cc96449219c2c0f0c4afbf9}} 
+\index{Server\+::\+Server@{Server\+::\+Server}!Instance@{Instance}}
+\index{Instance@{Instance}!Server\+::\+Server@{Server\+::\+Server}}
+\subsubsection{\texorpdfstring{Instance}{Instance}}
+{\footnotesize\ttfamily \hyperlink{class_server_1_1_server}{Server} Server.\+Server.\+Instance\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [get]}}
+
+Getter of the singleton. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Server/src/\hyperlink{_server_8cs}{Server.\+cs}\end{DoxyCompactItemize}

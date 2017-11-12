@@ -1,0 +1,142 @@
+\hypertarget{class_game_1_1_card}{}\section{Game.\+Card Class Reference}
+\label{class_game_1_1_card}\index{Game.\+Card@{Game.\+Card}}
+
+
+Collaboration diagram for Game.\+Card\+:
+% FIG 0
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{class_game_1_1_card_a76a5a259d3d61f379fb2354192753789}{Card\+Colour} \+: int \{ \newline
+{\bfseries Unknown} = 0, 
+{\bfseries Spades} = 1, 
+{\bfseries Clubs}, 
+{\bfseries Diamonds}, 
+\newline
+{\bfseries Hearts}
+ \}
+\item 
+enum \hyperlink{class_game_1_1_card_a17c2bb5fb12e206639e218492d78578a}{Card\+Value} \+: int \{ \newline
+{\bfseries Unknown} = 0, 
+{\bfseries Ace} = 1, 
+{\bfseries Two}, 
+{\bfseries Three}, 
+\newline
+{\bfseries Four}, 
+{\bfseries Five}, 
+{\bfseries Six}, 
+{\bfseries Seven}, 
+\newline
+{\bfseries Eight}, 
+{\bfseries Nine}, 
+{\bfseries Ten}, 
+{\bfseries Jack}, 
+\newline
+{\bfseries Queen}, 
+{\bfseries King}
+ \}
+\item 
+enum \hyperlink{class_game_1_1_card_a9b35cee58d08386bc6f1d3cc7e6c6999}{Card\+Position} \+: int \{ \newline
+{\bfseries Not\+Specified} = -\/1, 
+{\bfseries Bottom} = 0, 
+{\bfseries Left} = 1, 
+{\bfseries Top}, 
+\newline
+{\bfseries Right}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_game_1_1_card_ac495ed67b2e07198c0b2193ad4422c90}{Card} (\hyperlink{class_game_1_1_card_a76a5a259d3d61f379fb2354192753789}{Card\+Colour} \+\_\+colour, \hyperlink{class_game_1_1_card_a17c2bb5fb12e206639e218492d78578a}{Card\+Value} \+\_\+value, \hyperlink{class_game_1_1_card_a9b35cee58d08386bc6f1d3cc7e6c6999}{Card\+Position} \+\_\+position)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_game_1_1_card_a76a5a259d3d61f379fb2354192753789}{Card\+Colour} \hyperlink{class_game_1_1_card_a6b201acd3a84a137384c52303de942d2}{colour}
+\item 
+\hyperlink{class_game_1_1_card_a17c2bb5fb12e206639e218492d78578a}{Card\+Value} \hyperlink{class_game_1_1_card_aa59c1833ffad11e084d5ebb552a4698e}{value}
+\item 
+\hyperlink{class_game_1_1_card_a9b35cee58d08386bc6f1d3cc7e6c6999}{Card\+Position} \hyperlink{class_game_1_1_card_abf7379cf3858aa12e7ffb3440156a0d7}{position}
+\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+string \hyperlink{class_game_1_1_card_afaad8a7eae5f1e7df1cde0428e470179}{String\+Colour}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\item 
+string \hyperlink{class_game_1_1_card_aa0426a552479da58e7965a9d0fd3f1fd}{String\+Value}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class define what a card is. 
+
+\subsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{class_game_1_1_card_a76a5a259d3d61f379fb2354192753789}\label{class_game_1_1_card_a76a5a259d3d61f379fb2354192753789}} 
+\index{Game\+::\+Card@{Game\+::\+Card}!Card\+Colour@{Card\+Colour}}
+\index{Card\+Colour@{Card\+Colour}!Game\+::\+Card@{Game\+::\+Card}}
+\subsubsection{\texorpdfstring{Card\+Colour}{CardColour}}
+{\footnotesize\ttfamily enum \hyperlink{class_game_1_1_card_a76a5a259d3d61f379fb2354192753789}{Game.\+Card.\+Card\+Colour} \+: int\hspace{0.3cm}{\ttfamily [strong]}}
+
+This enum define the colors of the card. \mbox{\Hypertarget{class_game_1_1_card_a9b35cee58d08386bc6f1d3cc7e6c6999}\label{class_game_1_1_card_a9b35cee58d08386bc6f1d3cc7e6c6999}} 
+\index{Game\+::\+Card@{Game\+::\+Card}!Card\+Position@{Card\+Position}}
+\index{Card\+Position@{Card\+Position}!Game\+::\+Card@{Game\+::\+Card}}
+\subsubsection{\texorpdfstring{Card\+Position}{CardPosition}}
+{\footnotesize\ttfamily enum \hyperlink{class_game_1_1_card_a9b35cee58d08386bc6f1d3cc7e6c6999}{Game.\+Card.\+Card\+Position} \+: int\hspace{0.3cm}{\ttfamily [strong]}}
+
+This enum define the positions of the card. \mbox{\Hypertarget{class_game_1_1_card_a17c2bb5fb12e206639e218492d78578a}\label{class_game_1_1_card_a17c2bb5fb12e206639e218492d78578a}} 
+\index{Game\+::\+Card@{Game\+::\+Card}!Card\+Value@{Card\+Value}}
+\index{Card\+Value@{Card\+Value}!Game\+::\+Card@{Game\+::\+Card}}
+\subsubsection{\texorpdfstring{Card\+Value}{CardValue}}
+{\footnotesize\ttfamily enum \hyperlink{class_game_1_1_card_a17c2bb5fb12e206639e218492d78578a}{Game.\+Card.\+Card\+Value} \+: int\hspace{0.3cm}{\ttfamily [strong]}}
+
+This enum define the values of the card. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_game_1_1_card_ac495ed67b2e07198c0b2193ad4422c90}\label{class_game_1_1_card_ac495ed67b2e07198c0b2193ad4422c90}} 
+\index{Game\+::\+Card@{Game\+::\+Card}!Card@{Card}}
+\index{Card@{Card}!Game\+::\+Card@{Game\+::\+Card}}
+\subsubsection{\texorpdfstring{Card()}{Card()}}
+{\footnotesize\ttfamily Game.\+Card.\+Card (\begin{DoxyParamCaption}\item[{\hyperlink{class_game_1_1_card_a76a5a259d3d61f379fb2354192753789}{Card\+Colour}}]{\+\_\+colour,  }\item[{\hyperlink{class_game_1_1_card_a17c2bb5fb12e206639e218492d78578a}{Card\+Value}}]{\+\_\+value,  }\item[{\hyperlink{class_game_1_1_card_a9b35cee58d08386bc6f1d3cc7e6c6999}{Card\+Position}}]{\+\_\+position }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor. 
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_game_1_1_card_a6b201acd3a84a137384c52303de942d2}\label{class_game_1_1_card_a6b201acd3a84a137384c52303de942d2}} 
+\index{Game\+::\+Card@{Game\+::\+Card}!colour@{colour}}
+\index{colour@{colour}!Game\+::\+Card@{Game\+::\+Card}}
+\subsubsection{\texorpdfstring{colour}{colour}}
+{\footnotesize\ttfamily \hyperlink{class_game_1_1_card_a76a5a259d3d61f379fb2354192753789}{Card\+Colour} Game.\+Card.\+colour}
+
+The color of the card. \mbox{\Hypertarget{class_game_1_1_card_abf7379cf3858aa12e7ffb3440156a0d7}\label{class_game_1_1_card_abf7379cf3858aa12e7ffb3440156a0d7}} 
+\index{Game\+::\+Card@{Game\+::\+Card}!position@{position}}
+\index{position@{position}!Game\+::\+Card@{Game\+::\+Card}}
+\subsubsection{\texorpdfstring{position}{position}}
+{\footnotesize\ttfamily \hyperlink{class_game_1_1_card_a9b35cee58d08386bc6f1d3cc7e6c6999}{Card\+Position} Game.\+Card.\+position}
+
+The position of the card. \mbox{\Hypertarget{class_game_1_1_card_aa59c1833ffad11e084d5ebb552a4698e}\label{class_game_1_1_card_aa59c1833ffad11e084d5ebb552a4698e}} 
+\index{Game\+::\+Card@{Game\+::\+Card}!value@{value}}
+\index{value@{value}!Game\+::\+Card@{Game\+::\+Card}}
+\subsubsection{\texorpdfstring{value}{value}}
+{\footnotesize\ttfamily \hyperlink{class_game_1_1_card_a17c2bb5fb12e206639e218492d78578a}{Card\+Value} Game.\+Card.\+value}
+
+The value of the card. 
+
+\subsection{Property Documentation}
+\mbox{\Hypertarget{class_game_1_1_card_afaad8a7eae5f1e7df1cde0428e470179}\label{class_game_1_1_card_afaad8a7eae5f1e7df1cde0428e470179}} 
+\index{Game\+::\+Card@{Game\+::\+Card}!String\+Colour@{String\+Colour}}
+\index{String\+Colour@{String\+Colour}!Game\+::\+Card@{Game\+::\+Card}}
+\subsubsection{\texorpdfstring{String\+Colour}{StringColour}}
+{\footnotesize\ttfamily string Game.\+Card.\+String\+Colour\hspace{0.3cm}{\ttfamily [get]}}
+
+The getter of the name of the color. \mbox{\Hypertarget{class_game_1_1_card_aa0426a552479da58e7965a9d0fd3f1fd}\label{class_game_1_1_card_aa0426a552479da58e7965a9d0fd3f1fd}} 
+\index{Game\+::\+Card@{Game\+::\+Card}!String\+Value@{String\+Value}}
+\index{String\+Value@{String\+Value}!Game\+::\+Card@{Game\+::\+Card}}
+\subsubsection{\texorpdfstring{String\+Value}{StringValue}}
+{\footnotesize\ttfamily string Game.\+Card.\+String\+Value\hspace{0.3cm}{\ttfamily [get]}}
+
+The getter of the name of the value. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Server/src/\+Game/\hyperlink{_card_8cs}{Card.\+cs}\end{DoxyCompactItemize}

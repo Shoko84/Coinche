@@ -1,0 +1,456 @@
+\hypertarget{class_client_1_1_event_manager}{}\section{Client.\+Event\+Manager Class Reference}
+\label{class_client_1_1_event_manager}\index{Client.\+Event\+Manager@{Client.\+Event\+Manager}}
+
+
+Collaboration diagram for Client.\+Event\+Manager\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_client_1_1_event_manager_afa1fe29f61e7329ba985dfb8c2627b36}{Event\+Manager} ()
+\item 
+void \hyperlink{class_client_1_1_event_manager_ad850af88bc9fe2c1e31824171921fc4a}{Print\+Incoming\+Message} (Packet\+Header header, Connection connection, string message)
+\item 
+void \hyperlink{class_client_1_1_event_manager_a864e511bd02284159cba1cf1b0b31cf7}{Connection\+Ko} (Packet\+Header header, Connection connection, string message)
+\item 
+void \hyperlink{class_client_1_1_event_manager_a4fca9a8ae6010251ba07265e9f8572ac}{Connection\+Ok} (Packet\+Header header, Connection connection, string data)
+\item 
+void \hyperlink{class_client_1_1_event_manager_aae08d4b92f94038ac4934880fdbb9356}{Waiting\+For\+Player} (Packet\+Header header, Connection connection, string message)
+\item 
+void \hyperlink{class_client_1_1_event_manager_a53596e2ebf7de8a3d5fe42ca9a020b67}{Playing} (Packet\+Header header, Connection connection, string message)
+\item 
+void \hyperlink{class_client_1_1_event_manager_abd1cce780860d17af587ba718c07d33a}{Player\+Announce} (Packet\+Header header, Connection connection, string message)
+\item 
+void \hyperlink{class_client_1_1_event_manager_a11c5ad80334ca0d83551fddb47194589}{Player\+Play} (Packet\+Header header, Connection connection, string message)
+\item 
+void \hyperlink{class_client_1_1_event_manager_a65536bbfa18b0aaf02bf0a4dd1f6c1a0}{Someone\+Has\+Announced} (Packet\+Header header, Connection connection, string message)
+\item 
+void \hyperlink{class_client_1_1_event_manager_a55922c9feb080ebff89d86fa757d3880}{Someone\+Played\+A\+Card} (Packet\+Header header, Connection connection, string message)
+\item 
+void \hyperlink{class_client_1_1_event_manager_a8a67beed6389b1f6a1cab3742e7817ee}{Players\+Connect} (Packet\+Header header, Connection connection, string message)
+\item 
+void \hyperlink{class_client_1_1_event_manager_a56e8f36764340b1049c83f48e16d3e13}{Players\+Quit} (Packet\+Header header, Connection connection, string message)
+\item 
+void \hyperlink{class_client_1_1_event_manager_acfe5c23844435ad4b51104d31b75743f}{Player\+Rename} (Packet\+Header header, Connection connection, string message)
+\item 
+void \hyperlink{class_client_1_1_event_manager_a7a71a3bd8b1c0ecd10b8286c50f6d79d}{Player\+Has\+Lost} (Packet\+Header header, Connection connection, string message)
+\item 
+void \hyperlink{class_client_1_1_event_manager_a460ff979d6d31a452e4374c3144f0805}{Player\+Has\+Won} (Packet\+Header header, Connection connection, string message)
+\item 
+void \hyperlink{class_client_1_1_event_manager_ab2bcf174789c716591233351bb28d1e7}{Get\+Player\+Cards\+Number} (Packet\+Header header, Connection connection, string message)
+\item 
+void \hyperlink{class_client_1_1_event_manager_a0780cdbdad5e278920c1b01e81441e1a}{Get\+Player\+Score} (Packet\+Header header, Connection connection, string message)
+\item 
+void \hyperlink{class_client_1_1_event_manager_a78669a9c4545ffa2b35b8c2bfa750aa4}{Player\+Receive\+Deck} (Packet\+Header header, Connection connection, string message)
+\item 
+void \hyperlink{class_client_1_1_event_manager_a5876b23f48255516cf2f00052682e178}{Player\+Receive\+Pile} (Packet\+Header header, Connection connection, string message)
+\item 
+void \hyperlink{class_client_1_1_event_manager_a3e12d72c6c2c789dc45efd9ef0d7df68}{Ok} (Packet\+Header header, Connection connection, string message)
+\item 
+void \hyperlink{class_client_1_1_event_manager_a28db7dbdff678c58ae2365639eba8012}{Not\+My\+Turn} (Packet\+Header header, Connection connection, string message)
+\item 
+void \hyperlink{class_client_1_1_event_manager_ac3ea6f2f7242ce91e83244ed3af5cbfe}{Not\+Owning\+Card} (Packet\+Header header, Connection connection, string message)
+\item 
+void \hyperlink{class_client_1_1_event_manager_aa89e38b6c4951b76409d346715566695}{Announce\+Incorrect} (Packet\+Header header, Connection connection, string message)
+\item 
+void \hyperlink{class_client_1_1_event_manager_a9ba0ede549fb463f89022966a045a605}{Card\+Not\+Allowed} (Packet\+Header header, Connection connection, string message)
+\item 
+void \hyperlink{class_client_1_1_event_manager_a9750e931ce0003f953c3e62752c76413}{Announce\+Not\+Allowed} (Packet\+Header header, Connection connection, string message)
+\item 
+void \hyperlink{class_client_1_1_event_manager_ad5dbf05681ff2c9d265decf01bbecc50}{Incorrect\+Turn\+Type} (Packet\+Header header, Connection connection, string message)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class regroup all the functions wich will be triggered by the server\textquotesingle{}s responses. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_client_1_1_event_manager_afa1fe29f61e7329ba985dfb8c2627b36}\label{class_client_1_1_event_manager_afa1fe29f61e7329ba985dfb8c2627b36}} 
+\index{Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}!Event\+Manager@{Event\+Manager}}
+\index{Event\+Manager@{Event\+Manager}!Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}}
+\subsubsection{\texorpdfstring{Event\+Manager()}{EventManager()}}
+{\footnotesize\ttfamily Client.\+Event\+Manager.\+Event\+Manager (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_client_1_1_event_manager_aa89e38b6c4951b76409d346715566695}\label{class_client_1_1_event_manager_aa89e38b6c4951b76409d346715566695}} 
+\index{Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}!Announce\+Incorrect@{Announce\+Incorrect}}
+\index{Announce\+Incorrect@{Announce\+Incorrect}!Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}}
+\subsubsection{\texorpdfstring{Announce\+Incorrect()}{AnnounceIncorrect()}}
+{\footnotesize\ttfamily void Client.\+Event\+Manager.\+Announce\+Incorrect (\begin{DoxyParamCaption}\item[{Packet\+Header}]{header,  }\item[{Connection}]{connection,  }\item[{string}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Triggered when the server tells the client he told a lower contract value 
+\begin{DoxyParams}{Parameters}
+{\em header} & Infos about the header. \\
+\hline
+{\em connection} & Infos about the server\textquotesingle{}s connection. \\
+\hline
+{\em message} & Unused. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_client_1_1_event_manager_a9750e931ce0003f953c3e62752c76413}\label{class_client_1_1_event_manager_a9750e931ce0003f953c3e62752c76413}} 
+\index{Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}!Announce\+Not\+Allowed@{Announce\+Not\+Allowed}}
+\index{Announce\+Not\+Allowed@{Announce\+Not\+Allowed}!Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}}
+\subsubsection{\texorpdfstring{Announce\+Not\+Allowed()}{AnnounceNotAllowed()}}
+{\footnotesize\ttfamily void Client.\+Event\+Manager.\+Announce\+Not\+Allowed (\begin{DoxyParamCaption}\item[{Packet\+Header}]{header,  }\item[{Connection}]{connection,  }\item[{string}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Triggered when the server tells the client it\textquotesingle{}s not anymore a announce turn 
+\begin{DoxyParams}{Parameters}
+{\em header} & Infos about the header. \\
+\hline
+{\em connection} & Infos about the server\textquotesingle{}s connection. \\
+\hline
+{\em message} & Unused. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_client_1_1_event_manager_a9ba0ede549fb463f89022966a045a605}\label{class_client_1_1_event_manager_a9ba0ede549fb463f89022966a045a605}} 
+\index{Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}!Card\+Not\+Allowed@{Card\+Not\+Allowed}}
+\index{Card\+Not\+Allowed@{Card\+Not\+Allowed}!Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}}
+\subsubsection{\texorpdfstring{Card\+Not\+Allowed()}{CardNotAllowed()}}
+{\footnotesize\ttfamily void Client.\+Event\+Manager.\+Card\+Not\+Allowed (\begin{DoxyParamCaption}\item[{Packet\+Header}]{header,  }\item[{Connection}]{connection,  }\item[{string}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Triggered when the server tells the client he\textquotesingle{}s not allowed to play the card 
+\begin{DoxyParams}{Parameters}
+{\em header} & Infos about the header. \\
+\hline
+{\em connection} & Infos about the server\textquotesingle{}s connection. \\
+\hline
+{\em message} & Unused. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_client_1_1_event_manager_a864e511bd02284159cba1cf1b0b31cf7}\label{class_client_1_1_event_manager_a864e511bd02284159cba1cf1b0b31cf7}} 
+\index{Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}!Connection\+Ko@{Connection\+Ko}}
+\index{Connection\+Ko@{Connection\+Ko}!Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}}
+\subsubsection{\texorpdfstring{Connection\+Ko()}{ConnectionKo()}}
+{\footnotesize\ttfamily void Client.\+Event\+Manager.\+Connection\+Ko (\begin{DoxyParamCaption}\item[{Packet\+Header}]{header,  }\item[{Connection}]{connection,  }\item[{string}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Triggered when the server refuse the connection. 
+\begin{DoxyParams}{Parameters}
+{\em header} & Infos about the header. \\
+\hline
+{\em connection} & Infos about the server\textquotesingle{}s connection. \\
+\hline
+{\em message} & Unused. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_client_1_1_event_manager_a4fca9a8ae6010251ba07265e9f8572ac}\label{class_client_1_1_event_manager_a4fca9a8ae6010251ba07265e9f8572ac}} 
+\index{Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}!Connection\+Ok@{Connection\+Ok}}
+\index{Connection\+Ok@{Connection\+Ok}!Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}}
+\subsubsection{\texorpdfstring{Connection\+Ok()}{ConnectionOk()}}
+{\footnotesize\ttfamily void Client.\+Event\+Manager.\+Connection\+Ok (\begin{DoxyParamCaption}\item[{Packet\+Header}]{header,  }\item[{Connection}]{connection,  }\item[{string}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Triggered when the server accept the connection. 
+\begin{DoxyParams}{Parameters}
+{\em header} & Infos about the header. \\
+\hline
+{\em connection} & Infos about the server\textquotesingle{}s connection. \\
+\hline
+{\em message} & The id of and the user\textquotesingle{}s name as id\+:username. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_client_1_1_event_manager_ab2bcf174789c716591233351bb28d1e7}\label{class_client_1_1_event_manager_ab2bcf174789c716591233351bb28d1e7}} 
+\index{Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}!Get\+Player\+Cards\+Number@{Get\+Player\+Cards\+Number}}
+\index{Get\+Player\+Cards\+Number@{Get\+Player\+Cards\+Number}!Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}}
+\subsubsection{\texorpdfstring{Get\+Player\+Cards\+Number()}{GetPlayerCardsNumber()}}
+{\footnotesize\ttfamily void Client.\+Event\+Manager.\+Get\+Player\+Cards\+Number (\begin{DoxyParamCaption}\item[{Packet\+Header}]{header,  }\item[{Connection}]{connection,  }\item[{string}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Triggered when a client receive the cards number from someone. 
+\begin{DoxyParams}{Parameters}
+{\em header} & Infos about the header. \\
+\hline
+{\em connection} & Infos about the server\textquotesingle{}s connection. \\
+\hline
+{\em message} & The id of the player and the number of cards as id\+:nb\+Card. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_client_1_1_event_manager_a0780cdbdad5e278920c1b01e81441e1a}\label{class_client_1_1_event_manager_a0780cdbdad5e278920c1b01e81441e1a}} 
+\index{Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}!Get\+Player\+Score@{Get\+Player\+Score}}
+\index{Get\+Player\+Score@{Get\+Player\+Score}!Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}}
+\subsubsection{\texorpdfstring{Get\+Player\+Score()}{GetPlayerScore()}}
+{\footnotesize\ttfamily void Client.\+Event\+Manager.\+Get\+Player\+Score (\begin{DoxyParamCaption}\item[{Packet\+Header}]{header,  }\item[{Connection}]{connection,  }\item[{string}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Triggered when a client receive the player\textquotesingle{}s score. 
+\begin{DoxyParams}{Parameters}
+{\em header} & Infos about the header. \\
+\hline
+{\em connection} & Infos about the server\textquotesingle{}s connection. \\
+\hline
+{\em message} & The id of the player and the score as id\+:score. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_client_1_1_event_manager_ad5dbf05681ff2c9d265decf01bbecc50}\label{class_client_1_1_event_manager_ad5dbf05681ff2c9d265decf01bbecc50}} 
+\index{Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}!Incorrect\+Turn\+Type@{Incorrect\+Turn\+Type}}
+\index{Incorrect\+Turn\+Type@{Incorrect\+Turn\+Type}!Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}}
+\subsubsection{\texorpdfstring{Incorrect\+Turn\+Type()}{IncorrectTurnType()}}
+{\footnotesize\ttfamily void Client.\+Event\+Manager.\+Incorrect\+Turn\+Type (\begin{DoxyParamCaption}\item[{Packet\+Header}]{header,  }\item[{Connection}]{connection,  }\item[{string}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Triggered when the server tells the client it\textquotesingle{}s an incorrect turn type 
+\begin{DoxyParams}{Parameters}
+{\em header} & Infos about the header. \\
+\hline
+{\em connection} & Infos about the server\textquotesingle{}s connection. \\
+\hline
+{\em message} & Unused. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_client_1_1_event_manager_a28db7dbdff678c58ae2365639eba8012}\label{class_client_1_1_event_manager_a28db7dbdff678c58ae2365639eba8012}} 
+\index{Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}!Not\+My\+Turn@{Not\+My\+Turn}}
+\index{Not\+My\+Turn@{Not\+My\+Turn}!Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}}
+\subsubsection{\texorpdfstring{Not\+My\+Turn()}{NotMyTurn()}}
+{\footnotesize\ttfamily void Client.\+Event\+Manager.\+Not\+My\+Turn (\begin{DoxyParamCaption}\item[{Packet\+Header}]{header,  }\item[{Connection}]{connection,  }\item[{string}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Triggered when the server tells the client it\textquotesingle{}s not his turn 
+\begin{DoxyParams}{Parameters}
+{\em header} & Infos about the header. \\
+\hline
+{\em connection} & Infos about the server\textquotesingle{}s connection. \\
+\hline
+{\em message} & An user id. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_client_1_1_event_manager_ac3ea6f2f7242ce91e83244ed3af5cbfe}\label{class_client_1_1_event_manager_ac3ea6f2f7242ce91e83244ed3af5cbfe}} 
+\index{Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}!Not\+Owning\+Card@{Not\+Owning\+Card}}
+\index{Not\+Owning\+Card@{Not\+Owning\+Card}!Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}}
+\subsubsection{\texorpdfstring{Not\+Owning\+Card()}{NotOwningCard()}}
+{\footnotesize\ttfamily void Client.\+Event\+Manager.\+Not\+Owning\+Card (\begin{DoxyParamCaption}\item[{Packet\+Header}]{header,  }\item[{Connection}]{connection,  }\item[{string}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Triggered when the server tells the client he\textquotesingle{}s not owning the played card 
+\begin{DoxyParams}{Parameters}
+{\em header} & Infos about the header. \\
+\hline
+{\em connection} & Infos about the server\textquotesingle{}s connection. \\
+\hline
+{\em message} & Unused. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_client_1_1_event_manager_a3e12d72c6c2c789dc45efd9ef0d7df68}\label{class_client_1_1_event_manager_a3e12d72c6c2c789dc45efd9ef0d7df68}} 
+\index{Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}!Ok@{Ok}}
+\index{Ok@{Ok}!Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}}
+\subsubsection{\texorpdfstring{Ok()}{Ok()}}
+{\footnotesize\ttfamily void Client.\+Event\+Manager.\+Ok (\begin{DoxyParamCaption}\item[{Packet\+Header}]{header,  }\item[{Connection}]{connection,  }\item[{string}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Triggered when the server agree with one of the client request 
+\begin{DoxyParams}{Parameters}
+{\em header} & Infos about the header. \\
+\hline
+{\em connection} & Infos about the server\textquotesingle{}s connection. \\
+\hline
+{\em message} & Unused. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_client_1_1_event_manager_abd1cce780860d17af587ba718c07d33a}\label{class_client_1_1_event_manager_abd1cce780860d17af587ba718c07d33a}} 
+\index{Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}!Player\+Announce@{Player\+Announce}}
+\index{Player\+Announce@{Player\+Announce}!Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}}
+\subsubsection{\texorpdfstring{Player\+Announce()}{PlayerAnnounce()}}
+{\footnotesize\ttfamily void Client.\+Event\+Manager.\+Player\+Announce (\begin{DoxyParamCaption}\item[{Packet\+Header}]{header,  }\item[{Connection}]{connection,  }\item[{string}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Triggered when the it\textquotesingle{}s the announce turn of the client 
+\begin{DoxyParams}{Parameters}
+{\em header} & Infos about the header. \\
+\hline
+{\em connection} & Infos about the server\textquotesingle{}s connection. \\
+\hline
+{\em message} & A client id. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_client_1_1_event_manager_a7a71a3bd8b1c0ecd10b8286c50f6d79d}\label{class_client_1_1_event_manager_a7a71a3bd8b1c0ecd10b8286c50f6d79d}} 
+\index{Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}!Player\+Has\+Lost@{Player\+Has\+Lost}}
+\index{Player\+Has\+Lost@{Player\+Has\+Lost}!Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}}
+\subsubsection{\texorpdfstring{Player\+Has\+Lost()}{PlayerHasLost()}}
+{\footnotesize\ttfamily void Client.\+Event\+Manager.\+Player\+Has\+Lost (\begin{DoxyParamCaption}\item[{Packet\+Header}]{header,  }\item[{Connection}]{connection,  }\item[{string}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Triggered when a client has lost 
+\begin{DoxyParams}{Parameters}
+{\em header} & Infos about the header. \\
+\hline
+{\em connection} & Infos about the server\textquotesingle{}s connection. \\
+\hline
+{\em message} & Unused \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_client_1_1_event_manager_a460ff979d6d31a452e4374c3144f0805}\label{class_client_1_1_event_manager_a460ff979d6d31a452e4374c3144f0805}} 
+\index{Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}!Player\+Has\+Won@{Player\+Has\+Won}}
+\index{Player\+Has\+Won@{Player\+Has\+Won}!Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}}
+\subsubsection{\texorpdfstring{Player\+Has\+Won()}{PlayerHasWon()}}
+{\footnotesize\ttfamily void Client.\+Event\+Manager.\+Player\+Has\+Won (\begin{DoxyParamCaption}\item[{Packet\+Header}]{header,  }\item[{Connection}]{connection,  }\item[{string}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Triggered when a client has won 
+\begin{DoxyParams}{Parameters}
+{\em header} & Infos about the header. \\
+\hline
+{\em connection} & Infos about the server\textquotesingle{}s connection. \\
+\hline
+{\em message} & Unused \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_client_1_1_event_manager_a11c5ad80334ca0d83551fddb47194589}\label{class_client_1_1_event_manager_a11c5ad80334ca0d83551fddb47194589}} 
+\index{Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}!Player\+Play@{Player\+Play}}
+\index{Player\+Play@{Player\+Play}!Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}}
+\subsubsection{\texorpdfstring{Player\+Play()}{PlayerPlay()}}
+{\footnotesize\ttfamily void Client.\+Event\+Manager.\+Player\+Play (\begin{DoxyParamCaption}\item[{Packet\+Header}]{header,  }\item[{Connection}]{connection,  }\item[{string}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Triggered when the it\textquotesingle{}s the play turn of the client 
+\begin{DoxyParams}{Parameters}
+{\em header} & Infos about the header. \\
+\hline
+{\em connection} & Infos about the server\textquotesingle{}s connection. \\
+\hline
+{\em message} & A client id. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_client_1_1_event_manager_a78669a9c4545ffa2b35b8c2bfa750aa4}\label{class_client_1_1_event_manager_a78669a9c4545ffa2b35b8c2bfa750aa4}} 
+\index{Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}!Player\+Receive\+Deck@{Player\+Receive\+Deck}}
+\index{Player\+Receive\+Deck@{Player\+Receive\+Deck}!Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}}
+\subsubsection{\texorpdfstring{Player\+Receive\+Deck()}{PlayerReceiveDeck()}}
+{\footnotesize\ttfamily void Client.\+Event\+Manager.\+Player\+Receive\+Deck (\begin{DoxyParamCaption}\item[{Packet\+Header}]{header,  }\item[{Connection}]{connection,  }\item[{string}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Triggered when a client receive his deck. 
+\begin{DoxyParams}{Parameters}
+{\em header} & Infos about the header. \\
+\hline
+{\em connection} & Infos about the server\textquotesingle{}s connection. \\
+\hline
+{\em message} & A Deck. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_client_1_1_event_manager_a5876b23f48255516cf2f00052682e178}\label{class_client_1_1_event_manager_a5876b23f48255516cf2f00052682e178}} 
+\index{Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}!Player\+Receive\+Pile@{Player\+Receive\+Pile}}
+\index{Player\+Receive\+Pile@{Player\+Receive\+Pile}!Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}}
+\subsubsection{\texorpdfstring{Player\+Receive\+Pile()}{PlayerReceivePile()}}
+{\footnotesize\ttfamily void Client.\+Event\+Manager.\+Player\+Receive\+Pile (\begin{DoxyParamCaption}\item[{Packet\+Header}]{header,  }\item[{Connection}]{connection,  }\item[{string}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Triggered when a client receive the current pile 
+\begin{DoxyParams}{Parameters}
+{\em header} & Infos about the header. \\
+\hline
+{\em connection} & Infos about the server\textquotesingle{}s connection. \\
+\hline
+{\em message} & A Pile. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_client_1_1_event_manager_acfe5c23844435ad4b51104d31b75743f}\label{class_client_1_1_event_manager_acfe5c23844435ad4b51104d31b75743f}} 
+\index{Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}!Player\+Rename@{Player\+Rename}}
+\index{Player\+Rename@{Player\+Rename}!Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}}
+\subsubsection{\texorpdfstring{Player\+Rename()}{PlayerRename()}}
+{\footnotesize\ttfamily void Client.\+Event\+Manager.\+Player\+Rename (\begin{DoxyParamCaption}\item[{Packet\+Header}]{header,  }\item[{Connection}]{connection,  }\item[{string}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Triggered when a client change his name. 
+\begin{DoxyParams}{Parameters}
+{\em header} & Infos about the header. \\
+\hline
+{\em connection} & Infos about the server\textquotesingle{}s connection. \\
+\hline
+{\em message} & The id, the old name and the new name of the client in format id$\vert$old$\vert$new. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_client_1_1_event_manager_a8a67beed6389b1f6a1cab3742e7817ee}\label{class_client_1_1_event_manager_a8a67beed6389b1f6a1cab3742e7817ee}} 
+\index{Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}!Players\+Connect@{Players\+Connect}}
+\index{Players\+Connect@{Players\+Connect}!Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}}
+\subsubsection{\texorpdfstring{Players\+Connect()}{PlayersConnect()}}
+{\footnotesize\ttfamily void Client.\+Event\+Manager.\+Players\+Connect (\begin{DoxyParamCaption}\item[{Packet\+Header}]{header,  }\item[{Connection}]{connection,  }\item[{string}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Triggered when a new client is connected to the server. 
+\begin{DoxyParams}{Parameters}
+{\em header} & Infos about the header. \\
+\hline
+{\em connection} & Infos about the server\textquotesingle{}s connection. \\
+\hline
+{\em message} & A list of connected users with each item in format id\+:name. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_client_1_1_event_manager_a56e8f36764340b1049c83f48e16d3e13}\label{class_client_1_1_event_manager_a56e8f36764340b1049c83f48e16d3e13}} 
+\index{Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}!Players\+Quit@{Players\+Quit}}
+\index{Players\+Quit@{Players\+Quit}!Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}}
+\subsubsection{\texorpdfstring{Players\+Quit()}{PlayersQuit()}}
+{\footnotesize\ttfamily void Client.\+Event\+Manager.\+Players\+Quit (\begin{DoxyParamCaption}\item[{Packet\+Header}]{header,  }\item[{Connection}]{connection,  }\item[{string}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Triggered when a client disconnect himself from the server. 
+\begin{DoxyParams}{Parameters}
+{\em header} & Infos about the header. \\
+\hline
+{\em connection} & Infos about the server\textquotesingle{}s connection. \\
+\hline
+{\em message} & The client id. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_client_1_1_event_manager_a53596e2ebf7de8a3d5fe42ca9a020b67}\label{class_client_1_1_event_manager_a53596e2ebf7de8a3d5fe42ca9a020b67}} 
+\index{Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}!Playing@{Playing}}
+\index{Playing@{Playing}!Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}}
+\subsubsection{\texorpdfstring{Playing()}{Playing()}}
+{\footnotesize\ttfamily void Client.\+Event\+Manager.\+Playing (\begin{DoxyParamCaption}\item[{Packet\+Header}]{header,  }\item[{Connection}]{connection,  }\item[{string}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Triggered when the server is gonna start the game or is actually playing. 
+\begin{DoxyParams}{Parameters}
+{\em header} & Infos about the header. \\
+\hline
+{\em connection} & Infos about the server\textquotesingle{}s connection. \\
+\hline
+{\em message} & Unused. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_client_1_1_event_manager_ad850af88bc9fe2c1e31824171921fc4a}\label{class_client_1_1_event_manager_ad850af88bc9fe2c1e31824171921fc4a}} 
+\index{Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}!Print\+Incoming\+Message@{Print\+Incoming\+Message}}
+\index{Print\+Incoming\+Message@{Print\+Incoming\+Message}!Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}}
+\subsubsection{\texorpdfstring{Print\+Incoming\+Message()}{PrintIncomingMessage()}}
+{\footnotesize\ttfamily void Client.\+Event\+Manager.\+Print\+Incoming\+Message (\begin{DoxyParamCaption}\item[{Packet\+Header}]{header,  }\item[{Connection}]{connection,  }\item[{string}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Triggered when the a chat message is received. 
+\begin{DoxyParams}{Parameters}
+{\em header} & Infos about the header. \\
+\hline
+{\em connection} & Infos about the server\textquotesingle{}s connection. \\
+\hline
+{\em message} & The username and the message as username\+:message. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_client_1_1_event_manager_a65536bbfa18b0aaf02bf0a4dd1f6c1a0}\label{class_client_1_1_event_manager_a65536bbfa18b0aaf02bf0a4dd1f6c1a0}} 
+\index{Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}!Someone\+Has\+Announced@{Someone\+Has\+Announced}}
+\index{Someone\+Has\+Announced@{Someone\+Has\+Announced}!Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}}
+\subsubsection{\texorpdfstring{Someone\+Has\+Announced()}{SomeoneHasAnnounced()}}
+{\footnotesize\ttfamily void Client.\+Event\+Manager.\+Someone\+Has\+Announced (\begin{DoxyParamCaption}\item[{Packet\+Header}]{header,  }\item[{Connection}]{connection,  }\item[{string}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Triggered when someone announced 
+\begin{DoxyParams}{Parameters}
+{\em header} & Infos about the header. \\
+\hline
+{\em connection} & Infos about the server\textquotesingle{}s connection. \\
+\hline
+{\em message} & A contract. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_client_1_1_event_manager_a55922c9feb080ebff89d86fa757d3880}\label{class_client_1_1_event_manager_a55922c9feb080ebff89d86fa757d3880}} 
+\index{Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}!Someone\+Played\+A\+Card@{Someone\+Played\+A\+Card}}
+\index{Someone\+Played\+A\+Card@{Someone\+Played\+A\+Card}!Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}}
+\subsubsection{\texorpdfstring{Someone\+Played\+A\+Card()}{SomeonePlayedACard()}}
+{\footnotesize\ttfamily void Client.\+Event\+Manager.\+Someone\+Played\+A\+Card (\begin{DoxyParamCaption}\item[{Packet\+Header}]{header,  }\item[{Connection}]{connection,  }\item[{string}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Triggered when someone played 
+\begin{DoxyParams}{Parameters}
+{\em header} & Infos about the header. \\
+\hline
+{\em connection} & Infos about the server\textquotesingle{}s connection. \\
+\hline
+{\em message} & A card. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_client_1_1_event_manager_aae08d4b92f94038ac4934880fdbb9356}\label{class_client_1_1_event_manager_aae08d4b92f94038ac4934880fdbb9356}} 
+\index{Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}!Waiting\+For\+Player@{Waiting\+For\+Player}}
+\index{Waiting\+For\+Player@{Waiting\+For\+Player}!Client\+::\+Event\+Manager@{Client\+::\+Event\+Manager}}
+\subsubsection{\texorpdfstring{Waiting\+For\+Player()}{WaitingForPlayer()}}
+{\footnotesize\ttfamily void Client.\+Event\+Manager.\+Waiting\+For\+Player (\begin{DoxyParamCaption}\item[{Packet\+Header}]{header,  }\item[{Connection}]{connection,  }\item[{string}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Triggered when the server is waiting for players. 
+\begin{DoxyParams}{Parameters}
+{\em header} & Infos about the header. \\
+\hline
+{\em connection} & Infos about the server\textquotesingle{}s connection. \\
+\hline
+{\em message} & Unused. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Client/\+Module/Event\+Manager.\+cs\end{DoxyCompactItemize}

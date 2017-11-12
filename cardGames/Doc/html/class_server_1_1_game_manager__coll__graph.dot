@@ -1,0 +1,12 @@
+digraph "Server.GameManager"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{Server.GameManager\n|+ relance\l+ annonceTurn\l+ gameTurn\l+ status\l|+ GameManager()\l+ Wait()\l+ Distrib()\l+ NextAnnonce()\l+ CheckAnnonce()\l+ Annonce()\l+ NextTurn()\l+ CheckCard()\l+ Turn()\l+ CalculScore()\l+ Referee()\l+ End()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node2 -> Node1 [color="grey25",fontsize="10",style="solid",label=" +pile" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node2 [label="{Game.Pile\n|+ owners\l|+ Pile()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_game_1_1_pile.html"];
+  Node3 -> Node2 [color="grey25",fontsize="10",style="solid",label=" +cards" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node3 [label="{Game.Deck\n|+ cardValue\l+ cardPoint\l+ trumpValue\l+ trumpPoint\l+ cards\l+ Count\l|+ Deck()\l+ AddCard()\l+ AddCard()\l+ RemoveCard()\l+ RemoveCard()\l+ Find()\l+ ExistColour()\l+ GetRandomCard()\l+ Clear()\l+ Dump()\l+ ExistHigher()\l+ GetHigher()\l+ CalculPoint()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_game_1_1_deck.html"];
+  Node4 -> Node1 [color="grey25",fontsize="10",style="solid",label=" +contract" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node4 [label="{Game.Contract\n|+ score\l+ type\l+ id\l+ StringType\l|+ Contract()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_game_1_1_contract.html"];
+}

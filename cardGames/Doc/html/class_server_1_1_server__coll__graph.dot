@@ -1,0 +1,22 @@
+digraph "Server.Server"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{Server.Server\n|+ Instance\l+ debug\l|+ Server()\l+ Open()\l+ Close()\l+ Error()\l+ PrintOnDebug()\l+ WriteTo()\l+ WriteToAll()\l+ WriteToOther()\l+ CheckClose()\l+ Run()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node2 -> Node1 [color="grey25",fontsize="10",style="solid",label=" +network" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node2 [label="{Server.NetworkManager\n||+ NetworkManager()\l+ InitFunc()\l+ StartServer()\l+ ListEndPoints()\l+ StopServer()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_server_1_1_network_manager.html"];
+  Node3 -> Node1 [color="grey25",fontsize="10",style="solid",label=" +game" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node3 [label="{Server.GameManager\n|+ relance\l+ annonceTurn\l+ gameTurn\l+ status\l|+ GameManager()\l+ Wait()\l+ Distrib()\l+ NextAnnonce()\l+ CheckAnnonce()\l+ Annonce()\l+ NextTurn()\l+ CheckCard()\l+ Turn()\l+ CalculScore()\l+ Referee()\l+ End()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_server_1_1_game_manager.html"];
+  Node4 -> Node3 [color="grey25",fontsize="10",style="solid",label=" +pile" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node4 [label="{Game.Pile\n|+ owners\l|+ Pile()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_game_1_1_pile.html"];
+  Node5 -> Node4 [color="grey25",fontsize="10",style="solid",label=" +cards" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node5 [label="{Game.Deck\n|+ cardValue\l+ cardPoint\l+ trumpValue\l+ trumpPoint\l+ cards\l+ Count\l|+ Deck()\l+ AddCard()\l+ AddCard()\l+ RemoveCard()\l+ RemoveCard()\l+ Find()\l+ ExistColour()\l+ GetRandomCard()\l+ Clear()\l+ Dump()\l+ ExistHigher()\l+ GetHigher()\l+ CalculPoint()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_game_1_1_deck.html"];
+  Node6 -> Node3 [color="grey25",fontsize="10",style="solid",label=" +contract" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node6 [label="{Game.Contract\n|+ score\l+ type\l+ id\l+ StringType\l|+ Contract()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_game_1_1_contract.html"];
+  Node7 -> Node1 [color="grey25",fontsize="10",style="solid",label=" +players" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node7 [label="{Server.PlayerManager\n|+ list\l|+ PlayerManager()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_server_1_1_player_manager.html"];
+  Node8 -> Node1 [color="grey25",fontsize="10",style="solid",label=" +events" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node8 [label="{Server.EventManager\n||+ EventManager()\l+ Connection()\l+ Rename()\l+ Deconnection()\l+ ReceiveMessage()\l+ SendDeck()\l+ SendPile()\l+ HowManyCards()\l+ PlayerAnnonce()\l+ PlayerPlay()\l+ GetScore()\l+ PlayerReady()\l+ RelanceGame()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_server_1_1_event_manager.html"];
+  Node9 -> Node1 [color="grey25",fontsize="10",style="solid",label=" +serializer" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node9 [label="{Common.Serializer\n||+ ObjectToString()\l+ StringToObject\< T \>()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_common_1_1_serializer.html"];
+}

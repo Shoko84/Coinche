@@ -1,0 +1,139 @@
+\hypertarget{class_client_1_1_network_manager}{}\section{Client.\+Network\+Manager Class Reference}
+\label{class_client_1_1_network_manager}\index{Client.\+Network\+Manager@{Client.\+Network\+Manager}}
+
+
+Collaboration diagram for Client.\+Network\+Manager\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_client_1_1_network_manager_aecfff361611fa23b314522f9096d650b}{Network\+Manager} ()
+\item 
+void \hyperlink{class_client_1_1_network_manager_af288b5cc868c0eb586b67d9155650cd4}{Connect} (string username, string ip, int port)
+\item 
+void \hyperlink{class_client_1_1_network_manager_a153ce2acab6ca7ae2a16177603318328}{Set\+Call\+Back\+Function$<$ T $>$} (string type, Network\+Comms.\+Packet\+Handler\+Call\+Back\+Delegate$<$ T $>$ func)
+\item 
+void \hyperlink{class_client_1_1_network_manager_a488b3fc53182cc8d8da731a6a66d7156}{Disconnect} ()
+\item 
+void \hyperlink{class_client_1_1_network_manager_ac1e0ad62226df6e63b02d0680fe9a8ca}{Error} (string type, string msg)
+\item 
+void \hyperlink{class_client_1_1_network_manager_ab07955561eb46316ddf2c1e3f4d72670}{Write\+Message} (string type, string msg)
+\item 
+void \hyperlink{class_client_1_1_network_manager_a94eba16a4e3153c3676982aa4fec97c8}{Write\+Object} (string type, object obj)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{class_client_1_1_network_manager_a4be8908e8a6e14e5ac6f8ceb783e54cb}{Is\+Connected}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This Class contains the network part of the client. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_client_1_1_network_manager_aecfff361611fa23b314522f9096d650b}\label{class_client_1_1_network_manager_aecfff361611fa23b314522f9096d650b}} 
+\index{Client\+::\+Network\+Manager@{Client\+::\+Network\+Manager}!Network\+Manager@{Network\+Manager}}
+\index{Network\+Manager@{Network\+Manager}!Client\+::\+Network\+Manager@{Client\+::\+Network\+Manager}}
+\subsubsection{\texorpdfstring{Network\+Manager()}{NetworkManager()}}
+{\footnotesize\ttfamily Client.\+Network\+Manager.\+Network\+Manager (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_client_1_1_network_manager_af288b5cc868c0eb586b67d9155650cd4}\label{class_client_1_1_network_manager_af288b5cc868c0eb586b67d9155650cd4}} 
+\index{Client\+::\+Network\+Manager@{Client\+::\+Network\+Manager}!Connect@{Connect}}
+\index{Connect@{Connect}!Client\+::\+Network\+Manager@{Client\+::\+Network\+Manager}}
+\subsubsection{\texorpdfstring{Connect()}{Connect()}}
+{\footnotesize\ttfamily void Client.\+Network\+Manager.\+Connect (\begin{DoxyParamCaption}\item[{string}]{username,  }\item[{string}]{ip,  }\item[{int}]{port }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+This function permit to connect the client to a server. 
+\begin{DoxyParams}{Parameters}
+{\em username} & The user\textquotesingle{}s name. \\
+\hline
+{\em ip} & The ip of the server. \\
+\hline
+{\em port} & The port of the server. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function\+:
+% FIG 1
+\mbox{\Hypertarget{class_client_1_1_network_manager_a488b3fc53182cc8d8da731a6a66d7156}\label{class_client_1_1_network_manager_a488b3fc53182cc8d8da731a6a66d7156}} 
+\index{Client\+::\+Network\+Manager@{Client\+::\+Network\+Manager}!Disconnect@{Disconnect}}
+\index{Disconnect@{Disconnect}!Client\+::\+Network\+Manager@{Client\+::\+Network\+Manager}}
+\subsubsection{\texorpdfstring{Disconnect()}{Disconnect()}}
+{\footnotesize\ttfamily void Client.\+Network\+Manager.\+Disconnect (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+This function disconnect the client from the server. \mbox{\Hypertarget{class_client_1_1_network_manager_ac1e0ad62226df6e63b02d0680fe9a8ca}\label{class_client_1_1_network_manager_ac1e0ad62226df6e63b02d0680fe9a8ca}} 
+\index{Client\+::\+Network\+Manager@{Client\+::\+Network\+Manager}!Error@{Error}}
+\index{Error@{Error}!Client\+::\+Network\+Manager@{Client\+::\+Network\+Manager}}
+\subsubsection{\texorpdfstring{Error()}{Error()}}
+{\footnotesize\ttfamily void Client.\+Network\+Manager.\+Error (\begin{DoxyParamCaption}\item[{string}]{type,  }\item[{string}]{msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Write an error. 
+\begin{DoxyParams}{Parameters}
+{\em type} & The type of the event. \\
+\hline
+{\em msg} & The main part of the event. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function\+:
+% FIG 2
+\mbox{\Hypertarget{class_client_1_1_network_manager_a153ce2acab6ca7ae2a16177603318328}\label{class_client_1_1_network_manager_a153ce2acab6ca7ae2a16177603318328}} 
+\index{Client\+::\+Network\+Manager@{Client\+::\+Network\+Manager}!Set\+Call\+Back\+Function$<$ T $>$@{Set\+Call\+Back\+Function$<$ T $>$}}
+\index{Set\+Call\+Back\+Function$<$ T $>$@{Set\+Call\+Back\+Function$<$ T $>$}!Client\+::\+Network\+Manager@{Client\+::\+Network\+Manager}}
+\subsubsection{\texorpdfstring{Set\+Call\+Back\+Function$<$ T $>$()}{SetCallBackFunction< T >()}}
+{\footnotesize\ttfamily void Client.\+Network\+Manager.\+Set\+Call\+Back\+Function$<$ T $>$ (\begin{DoxyParamCaption}\item[{string}]{type,  }\item[{Network\+Comms.\+Packet\+Handler\+Call\+Back\+Delegate$<$ T $>$}]{func }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+This function permit to associate an event to a function. 
+\begin{DoxyParams}{Parameters}
+{\em type} & The type of the event. \\
+\hline
+{\em func} & The function to associate. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_client_1_1_network_manager_ab07955561eb46316ddf2c1e3f4d72670}\label{class_client_1_1_network_manager_ab07955561eb46316ddf2c1e3f4d72670}} 
+\index{Client\+::\+Network\+Manager@{Client\+::\+Network\+Manager}!Write\+Message@{Write\+Message}}
+\index{Write\+Message@{Write\+Message}!Client\+::\+Network\+Manager@{Client\+::\+Network\+Manager}}
+\subsubsection{\texorpdfstring{Write\+Message()}{WriteMessage()}}
+{\footnotesize\ttfamily void Client.\+Network\+Manager.\+Write\+Message (\begin{DoxyParamCaption}\item[{string}]{type,  }\item[{string}]{msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+This Function allow to send and event to the server. 
+\begin{DoxyParams}{Parameters}
+{\em type} & The type of the event. \\
+\hline
+{\em msg} & The main part of the event. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function\+:
+% FIG 3
+\mbox{\Hypertarget{class_client_1_1_network_manager_a94eba16a4e3153c3676982aa4fec97c8}\label{class_client_1_1_network_manager_a94eba16a4e3153c3676982aa4fec97c8}} 
+\index{Client\+::\+Network\+Manager@{Client\+::\+Network\+Manager}!Write\+Object@{Write\+Object}}
+\index{Write\+Object@{Write\+Object}!Client\+::\+Network\+Manager@{Client\+::\+Network\+Manager}}
+\subsubsection{\texorpdfstring{Write\+Object()}{WriteObject()}}
+{\footnotesize\ttfamily void Client.\+Network\+Manager.\+Write\+Object (\begin{DoxyParamCaption}\item[{string}]{type,  }\item[{object}]{obj }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+This function permit to send a object to the server through an event. 
+\begin{DoxyParams}{Parameters}
+{\em type} & The type of the event. \\
+\hline
+{\em obj} & The object to send. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_client_1_1_network_manager_a4be8908e8a6e14e5ac6f8ceb783e54cb}\label{class_client_1_1_network_manager_a4be8908e8a6e14e5ac6f8ceb783e54cb}} 
+\index{Client\+::\+Network\+Manager@{Client\+::\+Network\+Manager}!Is\+Connected@{Is\+Connected}}
+\index{Is\+Connected@{Is\+Connected}!Client\+::\+Network\+Manager@{Client\+::\+Network\+Manager}}
+\subsubsection{\texorpdfstring{Is\+Connected}{IsConnected}}
+{\footnotesize\ttfamily bool Client.\+Network\+Manager.\+Is\+Connected}
+
+Getter of the connection. \begin{DoxyReturn}{Returns}
+Return the state of the connection to the server.\+This boolean corresponds if the user is connected 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Client/\+Module/Network\+Manager.\+cs\end{DoxyCompactItemize}

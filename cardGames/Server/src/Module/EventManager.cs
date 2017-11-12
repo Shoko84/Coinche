@@ -213,7 +213,7 @@ namespace Server
         *   Triggered when the client ask the number of card of a player.
         *   @param   header      Infos about the header.
         *   @param   connection  Infos about the client connection.
-        *   @param   message     The id of the player he want to know the number of card.
+        *   @param   id          The id of the player he want to know the number of card.
         */
         public void HowManyCards(PacketHeader header, Connection connection, string id)
         {

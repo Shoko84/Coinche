@@ -1,0 +1,6 @@
+digraph "Server.EventManager"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{Server.EventManager\n||+ EventManager()\l+ Connection()\l+ Rename()\l+ Deconnection()\l+ ReceiveMessage()\l+ SendDeck()\l+ SendPile()\l+ HowManyCards()\l+ PlayerAnnonce()\l+ PlayerPlay()\l+ GetScore()\l+ PlayerReady()\l+ RelanceGame()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+}
