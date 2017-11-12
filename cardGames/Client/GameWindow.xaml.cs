@@ -45,7 +45,7 @@ namespace Client
             this.TestCanvas.Children.Add(rect);
         }
 
-        public void DrawGameField()
+        private void DrawGameField()
         {
             TestCanvas.Children.Clear();
             Image img = new Image();
@@ -62,7 +62,7 @@ namespace Client
             TestCanvas.Children.Add(img);
         }
 
-        public void DrawHandCards(List<ClientUser> cardsList)
+        private void DrawHandCards(List<ClientUser> cardsList)
         {
             Point[] cardsPos = new Point[]
             {
@@ -133,7 +133,7 @@ namespace Client
             }
         }
 
-        public void DrawCardsPlayed(Deck cardsPlayed)
+        private void DrawCardsPlayed(Deck cardsPlayed)
         {
             Point[] cardsPos = new Point[]
             {
@@ -160,7 +160,7 @@ namespace Client
             }
         }
 
-        public void DrawNameAndScore()
+        private void DrawNameAndScore()
         {
             for (int i = 0; i < GameInfos.Instance.UsersList.Count; i++)
             {
@@ -183,7 +183,7 @@ namespace Client
             }
         }
 
-        public void DrawWhosPlaying()
+        private void DrawWhosPlaying()
         {
             foreach (var user in GameInfos.Instance.UsersList)
             {
@@ -212,6 +212,24 @@ namespace Client
             }
         }
 
+        private void DrawContractPicked()
+        {
+            Contract contract = GameInfos.Instance.contractPicked;
+
+            if (contract != null)
+            {
+                Label text = new Label
+                {
+                    Foreground = Brushes.White,
+                    Content = contract.StringType + "\n" + contract.score + " points\nPicked by: " + GameInfos.Instance.GetClientUserById(contract.id).Username
+                };
+                text.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+                Canvas.SetLeft(text, TestCanvas.Width - text.DesiredSize.Width - 15);
+                Canvas.SetTop(text, 15);
+                TestCanvas.Children.Add(text);
+            }
+        }
+
         public void DrawCanvas()
         {
             DrawGameField();
@@ -219,6 +237,7 @@ namespace Client
             DrawCardsPlayed(GameInfos.Instance.CardsPlayed);
             DrawNameAndScore();
             DrawWhosPlaying();
+            DrawContractPicked();
         }
 
         public void Initialize()
