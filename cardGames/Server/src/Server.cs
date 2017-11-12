@@ -186,6 +186,22 @@ namespace Server
         }
 
         /**
+         *  Check if all the players are ONLINE
+         *  @return Return False if all the players are offline
+         */
+        public bool    CheckClose()
+        {
+            if (players.list.Count != 4)
+                return (true);
+            foreach (var it in players.list)
+            {
+                if (it.status == PLAYER_STATUS.ONLINE)
+                    return (true);
+            }
+            return (false);
+        }
+
+        /**
          *  Play one turn of the game according to the game state.
          */
         public void Run()

@@ -21,9 +21,12 @@ namespace Server
         {
             Server.Instance.debug = true;
             Server.Instance.Open();
-            Console.WriteLine("Press any key to stop the server..");
             while (true)
+            {
                 Server.Instance.Run();
+                if (!Server.Instance.CheckClose())
+                    break;
+            }
             Server.Instance.Close();
         }
     }
