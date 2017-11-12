@@ -103,15 +103,32 @@ namespace Client
         }
 
         /**
+         *  This function clear all game infos
+         */
+        public void RestartGameInfos()
+        {
+            foreach (var user in usersList)
+            {
+                user.CardsList.Clear();
+                user.Score = 0;
+                user.IsPlaying = false;
+            }
+            CardsPlayed = new Deck();
+            GameStatus = GAME_STATUS.WAIT;
+            ContractPicked = null;
+            LastPile = null;
+        }
+
+        /**
          *  GameInfos's constructor - Create an GameInfos instance
          */
         public GameInfos()
         {
             netManager = new NetworkManager();
             eventManager = new EventManager();
+            MyId = -1;
             usersList = new List<ClientUser>();
             CardsPlayed = new Deck();
-            MyId = -1;
             GameStatus = GAME_STATUS.WAIT;
             ContractPicked = null;
             LastPile = null;
