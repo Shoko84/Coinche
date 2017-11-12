@@ -31,45 +31,12 @@ namespace Client
             Right
         }
 
-        private int id; /**< This int corresponds to the user's id*/
-        /**
-         *  Getter of the user's id.
-         *  @return Return the user's id.
-         */
-        public int Id { get => id; }
-
-        private string username; /**< This string corresponds to the user's name*/
-        /**
-         *  Getter of the user's name.
-         *  @return Return the user's name.
-         */
-        public string Username { get => username; }
-
-        private ClientPosition position; /**< This enum corresponds to the user's position*/
-        /**
-         *  Getter of the user's position.
-         *  @return Return the user's position.
-         */
-        public ClientPosition Position { get => position; }
-
-        private Deck cardsList; /**< This Deck class corresponds to the user's deck card*/
-        /**
-         *  Getter of the user's deck card.
-         *  @return Return the user's deck card.
-         */
-        public Deck CardsList { get => cardsList; set => cardsList = value; }
-
-        /**
-         *  This function overrides the object 'Equals' method
-         *  @param  obj      The object to test the operation with.
-         */
-
-        private int score; /**< This integer corresponds to the user's score*/
-        /**
-         *  Getter of the user's score.
-         *  @return Return the user's score.
-         */
-        public int Score { get => score; set => score = value; }
+        public int Id;                  /**< This int corresponds to the user's id*/
+        public string Username;         /**< This string corresponds to the user's name*/
+        public ClientPosition Position; /**< This enum corresponds to the user's position*/
+        public Deck CardsList;          /**< This Deck class corresponds to the user's deck card*/
+        public int Score;               /**< This integer corresponds to the user's score*/
+        public bool IsPlaying;          /**< This boolean corresponds if the user is playing*/
 
         /**
          *  This function overrides the object 'Equals' method
@@ -78,9 +45,9 @@ namespace Client
         public override bool Equals(object obj)
         {
             ClientUser other = obj as ClientUser;
-            return (this.username == other.Username &&
-                    this.position == other.Position &&
-                    this.cardsList == other.CardsList);
+            return (Username == other.Username &&
+                    Position == other.Position &&
+                    CardsList == other.CardsList);
         }
 
         /**
@@ -89,7 +56,7 @@ namespace Client
          */
         public void AddCard(Card card)
         {
-            cardsList.AddCard(card);
+            CardsList.AddCard(card);
         }
 
         /**
@@ -98,7 +65,7 @@ namespace Client
          */
         public void RemoveCard(Card card)
         {
-            cardsList.RemoveCard(card);
+            CardsList.RemoveCard(card);
         }
 
         /**
@@ -109,11 +76,12 @@ namespace Client
          */
         public ClientUser(int _id, string _username, ClientPosition _position)
         {
-            id = _id;
-            username = _username;
-            position = _position;
-            cardsList = new Deck();
-            score = 0;
+            Id = _id;
+            Username = _username;
+            Position = _position;
+            CardsList = new Deck();
+            Score = 0;
+            IsPlaying = false;
         }
     }
 }

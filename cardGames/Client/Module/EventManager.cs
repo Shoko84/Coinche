@@ -120,10 +120,12 @@ namespace Client
             if (GameInfos.Instance.GameStatus == GAME_STATUS.ANNONCE)
             {
                 App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
-                    {
+                {
                     GameWindow.Instance.ContentArea.Content = GameWindow.Instance.ContractCallCont;
                     ContractCallContent content = GameWindow.Instance.ContractCallCont;
-                    if (int.Parse(message) == GameInfos.Instance.MyId)
+                    int userId = int.Parse(message);
+
+                    if (userId == GameInfos.Instance.MyId)
                     {
                         content.ContractBox.IsEnabled = true;
                         content.ContractValue.IsEnabled = true;
@@ -135,6 +137,14 @@ namespace Client
                         content.ContractValue.IsEnabled = false;
                         content.ContractCallButton.IsEnabled = false;
                     }
+                    foreach (var user in GameInfos.Instance.UsersList)
+                    {
+                        if (user.Id == userId)
+                            user.IsPlaying = true;
+                        else
+                            user.IsPlaying = false;
+                    }
+                    GameWindow.Instance.DrawCanvas();
                 }));
             }
         }
@@ -155,7 +165,9 @@ namespace Client
                 {
                     GameWindow.Instance.ContentArea.Content = GameWindow.Instance.IngameCallCont;
                     IngameCallContent content = GameWindow.Instance.IngameCallCont;
-                    if (int.Parse(message) == GameInfos.Instance.MyId)
+                    int userId = int.Parse(message);
+
+                    if (userId == GameInfos.Instance.MyId)
                     {
                         content.CardsListBox.IsEnabled = true;
                         content.PickCardButton.IsEnabled = true;
@@ -165,6 +177,14 @@ namespace Client
                         content.CardsListBox.IsEnabled = false;
                         content.PickCardButton.IsEnabled = false;
                     }
+                    foreach (var user in GameInfos.Instance.UsersList)
+                    {
+                        if (user.Id == userId)
+                            user.IsPlaying = true;
+                        else
+                            user.IsPlaying = false;
+                    }
+                    GameWindow.Instance.DrawCanvas();
                 }));
             }
         }
