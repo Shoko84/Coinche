@@ -1,0 +1,17 @@
+digraph "Client.GameInfos.GetPosFromId"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node12 [label="Client.GameInfos.GetPosFromId",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node12 -> Node13 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node13 [label="Client.GameInfos.AddPlayer",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_client_1_1_game_infos.html#adea137b31b6477e2c64a083e8eab6fac"];
+  Node13 -> Node14 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node14 [label="Client.EventManager.ConnectionOk",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_client_1_1_event_manager.html#a4fca9a8ae6010251ba07265e9f8572ac"];
+  Node13 -> Node15 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node15 [label="Client.EventManager.Players\lConnect",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_client_1_1_event_manager.html#a8a67beed6389b1f6a1cab3742e7817ee"];
+  Node12 -> Node16 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node16 [label="Client.EventManager.GetPlayer\lCardsNumber",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_client_1_1_event_manager.html#ab2bcf174789c716591233351bb28d1e7"];
+  Node12 -> Node17 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node17 [label="Client.EventManager.Player\lReceivePile",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_client_1_1_event_manager.html#a5876b23f48255516cf2f00052682e178"];
+}

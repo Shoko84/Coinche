@@ -1,0 +1,22 @@
+digraph "Game.Deck.AddCard"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="Game.Deck.AddCard",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node2 [label="Client.ClientUser.AddCard",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_client_1_1_client_user.html#adc5cda4be6a9fa1dcdf7adb0e18e57b0"];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node3 [label="Client.EventManager.Player\lReceivePile",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_client_1_1_event_manager.html#a5876b23f48255516cf2f00052682e178"];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node4 [label="Server.GameManager.Wait",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_server_1_1_game_manager.html#a07eb113db9a00aefdb565068ed532915"];
+  Node4 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node5 [label="Server.Server.Run",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_server_1_1_server.html#a40d5db9d850120c06889f827e8ce259a"];
+  Node1 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node6 [label="Server.GameManager.NextTurn",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_server_1_1_game_manager.html#a94b83f44ca6b2f3a70d9f5ad0af19696"];
+  Node6 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node7 [label="Server.GameManager.CheckCard",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_server_1_1_game_manager.html#a4a32016560d748cc8c272ebfb793f22c"];
+  Node7 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node8 [label="Server.GameManager.Turn",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_server_1_1_game_manager.html#afe22c5dc89cdc68d8361540b541acd30"];
+  Node8 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+}

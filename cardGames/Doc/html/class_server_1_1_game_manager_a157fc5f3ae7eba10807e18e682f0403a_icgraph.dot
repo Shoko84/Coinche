@@ -1,0 +1,16 @@
+digraph "Server.GameManager.NextAnnonce"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node16 [label="Server.GameManager.NextAnnonce",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node16 -> Node17 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node17 [label="Server.GameManager.Distrib",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_server_1_1_game_manager.html#abe3cba330255ade16dfadbf6d2bcbed7"];
+  Node17 -> Node18 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node18 [label="Server.Server.Run",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_server_1_1_server.html#a40d5db9d850120c06889f827e8ce259a"];
+  Node16 -> Node19 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node19 [label="Server.GameManager.Check\lAnnonce",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_server_1_1_game_manager.html#a28c391b5fd915d1f4ac422d9b4fe509e"];
+  Node19 -> Node20 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node20 [label="Server.GameManager.Annonce",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_server_1_1_game_manager.html#a8f9c1e139a56849d75ecbe8ab73243ac"];
+  Node20 -> Node18 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

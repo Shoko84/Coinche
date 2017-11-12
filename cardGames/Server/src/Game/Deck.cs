@@ -104,7 +104,7 @@ namespace Game
 
         /**
          *  Remove a card in the deck.
-         *  @param  color       The color of the card to remove.
+         *  @param  colour      The color of the card to remove.
          *  @param  value       The value of the card to remove.
          *  @param  position    The position of the card to remove.
          */

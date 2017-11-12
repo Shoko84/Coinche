@@ -12,10 +12,14 @@ namespace Common
      */
     public class Loop
     {
-        private int _it;
+        private int _it;    /**< The value of the iterator.*/
+        private int _max;   /**< The max value of the iterator.*/
+        private int _min;   /**< The min value of the iterator.*/
+        
+        /**
+         *  Getter of the iterator
+         */
         public int It { get => _it; set => _it = value; }
-        private int _max;
-        private int _min;
 
         /**
          *  Constructor

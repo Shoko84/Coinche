@@ -1,0 +1,227 @@
+\hypertarget{class_server_1_1_game_manager}{}\section{Server.\+Game\+Manager Class Reference}
+\label{class_server_1_1_game_manager}\index{Server.\+Game\+Manager@{Server.\+Game\+Manager}}
+
+
+Collaboration diagram for Server.\+Game\+Manager\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_server_1_1_game_manager_af92b9cb93c22d1751486c11c7f49a26f}{Game\+Manager} ()
+\item 
+void \hyperlink{class_server_1_1_game_manager_a07eb113db9a00aefdb565068ed532915}{Wait} ()
+\item 
+void \hyperlink{class_server_1_1_game_manager_abe3cba330255ade16dfadbf6d2bcbed7}{Distrib} ()
+\item 
+void \hyperlink{class_server_1_1_game_manager_a157fc5f3ae7eba10807e18e682f0403a}{Next\+Annonce} (bool first=false)
+\item 
+bool \hyperlink{class_server_1_1_game_manager_a28c391b5fd915d1f4ac422d9b4fe509e}{Check\+Annonce} (\hyperlink{class_game_1_1_contract}{Contract} \hyperlink{class_server_1_1_game_manager_af24c716c34949ff495b9a47eec59d88c}{contract})
+\item 
+void \hyperlink{class_server_1_1_game_manager_a8f9c1e139a56849d75ecbe8ab73243ac}{Annonce} ()
+\item 
+bool \hyperlink{class_server_1_1_game_manager_a94b83f44ca6b2f3a70d9f5ad0af19696}{Next\+Turn} (\hyperlink{class_game_1_1_card}{Card} card)
+\item 
+bool \hyperlink{class_server_1_1_game_manager_a4a32016560d748cc8c272ebfb793f22c}{Check\+Card} (\hyperlink{class_game_1_1_card}{Card} card)
+\item 
+void \hyperlink{class_server_1_1_game_manager_afe22c5dc89cdc68d8361540b541acd30}{Turn} ()
+\item 
+int \hyperlink{class_server_1_1_game_manager_a7a5ac01d26fc1536d5376e982023e736}{Calcul\+Score} (int id1, int id2)
+\item 
+void \hyperlink{class_server_1_1_game_manager_a290183cdbe0ad1767906d5d5c0ac4e54}{Referee} ()
+\item 
+void \hyperlink{class_server_1_1_game_manager_a7e771aa3a76446d77d872386fb4984d9}{End} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_game_1_1_contract}{Contract} \hyperlink{class_server_1_1_game_manager_af24c716c34949ff495b9a47eec59d88c}{contract}
+\item 
+\hyperlink{class_game_1_1_pile}{Pile} \hyperlink{class_server_1_1_game_manager_a4aa559ff09ed2f8a2cdcc057ef1173ea}{pile}
+\item 
+bool \hyperlink{class_server_1_1_game_manager_a33a61dc395239feaf64a60e508831f25}{relance}
+\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{class_server_1_1_game_manager_a72cab963cde1a3e7445f3d2fb44d3ee9}{annonce\+Turn}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\item 
+int \hyperlink{class_server_1_1_game_manager_a8e96395c8c7e183856fff1cb92ae948f}{game\+Turn}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\item 
+\hyperlink{namespace_server_a2b496a25969b5c46d373f7079fac645f}{G\+A\+M\+E\+\_\+\+S\+T\+A\+T\+US} \hyperlink{class_server_1_1_game_manager_a987a6f902c77f26b829ef23b7cdd1254}{status}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class permit to rule the game. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_server_1_1_game_manager_af92b9cb93c22d1751486c11c7f49a26f}\label{class_server_1_1_game_manager_af92b9cb93c22d1751486c11c7f49a26f}} 
+\index{Server\+::\+Game\+Manager@{Server\+::\+Game\+Manager}!Game\+Manager@{Game\+Manager}}
+\index{Game\+Manager@{Game\+Manager}!Server\+::\+Game\+Manager@{Server\+::\+Game\+Manager}}
+\subsubsection{\texorpdfstring{Game\+Manager()}{GameManager()}}
+{\footnotesize\ttfamily Server.\+Game\+Manager.\+Game\+Manager (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_server_1_1_game_manager_a8f9c1e139a56849d75ecbe8ab73243ac}\label{class_server_1_1_game_manager_a8f9c1e139a56849d75ecbe8ab73243ac}} 
+\index{Server\+::\+Game\+Manager@{Server\+::\+Game\+Manager}!Annonce@{Annonce}}
+\index{Annonce@{Annonce}!Server\+::\+Game\+Manager@{Server\+::\+Game\+Manager}}
+\subsubsection{\texorpdfstring{Annonce()}{Annonce()}}
+{\footnotesize\ttfamily void Server.\+Game\+Manager.\+Annonce (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+This function is triggered when the game is in A\+N\+N\+O\+N\+CE mode. Here is the caller graph for this function\+:
+% FIG 1
+\mbox{\Hypertarget{class_server_1_1_game_manager_a7a5ac01d26fc1536d5376e982023e736}\label{class_server_1_1_game_manager_a7a5ac01d26fc1536d5376e982023e736}} 
+\index{Server\+::\+Game\+Manager@{Server\+::\+Game\+Manager}!Calcul\+Score@{Calcul\+Score}}
+\index{Calcul\+Score@{Calcul\+Score}!Server\+::\+Game\+Manager@{Server\+::\+Game\+Manager}}
+\subsubsection{\texorpdfstring{Calcul\+Score()}{CalculScore()}}
+{\footnotesize\ttfamily int Server.\+Game\+Manager.\+Calcul\+Score (\begin{DoxyParamCaption}\item[{int}]{id1,  }\item[{int}]{id2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Calculate the score of a team according the scores of the two players. 
+\begin{DoxyParams}{Parameters}
+{\em id1} & The id of the first player in the team. \\
+\hline
+{\em id2} & The id of the second player in the team. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function\+:
+% FIG 2
+\mbox{\Hypertarget{class_server_1_1_game_manager_a28c391b5fd915d1f4ac422d9b4fe509e}\label{class_server_1_1_game_manager_a28c391b5fd915d1f4ac422d9b4fe509e}} 
+\index{Server\+::\+Game\+Manager@{Server\+::\+Game\+Manager}!Check\+Annonce@{Check\+Annonce}}
+\index{Check\+Annonce@{Check\+Annonce}!Server\+::\+Game\+Manager@{Server\+::\+Game\+Manager}}
+\subsubsection{\texorpdfstring{Check\+Annonce()}{CheckAnnonce()}}
+{\footnotesize\ttfamily bool Server.\+Game\+Manager.\+Check\+Annonce (\begin{DoxyParamCaption}\item[{\hyperlink{class_game_1_1_contract}{Contract}}]{contract }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+This function check if the annonce made by a player is allowed. Here is the caller graph for this function\+:
+% FIG 3
+\mbox{\Hypertarget{class_server_1_1_game_manager_a4a32016560d748cc8c272ebfb793f22c}\label{class_server_1_1_game_manager_a4a32016560d748cc8c272ebfb793f22c}} 
+\index{Server\+::\+Game\+Manager@{Server\+::\+Game\+Manager}!Check\+Card@{Check\+Card}}
+\index{Check\+Card@{Check\+Card}!Server\+::\+Game\+Manager@{Server\+::\+Game\+Manager}}
+\subsubsection{\texorpdfstring{Check\+Card()}{CheckCard()}}
+{\footnotesize\ttfamily bool Server.\+Game\+Manager.\+Check\+Card (\begin{DoxyParamCaption}\item[{\hyperlink{class_game_1_1_card}{Card}}]{card }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+The function check if the card played by the player can be played 
+\begin{DoxyParams}{Parameters}
+{\em card} & The card played by the player. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function\+:
+% FIG 4
+\mbox{\Hypertarget{class_server_1_1_game_manager_abe3cba330255ade16dfadbf6d2bcbed7}\label{class_server_1_1_game_manager_abe3cba330255ade16dfadbf6d2bcbed7}} 
+\index{Server\+::\+Game\+Manager@{Server\+::\+Game\+Manager}!Distrib@{Distrib}}
+\index{Distrib@{Distrib}!Server\+::\+Game\+Manager@{Server\+::\+Game\+Manager}}
+\subsubsection{\texorpdfstring{Distrib()}{Distrib()}}
+{\footnotesize\ttfamily void Server.\+Game\+Manager.\+Distrib (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+This function is triggered when the game is in D\+I\+S\+T\+R\+IB mode. Here is the caller graph for this function\+:
+% FIG 5
+\mbox{\Hypertarget{class_server_1_1_game_manager_a7e771aa3a76446d77d872386fb4984d9}\label{class_server_1_1_game_manager_a7e771aa3a76446d77d872386fb4984d9}} 
+\index{Server\+::\+Game\+Manager@{Server\+::\+Game\+Manager}!End@{End}}
+\index{End@{End}!Server\+::\+Game\+Manager@{Server\+::\+Game\+Manager}}
+\subsubsection{\texorpdfstring{End()}{End()}}
+{\footnotesize\ttfamily void Server.\+Game\+Manager.\+End (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+This function is triggered when the game is in E\+ND mode. Here is the caller graph for this function\+:
+% FIG 6
+\mbox{\Hypertarget{class_server_1_1_game_manager_a157fc5f3ae7eba10807e18e682f0403a}\label{class_server_1_1_game_manager_a157fc5f3ae7eba10807e18e682f0403a}} 
+\index{Server\+::\+Game\+Manager@{Server\+::\+Game\+Manager}!Next\+Annonce@{Next\+Annonce}}
+\index{Next\+Annonce@{Next\+Annonce}!Server\+::\+Game\+Manager@{Server\+::\+Game\+Manager}}
+\subsubsection{\texorpdfstring{Next\+Annonce()}{NextAnnonce()}}
+{\footnotesize\ttfamily void Server.\+Game\+Manager.\+Next\+Annonce (\begin{DoxyParamCaption}\item[{bool}]{first = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+This function change the annonce turn and prevent the players of the changement. Here is the caller graph for this function\+:
+% FIG 7
+\mbox{\Hypertarget{class_server_1_1_game_manager_a94b83f44ca6b2f3a70d9f5ad0af19696}\label{class_server_1_1_game_manager_a94b83f44ca6b2f3a70d9f5ad0af19696}} 
+\index{Server\+::\+Game\+Manager@{Server\+::\+Game\+Manager}!Next\+Turn@{Next\+Turn}}
+\index{Next\+Turn@{Next\+Turn}!Server\+::\+Game\+Manager@{Server\+::\+Game\+Manager}}
+\subsubsection{\texorpdfstring{Next\+Turn()}{NextTurn()}}
+{\footnotesize\ttfamily bool Server.\+Game\+Manager.\+Next\+Turn (\begin{DoxyParamCaption}\item[{\hyperlink{class_game_1_1_card}{Card}}]{card }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+This function change the player who\textquotesingle{}s currently playing and alert the players of the changes. 
+\begin{DoxyParams}{Parameters}
+{\em card} & The card played by the player. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function\+:
+% FIG 8
+\mbox{\Hypertarget{class_server_1_1_game_manager_a290183cdbe0ad1767906d5d5c0ac4e54}\label{class_server_1_1_game_manager_a290183cdbe0ad1767906d5d5c0ac4e54}} 
+\index{Server\+::\+Game\+Manager@{Server\+::\+Game\+Manager}!Referee@{Referee}}
+\index{Referee@{Referee}!Server\+::\+Game\+Manager@{Server\+::\+Game\+Manager}}
+\subsubsection{\texorpdfstring{Referee()}{Referee()}}
+{\footnotesize\ttfamily void Server.\+Game\+Manager.\+Referee (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+This function is triggered when the game is in R\+E\+F\+E\+R\+EE mode. Here is the caller graph for this function\+:
+% FIG 9
+\mbox{\Hypertarget{class_server_1_1_game_manager_afe22c5dc89cdc68d8361540b541acd30}\label{class_server_1_1_game_manager_afe22c5dc89cdc68d8361540b541acd30}} 
+\index{Server\+::\+Game\+Manager@{Server\+::\+Game\+Manager}!Turn@{Turn}}
+\index{Turn@{Turn}!Server\+::\+Game\+Manager@{Server\+::\+Game\+Manager}}
+\subsubsection{\texorpdfstring{Turn()}{Turn()}}
+{\footnotesize\ttfamily void Server.\+Game\+Manager.\+Turn (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+This function is triggered when the game is in T\+U\+RN mode. Here is the caller graph for this function\+:
+% FIG 10
+\mbox{\Hypertarget{class_server_1_1_game_manager_a07eb113db9a00aefdb565068ed532915}\label{class_server_1_1_game_manager_a07eb113db9a00aefdb565068ed532915}} 
+\index{Server\+::\+Game\+Manager@{Server\+::\+Game\+Manager}!Wait@{Wait}}
+\index{Wait@{Wait}!Server\+::\+Game\+Manager@{Server\+::\+Game\+Manager}}
+\subsubsection{\texorpdfstring{Wait()}{Wait()}}
+{\footnotesize\ttfamily void Server.\+Game\+Manager.\+Wait (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+This function is triggered when the game is in W\+A\+IT mode. Here is the caller graph for this function\+:
+% FIG 11
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_server_1_1_game_manager_af24c716c34949ff495b9a47eec59d88c}\label{class_server_1_1_game_manager_af24c716c34949ff495b9a47eec59d88c}} 
+\index{Server\+::\+Game\+Manager@{Server\+::\+Game\+Manager}!contract@{contract}}
+\index{contract@{contract}!Server\+::\+Game\+Manager@{Server\+::\+Game\+Manager}}
+\subsubsection{\texorpdfstring{contract}{contract}}
+{\footnotesize\ttfamily \hyperlink{class_game_1_1_contract}{Contract} Server.\+Game\+Manager.\+contract}
+
+The current contract. \mbox{\Hypertarget{class_server_1_1_game_manager_a4aa559ff09ed2f8a2cdcc057ef1173ea}\label{class_server_1_1_game_manager_a4aa559ff09ed2f8a2cdcc057ef1173ea}} 
+\index{Server\+::\+Game\+Manager@{Server\+::\+Game\+Manager}!pile@{pile}}
+\index{pile@{pile}!Server\+::\+Game\+Manager@{Server\+::\+Game\+Manager}}
+\subsubsection{\texorpdfstring{pile}{pile}}
+{\footnotesize\ttfamily \hyperlink{class_game_1_1_pile}{Pile} Server.\+Game\+Manager.\+pile}
+
+The current pile. \mbox{\Hypertarget{class_server_1_1_game_manager_a33a61dc395239feaf64a60e508831f25}\label{class_server_1_1_game_manager_a33a61dc395239feaf64a60e508831f25}} 
+\index{Server\+::\+Game\+Manager@{Server\+::\+Game\+Manager}!relance@{relance}}
+\index{relance@{relance}!Server\+::\+Game\+Manager@{Server\+::\+Game\+Manager}}
+\subsubsection{\texorpdfstring{relance}{relance}}
+{\footnotesize\ttfamily bool Server.\+Game\+Manager.\+relance}
+
+if the game must be relance. 
+
+\subsection{Property Documentation}
+\mbox{\Hypertarget{class_server_1_1_game_manager_a72cab963cde1a3e7445f3d2fb44d3ee9}\label{class_server_1_1_game_manager_a72cab963cde1a3e7445f3d2fb44d3ee9}} 
+\index{Server\+::\+Game\+Manager@{Server\+::\+Game\+Manager}!annonce\+Turn@{annonce\+Turn}}
+\index{annonce\+Turn@{annonce\+Turn}!Server\+::\+Game\+Manager@{Server\+::\+Game\+Manager}}
+\subsubsection{\texorpdfstring{annonce\+Turn}{annonceTurn}}
+{\footnotesize\ttfamily int Server.\+Game\+Manager.\+annonce\+Turn\hspace{0.3cm}{\ttfamily [get]}}
+
+Getter and Setter for the \+\_\+status variable. \begin{DoxyReturn}{Returns}
+Return the id of the player who annonce. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_server_1_1_game_manager_a8e96395c8c7e183856fff1cb92ae948f}\label{class_server_1_1_game_manager_a8e96395c8c7e183856fff1cb92ae948f}} 
+\index{Server\+::\+Game\+Manager@{Server\+::\+Game\+Manager}!game\+Turn@{game\+Turn}}
+\index{game\+Turn@{game\+Turn}!Server\+::\+Game\+Manager@{Server\+::\+Game\+Manager}}
+\subsubsection{\texorpdfstring{game\+Turn}{gameTurn}}
+{\footnotesize\ttfamily int Server.\+Game\+Manager.\+game\+Turn\hspace{0.3cm}{\ttfamily [get]}}
+
+Getter and Setter for the \+\_\+status variable. \begin{DoxyReturn}{Returns}
+Return the id of the player who play. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_server_1_1_game_manager_a987a6f902c77f26b829ef23b7cdd1254}\label{class_server_1_1_game_manager_a987a6f902c77f26b829ef23b7cdd1254}} 
+\index{Server\+::\+Game\+Manager@{Server\+::\+Game\+Manager}!status@{status}}
+\index{status@{status}!Server\+::\+Game\+Manager@{Server\+::\+Game\+Manager}}
+\subsubsection{\texorpdfstring{status}{status}}
+{\footnotesize\ttfamily \hyperlink{namespace_server_a2b496a25969b5c46d373f7079fac645f}{G\+A\+M\+E\+\_\+\+S\+T\+A\+T\+US} Server.\+Game\+Manager.\+status\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+Getter and Setter for the \+\_\+status variable. \begin{DoxyReturn}{Returns}
+Return the state of the game. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Server/src/\+Module/\hyperlink{_game_manager_8cs}{Game\+Manager.\+cs}\end{DoxyCompactItemize}

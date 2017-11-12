@@ -192,17 +192,8 @@ namespace Server
             {
                 if (!first)
                 {
-                    int cpt = 0;
-                    do
-                    {
-                        _annonceTurn.Next();
-                        Server.Instance.PrintOnDebug("______________________loop");
-                        if (cpt >= 4)
-                        {
-                            status = GAME_STATUS.DISTRIB;
-                            return;
-                        }
-                    } while (Server.Instance.players.list[_annonceTurn.It].contract != null && Server.Instance.players.list[_annonceTurn.It].contract.type == CONTRACT_TYPE.PASS);
+                    _annonceTurn.Next();
+                    Server.Instance.PrintOnDebug("______________________loop");
                     Server.Instance.PrintOnDebug("THE PLAYER WHO ANNONCE IS " + _annonceTurn.It);
                 }
             }

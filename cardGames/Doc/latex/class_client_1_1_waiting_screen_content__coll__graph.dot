@@ -1,0 +1,14 @@
+digraph "Client.WaitingScreenContent"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node4 [label="{Client.WaitingScreenContent\n||+ InitializeComponent()\l+ WaitingScreenContent()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node5 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal"];
+  Node5 [label="{UserControl\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node6 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal"];
+  Node6 [label="{System::Windows::Controls\l::UserControl\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node7 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal"];
+  Node7 [label="{System::Windows::Markup\l::IComponentConnector\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node8 -> Node4 [color="grey25",fontsize="10",style="solid",label=" ~Player1Button\n~Player0Button\n~Player3Button\n~Player2Button" ,arrowhead="odiamond"];
+  Node8 [label="{System\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+}

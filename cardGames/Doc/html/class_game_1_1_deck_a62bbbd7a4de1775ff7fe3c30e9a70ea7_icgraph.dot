@@ -1,0 +1,23 @@
+digraph "Game.Deck.Clear"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node11 [label="Game.Deck.Clear",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node11 -> Node12 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node12 [label="Client.EventManager.Player\lReceivePile",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_client_1_1_event_manager.html#a5876b23f48255516cf2f00052682e178"];
+  Node11 -> Node13 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node13 [label="Server.GameManager.Distrib",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_server_1_1_game_manager.html#abe3cba330255ade16dfadbf6d2bcbed7"];
+  Node13 -> Node14 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node14 [label="Server.Server.Run",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_server_1_1_server.html#a40d5db9d850120c06889f827e8ce259a"];
+  Node11 -> Node15 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node15 [label="Server.GameManager.NextTurn",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_server_1_1_game_manager.html#a94b83f44ca6b2f3a70d9f5ad0af19696"];
+  Node15 -> Node16 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node16 [label="Server.GameManager.CheckCard",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_server_1_1_game_manager.html#a4a32016560d748cc8c272ebfb793f22c"];
+  Node16 -> Node17 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node17 [label="Server.GameManager.Turn",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_server_1_1_game_manager.html#afe22c5dc89cdc68d8361540b541acd30"];
+  Node17 -> Node14 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 -> Node18 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node18 [label="Server.GameManager.Referee",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_server_1_1_game_manager.html#a290183cdbe0ad1767906d5d5c0ac4e54"];
+  Node18 -> Node14 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

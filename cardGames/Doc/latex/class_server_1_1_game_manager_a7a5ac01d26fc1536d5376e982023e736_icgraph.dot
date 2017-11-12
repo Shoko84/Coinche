@@ -1,0 +1,11 @@
+digraph "Server.GameManager.CalculScore"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node3 [label="Server.GameManager.Calcul\lScore",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node4 [label="Server.GameManager.Referee",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_server_1_1_game_manager.html#a290183cdbe0ad1767906d5d5c0ac4e54"];
+  Node4 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node5 [label="Server.Server.Run",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_server_1_1_server.html#a40d5db9d850120c06889f827e8ce259a"];
+}

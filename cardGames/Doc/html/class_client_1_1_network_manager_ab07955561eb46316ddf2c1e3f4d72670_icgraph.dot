@@ -1,0 +1,33 @@
+digraph "Client.NetworkManager.WriteMessage"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node19 [label="Client.NetworkManager.Write\lMessage",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node19 -> Node20 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node20 [label="Client.ContractCallContent.\lContractCallContent",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_client_1_1_contract_call_content.html#a926d64eeda9118372e46bc8b085ef7ef"];
+  Node19 -> Node21 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node21 [label="Client.GameWindow.Initialize",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_client_1_1_game_window.html#a1fc43a939c13e466c4f9d031cab17d21"];
+  Node21 -> Node22 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node22 [label="Client.EventManager.Players\lConnect",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_client_1_1_event_manager.html#a8a67beed6389b1f6a1cab3742e7817ee"];
+  Node21 -> Node23 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node23 [label="Client.EventManager.Player\lHasLost",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_client_1_1_event_manager.html#a7a71a3bd8b1c0ecd10b8286c50f6d79d"];
+  Node21 -> Node24 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node24 [label="Client.EventManager.Player\lHasWon",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_client_1_1_event_manager.html#a460ff979d6d31a452e4374c3144f0805"];
+  Node19 -> Node25 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node25 [label="Client.GameWindow.GameWindow",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_client_1_1_game_window.html#afc1d45d2b704a4daf6a669e3e0e28f5f"];
+  Node19 -> Node26 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node26 [label="Client.IngameCallContent.\lIngameCallContent",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_client_1_1_ingame_call_content.html#a6bb1d77e0618a9f3771a1bc88f9f879f"];
+  Node19 -> Node27 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node27 [label="Client.EventManager.Playing",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_client_1_1_event_manager.html#a53596e2ebf7de8a3d5fe42ca9a020b67"];
+  Node19 -> Node23 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node19 -> Node24 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node19 -> Node28 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node28 [label="Client.NetworkManager.Connect",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_client_1_1_network_manager.html#af288b5cc868c0eb586b67d9155650cd4"];
+  Node28 -> Node29 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node29 [label="Client.LoginContent.Login\lContent",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_client_1_1_login_content.html#a95b9f4d06cacee6548363e17323ff6df"];
+  Node19 -> Node30 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node30 [label="Client.NetworkManager.Disconnect",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_client_1_1_network_manager.html#a488b3fc53182cc8d8da731a6a66d7156"];
+  Node19 -> Node31 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node31 [label="Client.NetworkManager.Write\lObject",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_client_1_1_network_manager.html#a94eba16a4e3153c3676982aa4fec97c8"];
+}

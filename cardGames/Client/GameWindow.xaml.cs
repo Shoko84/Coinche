@@ -16,19 +16,23 @@ using Game;
 
 namespace Client
 {
-    /// <summary>
-    /// Interaction logic for GameWindow.xaml
-    /// </summary>
+    /**
+     *  Interaction logic for GameWindow.xaml
+     */
     public partial class GameWindow : Window
     {
         private ContractCallContent contractCallCont;
-        private IngameCallContent ingameCallCont;
+        private IngameCallContent   ingameCallCont;
 
-        public ContractCallContent ContractCallCont { get => contractCallCont; }
-        public IngameCallContent IngameCallCont { get => ingameCallCont; }
+        public ContractCallContent  ContractCallCont { get => contractCallCont; }
+        public IngameCallContent    IngameCallCont { get => ingameCallCont; }
 
-        private static GameWindow instance;
-        public static GameWindow Instance { get => instance; }
+        private static GameWindow   instance;
+
+        /**
+         *  Getter and setter;
+         */
+        public static GameWindow    Instance { get => instance; }
 
         /**
          *  This function draw the Gamefield background

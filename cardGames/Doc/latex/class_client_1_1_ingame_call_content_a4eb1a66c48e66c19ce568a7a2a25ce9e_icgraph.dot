@@ -1,0 +1,9 @@
+digraph "Client.IngameCallContent.InitializeComponent"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="Client.IngameCallContent.\lInitializeComponent",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node2 [label="Client.IngameCallContent.\lIngameCallContent",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_client_1_1_ingame_call_content.html#a6bb1d77e0618a9f3771a1bc88f9f879f"];
+}
