@@ -144,6 +144,11 @@ namespace Client
                         else
                             user.IsPlaying = false;
                     }
+                    if (GameWindow.Instance.GameLogger.Text != "")
+                        GameWindow.Instance.GameLogger.Text += "\n\n";
+                    GameWindow.Instance.GameLogger.Text += "[" + DateTime.Now.ToShortTimeString().ToString() + "] " +
+                                                           GameInfos.Instance.GetClientUserById(userId).Username +
+                                                           " is now announcing";
                     GameWindow.Instance.DrawCanvas();
                 }));
             }
@@ -184,6 +189,11 @@ namespace Client
                         else
                             user.IsPlaying = false;
                     }
+                    if (GameWindow.Instance.GameLogger.Text != "")
+                        GameWindow.Instance.GameLogger.Text += "\n\n";
+                    GameWindow.Instance.GameLogger.Text += "[" + DateTime.Now.ToShortTimeString().ToString() + "] " +
+                                                           GameInfos.Instance.GetClientUserById(userId).Username +
+                                                           " is now playing";
                     GameWindow.Instance.DrawCanvas();
                 }));
             }
@@ -198,9 +208,9 @@ namespace Client
         public void SomeoneHasAnnounced(PacketHeader header, Connection connection, string message)
         {
             Contract contract = JsonConvert.DeserializeObject<Contract>(message);
-            if (contract.type != CONTRACT_TYPE.PASS)
+            App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
             {
-                App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
+                if (contract.type != CONTRACT_TYPE.PASS)
                 {
                     ContractCallContent content = GameWindow.Instance.ContractCallCont;
 
@@ -216,9 +226,41 @@ namespace Client
                     }
                     if (GameInfos.Instance.ContractPicked == null || GameInfos.Instance.ContractPicked.score < contract.score)
                         GameInfos.Instance.ContractPicked = new Contract(contract.score, contract.type, contract.id);
+                    if (GameWindow.Instance.GameLogger.Text != "")
+                        GameWindow.Instance.GameLogger.Text += "\n\n";
+                    GameWindow.Instance.GameLogger.Text += "[" + DateTime.Now.ToShortTimeString().ToString() + "] " +
+                                                           GameInfos.Instance.GetClientUserById(contract.id).Username +
+                                                           " announced a contract with a value of " + contract.score.ToString() +
+                                                           " and a '" + contract.StringType + "' rule";
                     GameWindow.Instance.DrawCanvas();
-                }));
-            }
+                }
+                else
+                {
+                    if (GameWindow.Instance.GameLogger.Text != "")
+                        GameWindow.Instance.GameLogger.Text += "\n\n";
+                    GameWindow.Instance.GameLogger.Text += "[" + DateTime.Now.ToShortTimeString().ToString() + "] " +
+                                                           GameInfos.Instance.GetClientUserById(contract.id).Username +
+                                                           " passed";
+                }
+            }));
+        }
+
+        /**
+         *  Triggered when the someone played
+         *  @param   header      Infos about the header.
+         *  @param   connection  Infos about the server's connection.
+         *  @param   message     A card.
+         */
+        public void SomeonePlayedACard(PacketHeader header, Connection connection, string message)
+        {
+            Card card = JsonConvert.DeserializeObject<Card>(message);
+            App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
+            {
+                if (GameWindow.Instance.GameLogger.Text != "")
+                    GameWindow.Instance.GameLogger.Text += "\n\n";
+                GameWindow.Instance.GameLogger.Text += "[" + DateTime.Now.ToShortTimeString().ToString() + "] " +
+                                                       card.StringValue + " " + card.StringColour + " was played";
+            }));
         }
 
         /**
@@ -264,7 +306,16 @@ namespace Client
          */
         public void PlayersQuit(PacketHeader header, Connection connection, string message)
         {
-            Console.WriteLine("Player " + message);
+            int userId = int.Parse(message);
+
+            App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
+            {
+                if (GameWindow.Instance.GameLogger.Text != "")
+                    GameWindow.Instance.GameLogger.Text += "\n\n";
+                GameWindow.Instance.GameLogger.Text += "[" + DateTime.Now.ToShortTimeString().ToString() + "] " +
+                                                       GameInfos.Instance.GetClientUserById(userId).Username +
+                                                       " disconnected";
+            }));
         }
 
         /**
@@ -275,7 +326,12 @@ namespace Client
         */
         public void PlayerRename(PacketHeader header, Connection connection, string message)
         {
-            Console.WriteLine("Player " + message.Split('|')[0] + " renamed " + message.Split('|')[1] + " to " + message.Split('|')[2]);
+            App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
+            {
+                if (GameWindow.Instance.GameLogger.Text != "")
+                    GameWindow.Instance.GameLogger.Text += "\n\n";
+                GameWindow.Instance.GameLogger.Text += "[" + DateTime.Now.ToShortTimeString().ToString() + "] " + "Player " + message.Split('|')[0] + " renamed " + message.Split('|')[1] + " to " + message.Split('|')[2];
+            }));
         }
 
         /**
@@ -311,12 +367,17 @@ namespace Client
          */
         public void GetPlayerScore(PacketHeader header, Connection connection, string message)
         {
+            string[] args = message.Split(':');
+
             App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
             {
-                string[] args = message.Split(':');
-
                 ClientUser user = GameInfos.Instance.GetClientUserById(int.Parse(args[0]));
                 user.Score += int.Parse(args[1]);
+                if (GameWindow.Instance.GameLogger.Text != "")
+                    GameWindow.Instance.GameLogger.Text += "\n\n";
+                GameWindow.Instance.GameLogger.Text += "[" + DateTime.Now.ToShortTimeString().ToString() + "] " +
+                                                       GameInfos.Instance.GetClientUserById(int.Parse(args[0])).Username +
+                                                       " has a score of " + args[1];
                 GameWindow.Instance.DrawCanvas();
             }));
         }
@@ -343,6 +404,12 @@ namespace Client
             }));
         }
 
+        /**
+         *  Triggered when the server agree with one of the client request
+         *  @param   header      Infos about the header.
+         *  @param   connection  Infos about the server's connection.
+         *  @param   message     Unused.
+         */
         public void PlayerReceivePile(PacketHeader header, Connection connection, string message)
         {
             Pile pile = JsonConvert.DeserializeObject<Pile>(message);
