@@ -338,6 +338,8 @@ namespace Server
                     return (false);
                 foreach (var i in pile.cards.cards)
                     Server.Instance.players.list[winner].win.AddCard(i);
+                if (Server.Instance.players.list[winner].deck.Count <= 0)
+                    Server.Instance.players.list[winner].points += 10;
                 Server.Instance.WriteToAll("212", Server.Instance.serializer.ObjectToString(pile));
                 pile.cards.Clear();
                 pile.owners.Clear();
@@ -431,7 +433,10 @@ namespace Server
          */
         public int CalculScore(int id1, int id2)
         {
-            return (Server.Instance.players.list[id1].win.CalculPoint(contract) + Server.Instance.players.list[id2].win.CalculPoint(contract));
+            return (Server.Instance.players.list[id1].win.CalculPoint(contract) 
+                + Server.Instance.players.list[id2].win.CalculPoint(contract) 
+                + Server.Instance.players.list[id1].points
+                + Server.Instance.players.list[id2].points);
         }
 
         /**
@@ -442,20 +447,43 @@ namespace Server
             int teamOne = CalculScore(0, 2);
             int teamTwo = CalculScore(1, 3);
 
+            if (teamOne == 0)
+                teamTwo += 250;
+            if (teamTwo == 0)
+                teamOne += 250;
+
+            bool win;
+
             Server.Instance.PrintOnDebug("\nCount of the points");
             Server.Instance.WriteToAll("040", "Game is finish");
+
+            if (contract.id == 0 || contract.id == 2)
+            {
+                if (teamOne > contract.score)
+                    win = true;
+                else
+                    win = false;
+            }
+            else
+            {
+                if (teamTwo > contract.score)
+                    win = false;
+                else
+                    win = true;
+            }
+
             foreach (var it in Server.Instance.players.list)
             {
                 if (it.id == 0 || it.id == 2)
                 {
-                    if (teamOne > teamTwo)
+                   if (win == true)
                         Server.Instance.WriteTo("042", it.ip, it.port, "");
                     else
                         Server.Instance.WriteTo("041", it.ip, it.port, "");
                 }
                 else
                 {
-                    if (teamOne < teamTwo)
+                    if (win == false)
                         Server.Instance.WriteTo("042", it.ip, it.port, "");
                     else
                         Server.Instance.WriteTo("041", it.ip, it.port, "");
@@ -480,6 +508,7 @@ namespace Server
                 pl.deck.Clear();
                 pl.win.Clear();
                 pl.contract = null;
+                pl.points = 0;
             }
             _annonceTurn.It = rand.Next(0, 3);
             _gameTurn.It = _annonceTurn.It;

@@ -327,7 +327,7 @@ namespace Server
             foreach (var it in Server.Instance.players.list)
             {
                 if (it.id == int.Parse(id))
-                    score = it.win.CalculPoint(Server.Instance.game.contract);
+                    score = it.win.CalculPoint(Server.Instance.game.contract) + it.points;
             }
             Server.Instance.PrintOnDebug("============ Score of player " + id + " is " + score);
             Server.Instance.WriteTo("214", ip, port, id + ":" + score);
