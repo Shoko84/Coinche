@@ -78,6 +78,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AutoScrollerHelper.cs" />
     <Compile Include="CoincheCallContent.xaml.cs">
       <DependentUpon>CoincheCallContent.xaml</DependentUpon>
     </Compile>

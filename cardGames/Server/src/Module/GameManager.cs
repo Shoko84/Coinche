@@ -89,7 +89,7 @@ namespace Server
         {
             if (Server.Instance.players.list.Count() == 4)
             {
-                foreach(var it in Server.Instance.players.list)
+                foreach (var it in Server.Instance.players.list.ToList<Profile>())
                 {
                     if (it.ready == false)
                         return;
@@ -420,6 +420,7 @@ namespace Server
          */
         public void End()
         {
+
         }
     }
 }

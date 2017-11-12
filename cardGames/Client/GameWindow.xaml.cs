@@ -291,5 +291,14 @@ namespace Client
         {
             GameInfos.Instance.NetManager.WriteMessage("050", "");
         }
+
+        private void ChatInput_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return && ChatInput.Text != "")
+            {
+                GameInfos.Instance.NetManager.WriteMessage("msg", ChatInput.Text);
+                ChatInput.Text = "";
+            }
+        }
     }
 }

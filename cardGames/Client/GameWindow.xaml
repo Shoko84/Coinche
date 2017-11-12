@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Client"
         mc:Ignorable="d"
-        Title="CardGames" Height="620" Width="1251.8"
+        Title="CardGames" Height="620" Width="1258"
         ResizeMode="NoResize" Closing="Window_Closing">
 
     <Grid Background="#FF323232">
@@ -34,6 +34,7 @@
                         Grid.Row="0"
                         Foreground="White" Padding="0,10,0,0" />
                 <ScrollViewer Grid.Row="1"
+                              x:Name="GameLoggerScroller"
                               HorizontalScrollBarVisibility="Disabled"
                               VerticalScrollBarVisibility="Auto"
                               Padding="5">
@@ -86,8 +87,9 @@
                 <ScrollViewer Grid.Row="1"
                               HorizontalScrollBarVisibility="Disabled"
                               VerticalScrollBarVisibility="Auto"
-                              Padding="5">
-                    <TextBlock x:Name="Chat"
+                              Padding="5"
+                              x:Name="ChatScroller">
+                    <TextBlock x:Name="ChatData"
                                Foreground="White"
                                FontSize="10"
                                TextWrapping="Wrap"/>
@@ -100,7 +102,7 @@
                             Margin="4"
                             FontSize="12"
                             BorderBrush="#FF666666"
-                            x:Name="ChatInput"/>
+                            x:Name="ChatInput" KeyDown="ChatInput_KeyDown"/>
             </Grid>
         </Border>
     </Grid>
