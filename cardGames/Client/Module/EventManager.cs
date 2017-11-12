@@ -42,7 +42,15 @@ namespace Client
          */
         public void PrintIncomingMessage(PacketHeader header, Connection connection, string message)
         {
-            Console.WriteLine("\nA message was received from " + connection.ToString() + " which said '" + message + "'.");
+            App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
+            {
+                string[] args = message.Split(':');
+
+                if (GameWindow.Instance.ChatData.Text != "")
+                    GameWindow.Instance.ChatData.Text += "\n";
+                GameWindow.Instance.ChatData.Text += "[" + message.Split(':')[0] + "]: " + message.Split(':')[1];
+                GameWindow.Instance.ChatScroller.ScrollToBottom();
+            }));
         }
 
         /**
@@ -120,10 +128,12 @@ namespace Client
             if (GameInfos.Instance.GameStatus == GAME_STATUS.ANNONCE)
             {
                 App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
-                    {
+                {
                     GameWindow.Instance.ContentArea.Content = GameWindow.Instance.ContractCallCont;
                     ContractCallContent content = GameWindow.Instance.ContractCallCont;
-                    if (int.Parse(message) == GameInfos.Instance.MyId)
+                    int userId = int.Parse(message);
+
+                    if (userId == GameInfos.Instance.MyId)
                     {
                         content.ContractBox.IsEnabled = true;
                         content.ContractValue.IsEnabled = true;
@@ -135,6 +145,20 @@ namespace Client
                         content.ContractValue.IsEnabled = false;
                         content.ContractCallButton.IsEnabled = false;
                     }
+                    foreach (var user in GameInfos.Instance.UsersList)
+                    {
+                        if (user.Id == userId)
+                            user.IsPlaying = true;
+                        else
+                            user.IsPlaying = false;
+                    }
+                    if (GameWindow.Instance.GameLogger.Text != "")
+                        GameWindow.Instance.GameLogger.Text += "\n\n";
+                    GameWindow.Instance.GameLogger.Text += "[" + DateTime.Now.ToShortTimeString().ToString() + "] " +
+                                                           GameInfos.Instance.GetClientUserById(userId).Username +
+                                                           " is now announcing";
+                    GameWindow.Instance.GameLoggerScroller.ScrollToBottom();
+                    GameWindow.Instance.DrawCanvas();
                 }));
             }
         }
@@ -155,7 +179,9 @@ namespace Client
                 {
                     GameWindow.Instance.ContentArea.Content = GameWindow.Instance.IngameCallCont;
                     IngameCallContent content = GameWindow.Instance.IngameCallCont;
-                    if (int.Parse(message) == GameInfos.Instance.MyId)
+                    int userId = int.Parse(message);
+
+                    if (userId == GameInfos.Instance.MyId)
                     {
                         content.CardsListBox.IsEnabled = true;
                         content.PickCardButton.IsEnabled = true;
@@ -165,6 +191,20 @@ namespace Client
                         content.CardsListBox.IsEnabled = false;
                         content.PickCardButton.IsEnabled = false;
                     }
+                    foreach (var user in GameInfos.Instance.UsersList)
+                    {
+                        if (user.Id == userId)
+                            user.IsPlaying = true;
+                        else
+                            user.IsPlaying = false;
+                    }
+                    if (GameWindow.Instance.GameLogger.Text != "")
+                        GameWindow.Instance.GameLogger.Text += "\n\n";
+                    GameWindow.Instance.GameLogger.Text += "[" + DateTime.Now.ToShortTimeString().ToString() + "] " +
+                                                           GameInfos.Instance.GetClientUserById(userId).Username +
+                                                           " is now playing";
+                    GameWindow.Instance.GameLoggerScroller.ScrollToBottom();
+                    GameWindow.Instance.DrawCanvas();
                 }));
             }
         }
@@ -178,9 +218,9 @@ namespace Client
         public void SomeoneHasAnnounced(PacketHeader header, Connection connection, string message)
         {
             Contract contract = JsonConvert.DeserializeObject<Contract>(message);
-            if (contract.type != CONTRACT_TYPE.PASS)
+            App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
             {
-                App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
+                if (contract.type != CONTRACT_TYPE.PASS)
                 {
                     ContractCallContent content = GameWindow.Instance.ContractCallCont;
 
@@ -194,8 +234,45 @@ namespace Client
                         content.ContractValue.Minimum = 160;
                         content.ContractValue.Value = 160;
                     }
-                }));
-            }
+                    if (GameInfos.Instance.ContractPicked == null || GameInfos.Instance.ContractPicked.score < contract.score)
+                        GameInfos.Instance.ContractPicked = new Contract(contract.score, contract.type, contract.id);
+                    if (GameWindow.Instance.GameLogger.Text != "")
+                        GameWindow.Instance.GameLogger.Text += "\n\n";
+                    GameWindow.Instance.GameLogger.Text += "[" + DateTime.Now.ToShortTimeString().ToString() + "] " +
+                                                           GameInfos.Instance.GetClientUserById(contract.id).Username +
+                                                           " announced a contract with a value of " + contract.score.ToString() +
+                                                           " and a '" + contract.StringType + "' rule";
+                    GameWindow.Instance.DrawCanvas();
+                }
+                else
+                {
+                    if (GameWindow.Instance.GameLogger.Text != "")
+                        GameWindow.Instance.GameLogger.Text += "\n\n";
+                    GameWindow.Instance.GameLogger.Text += "[" + DateTime.Now.ToShortTimeString().ToString() + "] " +
+                                                           GameInfos.Instance.GetClientUserById(contract.id).Username +
+                                                           " passed";
+                }
+                GameWindow.Instance.GameLoggerScroller.ScrollToBottom();
+            }));
+        }
+
+        /**
+         *  Triggered when the someone played
+         *  @param   header      Infos about the header.
+         *  @param   connection  Infos about the server's connection.
+         *  @param   message     A card.
+         */
+        public void SomeonePlayedACard(PacketHeader header, Connection connection, string message)
+        {
+            Card card = JsonConvert.DeserializeObject<Card>(message);
+            App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
+            {
+                if (GameWindow.Instance.GameLogger.Text != "")
+                    GameWindow.Instance.GameLogger.Text += "\n\n";
+                GameWindow.Instance.GameLogger.Text += "[" + DateTime.Now.ToShortTimeString().ToString() + "] " +
+                                                       card.StringValue + " " + card.StringColour + " was played";
+                GameWindow.Instance.GameLoggerScroller.ScrollToBottom();
+            }));
         }
 
         /**
@@ -241,7 +318,17 @@ namespace Client
          */
         public void PlayersQuit(PacketHeader header, Connection connection, string message)
         {
-            Console.WriteLine("Player " + message);
+            int userId = int.Parse(message);
+
+            App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
+            {
+                if (GameWindow.Instance.GameLogger.Text != "")
+                    GameWindow.Instance.GameLogger.Text += "\n\n";
+                GameWindow.Instance.GameLogger.Text += "[" + DateTime.Now.ToShortTimeString().ToString() + "] " +
+                                                       GameInfos.Instance.GetClientUserById(userId).Username +
+                                                       " disconnected";
+                GameWindow.Instance.GameLoggerScroller.ScrollToBottom();
+            }));
         }
 
         /**
@@ -252,7 +339,13 @@ namespace Client
         */
         public void PlayerRename(PacketHeader header, Connection connection, string message)
         {
-            Console.WriteLine("Player " + message.Split('|')[0] + " renamed " + message.Split('|')[1] + " to " + message.Split('|')[2]);
+            App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
+            {
+                if (GameWindow.Instance.GameLogger.Text != "")
+                    GameWindow.Instance.GameLogger.Text += "\n\n";
+                GameWindow.Instance.GameLogger.Text += "[" + DateTime.Now.ToShortTimeString().ToString() + "] " + "Player " + message.Split('|')[0] + " renamed " + message.Split('|')[1] + " to " + message.Split('|')[2];
+                GameWindow.Instance.GameLoggerScroller.ScrollToBottom();
+            }));
         }
 
         /**
@@ -273,12 +366,34 @@ namespace Client
                         GameInfos.Instance.UsersList[i].CardsList.Clear();
                         for (int j = 0; j < nbCard; j++)
                             GameInfos.Instance.UsersList[i].CardsList.AddCard(Card.CardColour.Unknown, Card.CardValue.Unknown, (Card.CardPosition)GameInfos.Instance.GetPosFromId(GameInfos.Instance.MyId, GameInfos.Instance.UsersList[i].Id));
-                        GameWindow.Instance.DrawGameField();
-                        GameWindow.Instance.DrawHandCards(GameInfos.Instance.UsersList);
-                        GameWindow.Instance.DrawCardsPlayed(GameInfos.Instance.CardsPlayed);
+                        GameWindow.Instance.DrawCanvas();
                         break;
                     }
                 }
+            }));
+        }
+
+        /**
+         *  Triggered when a client receive the player's score.
+         *  @param   header      Infos about the header.
+         *  @param   connection  Infos about the server's connection.
+         *  @param   message     The id of the player and the score as id:score.
+         */
+        public void GetPlayerScore(PacketHeader header, Connection connection, string message)
+        {
+            string[] args = message.Split(':');
+
+            App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
+            {
+                ClientUser user = GameInfos.Instance.GetClientUserById(int.Parse(args[0]));
+                user.Score += int.Parse(args[1]);
+                if (GameWindow.Instance.GameLogger.Text != "")
+                    GameWindow.Instance.GameLogger.Text += "\n\n";
+                GameWindow.Instance.GameLogger.Text += "[" + DateTime.Now.ToShortTimeString().ToString() + "] " +
+                                                       GameInfos.Instance.GetClientUserById(int.Parse(args[0])).Username +
+                                                       " has a score of " + args[1];
+                GameWindow.Instance.GameLoggerScroller.ScrollToBottom();
+                GameWindow.Instance.DrawCanvas();
             }));
         }
 
@@ -291,36 +406,36 @@ namespace Client
         public void PlayerReceiveDeck(PacketHeader header, Connection connection, string message)
         {
             Deck deck = JsonConvert.DeserializeObject<Deck>(message);
-            ObservableCollection<string> cardsNames = new ObservableCollection<string>();
-
-            GameInfos.Instance.GetClientUserById(GameInfos.Instance.MyId).CardsList = deck;
-            foreach (var card in deck.cards)
-                cardsNames.Add(card.StringValue + " " + card.StringColour);
-
             App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
             {
-                GameWindow.Instance.DrawGameField();
-                GameWindow.Instance.DrawHandCards(GameInfos.Instance.UsersList);
-                GameWindow.Instance.DrawCardsPlayed(GameInfos.Instance.CardsPlayed);
+                ObservableCollection<string> cardsNames = new ObservableCollection<string>();
+
+                GameInfos.Instance.GetClientUserById(GameInfos.Instance.MyId).CardsList = deck;
+                foreach (var card in deck.cards)
+                    cardsNames.Add(card.StringValue + " " + card.StringColour);
+                GameWindow.Instance.DrawCanvas();
                 GameWindow.Instance.IngameCallCont.CardsListBox.ItemsSource = cardsNames;
                 GameWindow.Instance.IngameCallCont.CardsListBox.SelectedIndex = 0;
             }));
         }
 
+        /**
+         *  Triggered when the server agree with one of the client request
+         *  @param   header      Infos about the header.
+         *  @param   connection  Infos about the server's connection.
+         *  @param   message     Unused.
+         */
         public void PlayerReceivePile(PacketHeader header, Connection connection, string message)
         {
             Pile pile = JsonConvert.DeserializeObject<Pile>(message);
-            ObservableCollection<string> cardsNames = new ObservableCollection<string>();
-            
-            GameInfos.Instance.CardsPlayed.Clear();
-            for (int i = 0; i < pile.cards.Count; i++)
-                GameInfos.Instance.CardsPlayed.AddCard(pile.cards.cards[i].colour, pile.cards.cards[i].value, (Card.CardPosition)GameInfos.Instance.GetPosFromId(GameInfos.Instance.MyId, pile.owners[i]));
-
             App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
             {
-                GameWindow.Instance.DrawGameField();
-                GameWindow.Instance.DrawHandCards(GameInfos.Instance.UsersList);
-                GameWindow.Instance.DrawCardsPlayed(GameInfos.Instance.CardsPlayed);
+                GameInfos.Instance.CardsPlayed.Clear();
+                for (int i = 0; i < pile.cards.Count; i++)
+                    GameInfos.Instance.CardsPlayed.AddCard(pile.cards.cards[i].colour, pile.cards.cards[i].value, (Card.CardPosition)GameInfos.Instance.GetPosFromId(GameInfos.Instance.MyId, pile.owners[i]));
+                if (pile.cards.cards.Count == 4)
+                    GameInfos.Instance.LastPile = pile;
+                GameWindow.Instance.DrawCanvas();
             }));
         }
 

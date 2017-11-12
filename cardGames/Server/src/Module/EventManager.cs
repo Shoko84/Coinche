@@ -156,8 +156,14 @@ namespace Server
             var ip = connection.ConnectionInfo.RemoteEndPoint.ToString().Split(':')[0];
             var port = int.Parse(connection.ConnectionInfo.RemoteEndPoint.ToString().Split(':')[1]);
 
-            Server.Instance.PrintOnDebug(message);
-            Server.Instance.WriteTo("message", ip, port, "OK");
+            foreach (var it in Server.Instance.players.list)
+            {
+                if (it.ip == ip && it.port == port)
+                {
+                    Server.Instance.PrintOnDebug(message);
+                    Server.Instance.WriteToAll("msg", it.owner + ":" + message);
+                }
+            }
         }
 
         /**

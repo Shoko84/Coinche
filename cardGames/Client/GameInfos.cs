@@ -28,20 +28,18 @@ namespace Client
 
         private NetworkManager netManager;
         public NetworkManager NetManager { get => netManager; }
+
         private EventManager eventManager;
         public EventManager EventManager { get => eventManager; }
 
         private List<ClientUser> usersList;
         public List<ClientUser> UsersList { get => usersList; }
 
-        private Deck cardsPlayed;
-        public Deck CardsPlayed { get => cardsPlayed; set => cardsPlayed = value; }
-
-        private int myId = -1;
-        public int MyId { get => myId; set => myId = value; }
-
-        private GAME_STATUS gameStatus;
-        public GAME_STATUS GameStatus { get => gameStatus; set => gameStatus = value; }
+        public Deck CardsPlayed;
+        public int MyId;
+        public GAME_STATUS GameStatus;
+        public Contract ContractPicked;
+        public Pile LastPile;
 
         public ClientUser GetClientUserById(int id)
         {
@@ -58,83 +56,18 @@ namespace Client
             return (ClientUser.ClientPosition)(((id - myId) + 4) % 4);
         }
 
-        public void AddCardsPlayed(Card card)
-        {
-            cardsPlayed.AddCard(card);
-            if (App.Current.MainWindow is GameWindow)
-            {
-                ((GameWindow)App.Current.MainWindow).DrawGameField();
-                ((GameWindow)App.Current.MainWindow).DrawHandCards(usersList);
-                ((GameWindow)App.Current.MainWindow).DrawCardsPlayed(cardsPlayed);
-            }
-        }
-
-        public void ClearCardsPlayed()
-        {
-            cardsPlayed.Clear();
-            if (App.Current.MainWindow is GameWindow)
-            {
-                ((GameWindow)App.Current.MainWindow).DrawGameField();
-                ((GameWindow)App.Current.MainWindow).DrawHandCards(usersList);
-                ((GameWindow)App.Current.MainWindow).DrawCardsPlayed(cardsPlayed);
-            }
-        }
-
-        public void AddCardToPlayerId(int id, Card card)
-        {
-            for (int i = 0; i < usersList.Count; i++)
-            {
-                if (usersList[i].Id == id)
-                {
-                    usersList[i].AddCard(card);
-
-                    if (App.Current.MainWindow is GameWindow)
-                    {
-                        ((GameWindow)App.Current.MainWindow).DrawGameField();
-                        ((GameWindow)App.Current.MainWindow).DrawHandCards(usersList);
-                        ((GameWindow)App.Current.MainWindow).DrawCardsPlayed(cardsPlayed);
-                    }
-                    break;
-                }
-            }
-        }
-
-        public void RemoveCardFromPlayerId(int id, Card card)
-        {
-            // TODO
-
-            //if (App.Current.MainWindow is GameWindow)
-            //{
-            //    ((GameWindow)App.Current.MainWindow).DrawGameField();
-            //    ((GameWindow)App.Current.MainWindow).DrawHandCards(usersList);
-            //    ((GameWindow)App.Current.MainWindow).DrawCardsPlayed(cardsPlayed);
-            //}
-        }
-
         public bool AddPlayer(int id, string playerName, bool isMyself)
         {
-            if (isMyself && myId == -1)
+            if (isMyself && MyId == -1)
             {
                 usersList.Add(new ClientUser(id, playerName, GetPosFromId(id, id)));
-                myId = id;
+                MyId = id;
             }
-            else if (!isMyself && myId != -1 && !usersList.Exists(e => e.Id == id))
-                usersList.Add(new ClientUser(id, playerName, GetPosFromId(myId, id)));
+            else if (!isMyself && MyId != -1 && !usersList.Exists(e => e.Id == id))
+                usersList.Add(new ClientUser(id, playerName, GetPosFromId(MyId, id)));
             else
                 return (false);
             return (true);
-        }
-
-        public void RemovePlayer(string playerName)
-        {
-            // TODO
-
-            //if (App.Current.MainWindow is GameWindow)
-            //{
-            //    ((GameWindow)App.Current.MainWindow).DrawGameField();
-            //    ((GameWindow)App.Current.MainWindow).DrawHandCards(usersList);
-            //    ((GameWindow)App.Current.MainWindow).DrawCardsPlayed(cardsPlayed);
-            //}
         }
 
         public GameInfos()
@@ -142,9 +75,11 @@ namespace Client
             netManager = new NetworkManager();
             eventManager = new EventManager();
             usersList = new List<ClientUser>();
-            cardsPlayed = new Deck();
-            myId = -1;
-            gameStatus = GAME_STATUS.WAIT;
+            CardsPlayed = new Deck();
+            MyId = -1;
+            GameStatus = GAME_STATUS.WAIT;
+            ContractPicked = null;
+            LastPile = null;
         }
     }
 }

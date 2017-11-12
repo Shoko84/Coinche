@@ -28,7 +28,7 @@ namespace Client
             SetCallBackFunction<string>("012", GameInfos.Instance.EventManager.PlayerAnnounce);
             SetCallBackFunction<string>("013", GameInfos.Instance.EventManager.PlayerPlay);
             SetCallBackFunction<string>("020", GameInfos.Instance.EventManager.SomeoneHasAnnounced);
-            //SetCallBackFunction<string>("021", GameInfos.Instance.EventManager.SomeonePlayedACard);
+            SetCallBackFunction<string>("021", GameInfos.Instance.EventManager.SomeonePlayedACard);
             SetCallBackFunction<string>("030", GameInfos.Instance.EventManager.PlayersConnect);
             SetCallBackFunction<string>("031", GameInfos.Instance.EventManager.PlayerRename);
             SetCallBackFunction<string>("052", GameInfos.Instance.EventManager.PlayersQuit);
@@ -36,6 +36,7 @@ namespace Client
             SetCallBackFunction<string>("211", GameInfos.Instance.EventManager.PlayerReceiveDeck);
             SetCallBackFunction<string>("212", GameInfos.Instance.EventManager.PlayerReceivePile);
             SetCallBackFunction<string>("213", GameInfos.Instance.EventManager.GetPlayerCardsNumber);
+            SetCallBackFunction<string>("214", GameInfos.Instance.EventManager.GetPlayerScore);
             SetCallBackFunction<string>("230", GameInfos.Instance.EventManager.ConnectionOk);
             SetCallBackFunction<string>("320", GameInfos.Instance.EventManager.NotMyTurn);
             SetCallBackFunction<string>("321", GameInfos.Instance.EventManager.NotOwningCard);

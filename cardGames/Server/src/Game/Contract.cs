@@ -26,9 +26,22 @@
      */
     public class Contract
     {
+        /**
+         *  This string[] contains the name of all the trump types.
+         */
+        private string[] typeStr = new string[]
+        {
+            "Pass", "Spades", "Clubs", "Diamonds", "Hearts", "All trumps", "Without trumps"
+        };
+
         public int              score;  /**< The score of the contract.*/
         public CONTRACT_TYPE    type;   /**< The type of the trump.*/
         public int              id;     /**< The id of the owner of the contract.*/
+
+        /**
+         *  Getter of the string name of the type of trump.
+         */
+        public string StringType { get => typeStr[(int)type]; }
 
         /**
          *  Constructor
