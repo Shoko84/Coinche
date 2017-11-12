@@ -189,12 +189,42 @@ namespace Client
             }
         }
 
+        public void DrawWhosPlaying()
+        {
+            foreach (var user in GameInfos.Instance.UsersList)
+            {
+                if (user.IsPlaying)
+                {
+                    Image img = new Image();
+                    string path = System.IO.Path.Combine(Environment.CurrentDirectory, "..", "..", "ressources", "assets", "icons", "playing.png");
+                    Uri uri = new Uri(path);
+                    BitmapImage bmp = new BitmapImage(uri);
+                    img.Source = bmp;
+                    img.Width = bmp.Width;
+                    img.Height = bmp.Height;
+
+                    Point[] playingPos = new Point[]
+                    {
+                    new Point(this.TestCanvas.Width / 2 - img.Width / 2, this.TestCanvas.Height - 155),
+                    new Point(104, this.TestCanvas.Height / 2 + 15),
+                    new Point(this.TestCanvas.Width / 2 - img.Width / 2, 130),
+                    new Point(this.TestCanvas.Width - 128, this.TestCanvas.Height / 2 - 40),
+                    };
+
+                    Canvas.SetLeft(img, playingPos[(int)user.Position].X);
+                    Canvas.SetTop(img, playingPos[(int)user.Position].Y);
+                    TestCanvas.Children.Add(img);
+                }
+            }
+        }
+
         public void DrawCanvas()
         {
             DrawGameField();
             DrawHandCards(GameInfos.Instance.UsersList);
             DrawCardsPlayed(GameInfos.Instance.CardsPlayed);
             DrawNameAndScore();
+            DrawWhosPlaying();
         }
 
         public void Initialize()
