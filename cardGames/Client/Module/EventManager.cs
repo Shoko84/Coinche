@@ -11,12 +11,9 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Threading;
-using Common;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Game;
-using System.Linq;
 using System.Collections.ObjectModel;
 using Server;
 
@@ -32,13 +29,14 @@ namespace Client
          */
         public EventManager()
         {
+
         }
 
         /**
-         *  Triggered when the server answer to the client.
+         *  Triggered when the a chat message is received.
          *  @param   header      Infos about the header.
          *  @param   connection  Infos about the server's connection.
-         *  @param   message     The message.
+         *  @param   message     The username and the message as username:message.
          */
         public void PrintIncomingMessage(PacketHeader header, Connection connection, string message)
         {
@@ -69,7 +67,7 @@ namespace Client
          *  Triggered when the server accept the connection.
          *  @param   header      Infos about the header.
          *  @param   connection  Infos about the server's connection.
-         *  @param   message     The id of the client.
+         *  @param   message     The id of and the user's name as id:username.
          */
         public void ConnectionOk(PacketHeader header, Connection connection, string data)
         {
@@ -96,7 +94,7 @@ namespace Client
          */
         public void WaitingForPlayer(PacketHeader header, Connection connection, string message)
         {
-            Console.WriteLine("Waiting for players");
+
         }
 
         /**
@@ -116,7 +114,7 @@ namespace Client
         }
 
         /**
-         *  Triggered when the it's the announce turn of the client [id]
+         *  Triggered when the it's the announce turn of the client
          *  @param   header      Infos about the header.
          *  @param   connection  Infos about the server's connection.
          *  @param   message     A client id.
@@ -164,7 +162,7 @@ namespace Client
         }
 
         /**
-         *  Triggered when the it's the play turn of the client [id]
+         *  Triggered when the it's the play turn of the client
          *  @param   header      Infos about the header.
          *  @param   connection  Infos about the server's connection.
          *  @param   message     A client id.
@@ -210,7 +208,7 @@ namespace Client
         }
 
         /**
-         *  Triggered when the someone announced
+         *  Triggered when someone announced
          *  @param   header      Infos about the header.
          *  @param   connection  Infos about the server's connection.
          *  @param   message     A contract.
@@ -257,7 +255,7 @@ namespace Client
         }
 
         /**
-         *  Triggered when the someone played
+         *  Triggered when someone played
          *  @param   header      Infos about the header.
          *  @param   connection  Infos about the server's connection.
          *  @param   message     A card.
@@ -279,7 +277,7 @@ namespace Client
          *  Triggered when a new client is connected to the server.
          *  @param   header      Infos about the header.
          *  @param   connection  Infos about the server's connection.
-         *  @param   message     The id of the new player and the name of the player in format id:name.
+         *  @param   message     A list of connected users with each item in format id:name.
          */
         public void PlayersConnect(PacketHeader header, Connection connection, string message)
         {
@@ -314,7 +312,7 @@ namespace Client
          *  Triggered when a client disconnect himself from the server.
          *  @param   header      Infos about the header.
          *  @param   connection  Infos about the server's connection.
-         *  @param   message     The id of the client id.
+         *  @param   message     The client id.
          */
         public void PlayersQuit(PacketHeader header, Connection connection, string message)
         {
@@ -401,7 +399,7 @@ namespace Client
         *  Triggered when a client receive his deck.
         *  @param   header      Infos about the header.
         *  @param   connection  Infos about the server's connection.
-        *  @param   message     The id, the old name and the new name of the client in format id|old|new.
+        *  @param   message     A Deck.
         */
         public void PlayerReceiveDeck(PacketHeader header, Connection connection, string message)
         {
@@ -420,10 +418,10 @@ namespace Client
         }
 
         /**
-         *  Triggered when the server agree with one of the client request
+         *  Triggered when a client receive the current pile
          *  @param   header      Infos about the header.
          *  @param   connection  Infos about the server's connection.
-         *  @param   message     Unused.
+         *  @param   message     A Pile.
          */
         public void PlayerReceivePile(PacketHeader header, Connection connection, string message)
         {
@@ -447,37 +445,73 @@ namespace Client
         */
         public void Ok(PacketHeader header, Connection connection, string message)
         {
-            Console.WriteLine("OK");
+
         }
 
+        /**
+        *  Triggered when the server tells the client it's not his turn
+        *  @param   header      Infos about the header.
+        *  @param   connection  Infos about the server's connection.
+        *  @param   message     An user id.
+        */
         public void NotMyTurn(PacketHeader header, Connection connection, string message)
         {
-            MessageBox.Show("It's not your turn, it's player " + message + "'s turn");
+            MessageBox.Show("It's not your turn, it's player " + message + "'s turn", "Incorrect turn", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
+        /**
+        *  Triggered when the server tells the client he's not owning the played card
+        *  @param   header      Infos about the header.
+        *  @param   connection  Infos about the server's connection.
+        *  @param   message     Unused.
+        */
         public void NotOwningCard(PacketHeader header, Connection connection, string message)
         {
-            MessageBox.Show("You don't own this card.");
+            MessageBox.Show("You don't own this card.", "Incorrect play", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
+        /**
+        *  Triggered when the server tells the client he told a lower contract value
+        *  @param   header      Infos about the header.
+        *  @param   connection  Infos about the server's connection.
+        *  @param   message     Unused.
+        */
         public void AnnounceIncorrect(PacketHeader header, Connection connection, string message)
         {
-            MessageBox.Show("Incorrect announce");
+            MessageBox.Show("You can't announce a lower contract value", "Incorrect announce", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
+        /**
+        *  Triggered when the server tells the client he's not allowed to play the card
+        *  @param   header      Infos about the header.
+        *  @param   connection  Infos about the server's connection.
+        *  @param   message     Unused.
+        */
         public void CardNotAllowed(PacketHeader header, Connection connection, string message)
         {
-            MessageBox.Show("You can't play this card.");
+            MessageBox.Show("You can't play this card.", "Incorrect play", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
+        /**
+        *  Triggered when the server tells the client it's not anymore a announce turn
+        *  @param   header      Infos about the header.
+        *  @param   connection  Infos about the server's connection.
+        *  @param   message     Unused.
+        */
         public void AnnounceNotAllowed(PacketHeader header, Connection connection, string message)
         {
-            MessageBox.Show("It's not an announce turn");
+            MessageBox.Show("It's not an announce turn", "Incorrect call", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
+        /**
+        *  Triggered when the server tells the client it's an incorrect turn type
+        *  @param   header      Infos about the header.
+        *  @param   connection  Infos about the server's connection.
+        *  @param   message     Unused.
+        */
         public void IncorrectTurnType(PacketHeader header, Connection connection, string message)
         {
-            MessageBox.Show("Incorrect turn type");
+            MessageBox.Show("Incorrect turn type", "Incorrect call", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
     }
 }

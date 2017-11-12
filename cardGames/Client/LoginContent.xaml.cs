@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/**
+ * @file    LoginContent.xaml.cs
+ * @author  Maxime Cauvin
+ * 
+ * This file contains the LoginContent Class.
+ */
+
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Client
 {
@@ -20,11 +15,20 @@ namespace Client
     /// </summary>
     public partial class LoginContent : UserControl
     {
+        /**
+         *  LoginContent's constructor - Create an LoginContent instance
+         */
         public LoginContent()
         {
             InitializeComponent();
         }
 
+        /**
+         *  Send a request to the server to be connected
+         *  @param  username     The username filled in the UsernameField
+         *  @param  ip           The IP filled in the AddressField
+         *  @param  port         The port filled in the PortField
+         */
         private void SendCredentialsToServer(string username, string ip, string port)
         {
             if (string.IsNullOrEmpty(username))
@@ -37,7 +41,12 @@ namespace Client
                 GameInfos.Instance.NetManager.Connect(username, ip, int.Parse(port));
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        /**
+         *  ConnectButton Click Event trigger
+         *  @param  sender     The component that triggered the event
+         *  @param  e          Object that contains the state information and data about the event triggered.
+         */
+        private void ConnectButton_Click(object sender, RoutedEventArgs e)
         {
             SendCredentialsToServer(UsernameField.Text, AddressField.Text, PortField.Text);
         }

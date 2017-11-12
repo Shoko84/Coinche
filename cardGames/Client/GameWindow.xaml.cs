@@ -1,17 +1,17 @@
-﻿using System;
+﻿/**
+ * @file    GameWindow.xaml.cs
+ * @author  Maxime Cauvin
+ * 
+ * This file contains the GameWindow Class.
+ */
+
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Game;
 
 namespace Client
@@ -22,29 +22,17 @@ namespace Client
     public partial class GameWindow : Window
     {
         private ContractCallContent contractCallCont;
-        private CoincheCallContent coincheCallWidget;
         private IngameCallContent ingameCallCont;
 
         public ContractCallContent ContractCallCont { get => contractCallCont; }
-        public CoincheCallContent CoincheCallWidget { get => coincheCallWidget; }
         public IngameCallContent IngameCallCont { get => ingameCallCont; }
 
         private static GameWindow instance;
         public static GameWindow Instance { get => instance; }
 
-        private void DisplayRectOnCanvas(double x, double y, double width, double height, Color color)
-        {
-            Rectangle rect = new System.Windows.Shapes.Rectangle
-            {
-                Fill = new SolidColorBrush(color),
-                Width = width,
-                Height = height
-            };
-            Canvas.SetLeft(rect, x);
-            Canvas.SetTop(rect, y);
-            this.TestCanvas.Children.Add(rect);
-        }
-
+        /**
+         *  This function draw the Gamefield background
+         */
         private void DrawGameField()
         {
             TestCanvas.Children.Clear();
@@ -62,6 +50,9 @@ namespace Client
             TestCanvas.Children.Add(img);
         }
 
+        /**
+         *  This function draw cards in hand
+         */
         private void DrawHandCards(List<ClientUser> cardsList)
         {
             Point[] cardsPos = new Point[]
@@ -133,6 +124,9 @@ namespace Client
             }
         }
 
+        /**
+         *  This function draw cards in the current pile
+         */
         private void DrawCardsPlayed(Deck cardsPlayed)
         {
             Point[] cardsPos = new Point[]
@@ -160,6 +154,9 @@ namespace Client
             }
         }
 
+        /**
+         *  This function draw the user's name and score
+         */
         private void DrawNameAndScore()
         {
             for (int i = 0; i < GameInfos.Instance.UsersList.Count; i++)
@@ -187,6 +184,9 @@ namespace Client
             }
         }
 
+        /**
+         *  This function draw an icon to show who is playing
+         */
         private void DrawWhosPlaying()
         {
             foreach (var user in GameInfos.Instance.UsersList)
@@ -216,6 +216,9 @@ namespace Client
             }
         }
 
+        /**
+         *  This function draw informations about the picked contract
+         */
         private void DrawContractPicked()
         {
             Contract contract = GameInfos.Instance.ContractPicked;
@@ -234,6 +237,9 @@ namespace Client
             }
         }
 
+        /**
+         *  This function draw the last pile
+         */
         private void DrawLastPile()
         {
             Pile pile = GameInfos.Instance.LastPile;
@@ -259,6 +265,9 @@ namespace Client
             }
         }
 
+        /**
+         *  This function redraw the entire canvas
+         */
         public void DrawCanvas()
         {
             DrawGameField();
@@ -270,28 +279,42 @@ namespace Client
             DrawLastPile();
         }
 
+        /**
+         *  This function initialize the class post instantiation
+         */
         public void Initialize()
         {
             GameInfos.Instance.NetManager.WriteMessage("100", "");
         }
 
+        /**
+         *  GameWindow's constructor - Create an GameWindow instance
+         */
         public GameWindow()
         {
             instance = this;
             contractCallCont = new ContractCallContent();
-            coincheCallWidget = new CoincheCallContent();
             ingameCallCont = new IngameCallContent();
 
             InitializeComponent();
             ContentArea.Content = contractCallCont;
-            Title = GameInfos.Instance.GetClientUserById(GameInfos.Instance.MyId).Username + ":" + GameInfos.Instance.MyId;
         }
 
+        /**
+         *  Window On Close Event trigger
+         *  @param  sender     The component that triggered the event
+         *  @param  e          Object that contains the state information and data about the event triggered.
+         */
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             GameInfos.Instance.NetManager.WriteMessage("050", "");
         }
 
+        /**
+         *  ChatInput On KeyDown Event trigger
+         *  @param  sender     The component that triggered the event
+         *  @param  e          Object that contains the state information and data about the event triggered.
+         */
         private void ChatInput_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Return && ChatInput.Text != "")
