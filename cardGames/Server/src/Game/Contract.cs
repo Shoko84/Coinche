@@ -1,11 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/**
+ *  @file   Contract.cs
+ *  @author Marc-Antoine Leconte
+ *  
+ *  This file contains the contract Class.
+ */
 
-namespace Game
+ namespace Game
 {
+    /**
+     *  This enum list the types of trump in the contract.
+     */
     public enum CONTRACT_TYPE
     {
         PASS = 0,
@@ -17,12 +21,18 @@ namespace Game
         WITHOUT_TRUMP
     };
 
+    /**
+     *  This class describe what a contract is.
+     */
     public class Contract
     {
-        public int              score;
-        public CONTRACT_TYPE    type;
-        public int              id;
+        public int              score;  /**< The score of the contract.*/
+        public CONTRACT_TYPE    type;   /**< The type of the trump.*/
+        public int              id;     /**< The id of the owner of the contract.*/
 
+        /**
+         *  Constructor
+         */
         public Contract(int _score, CONTRACT_TYPE _type, int _id)
         {
             score = _score;

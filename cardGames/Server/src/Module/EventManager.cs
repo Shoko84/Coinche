@@ -9,7 +9,6 @@ using NetworkCommsDotNet.Connections;
 using NetworkCommsDotNet;
 using System.Linq;
 using Common;
-using System;
 using Game;
 using System.Collections.Generic;
 
@@ -161,6 +160,12 @@ namespace Server
             Server.Instance.WriteTo("message", ip, port, "OK");
         }
 
+        /**
+        *   Triggered when the client ask his deck to the server.
+        *   @param   header      Infos about the header.
+        *   @param   connection  Infos about the client connection.
+        *   @param   message     Unused.
+        */
         public void SendDeck(PacketHeader header, Connection connection, string message)
         {
             var ip = connection.ConnectionInfo.RemoteEndPoint.ToString().Split(':')[0];
@@ -179,6 +184,12 @@ namespace Server
             }
         }
 
+        /**
+        *   Triggered when the client ask The pile to the server.
+        *   @param   header      Infos about the header.
+        *   @param   connection  Infos about the client connection.
+        *   @param   message     Unused.
+        */
         public void SendPile(PacketHeader header, Connection connection, string message)
         {
             var ip = connection.ConnectionInfo.RemoteEndPoint.ToString().Split(':')[0];
@@ -189,6 +200,12 @@ namespace Server
             Server.Instance.WriteTo("212", ip, port, serial);
         }
 
+        /**
+        *   Triggered when the client ask the number of card of a player.
+        *   @param   header      Infos about the header.
+        *   @param   connection  Infos about the client connection.
+        *   @param   message     The id of the player he want to know the number of card.
+        */
         public void HowManyCards(PacketHeader header, Connection connection, string id)
         {
             var ip = connection.ConnectionInfo.RemoteEndPoint.ToString().Split(':')[0];
@@ -199,11 +216,17 @@ namespace Server
             Server.Instance.WriteTo("213", ip, port, id + ":" + Server.Instance.players.list[_id].deck.Count.ToString());
         }
 
-        public void PlayerAnnonce(PacketHeader header, Connection connection, string message)
+        /**
+        *   Triggered when the client want to make an annonce.
+        *   @param   header      Infos about the header.
+        *   @param   connection  Infos about the client connection.
+        *   @param   serial      The serialisation of a Contract object.
+        */
+        public void PlayerAnnonce(PacketHeader header, Connection connection, string serial)
         {
             var ip = connection.ConnectionInfo.RemoteEndPoint.ToString().Split(':')[0];
             var port = int.Parse(connection.ConnectionInfo.RemoteEndPoint.ToString().Split(':')[1]);
-            Contract annonce = Server.Instance.serializer.StringToObject<Contract>(message);
+            Contract annonce = Server.Instance.serializer.StringToObject<Contract>(serial);
             string type = "";
             string msg = "";
 
@@ -238,11 +261,17 @@ namespace Server
            
         }
 
-        public void PlayerPlay(PacketHeader header, Connection connection, string message)
+        /**
+        *   Triggered when the client want to play a card.
+        *   @param   header      Infos about the header.
+        *   @param   connection  Infos about the client connection.
+        *   @param   serial      Serialisation of a Card object.
+        */
+        public void PlayerPlay(PacketHeader header, Connection connection, string serial)
         {
             var ip = connection.ConnectionInfo.RemoteEndPoint.ToString().Split(':')[0];
             var port = int.Parse(connection.ConnectionInfo.RemoteEndPoint.ToString().Split(':')[1]);
-            Card card = Server.Instance.serializer.StringToObject<Card>(message);
+            Card card = Server.Instance.serializer.StringToObject<Card>(serial);
 
             Server.Instance.PrintOnDebug("THE PLAYER WANT TO PLAY");
 
@@ -262,7 +291,7 @@ namespace Server
                     {
                         Server.Instance.PrintOnDebug("THE PLAYER PLAY RIGHT");
                         Server.Instance.players.list[it.id].deck.RemoveCard(card);
-                        Server.Instance.WriteToAll("021", message);
+                        Server.Instance.WriteToAll("021", serial);
                     }
 
                     Server.Instance.WriteTo("211", ip, port,Server.Instance.serializer.ObjectToString(Server.Instance.players.list[it.id].deck));
@@ -277,6 +306,12 @@ namespace Server
             }
         }
 
+        /**
+        *   Triggered when the client want to play a card.
+        *   @param   header      Infos about the header.
+        *   @param   connection  Infos about the client connection.
+        *   @param   id          The id of the player from who the player want to know the score.
+        */
         public void GetScore(PacketHeader header, Connection connection, string id)
         {
             var ip = connection.ConnectionInfo.RemoteEndPoint.ToString().Split(':')[0];
@@ -285,7 +320,12 @@ namespace Server
             Server.Instance.WriteTo("214", ip, port, id + ":" + Server.Instance.players.list[int.Parse(id)].win.CalculPoint(Server.Instance.game.contract).ToString());
         }
 
-        
+        /**
+        *   Triggered when the client want to play a card.
+        *   @param   header      Infos about the header.
+        *   @param   connection  Infos about the client connection.
+        *   @param   id          The id of the player who's ready.
+        */
         public void PlayerReady(PacketHeader header, Connection connection, string id)
         {
             var ip = connection.ConnectionInfo.RemoteEndPoint.ToString().Split(':')[0];
