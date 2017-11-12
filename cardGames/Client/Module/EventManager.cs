@@ -16,6 +16,7 @@ using Newtonsoft.Json;
 using Game;
 using System.Collections.ObjectModel;
 using Server;
+using Common;
 
 namespace Client
 {
@@ -333,29 +334,32 @@ namespace Client
         *  Triggered when a client change his name.
         *  @param   header      Infos about the header.
         *  @param   connection  Infos about the server's connection.
-        *  @param   message     The id, the old name and the new name of the client in format id|old|new.
+        *  @param   message     A PlayerRename class.
         */
         public void PlayerRename(PacketHeader header, Connection connection, string message)
         {
             App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
             {
-                string[] args = message.Split(':');
+                PlayerRename player = JsonConvert.DeserializeObject<PlayerRename>(message);
                 List<ClientUser> users = GameInfos.Instance.UsersList;
 
                 for (int i = 0; i < users.Count; i++)
                 {
-                    if (int.Parse(args[0]) == users[i].Id)
+                    if (player.Id == users[i].Id)
                     {
-                        users[i].Username = args[2];
+                        users[i].Username = player.NewName;
                         break;
                     }
                 }
-                if (GameWindow.Instance.GameLogger.Text != "")
-                    GameWindow.Instance.GameLogger.Text += "\n\n";
-                GameWindow.Instance.GameLogger.Text += "[" + DateTime.Now.ToLongTimeString().ToString() + "] " + "Player " + args[0] + 
-                                                       " renamed " + args[1] + " to " + args[2];
-                GameWindow.Instance.GameLoggerScroller.ScrollToBottom();
-                GameWindow.Instance.DrawCanvas();
+                if (GameWindow.Instance != null)
+                {
+                    if (GameWindow.Instance.GameLogger.Text != "")
+                        GameWindow.Instance.GameLogger.Text += "\n\n";
+                    GameWindow.Instance.GameLogger.Text += "[" + DateTime.Now.ToLongTimeString().ToString() + "] " + player.OldName +
+                                                           " has renamed into " + player.NewName;
+                    GameWindow.Instance.GameLoggerScroller.ScrollToBottom();
+                    GameWindow.Instance.DrawCanvas();
+                }
             }));
         }
 

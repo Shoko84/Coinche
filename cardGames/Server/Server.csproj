@@ -59,6 +59,7 @@
     <Compile Include="src\Server.cs" />
     <Compile Include="src\ServerLobby.cs" />
     <Compile Include="src\Utils\Loop.cs" />
+    <Compile Include="src\Utils\PlayerRename.cs" />
     <Compile Include="src\Utils\Serializer.cs" />
   </ItemGroup>
   <ItemGroup>
