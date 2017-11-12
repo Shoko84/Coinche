@@ -68,6 +68,8 @@ namespace Server
                         Server.Instance.players.list[entry.id].ip = ip;
                         Server.Instance.players.list[entry.id].port = port;
                         Server.Instance.players.list[entry.id].status = PLAYER_STATUS.ONLINE;
+                        Server.Instance.WriteToOther("031", ip, port,
+                                                     Server.Instance.serializer.ObjectToString(new PlayerRename(entry.id, Server.Instance.players.list[entry.id].owner, message)));
                         Server.Instance.players.list[entry.id].owner = message;
                         connect = true;
                         break;
@@ -114,7 +116,8 @@ namespace Server
                 if (entry.ip == ip && entry.port == port)
                 {
                     Server.Instance.PrintOnDebug("A player " + entry.ip + " rename: " + message);
-                    Server.Instance.WriteToOther("031", ip, port, entry.id + "|" + Server.Instance.players.list[entry.id].owner + "|" + message);
+                    Server.Instance.WriteToOther("031", ip, port,
+                                                 Server.Instance.serializer.ObjectToString(new PlayerRename(entry.id, Server.Instance.players.list[entry.id].owner, message)));
                     Server.Instance.players.list[entry.id].owner = message;
                     Server.Instance.WriteTo("200", ip, port, "Rename OK");
                     break;
@@ -356,6 +359,8 @@ namespace Server
                             Server.Instance.WriteToAll("012", Server.Instance.game.annonceTurn.ToString());
                         if (Server.Instance.game.status == GAME_STATUS.TURN)
                             Server.Instance.WriteToAll("013", Server.Instance.game.gameTurn.ToString());
+                        if (Server.Instance.game.contract != null)
+                            Server.Instance.WriteToAll("020", Server.Instance.serializer.ObjectToString(Server.Instance.game.contract));
                     }
                     it.ready = true;
                     return;
