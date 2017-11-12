@@ -79,7 +79,15 @@ namespace Game
 
         public bool ExistColour(CardColour color)
         {
-            return (cards.Exists(x => x.colour == color));
+            foreach (var it in cards)
+            {
+                if (it.colour == color)
+                {
+                    Console.WriteLine("-----------------------" + it.StringValue + " " + it.StringColour);
+                    return (true);
+                }
+            }
+            return (false);
         }
 
         public Card GetRandomCard()
@@ -112,10 +120,33 @@ namespace Game
                 if (it.colour == card.colour)
                 {
                     if (value[(int)it.value] > value[(int)card.value])
+                    {
+                        Console.WriteLine("---------------------------------------" + it.StringValue + " " + it.StringColour);
                         return (true);
+                    }
                 }
             }
             return (false);
+        }
+
+        public CardValue GetHigher(Card card, CONTRACT_TYPE trump)
+        {
+            CardValue max = CardValue.Unknown;
+            int[] value;
+
+            if ((int)trump == (int)card.colour || trump == CONTRACT_TYPE.ALL_TRUMP)
+                value = trumpValue;
+            else
+                value = cardValue;
+            foreach (var it in cards)
+            {
+                if (it.colour == card.colour)
+                {
+                    if (max == CardValue.Unknown || value[(int)it.value] > value[(int)max])
+                        max = it.value;
+                }
+            }
+            return (max);
         }
 
         public int CalculPoint(Contract contract)

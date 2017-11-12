@@ -226,9 +226,16 @@ namespace Server
                     if (type == "")
                         type = "200";
                     Server.Instance.WriteTo(type, ip, port, msg);
+                    Server.Instance.WriteTo("211", ip, port, Server.Instance.serializer.ObjectToString(Server.Instance.players.list[it.id].deck));
+                    foreach (var itA in Server.Instance.players.list)
+                    {
+                        if (itA.id != it.id)
+                            Server.Instance.WriteTo("213", itA.ip, itA.port, it.id + ":" + Server.Instance.players.list[it.id].deck.Count.ToString());
+                    }
                     break;
                 }
             }
+           
         }
 
         public void PlayerPlay(PacketHeader header, Connection connection, string message)
