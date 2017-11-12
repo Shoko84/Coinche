@@ -35,7 +35,10 @@ namespace Client
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            SendCredentialsToServer(UsernameField.Text, AddressField.Text, PortField.Text);
+            GameWindow win = new GameWindow();
+            App.Current.MainWindow = win;
+            win.Initialize();
+            win.Show();
         }
     }
 }

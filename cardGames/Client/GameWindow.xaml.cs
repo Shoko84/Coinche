@@ -47,25 +47,19 @@ namespace Client
 
         public void DrawGameField()
         {
-            this.TestCanvas.Children.Clear();
-            //Background
-            DisplayRectOnCanvas(0, 0, this.TestCanvas.Width - this.TestCanvas.Margin.Right - this.TestCanvas.Margin.Left,
-                                this.TestCanvas.Height - this.TestCanvas.Margin.Top - this.TestCanvas.Margin.Bottom,
-                                Colors.ForestGreen);
+            TestCanvas.Children.Clear();
+            Image img = new Image();
+            string path = System.IO.Path.Combine(Environment.CurrentDirectory, "..", "..", "ressources", "assets", "background", "background.jpg");
+            Uri uri = new Uri(path);
+            BitmapImage bmp = new BitmapImage(uri);
 
-            //Left side
-            DisplayRectOnCanvas(0, this.TestCanvas.Height / 2 - 350 / 2, 80, 350, Colors.Brown);
-
-            //Right side
-            DisplayRectOnCanvas(this.TestCanvas.Width - 80,
-                                this.TestCanvas.Height / 2 - 350 / 2, 80, 350, Colors.Brown);
-
-            // Top side
-            DisplayRectOnCanvas(this.TestCanvas.Width / 2 - 350 / 2, 0, 350, 80, Colors.Brown);
-
-            // Bottom side
-            DisplayRectOnCanvas(this.TestCanvas.Width / 2 - 350 / 2,
-                                this.TestCanvas.Height - 80, 350, 80, Colors.Brown);
+            img.Source = bmp;
+            img.Width = bmp.Width * 3.27f + 1;
+            img.Height = bmp.Height * 3.27f;
+            img.Stretch = Stretch.Fill;
+            Canvas.SetLeft(img, 0);
+            Canvas.SetTop(img, 0);
+            TestCanvas.Children.Add(img);
         }
 
         public void DrawHandCards(List<ClientUser> cardsList)
@@ -242,7 +236,7 @@ namespace Client
 
             InitializeComponent();
             ContentArea.Content = contractCallCont;
-            Title = GameInfos.Instance.GetClientUserById(GameInfos.Instance.MyId).Username + ":" + GameInfos.Instance.MyId;
+            //Title = GameInfos.Instance.GetClientUserById(GameInfos.Instance.MyId).Username + ":" + GameInfos.Instance.MyId;
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
