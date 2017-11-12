@@ -349,7 +349,14 @@ namespace Server
                 if (it.ip == ip && it.port == port)
                 {
                     if (Server.Instance.game.status != GAME_STATUS.WAIT)
+                    {
                         Server.Instance.WriteTo("010", ip, port, "");
+
+                        if (Server.Instance.game.status == GAME_STATUS.ANNONCE)
+                            Server.Instance.WriteToAll("012", Server.Instance.game.annonceTurn.ToString());
+                        if (Server.Instance.game.status == GAME_STATUS.TURN)
+                            Server.Instance.WriteToAll("013", Server.Instance.game.gameTurn.ToString());
+                    }
                     it.ready = true;
                     return;
                 }

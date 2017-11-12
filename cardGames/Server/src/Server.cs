@@ -118,6 +118,15 @@ namespace Server
          */
         public void WriteTo(string type, string ip, int port, string msg)
         {
+            foreach(var pl in Server.Instance.players.list)
+            {
+                if (pl.ip == ip && pl.port == port)
+                {
+                    if (pl.status == PLAYER_STATUS.OFFLINE)
+                        return;
+                    break;
+                }
+            }
             lock (_padlock)
             {
                 try
@@ -155,6 +164,7 @@ namespace Server
             PrintOnDebug("<ALL>");
             foreach (var entry in players.list)
                 WriteTo(type, entry.ip, entry.port, msg);
+            PrintOnDebug("</ALL>");
         }
 
         /**
@@ -172,6 +182,7 @@ namespace Server
                 if (entry.ip != ip || entry.port != port)
                     WriteTo(type, entry.ip, entry.port, msg);
             }
+            PrintOnDebug("</OTHER>");
         }
 
         /**

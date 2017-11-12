@@ -244,6 +244,8 @@ namespace Server
          */
         public void Annonce()
         {
+            if (Server.Instance.players.list[gameTurn].status == PLAYER_STATUS.OFFLINE)
+                CheckAnnonce(new Contract(0, CONTRACT_TYPE.PASS, gameTurn));
             foreach (var it in Server.Instance.players.list)
             {
                 if (it.contract == null)
@@ -418,6 +420,14 @@ namespace Server
          */
         public void Turn()
         {
+            if (Server.Instance.players.list[gameTurn].status == PLAYER_STATUS.OFFLINE)
+            {
+                foreach (var card in Server.Instance.players.list[gameTurn].deck.cards)
+                {
+                    if (CheckCard(card))
+                        break;
+                }
+            }
             foreach (var it in Server.Instance.players.list)
             {
                 if (it.deck.Count != 0)
