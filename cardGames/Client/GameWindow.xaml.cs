@@ -246,10 +246,11 @@ namespace Client
                     BitmapImage bmp = new BitmapImage(uri);
 
                     img.Source = bmp;
-                    img.Width = bmp.Width * 0.60;
-                    img.Height = bmp.Height * 0.60;
-                    Canvas.SetLeft(img, 15 + (i * img.Width) + (i * 10));
-                    Canvas.SetTop(img, 15);
+                    img.Width = bmp.Width * 0.55;
+                    img.Height = bmp.Height * 0.55;
+                    Canvas.SetLeft(img, 18 + (i * img.Width) + (i * 10));
+                    Canvas.SetTop(img, 18);
+                    TestCanvas.Children.Add(img);
                 }
             }
         }
@@ -267,7 +268,6 @@ namespace Client
 
         public void Initialize()
         {
-            DrawCanvas();
             GameInfos.Instance.NetManager.WriteMessage("100", "");
         }
 
