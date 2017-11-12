@@ -46,7 +46,7 @@ namespace Server
         public Pile pile;
 
         /**
-         *  Getter and Setter for the _status var.
+         *  Getter and Setter for the _status variable.
          *  @return Return the state of the game.
          */
         public GAME_STATUS status
@@ -100,9 +100,8 @@ namespace Server
         }
 
         /**
-         *  Init the initial deck;
+         *  Init the game deck;
          */
-
         private void    InitDeck()
         {
             Server.Instance.PrintOnDebug("\nInitDeck");
@@ -178,6 +177,9 @@ namespace Server
             NextAnnonce(true);
         }
 
+        /**
+         *  This function change the annonce turn and prevent the players of the changement.
+         */
         public void NextAnnonce(bool first = false)
         {
             lock (_padlock)
@@ -198,6 +200,9 @@ namespace Server
             Server.Instance.PrintOnDebug("status = " + status.ToString());
         }
 
+        /**
+         *  This function check if the annonce made by a player is allowed.
+         */
         public bool CheckAnnonce(Contract contract)
         {
             if (contract.type == CONTRACT_TYPE.PASS)
@@ -250,6 +255,9 @@ namespace Server
             }
         }
 
+        /**
+         *  This function find the winner of the game according to the points of the players.
+         */
         private int FindWinner()
         {
             int tmp = 0;
@@ -290,6 +298,10 @@ namespace Server
             return (winner);
         }
 
+        /**
+         *  This function change the player who's currently playing and alert the players of the changes.
+         *  @param  card    The card played by the player.
+         */
         public bool NextTurn(Card card)
         {
             int winner = -1;
@@ -323,6 +335,10 @@ namespace Server
             return (true);
         }
 
+        /**
+         *  The function check if the card played by the player can be played
+         *  @param card The card played by the player.
+         */
         public bool CheckCard(Card card)
         {
             Server.Instance.PrintOnDebug("CHECK CARD");
@@ -380,7 +396,12 @@ namespace Server
             status = GAME_STATUS.REFEREE;
         }
 
-        public  int CalculScore(int id1, int id2)
+        /**
+         *  Calculate the score of a team according the scores of the two players.
+         *  @param  id1 The id of the first player in the team.
+         *  @param  id2 The id of the second player in the team.
+         */
+        public int CalculScore(int id1, int id2)
         {
             return (Server.Instance.players.list[id1].win.CalculPoint(contract) + Server.Instance.players.list[id2].win.CalculPoint(contract));
         }
