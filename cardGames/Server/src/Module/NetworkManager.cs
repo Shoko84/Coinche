@@ -29,7 +29,7 @@ namespace Server
         public void InitFunc()
         {
             NetworkComms.AppendGlobalIncomingPacketHandler<string>("msg", Server.Instance.events.ReceiveMessage);
-            NetworkComms.AppendGlobalIncomingPacketHandler<string>("020", Server.Instance.events.RelanceGame);
+            NetworkComms.AppendGlobalIncomingPacketHandler<string>("022", Server.Instance.events.RelanceGame);
             NetworkComms.AppendGlobalIncomingPacketHandler<string>("050", Server.Instance.events.Deconnection);
             NetworkComms.AppendGlobalIncomingPacketHandler<string>("100", Server.Instance.events.PlayerReady);
             NetworkComms.AppendGlobalIncomingPacketHandler<string>("111", Server.Instance.events.SendDeck);
