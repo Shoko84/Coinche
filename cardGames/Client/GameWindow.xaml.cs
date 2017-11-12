@@ -323,5 +323,11 @@ namespace Client
                 ChatInput.Text = "";
             }
         }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.F5)
+                DrawCanvas();
+        }
     }
 }
