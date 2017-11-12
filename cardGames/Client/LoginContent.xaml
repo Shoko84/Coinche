@@ -107,6 +107,6 @@
                 Background="#FF5B5B5B"
                 Foreground="White"
                 HorizontalAlignment="Center"
-                VerticalAlignment="Center" Click="Button_Click"/>
+                VerticalAlignment="Center" Click="ConnectButton_Click"/>
     </Grid>
 </UserControl>

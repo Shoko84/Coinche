@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/**
+ * @file    MainWindow.xaml.cs
+ * @author  Maxime Cauvin
+ * 
+ * This file contains the MainWindow Class.
+ */
+
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Client
 {
@@ -19,15 +14,27 @@ namespace Client
     /// </summary>
     public partial class MainWindow : Window
     {
-        private static MainWindow instance;
+        private static MainWindow instance; /**< This variable corresponds to the current MainWindow instance*/
+        /**
+         *  Getter of the MainWindow instance
+         */
         public static MainWindow Instance { get => instance; }
 
-        private WaitingScreenContent waitingScreen;
+        private WaitingScreenContent waitingScreen; /**< This variable corresponds to an loaded WaitingScreenContent instance that will be displayed in the MainWindow*/
+        /**
+         *  Getter of the waitingScreen instance
+         */
         public WaitingScreenContent WaitingScreen { get => waitingScreen; }
 
-        private LoginContent loginScreen;
+        private LoginContent loginScreen; /**< This variable corresponds to an loaded LoginContent instance that will be displayed in the MainWindow*/
+        /**
+         *  Getter of the loginScreen instance
+         */
         public LoginContent LoginScreen { get => loginScreen; }
 
+        /**
+         *  MainWindow's constructor - Create an MainWindow instance
+         */
         public MainWindow()
         {
             instance = this;

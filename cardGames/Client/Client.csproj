@@ -78,10 +78,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AutoScrollerHelper.cs" />
-    <Compile Include="CoincheCallContent.xaml.cs">
-      <DependentUpon>CoincheCallContent.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ContractCallContent.xaml.cs">
       <DependentUpon>ContractCallContent.xaml</DependentUpon>
     </Compile>
@@ -90,15 +86,9 @@
     </Compile>
     <Compile Include="Module\EventManager.cs" />
     <Compile Include="Module\NetworkManager.cs" />
-    <Compile Include="Utils\Data.cs" />
-    <Compile Include="Utils\Serializer.cs" />
     <Compile Include="WaitingScreenContent.xaml.cs">
       <DependentUpon>WaitingScreenContent.xaml</DependentUpon>
     </Compile>
-    <Page Include="CoincheCallContent.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="ContractCallContent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -1,18 +1,13 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/**
+ * @file    IngameCallContent.xaml.cs
+ * @author  Maxime Cauvin
+ * 
+ * This file contains the IngameCallContent Class.
+ */
+
+using Newtonsoft.Json;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Client
 {
@@ -21,11 +16,19 @@ namespace Client
     /// </summary>
     public partial class IngameCallContent : UserControl
     {
+        /**
+         *  IngameCallContent's constructor - Create an IngameCallContent instance
+         */
         public IngameCallContent()
         {
             InitializeComponent();
         }
 
+        /**
+         *  PickCardButton Click Event trigger
+         *  @param  sender     The component that triggered the event
+         *  @param  e          Object that contains the state information and data about the event triggered.
+         */
         private void PickCardButton_Click(object sender, RoutedEventArgs e)
         {
             ClientUser user = GameInfos.Instance.GetClientUserById(GameInfos.Instance.MyId);

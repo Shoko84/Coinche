@@ -5,11 +5,6 @@
  * This file contains the ClientUser Class.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Game;
 
 namespace Client
@@ -48,6 +43,16 @@ namespace Client
             return (Username == other.Username &&
                     Position == other.Position &&
                     CardsList == other.CardsList);
+        }
+
+        /**
+         *  This function overrides the object 'Equals' method
+         *  @param  obj      The object to test the operation with.
+         *  @return          Returning default HashCode
+         */
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
 
         /**

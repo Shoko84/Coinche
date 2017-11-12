@@ -7,7 +7,7 @@
 
 using NetworkCommsDotNet;
 using System;
-using Common;
+using Newtonsoft.Json;
 
 namespace Client
 {
@@ -19,7 +19,10 @@ namespace Client
         private string  _serverIP;      /**< This string corresponds to the server's ip*/
         private int     _serverPort;    /**< This int corresponds to the server's port*/
         private bool    _connect;       /**< This boolean allows to know if the client is connected or not to a server*/
-        
+
+        /**
+         *  Initialize callback functions in the client-server communication
+         */
         private void Init()
         {
             SetCallBackFunction<string>("msg", GameInfos.Instance.EventManager.PrintIncomingMessage);
@@ -43,6 +46,7 @@ namespace Client
             SetCallBackFunction<string>("322", GameInfos.Instance.EventManager.AnnounceIncorrect);
             SetCallBackFunction<string>("323", GameInfos.Instance.EventManager.CardNotAllowed);
             SetCallBackFunction<string>("324", GameInfos.Instance.EventManager.AnnounceNotAllowed);
+            SetCallBackFunction<string>("325", GameInfos.Instance.EventManager.IncorrectTurnType);
             SetCallBackFunction<string>("330", GameInfos.Instance.EventManager.ConnectionKo);
         }
        
@@ -50,19 +54,21 @@ namespace Client
          *  Getter of the connection.
          *  @return Return the state of the connection to the server.
          */
-        public bool IsConnected { get => _connect; set => _connect = value; }
+        public bool IsConnected; /**< This boolean corresponds if the user is connected*/
 
         /**
          *  Constructor.
          */
         public NetworkManager()
         {
+
         }
 
         /**
          *  This function permit to connect the client to a server.
-         *  @param  ip      The ip of the server.
-         *  @param  port    The port of the server.
+         *  @param  username    The user's name.
+         *  @param  ip          The ip of the server.
+         *  @param  port        The port of the server.
          */
         public void Connect(string username, string ip, int port)
         {
@@ -100,6 +106,8 @@ namespace Client
 
         /**
          *  Write an error.
+         *  @param  type   The type of the event.
+         *  @param  msg    The main part of the event.
          */
         public void Error(string type, string msg)
         {
@@ -126,7 +134,7 @@ namespace Client
         }
 
         /**
-         *  This function permit to send a object to the server throug an event.
+         *  This function permit to send a object to the server through an event.
          *  @param  type    The type of the event.
          *  @param  obj     The object to send.
          */
@@ -134,7 +142,7 @@ namespace Client
         {
             if (this._connect)
             {
-                string serialize = Serializer.ObjectToString(obj);
+                string serialize = JsonConvert.SerializeObject(obj);
                 WriteMessage(type, serialize);
             }
             else
