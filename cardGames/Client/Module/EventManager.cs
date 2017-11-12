@@ -214,6 +214,8 @@ namespace Client
                         content.ContractValue.Minimum = 160;
                         content.ContractValue.Value = 160;
                     }
+                    if (GameInfos.Instance.contractPicked == null || GameInfos.Instance.contractPicked.score < contract.score)
+                        GameInfos.Instance.contractPicked = new Contract(contract.score, contract.type, contract.id);
                 }));
             }
         }

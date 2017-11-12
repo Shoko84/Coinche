@@ -236,12 +236,12 @@ namespace Client
 
             InitializeComponent();
             ContentArea.Content = contractCallCont;
-            //Title = GameInfos.Instance.GetClientUserById(GameInfos.Instance.MyId).Username + ":" + GameInfos.Instance.MyId;
+            Title = GameInfos.Instance.GetClientUserById(GameInfos.Instance.MyId).Username + ":" + GameInfos.Instance.MyId;
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            //GameInfos.Instance.NetManager.WriteMessage("050", "");
+            GameInfos.Instance.NetManager.WriteMessage("050", "");
         }
     }
 }
