@@ -322,8 +322,15 @@ namespace Server
         {
             var ip = connection.ConnectionInfo.RemoteEndPoint.ToString().Split(':')[0];
             var port = int.Parse(connection.ConnectionInfo.RemoteEndPoint.ToString().Split(':')[1]);
+            int score = 0;
 
-            Server.Instance.WriteTo("214", ip, port, id + ":" + Server.Instance.players.list[int.Parse(id)].win.CalculPoint(Server.Instance.game.contract).ToString());
+            foreach (var it in Server.Instance.players.list)
+            {
+                if (it.id == int.Parse(id))
+                    score = it.win.CalculPoint(Server.Instance.game.contract);
+            }
+            Server.Instance.PrintOnDebug("============ Score of player " + id + " is " + score);
+            Server.Instance.WriteTo("214", ip, port, id + ":" + score);
         }
 
         /**
@@ -349,5 +356,16 @@ namespace Server
             }
         }
 
+        /**
+       *   Triggered when the client want to relance the game.
+       *   @param   header      Infos about the header.
+       *   @param   connection  Infos about the client connection.
+       *   @param   msg         Unused.
+       */
+        public void RelanceGame(PacketHeader header, Connection connection, string msg)
+        {
+            if (Server.Instance.game.status == GAME_STATUS.END)
+                Server.Instance.game.relance = true;
+        }
     }
 }
