@@ -29,6 +29,10 @@ namespace Client
         {
             if (string.IsNullOrEmpty(username))
                 MessageBox.Show("Username wasn't specified", "Connection error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            else if (string.IsNullOrEmpty(ip))
+                MessageBox.Show("IP address wasn't specified", "Connection error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            else if (string.IsNullOrEmpty(port))
+                MessageBox.Show("Port wasn't specified", "Connection error", MessageBoxButton.OK, MessageBoxImage.Warning);
             else
                 GameInfos.Instance.NetManager.Connect(username, ip, int.Parse(port));
         }
