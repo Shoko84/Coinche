@@ -41,8 +41,6 @@ namespace Server
         private Loop _gameTurn;
         public int gameTurn { get => _gameTurn.It; }
 
-        public int nbPass;
-
         public Contract contract;
 
         public Pile pile;
@@ -81,7 +79,6 @@ namespace Server
             _annonceTurn = new Loop(0, 3, rand.Next(0, 3));
             _gameTurn = new Loop(0, 3, _annonceTurn.It);
             pile = new Pile();
-            nbPass = 0;
             contract = null;
         }
 
@@ -134,10 +131,22 @@ namespace Server
         {
             Card tmp;
             Loop turn = new Loop(0, 3);
-            _deck.Clear();
-            InitDeck();
+            Random rand = new Random();
 
             Server.Instance.PrintOnDebug("\nDistribution");
+
+            _deck.Clear();
+            contract = null;
+            foreach (var pl in Server.Instance.players.list)
+            {
+                pl.deck.Clear();
+                pl.contract = null;
+            }
+            _annonceTurn.It = rand.Next(0, 3);
+            _gameTurn.It = _annonceTurn.It;
+            pile.cards.Clear();
+            pile.owners.Clear();
+            InitDeck();
             while (_deck.Count != 0)
             {
                 tmp = _deck.GetRandomCard();
@@ -175,7 +184,11 @@ namespace Server
             {
                 if (!first)
                 {
-                    _annonceTurn.Next();
+                    do
+                    {
+                        _annonceTurn.Next();
+                        Server.Instance.PrintOnDebug("______________________loop");
+                    } while (Server.Instance.players.list[_annonceTurn.It].contract != null && Server.Instance.players.list[_annonceTurn.It].contract.type == CONTRACT_TYPE.PASS);
                     Server.Instance.PrintOnDebug("THE PLAYER WHO ANNONCE IS " + _annonceTurn.It);
                 }
             }
@@ -189,8 +202,7 @@ namespace Server
         {
             if (contract.type == CONTRACT_TYPE.PASS)
             {
-                Server.Instance.players.list[_annonceTurn.It].contract = null;
-                nbPass += 1;
+                Server.Instance.players.list[_annonceTurn.It].contract = contract;
                 Server.Instance.WriteToAll("020", Server.Instance.serializer.ObjectToString(contract));
                 NextAnnonce();
                 return (true);
@@ -205,7 +217,6 @@ namespace Server
             }
             Server.Instance.players.list[_annonceTurn.It].contract = contract;
             this.contract = contract;
-            nbPass = 0;
             Server.Instance.WriteToAll("020", Server.Instance.serializer.ObjectToString(contract));
             NextAnnonce();
             return (true);
@@ -216,20 +227,25 @@ namespace Server
          */
         public void Annonce()
         {
-            if (nbPass >= 3)
+            foreach (var it in Server.Instance.players.list)
             {
-                Server.Instance.PrintOnDebug("\nThere are 3 pass");
-                lock (_padlock)
+                if (it.contract == null)
+                    return;
+                if (contract != null && it.contract.type != CONTRACT_TYPE.PASS && contract.score > it.contract.score)
+                    return;
+            }
+
+            Server.Instance.PrintOnDebug("\nThere are 3 pass");
+            lock (_padlock)
+            {
+                if (contract == null)
+                    status = GAME_STATUS.DISTRIB;
+                else
                 {
-                    if (contract == null)
-                        status = GAME_STATUS.DISTRIB;
-                    else
-                    {
-                        status = GAME_STATUS.TURN;
-                        var it = Server.Instance.players.list[_gameTurn.It];
-                        Server.Instance.WriteToAll("013", _gameTurn.It.ToString());
-                        Server.Instance.PrintOnDebug("Waiting turn from player " + _gameTurn.It.ToString());
-                    }
+                    status = GAME_STATUS.TURN;
+                    var it = Server.Instance.players.list[_gameTurn.It];
+                    Server.Instance.WriteToAll("013", _gameTurn.It.ToString());
+                    Server.Instance.PrintOnDebug("Waiting turn from player " + _gameTurn.It.ToString());
                 }
             }
         }
@@ -287,6 +303,7 @@ namespace Server
                 winner = FindWinner();
                 foreach (var i in pile.cards.cards)
                     Server.Instance.players.list[winner].win.AddCard(i);
+                Server.Instance.WriteToAll("212", Server.Instance.serializer.ObjectToString(pile));
                 pile.cards.Clear();
                 pile.owners.Clear();
                 foreach(var dest in Server.Instance.players.list)
@@ -313,35 +330,41 @@ namespace Server
             if (contract == null)
             {
                 status = GAME_STATUS.ANNONCE;
-                nbPass = 0;
                 return (false);
             }
             CardColour color = card.colour;
 
             if (pile.cards.Count != 0)
                 color = pile.cards.cards[0].colour;
-            if (card.colour == color)
+            Server.Instance.PrintOnDebug("COLOR => " + color.ToString());
+            if (card.colour != color)
             {
-                if (pile.cards.ExistHigher(card, contract.type))
+                if (!Server.Instance.players.list[_gameTurn.It].deck.ExistColour(color))
                 {
-                    if (Server.Instance.players.list[_gameTurn.It].deck.ExistHigher(card, contract.type))
-                        return (false);
-                }
-                return (NextTurn(card));
-            }
-            else
-            {
-                if ((int)card.colour == (int)contract.type)
-                {
-                    if (pile.cards.ExistHigher(card, contract.type))
+                    if ((int)card.colour == (int)contract.type)
                     {
-                        if (Server.Instance.players.list[_gameTurn.It].deck.ExistHigher(card, contract.type))
+                        if (Server.Instance.game.pile.cards.ExistHigher(card, contract.type))
+                        {
+                            Server.Instance.PrintOnDebug("A card in the deck is higher");
                             return (false);
+                        }
                     }
                     return (NextTurn(card));
                 }
+                Server.Instance.PrintOnDebug("You have a card with the same color in the deck");
                 return (false);
             }
+            if ((int)card.colour == (int)contract.type)
+            {
+                if (Server.Instance.game.pile.cards.ExistHigher(card, contract.type))
+                {
+                    if (!Server.Instance.players.list[_gameTurn.It].deck.ExistHigher(new Card(card.colour, Server.Instance.game.pile.cards.GetHigher(card, contract.type), 0), contract.type))
+                        return (NextTurn(card));
+                    Server.Instance.PrintOnDebug("You must play a trump more powerfull");
+                    return (false);
+                }
+            }
+            return (NextTurn(card));
         }
 
         /**
@@ -389,6 +412,7 @@ namespace Server
                         Server.Instance.WriteTo("041", it.ip, it.port, "You're so bad omg");
                 }
             }
+            status = GAME_STATUS.DISTRIB;
         }
 
         /**

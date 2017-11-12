@@ -214,8 +214,8 @@ namespace Client
                         content.ContractValue.Minimum = 160;
                         content.ContractValue.Value = 160;
                     }
-                    if (GameInfos.Instance.contractPicked == null || GameInfos.Instance.contractPicked.score < contract.score)
-                        GameInfos.Instance.contractPicked = new Contract(contract.score, contract.type, contract.id);
+                    if (GameInfos.Instance.ContractPicked == null || GameInfos.Instance.ContractPicked.score < contract.score)
+                        GameInfos.Instance.ContractPicked = new Contract(contract.score, contract.type, contract.id);
                     GameWindow.Instance.DrawCanvas();
                 }));
             }
@@ -330,14 +330,13 @@ namespace Client
         public void PlayerReceiveDeck(PacketHeader header, Connection connection, string message)
         {
             Deck deck = JsonConvert.DeserializeObject<Deck>(message);
-            ObservableCollection<string> cardsNames = new ObservableCollection<string>();
-
-            GameInfos.Instance.GetClientUserById(GameInfos.Instance.MyId).CardsList = deck;
-            foreach (var card in deck.cards)
-                cardsNames.Add(card.StringValue + " " + card.StringColour);
-
             App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
             {
+                ObservableCollection<string> cardsNames = new ObservableCollection<string>();
+
+                GameInfos.Instance.GetClientUserById(GameInfos.Instance.MyId).CardsList = deck;
+                foreach (var card in deck.cards)
+                    cardsNames.Add(card.StringValue + " " + card.StringColour);
                 GameWindow.Instance.DrawCanvas();
                 GameWindow.Instance.IngameCallCont.CardsListBox.ItemsSource = cardsNames;
                 GameWindow.Instance.IngameCallCont.CardsListBox.SelectedIndex = 0;
@@ -347,14 +346,13 @@ namespace Client
         public void PlayerReceivePile(PacketHeader header, Connection connection, string message)
         {
             Pile pile = JsonConvert.DeserializeObject<Pile>(message);
-            ObservableCollection<string> cardsNames = new ObservableCollection<string>();
-            
-            GameInfos.Instance.CardsPlayed.Clear();
-            for (int i = 0; i < pile.cards.Count; i++)
-                GameInfos.Instance.CardsPlayed.AddCard(pile.cards.cards[i].colour, pile.cards.cards[i].value, (Card.CardPosition)GameInfos.Instance.GetPosFromId(GameInfos.Instance.MyId, pile.owners[i]));
-
             App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
             {
+                GameInfos.Instance.CardsPlayed.Clear();
+                for (int i = 0; i < pile.cards.Count; i++)
+                    GameInfos.Instance.CardsPlayed.AddCard(pile.cards.cards[i].colour, pile.cards.cards[i].value, (Card.CardPosition)GameInfos.Instance.GetPosFromId(GameInfos.Instance.MyId, pile.owners[i]));
+                if (pile.cards.cards.Count == 4)
+                    GameInfos.Instance.LastPile = pile;
                 GameWindow.Instance.DrawCanvas();
             }));
         }

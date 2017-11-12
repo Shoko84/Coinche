@@ -214,19 +214,44 @@ namespace Client
 
         private void DrawContractPicked()
         {
-            Contract contract = GameInfos.Instance.contractPicked;
+            Contract contract = GameInfos.Instance.ContractPicked;
 
             if (contract != null)
             {
                 Label text = new Label
                 {
                     Foreground = Brushes.White,
-                    Content = contract.StringType + "\n" + contract.score + " points\nPicked by: " + GameInfos.Instance.GetClientUserById(contract.id).Username
+                    Content = contract.StringType + "\n" + contract.score + " points\nPicked by " + GameInfos.Instance.GetClientUserById(contract.id).Username
                 };
                 text.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
                 Canvas.SetLeft(text, TestCanvas.Width - text.DesiredSize.Width - 15);
                 Canvas.SetTop(text, 15);
                 TestCanvas.Children.Add(text);
+            }
+        }
+
+        private void DrawLastPile()
+        {
+            Pile pile = GameInfos.Instance.LastPile;
+
+            if (pile != null)
+            {
+                List<Card> cards = pile.cards.cards;
+                for (int i = 0; i < cards.Count; i++)
+                {
+                    Image img = new Image();
+
+                    string path = System.IO.Path.Combine(Environment.CurrentDirectory, "..", "..", "ressources", "assets", "cards", cards[i].StringColour, cards[i].StringValue + ".png");
+                    Uri uri = new Uri(path);
+                    BitmapImage bmp = new BitmapImage(uri);
+
+                    img.Source = bmp;
+                    img.Width = bmp.Width * 0.55;
+                    img.Height = bmp.Height * 0.55;
+                    Canvas.SetLeft(img, 18 + (i * img.Width) + (i * 10));
+                    Canvas.SetTop(img, 18);
+                    TestCanvas.Children.Add(img);
+                }
             }
         }
 
@@ -238,11 +263,11 @@ namespace Client
             DrawNameAndScore();
             DrawWhosPlaying();
             DrawContractPicked();
+            DrawLastPile();
         }
 
         public void Initialize()
         {
-            DrawCanvas();
             GameInfos.Instance.NetManager.WriteMessage("100", "");
         }
 
