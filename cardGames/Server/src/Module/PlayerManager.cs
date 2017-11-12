@@ -33,6 +33,7 @@ namespace Server
         public Contract         contract;   /**< The contract of the player.*/
         public Deck             win;        /**< The deck containing all the cards the player won.*/
         public bool             ready;      /**< A boolean describing if the client is ready to get info from the serv.*/
+        public int              points;     /**< All the added points gain in the game.*/
         
         /**
          *  Constructor.
@@ -52,6 +53,7 @@ namespace Server
             contract = null;
             win = new Deck();
             ready = false;
+            points = 0;
         }
     }
 
