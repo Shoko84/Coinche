@@ -169,6 +169,10 @@ namespace Client
                     Foreground = Brushes.White,
                     Content = GameInfos.Instance.UsersList[i].Username + ": " + GameInfos.Instance.UsersList[i].Score.ToString()
                 };
+                if ((int)GameInfos.Instance.UsersList[i].Position % 2 == 0)
+                    text.Background = new BrushConverter().ConvertFrom("#CC2C5CA2") as Brush;
+                else
+                    text.Background = new BrushConverter().ConvertFrom("#CCA83939") as Brush;
                 text.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
                 Point[] scoresPos = new Point[]
                 {
@@ -199,10 +203,10 @@ namespace Client
 
                     Point[] playingPos = new Point[]
                     {
-                    new Point(this.TestCanvas.Width / 2 - img.Width / 2, this.TestCanvas.Height - 155),
-                    new Point(104, this.TestCanvas.Height / 2 + 15),
-                    new Point(this.TestCanvas.Width / 2 - img.Width / 2, 130),
-                    new Point(this.TestCanvas.Width - 128, this.TestCanvas.Height / 2 - 40),
+                        new Point(this.TestCanvas.Width / 2 - img.Width / 2, this.TestCanvas.Height - 155),
+                        new Point(104, this.TestCanvas.Height / 2 + 15),
+                        new Point(this.TestCanvas.Width / 2 - img.Width / 2, 130),
+                        new Point(this.TestCanvas.Width - 128, this.TestCanvas.Height / 2 - 40),
                     };
 
                     Canvas.SetLeft(img, playingPos[(int)user.Position].X);
