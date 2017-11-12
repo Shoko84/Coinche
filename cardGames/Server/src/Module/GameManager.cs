@@ -9,6 +9,7 @@ using Common;
 using Game;
 using System;
 using System.Linq;
+using System.Threading;
 using static Game.Card;
 
 namespace Server
@@ -235,8 +236,16 @@ namespace Server
          */
         public void Annonce()
         {
-            if (Server.Instance.players.list[gameTurn].status == PLAYER_STATUS.OFFLINE)
+            if (Server.Instance.players.list[annonceTurn].status == PLAYER_STATUS.OFFLINE)
+            {
                 CheckAnnonce(new Contract(0, CONTRACT_TYPE.PASS, gameTurn));
+                Server.Instance.WriteTo("211", Server.Instance.players.list[annonceTurn].ip, Server.Instance.players.list[annonceTurn].port, Server.Instance.serializer.ObjectToString(Server.Instance.players.list[annonceTurn].deck));
+                foreach (var itA in Server.Instance.players.list)
+                {
+                    if (itA.id != annonceTurn)
+                        Server.Instance.WriteTo("213", itA.ip, itA.port, annonceTurn + ":" + Server.Instance.players.list[annonceTurn].deck.Count.ToString());
+                }
+            }
             foreach (var it in Server.Instance.players.list)
             {
                 if (it.contract == null)
@@ -339,6 +348,19 @@ namespace Server
                 foreach(var dest in Server.Instance.players.list)
                     Server.Instance.WriteToAll("214", dest.id + ":" + dest.win.CalculPoint(contract).ToString());
             }
+
+            if (Server.Instance.players.list[gameTurn].status == PLAYER_STATUS.OFFLINE)
+            {
+                Server.Instance.players.list[gameTurn].deck.RemoveCard(card);
+                Server.Instance.WriteToAll("021", Server.Instance.serializer.ObjectToString(card));
+                Server.Instance.WriteTo("211", Server.Instance.players.list[gameTurn].ip, Server.Instance.players.list[gameTurn].port, Server.Instance.serializer.ObjectToString(Server.Instance.players.list[gameTurn].deck));
+                Server.Instance.WriteToAll("212", Server.Instance.serializer.ObjectToString(Server.Instance.game.pile));
+                foreach (var itA in Server.Instance.players.list)
+                {
+                    if (itA.id != gameTurn)
+                        Server.Instance.WriteTo("213", itA.ip, itA.port, gameTurn + ":" + Server.Instance.players.list[gameTurn].deck.Count.ToString());
+                }
+            }
             lock (_padlock)
             {
                 if (winner < 0)
@@ -416,7 +438,10 @@ namespace Server
                 foreach (var card in Server.Instance.players.list[gameTurn].deck.cards)
                 {
                     if (CheckCard(card))
+                    {
+                        Thread.Sleep(800);
                         break;
+                    }
                 }
             }
             foreach (var it in Server.Instance.players.list)

@@ -16,6 +16,7 @@ using Newtonsoft.Json;
 using Game;
 using System.Collections.ObjectModel;
 using Server;
+using Common;
 
 namespace Client
 {
@@ -152,7 +153,7 @@ namespace Client
                     }
                     if (GameWindow.Instance.GameLogger.Text != "")
                         GameWindow.Instance.GameLogger.Text += "\n\n";
-                    GameWindow.Instance.GameLogger.Text += "[" + DateTime.Now.ToShortTimeString().ToString() + "] " +
+                    GameWindow.Instance.GameLogger.Text += "[" + DateTime.Now.ToLongTimeString().ToString() + "] " +
                                                            GameInfos.Instance.GetClientUserById(userId).Username +
                                                            " is now announcing";
                     GameWindow.Instance.GameLoggerScroller.ScrollToBottom();
@@ -198,7 +199,7 @@ namespace Client
                     }
                     if (GameWindow.Instance.GameLogger.Text != "")
                         GameWindow.Instance.GameLogger.Text += "\n\n";
-                    GameWindow.Instance.GameLogger.Text += "[" + DateTime.Now.ToShortTimeString().ToString() + "] " +
+                    GameWindow.Instance.GameLogger.Text += "[" + DateTime.Now.ToLongTimeString().ToString() + "] " +
                                                            GameInfos.Instance.GetClientUserById(userId).Username +
                                                            " is now playing";
                     GameWindow.Instance.GameLoggerScroller.ScrollToBottom();
@@ -236,7 +237,7 @@ namespace Client
                         GameInfos.Instance.ContractPicked = new Contract(contract.score, contract.type, contract.id);
                     if (GameWindow.Instance.GameLogger.Text != "")
                         GameWindow.Instance.GameLogger.Text += "\n\n";
-                    GameWindow.Instance.GameLogger.Text += "[" + DateTime.Now.ToShortTimeString().ToString() + "] " +
+                    GameWindow.Instance.GameLogger.Text += "[" + DateTime.Now.ToLongTimeString().ToString() + "] " +
                                                            GameInfos.Instance.GetClientUserById(contract.id).Username +
                                                            " announced a contract with a value of " + contract.score.ToString() +
                                                            " and a '" + contract.StringType + "' rule";
@@ -246,7 +247,7 @@ namespace Client
                 {
                     if (GameWindow.Instance.GameLogger.Text != "")
                         GameWindow.Instance.GameLogger.Text += "\n\n";
-                    GameWindow.Instance.GameLogger.Text += "[" + DateTime.Now.ToShortTimeString().ToString() + "] " +
+                    GameWindow.Instance.GameLogger.Text += "[" + DateTime.Now.ToLongTimeString().ToString() + "] " +
                                                            GameInfos.Instance.GetClientUserById(contract.id).Username +
                                                            " passed";
                 }
@@ -267,7 +268,7 @@ namespace Client
             {
                 if (GameWindow.Instance.GameLogger.Text != "")
                     GameWindow.Instance.GameLogger.Text += "\n\n";
-                GameWindow.Instance.GameLogger.Text += "[" + DateTime.Now.ToShortTimeString().ToString() + "] " +
+                GameWindow.Instance.GameLogger.Text += "[" + DateTime.Now.ToLongTimeString().ToString() + "] " +
                                                        card.StringValue + " " + card.StringColour + " was played";
                 GameWindow.Instance.GameLoggerScroller.ScrollToBottom();
             }));
@@ -322,7 +323,7 @@ namespace Client
             {
                 if (GameWindow.Instance.GameLogger.Text != "")
                     GameWindow.Instance.GameLogger.Text += "\n\n";
-                GameWindow.Instance.GameLogger.Text += "[" + DateTime.Now.ToShortTimeString().ToString() + "] " +
+                GameWindow.Instance.GameLogger.Text += "[" + DateTime.Now.ToLongTimeString().ToString() + "] " +
                                                        GameInfos.Instance.GetClientUserById(userId).Username +
                                                        " disconnected";
                 GameWindow.Instance.GameLoggerScroller.ScrollToBottom();
@@ -333,16 +334,32 @@ namespace Client
         *  Triggered when a client change his name.
         *  @param   header      Infos about the header.
         *  @param   connection  Infos about the server's connection.
-        *  @param   message     The id, the old name and the new name of the client in format id|old|new.
+        *  @param   message     A PlayerRename class.
         */
         public void PlayerRename(PacketHeader header, Connection connection, string message)
         {
             App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
             {
-                if (GameWindow.Instance.GameLogger.Text != "")
-                    GameWindow.Instance.GameLogger.Text += "\n\n";
-                GameWindow.Instance.GameLogger.Text += "[" + DateTime.Now.ToShortTimeString().ToString() + "] " + "Player " + message.Split('|')[0] + " renamed " + message.Split('|')[1] + " to " + message.Split('|')[2];
-                GameWindow.Instance.GameLoggerScroller.ScrollToBottom();
+                PlayerRename player = JsonConvert.DeserializeObject<PlayerRename>(message);
+                List<ClientUser> users = GameInfos.Instance.UsersList;
+
+                for (int i = 0; i < users.Count; i++)
+                {
+                    if (player.Id == users[i].Id)
+                    {
+                        users[i].Username = player.NewName;
+                        break;
+                    }
+                }
+                if (GameWindow.Instance != null)
+                {
+                    if (GameWindow.Instance.GameLogger.Text != "")
+                        GameWindow.Instance.GameLogger.Text += "\n\n";
+                    GameWindow.Instance.GameLogger.Text += "[" + DateTime.Now.ToLongTimeString().ToString() + "] " + player.OldName +
+                                                           " has renamed into " + player.NewName;
+                    GameWindow.Instance.GameLoggerScroller.ScrollToBottom();
+                    GameWindow.Instance.DrawCanvas();
+                }
             }));
         }
 
@@ -445,7 +462,7 @@ namespace Client
                 user.Score = int.Parse(args[1]);
                 if (GameWindow.Instance.GameLogger.Text != "")
                     GameWindow.Instance.GameLogger.Text += "\n\n";
-                GameWindow.Instance.GameLogger.Text += "[" + DateTime.Now.ToShortTimeString().ToString() + "] " +
+                GameWindow.Instance.GameLogger.Text += "[" + DateTime.Now.ToLongTimeString().ToString() + "] " +
                                                        GameInfos.Instance.GetClientUserById(int.Parse(args[0])).Username +
                                                        " has a score of " + args[1];
                 GameWindow.Instance.GameLoggerScroller.ScrollToBottom();
