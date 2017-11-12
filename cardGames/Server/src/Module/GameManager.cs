@@ -34,16 +34,26 @@ namespace Server
         private GAME_STATUS _status;  /**< This var determine the state of the game.*/
         private Deck _deck;           /**< The deck containing all the cards.*/
 
+        public Contract contract;     /**< The current contract.*/
+        public Pile pile;             /**< The current pile.*/
+        public bool relance;          /**< if the game must be relance.*/
+
+        private Loop _annonceTurn;    /**< The player who must annonce.*/
+        private Loop _gameTurn;       /**< The player who must play.*/
         private static readonly object _padlock = new object();    /**< Thread protection.*/
-        private Loop _annonceTurn;
+
+        /**
+         *  Getter and Setter for the _status variable.
+         *  @return Return the id of the player who annonce.
+         */
         public int annonceTurn { get => _annonceTurn.It; }
 
-        private Loop _gameTurn;
+        /**
+         *  Getter and Setter for the _status variable.
+         *  @return Return the id of the player who play.
+         */
         public int gameTurn { get => _gameTurn.It; }
 
-        public Contract contract;
-
-        public Pile pile;
 
         /**
          *  Getter and Setter for the _status variable.
@@ -80,6 +90,7 @@ namespace Server
             _gameTurn = new Loop(0, 3, _annonceTurn.It);
             pile = new Pile();
             contract = null;
+            relance = false;
         }
 
         /**
@@ -130,21 +141,11 @@ namespace Server
         {
             Card tmp;
             Loop turn = new Loop(0, 3);
-            Random rand = new Random();
 
             Server.Instance.PrintOnDebug("\nDistribution");
 
             _deck.Clear();
-            contract = null;
-            foreach (var pl in Server.Instance.players.list)
-            {
-                pl.deck.Clear();
-                pl.contract = null;
-            }
-            _annonceTurn.It = rand.Next(0, 3);
-            _gameTurn.It = _annonceTurn.It;
-            pile.cards.Clear();
-            pile.owners.Clear();
+            Reset();
             InitDeck();
             while (_deck.Count != 0)
             {
@@ -170,6 +171,8 @@ namespace Server
                         if (iter.ip != it.ip || iter.port != it.port)
                             Server.Instance.WriteTo("213", it.ip, it.port, iter.id + ":" + Server.Instance.players.list[iter.id].deck.Count.ToString());
                     }
+                    foreach (var dest in Server.Instance.players.list)
+                        Server.Instance.WriteToAll("214", dest.id + ":" + dest.win.CalculPoint(contract).ToString());
                 }
                 break;
             }
@@ -186,10 +189,16 @@ namespace Server
             {
                 if (!first)
                 {
+                    int cpt = 0;
                     do
                     {
                         _annonceTurn.Next();
                         Server.Instance.PrintOnDebug("______________________loop");
+                        if (cpt >= 4)
+                        {
+                            status = GAME_STATUS.DISTRIB;
+                            return;
+                        }
                     } while (Server.Instance.players.list[_annonceTurn.It].contract != null && Server.Instance.players.list[_annonceTurn.It].contract.type == CONTRACT_TYPE.PASS);
                     Server.Instance.PrintOnDebug("THE PLAYER WHO ANNONCE IS " + _annonceTurn.It);
                 }
@@ -319,7 +328,7 @@ namespace Server
                 pile.cards.Clear();
                 pile.owners.Clear();
                 foreach(var dest in Server.Instance.players.list)
-                    Server.Instance.WriteToAll("214", dest.id + ":" + dest.deck.CalculPoint(contract).ToString());
+                    Server.Instance.WriteToAll("214", dest.id + ":" + dest.win.CalculPoint(contract).ToString());
             }
             lock (_padlock)
             {
@@ -345,7 +354,7 @@ namespace Server
 
             if (contract == null)
             {
-                status = GAME_STATUS.ANNONCE;
+                status = GAME_STATUS.DISTRIB;
                 return (false);
             }
             CardColour color = card.colour;
@@ -364,6 +373,11 @@ namespace Server
                             Server.Instance.PrintOnDebug("A card in the deck is higher");
                             return (false);
                         }
+                    }
+                    else
+                    {
+                        if (Server.Instance.players.list[_gameTurn.It].deck.ExistColour((CardColour)((int)contract.type)))
+                            return (false);
                     }
                     return (NextTurn(card));
                 }
@@ -415,25 +429,48 @@ namespace Server
             int teamTwo = CalculScore(1, 3);
 
             Server.Instance.PrintOnDebug("\nCount of the points");
+            Server.Instance.WriteToAll("040", "Game is finish");
             foreach (var it in Server.Instance.players.list)
             {
-                Server.Instance.WriteTo("040", it.ip, it.port, "Game is finish");
                 if (it.id == 0 || it.id == 2)
                 {
                     if (teamOne > teamTwo)
-                        Server.Instance.WriteTo("042", it.ip, it.port, "Congratulation");
+                        Server.Instance.WriteTo("042", it.ip, it.port, "");
                     else
-                        Server.Instance.WriteTo("041", it.ip, it.port, "You're so bad omg");
+                        Server.Instance.WriteTo("041", it.ip, it.port, "");
                 }
                 else
                 {
                     if (teamOne < teamTwo)
-                        Server.Instance.WriteTo("042", it.ip, it.port, "Congratulation");
+                        Server.Instance.WriteTo("042", it.ip, it.port, "");
                     else
-                        Server.Instance.WriteTo("041", it.ip, it.port, "You're so bad omg");
+                        Server.Instance.WriteTo("041", it.ip, it.port, "");
                 }
             }
-            status = GAME_STATUS.DISTRIB;
+            relance = false;
+            status = GAME_STATUS.END;
+        }
+
+        /**
+         *  This function rest the game parameters
+         */
+         private void Reset()
+        {
+            Random rand = new Random();
+
+            foreach (var it in Server.Instance.players.list)
+                it.ready = false;
+            contract = null;
+            foreach (var pl in Server.Instance.players.list)
+            {
+                pl.deck.Clear();
+                pl.win.Clear();
+                pl.contract = null;
+            }
+            _annonceTurn.It = rand.Next(0, 3);
+            _gameTurn.It = _annonceTurn.It;
+            pile.cards.Clear();
+            pile.owners.Clear();
         }
 
         /**
@@ -441,7 +478,8 @@ namespace Server
          */
         public void End()
         {
-
+            if (relance == true)
+                status = GAME_STATUS.WAIT;
         }
     }
 }

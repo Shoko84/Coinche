@@ -238,6 +238,8 @@ namespace Game
         {
             int score = 0;
 
+            if (contract == null)
+                return (score);
             foreach (var it in cards)
             {
                 if ((int)it.colour == (int)contract.type || contract.type == CONTRACT_TYPE.ALL_TRUMP)
