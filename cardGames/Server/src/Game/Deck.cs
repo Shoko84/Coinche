@@ -79,7 +79,15 @@ namespace Game
 
         public bool ExistColour(CardColour color)
         {
-            return (cards.Exists(x => x.colour == color));
+            foreach (var it in cards)
+            {
+                if (it.colour == color)
+                {
+                    Console.WriteLine(it.StringValue + " " + it.StringColour);
+                    return (true);
+                }
+            }
+            return (false);
         }
 
         public Card GetRandomCard()

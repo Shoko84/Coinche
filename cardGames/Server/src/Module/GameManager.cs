@@ -134,10 +134,15 @@ namespace Server
         {
             Card tmp;
             Loop turn = new Loop(0, 3);
+           
+            Server.Instance.PrintOnDebug("\nDistribution");
+
             _deck.Clear();
             InitDeck();
+            nbPass = 0;
+            foreach (var deck in Server.Instance.players.list)
+                deck.deck.Clear();
 
-            Server.Instance.PrintOnDebug("\nDistribution");
             while (_deck.Count != 0)
             {
                 tmp = _deck.GetRandomCard();
@@ -320,30 +325,32 @@ namespace Server
 
             if (pile.cards.Count != 0)
                 color = pile.cards.cards[0].colour;
-            if (card.colour == color)
+            if (card.colour != color)
             {
-                if (pile.cards.ExistHigher(card, contract.type))
+                if (!Server.Instance.players.list[_gameTurn.It].deck.ExistColour(card.colour))
                 {
-                    if (Server.Instance.players.list[_gameTurn.It].deck.ExistHigher(card, contract.type))
-                        return (false);
-                }
-                return (NextTurn(card));
-            }
-            else
-            {
-                if (Server.Instance.players.list[_gameTurn.It].deck.ExistColour(card.colour))
-                    return (false);
-                if ((int)card.colour == (int)contract.type)
-                {
-                    if (pile.cards.ExistHigher(card, contract.type))
+                    if ((int)card.colour == (int)contract.type)
                     {
-                        if (Server.Instance.players.list[_gameTurn.It].deck.ExistHigher(card, contract.type))
+                        if (Server.Instance.game.pile.cards.ExistHigher(card, contract.type))
+                        {
+                            Server.Instance.PrintOnDebug("A card in the deck is higher");
                             return (false);
+                        }
                     }
                     return (NextTurn(card));
                 }
+                Server.Instance.PrintOnDebug("You have a card with the same color in the deck");
                 return (false);
             }
+            if ((int)card.colour == (int)contract.type)
+            {
+                if (Server.Instance.game.pile.cards.ExistHigher(card, contract.type))
+                {
+                    Server.Instance.PrintOnDebug("You must play a trump more powerfull");
+                    return (false);
+                }
+            }
+            return (NextTurn(card));
         }
 
         /**
